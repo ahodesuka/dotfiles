@@ -1,0 +1,62 @@
+Xft.dpi:                96
+Xft.antialias:          true
+Xft.hinting:            true
+Xft.rgba:               rgb
+Xft.autohint:           true
+Xft.hintstyle:          hintfull
+Xft.lcdfilter:          lcddefault
+
+urxvt*font:             xft:profont:pixelsize=11,xft:MS Gothic,xft:Bitstream Vera Sans
+urxvt*boldFont:         xft:profont:pixelsize=11,xft:MS Gothic,xft:Bitstream Vera Sans
+
+urxvt.fading:           false
+urxvt.shading:          false 
+urxvt.scrollBar:        false
+urxvt.geometry:         104x24
+urxvt.depth:            24
+urxvt.saveLines:        10000
+urxvt*termName:         rxvt-unicode
+
+urxvt*background:       #1b1b1b
+urxvt*foreground:       #cccaca
+urxvt*cursorColor:      #ffffff
+
+!Black
+urxvt*color0:           #171514
+urxvt*color8:           #5b595a
+!Red
+urxvt*color1:           #a16a71
+urxvt*color9:           #c78383
+!Green
+urxvt*color2:           #7aa16a
+urxvt*color10:          #93c783
+!Yellow
+urxvt*color3:           #a1846a
+urxvt*color11:          #c7a081
+!Blue
+urxvt*color4:           #6a80a1
+urxvt*color12:          #839fc7
+!Magenta
+urxvt*color5:           #916aa1
+urxvt*color13:          #c483c7
+!Cyan
+urxvt*color6:           #629c99
+urxvt*color14:          #51c4bf
+!White
+urxvt*color7:           #a8a8a8
+urxvt*color15:          #cacccc
+
+urxvt.perl-lib:         /home/mokou/.config/urxvt
+urxvt.perl-ext:         default,matcher,tabbedex
+
+urxvt.urlLauncher:      nightly
+urxvt.colorUL:          #db7d7d
+urxvt.matcher.button:   1
+
+urxvt.tabbedex.tabbar-fg:       7
+urxvt.tabbedex.tabbar-bg:       0
+urxvt.tabbedex.tab-fg:          1
+urxvt.tabbedex.tab-bg:          234
+urxvt.tabbedex.title-fg:        1
+urxvt.tabbedex.title-bg:        0
+

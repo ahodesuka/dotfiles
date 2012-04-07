@@ -1,0 +1,17 @@
+gtk-theme-name="Vorta"
+gtk-icon-theme-name="FaenKfolder-black"
+gtk-font-name="cure 8"
+gtk-cursor-theme-name="Neutral_Plus"
+gtk-cursor-theme-size=0
+gtk-toolbar-style=GTK_TOOLBAR_ICONS
+gtk-toolbar-icon-size=GTK_ICON_SIZE_SMALL_TOOLBAR
+gtk-button-images=0
+gtk-menu-images=0
+gtk-enable-event-sounds=0
+gtk-enable-input-feedback-sounds=0
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle="hintfull"
+gtk-xft-rgba="rgb"
+gtk-color-scheme="tooltip_fg_color:#eeeeee\nlink_color:#b94e5d\nbase_color:#383838\nselected_fg_color:#FFFFFF\ntext_color:#dddddd\nbg_color:#4e4e4e\ntooltip_bg_color:#222222\nselected_bg_color:#a7a747\nfg_color:#dddddd\n"
+include "/home/mokou/.gtkrc-2.0.mine"

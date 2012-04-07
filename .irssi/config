@@ -1,0 +1,199 @@
+servers = (
+  {
+    address = "irc.rizon.net";
+    chatnet = "Rizon";
+    port = "6667";
+    use_ssl = "no";
+    ssl_verify = "no";
+    autoconnect = "yes";
+  }
+);
+
+chatnets = {
+  Rizon = {
+    type = "IRC";
+    autosendcmd = "";
+    max_kicks = "1";
+    max_msgs = "3";
+    max_whois = "30";
+  };
+};
+
+channels = ( );
+
+aliases = {
+  J = "join";
+  WJOIN = "join -window";
+  WQUERY = "query -window";
+  LEAVE = "part";
+  BYE = "quit";
+  EXIT = "quit";
+  SIGNOFF = "quit";
+  DESCRIBE = "action";
+  DATE = "time";
+  HOST = "userhost";
+  LAST = "lastlog";
+  SAY = "msg *";
+  WI = "whois";
+  WII = "whois $0 $0";
+  WW = "whowas";
+  W = "who";
+  N = "names";
+  M = "msg";
+  T = "topic";
+  C = "clear";
+  CL = "clear";
+  K = "kick";
+  KB = "kickban";
+  KN = "knockout";
+  BANS = "ban";
+  B = "ban";
+  MUB = "unban *";
+  UB = "unban";
+  IG = "ignore";
+  UNIG = "unignore";
+  SB = "scrollback";
+  UMODE = "mode $N";
+  WC = "window close";
+  WN = "window new hide";
+  GOTO = "sb goto";
+  CHAT = "dcc chat";
+  RUN = "SCRIPT LOAD";
+  CALC = "exec - if command -v bc >/dev/null 2>&1\\; then printf '%s=' '$*'\\; echo '$*' | bc -l\\; else echo bc was not found\\; fi";
+  SBAR = "STATUSBAR";
+  INVITELIST = "mode $C +I";
+  Q = "QUERY";
+  "MANUAL-WINDOWS" = "set use_status_window off;set autocreate_windows off;set autocreate_query_level none;set autoclose_windows off;set reuse_unused_windows on;save";
+  EXEMPTLIST = "mode $C +e";
+  ATAG = "WINDOW SERVER";
+  UNSET = "set -clear";
+  RESET = "set -default";
+};
+
+statusbar = {
+  # formats:
+  # when using {templates}, the template is shown only if it's argument isn't
+  # empty unless no argument is given. for example {sb} is printed always,
+  # but {sb $T} is printed only if $T isn't empty.
+
+  items = {
+    # start/end text in statusbars
+    barstart = "{sbstart}";
+    barend = "{sbend}";
+
+    topicbarstart = "{topicsbstart}";
+    topicbarend = "{topicsbend}";
+
+    # treated "normally", you could change the time/user name to whatever
+    time = "{sb {sbtime $Z}}";
+    user = "{sb {sbnick $cumode$N}{sbmode $usermode}{sbaway $A}}";
+
+    # treated specially .. window is printed with non-empty windows,
+    # window_empty is printed with empty windows
+    window = "{sbchan $C}{sbquery $Q}{sbmode $M} {sbdim on} {sbservertag $tag}";
+    window_empty = "{sbdim on} {sbservertag $tag}";
+    prompt = "{prompt $[.15]itemname}";
+    prompt_empty = "{prompt $winname}";
+    topic = "{sb $topic}";
+    act = "$*";
+  };
+
+  # there's two type of statusbars. root statusbars are either at the top
+  # of the screen or at the bottom of the screen. window statusbars are at
+  # the top/bottom of each split window in screen.
+  default = {
+    # the "default statusbar" to be displayed at the bottom of the window.
+    # contains all the normal items.
+    window = {
+      disabled = "no";
+
+      # window, root
+      type = "window";
+      # top, bottom
+      placement = "top";
+      # number
+      position = "4";
+      # active, inactive, always
+      visible = "always";
+
+      # list of items in statusbar in the display order
+      items = {
+        barstart = { priority = "100"; };
+        time = { };
+        user = { };
+        usercount = { };
+        window = { };
+        window_empty = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
+
+    # we treat input line as yet another statusbar :) It's possible to
+    # add other items before or after the input line item.
+    prompt = {
+      type = "root";
+      placement = "bottom";
+      # we want to be at the bottom always
+      position = "100";
+      visible = "always";
+      items = {
+        prompt = { priority = "-1"; };
+        prompt_empty = { priority = "-1"; };
+        # treated specially, this is the real input line.
+        input = { priority = "10"; };
+      };
+    };
+
+    # topicbar
+    topic = {
+      type = "root";
+      placement = "top";
+      position = "1";
+      items = {
+        topicbarstart = { priority = "100"; };
+        topic = { };
+        topicbarend = { priority = "100"; alignment = "right"; };
+      };
+    };
+    dccstat = {
+      placement = "top";
+      position = "3";
+      items = { dccstat = { }; };
+      disabled = "yes";
+    };
+  };
+};
+settings = {
+  core = { real_name = ""; user_name = ""; nick = ""; };
+  "fe-text" = { actlist_sort = "refnum"; };
+  "perl/core/scripts" = {
+    awl_display_key = "$Q%K|%n$H$C$S";
+    awl_block = "12";
+    neat_melength = "8";
+    neat_maxlength = "8";
+    dccstat_progbar_transferred = "%G═%n";
+    dccstat_progbar_position = "%B╡%n";
+    dccstat_progbar_remaining = "%K─%n";
+    dccstat_refresh = "1";
+    dccstat_cycle_through_transfers = "no";
+    dccstat_hide_sbar_when_inactive = "yes";
+    dccstat_short_mode = "yes";
+    awl_maxlines = "2";
+    awl_placement = "bottom";
+    awl_position = "0";
+    awl_automode = "emulate_lightbar";
+    awl_all_disable = "yes";
+    awl_hide_data = "1";
+    awl_prefer_name = "yes";
+    awl_custom_sb = "yes";
+    nicklist_automode = "SCREEN";
+    nicklist_width = "15";
+    autoaway_timeout = "3600";
+    neat_right_mode = "no";
+  };
+  "fe-common/core" = { theme = "ahoka"; };
+  "irc/dcc" = { dcc_autoget = "yes"; dcc_autoresume = "yes"; };
+};
+keyboard = ( 
+  { key = "meta-[M"; id = "command"; data = "mouse_xterm "; }
+);
