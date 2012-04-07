@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cmd=$1
+shift
+
+pkill compton
+$cmd "$*" &
+wait $!
+cmptn
+

@@ -1,0 +1,251 @@
+#!/bin/bash
+#
+# colortest - by ahoka
+#
+# This is just a simple compilation of colortests that I put together.
+# Most scripts are from;
+#   http://crunchbanglinux.org/forums/topic/13645/ansi-colorschemes-scripts/
+#
+
+f=3 b=4
+for j in f b; do
+  for i in {0..7}; do
+    printf -v $j$i %b "\e[${!j}${i}m"
+  done
+done
+bld=$'\e[1m'
+rst=$'\e[0m'
+inv=$'\e[7m'
+
+while getopts ":hbcdglpPrstx" flags; do
+	case $flags in
+        h) # help
+			echo -e "Usage:"
+			echo -e "  colortest [OPTION]"
+			echo ""
+			echo "colortest - display terminal colors in an array of formats."
+			echo ""
+			echo -e "Options${rst}:"
+			echo -e "   ${bld}-b${rst}                 Little Blocks, by pfh."
+			echo -e "   ${bld}-c${rst}                 Memory Cells, by pfh."
+			echo -e "   ${bld}-d${rst}                 DNA, by pfh."
+			echo -e "   ${bld}-g${rst}                 GNU Heads, by ivo."
+			echo -e "   ${bld}-l${rst}                 Simple, by ahoka."
+			echo -e "   ${bld}-p${rst}                 Pac Man, by pfh."
+			echo -e "   ${bld}-P${rst}                 Pac Man (without dots), by pfh."
+			echo -e "   ${bld}-r${rst}                 Rally-X, by pfh."
+			echo -e "   ${bld}-s${rst}                 Space Invaders, by pfh."
+			echo -e "   ${bld}-t${rst}                 Battle Tanks, by muzieca."
+			echo -e "   ${bld}-x${rst}                 Hexadecimal table, by muzieca."
+			echo -e "   ${bld}-h${rst}                 Display this help."
+			exit
+        ;;
+        b) # Little Blocks by: pfh
+cat << EOF
+
+ $f1▀■▄ $f2▀■▄ $f3▀■▄ $f4▀■▄ $f5▀■▄ $f6▀■▄
+  $bld$f1▀■▄ $f2▀■▄ $f3▀■▄ $f4▀■▄ $f5▀■▄ $f6▀■▄$rst
+
+EOF
+            exit
+        ;;
+        c) # (?) Memory cells by: pfh - not sure what to call this
+
+cat << EOF
+
+ $f1╔╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╗  $f2╔╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╗  $f3╔╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╗
+ $bld$f1╚╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╝  $f2╚╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╝  $f3╚╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╝$rst
+  ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ 
+ $f4╔╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╗  $f5╔╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╗  $f6╔╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╗
+ $bld$f4╚╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╝  $f5╚╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╝  $f6╚╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╝$rst
+
+
+EOF
+            exit
+        ;;
+        d) # DNA by: pfh
+cat << EOF
+
+ $f1█-----$bld█  $rst$f2█-----$bld█$rst  $f3█-----$bld█$rst  $f4█-----$bld█$rst  $f5█-----$bld█$rst  $f6█-----$bld█$rst
+  $f1█---$bld█$rst    $f2█---$bld█$rst    $f3█---$bld█$rst    $f4█---$bld█$rst    $f5█---$bld█$rst    $f6█---$bld█$rst
+  $f1 █-$bld█$rst     $f2 █-$bld█$rst     $f3 █-$bld█$rst     $f4 █-$bld█$rst     $f5 █-$bld█$rst     $f6 █-$bld█$rst
+    $f1█$rst        $f2█$rst        $f3█$rst        $f4█$rst        $f5█$rst        $f6█$rst
+   $f1$bld█-$rst$f1█$rst      $f2$bld█_$rst$f2█$rst      $f3$bld█-$rst$f3█$rst      $f4$bld█-$rst$f4█$rst      $f5$bld█-$rst$f5█$rst      $f6$bld█-$rst$f6█$rst
+  $f1$bld█---$rst$f1█$rst    $f2$bld█---$rst$f2█$rst    $f3$bld█---$rst$f3█$rst    $f4$bld█---$rst$f4█$rst    $f5$bld█---$rst$f5█$rst    $f6$bld█---$rst$f6█$rst 
+ $f1$bld█-----$rst$f1█$rst  $f2$bld█-----$rst$f2█$rst  $f3$bld█-----$rst$f3█$rst  $f4$bld█-----$rst$f4█$rst  $f5$bld█-----$rst$f5█$rst  $f6$bld█-----$rst$f6█$rst
+  $f1$bld█---$rst$f1█$rst    $f2$bld█---$rst$f2█$rst    $f3$bld█---$rst$f3█$rst    $f4$bld█---$rst$f4█$rst    $f5$bld█---$rst$f5█$rst    $f6$bld█---$rst$f6█$rst
+   $f1$bld█-$rst$f1█$rst      $f2$bld█-$rst$f2█$rst      $f3$bld█-$rst$f3█$rst      $f4$bld█-$rst$f4█$rst      $f5$bld█-$rst$f5█$rst      $f6$bld█-$rst$f6█$rst
+    $f1$bld█$rst        $f2$bld█$rst        $f3$bld█$rst        $f4$bld█$rst        $f5$bld█$rst        $f6$bld█$rst
+   $f1█-$bld█$rst      $f2█-$bld█$rst      $f3█-$bld█$rst      $f4█-$bld█$rst      $f5█-$bld█$rst      $f6█-$bld█$rst
+  $f1█---$bld█$rst    $f2█---$bld█$rst    $f3█---$bld█$rst    $f4█---$bld█$rst    $f5█---$bld█$rst    $f6█---$bld█$rst
+ $f1█-----$bld█  $rst$f2█-----$bld█$rst  $f3█-----$bld█$rst  $f4█-----$bld█$rst  $f5█-----$bld█$rst  $f6█-----$bld█$rst
+  $f1█---$bld█$rst    $f2█---$bld█$rst    $f3█---$bld█$rst    $f4█---$bld█$rst    $f5█---$bld█$rst    $f6█---$bld█$rst
+  $f1 █-$bld█$rst     $f2 █-$bld█$rst     $f3 █-$bld█$rst     $f4 █-$bld█$rst     $f5 █-$bld█$rst     $f6 █-$bld█$rst
+    $f1█$rst        $f2█$rst        $f3█$rst        $f4█$rst        $f5█$rst        $f6█$rst
+   $f1$bld█-$rst$f1█$rst      $f2$bld█_$rst$f2█$rst      $f3$bld█-$rst$f3█$rst      $f4$bld█-$rst$f4█$rst      $f5$bld█-$rst$f5█$rst      $f6$bld█-$rst$f6█$rst
+  $f1$bld█---$rst$f1█$rst    $f2$bld█---$rst$f2█$rst    $f3$bld█---$rst$f3█$rst    $f4$bld█---$rst$f4█$rst    $f5$bld█---$rst$f5█$rst    $f6$bld█---$rst$f6█$rst 
+ $f1$bld█-----$rst$f1█$rst  $f2$bld█-----$rst$f2█$rst  $f3$bld█-----$rst$f3█$rst  $f4$bld█-----$rst$f4█$rst  $f5$bld█-----$rst$f5█$rst  $f6$bld█-----$rst$f6█$rst
+  $f1$bld█---$rst$f1█$rst    $f2$bld█---$rst$f2█$rst    $f3$bld█---$rst$f3█$rst    $f4$bld█---$rst$f4█$rst    $f5$bld█---$rst$f5█$rst    $f6$bld█---$rst$f6█$rst
+   $f1$bld█-$rst$f1█$rst      $f2$bld█-$rst$f2█$rst      $f3$bld█-$rst$f3█$rst      $f4$bld█-$rst$f4█$rst      $f5$bld█-$rst$f5█$rst      $f6$bld█-$rst$f6█$rst
+    $f1$bld█$rst        $f2$bld█$rst        $f3$bld█$rst        $f4$bld█$rst        $f5$bld█$rst        $f6$bld█$rst
+   $f1█-$bld█$rst      $f2█-$bld█$rst      $f3█-$bld█$rst      $f4█-$bld█$rst      $f5█-$bld█$rst      $f6█-$bld█$rst
+  $f1█---$bld█$rst    $f2█---$bld█$rst    $f3█---$bld█$rst    $f4█---$bld█$rst    $f5█---$bld█$rst    $f6█---$bld█$rst
+ $f1█-----$bld█  $rst$f2█-----$bld█$rst  $f3█-----$bld█$rst  $f4█-----$bld█$rst  $f5█-----$bld█$rst  $f6█-----$bld█$rst
+  
+EOF
+            exit
+        ;;
+        g) # GNU  by: ivo - not sure what to call this
+
+cat << EOF  
+  
+$bld$f1   ██     ██ $rst $bld$f2   ██     ██ $rst $bld$f3   ██     ██ $rst $bld$f4   ██     ██ $rst $bld$f5   ██     ██ $rst $bld$f6   ██     ██ $rst 
+$bld$f1  █$f7 ■$rst$bld$f1█   █$f7■$rst$bld$f1 █$rst $bld$f2  █$f7 ■$rst$bld$f2█   █$f7■$rst$bld$f2 █$rst $bld$f3  █$f7 ■$rst$bld$f3█   █$f7■$rst$bld$f3 █$rst $bld$f4  █$f7 ■$rst$bld$f4█   █$f7■$rst$bld$f4 █$rst $bld$f5  █$f7 ■$rst$bld$f5█   █$f7■$rst$bld$f5 █$rst $bld$f6  █$f7 ■$rst$bld$f6█   █$f7■$rst$bld$f6 █$rst 
+$f1   █ █   █ █ $rst $f2   █ █   █ █ $rst $f3   █ █   █ █ $rst $f4   █ █   █ █ $rst $f5   █ █   █ █ $rst $f6   █ █   █ █ $rst
+$f1     █ █ █   $rst $f2     █ █ █   $rst $f3     █ █ █   $rst $f4     █ █ █   $rst $f5     █ █ █   $rst $f6     █ █ █   $rst
+$f1      =■=    $rst $f2      =■=    $rst $f3      =■=    $rst $f4      =■=    $rst $f5      =■=    $rst $f6      =■=    $rst                                              
+
+EOF
+            exit
+        ;;
+        l) # Simple Lines
+
+cat << EOF
+
+ $f1░░░░░$bld$f1░░░░░$rst $f2░░░░░$bld$f2░░░░░$rst $f3░░░░░$bld$f3░░░░░$rst $f4░░░░░$bld$f4░░░░░$rst $f5░░░░░$bld$f5░░░░░$rst $f6░░░░░$bld$f6░░░░░$rst
+
+EOF
+            exit
+        ;;
+        p) # PACMAN by: pfh
+cat << EOF
+
+$rst
+ $f3  ▄███████▄                $f1  ▄██████▄    $f2  ▄██████▄    $f4  ▄██████▄    $f5  ▄██████▄    $f6  ▄██████▄    
+ $f3▄█████████▀▀               $f1▄$f7█▀█$f1██$f7█▀█$f1██▄  $f2▄█$f7███$f2██$f7███$f2█▄  $f4▄█$f7███$f4██$f7███$f4█▄  $f5▄█$f7███$f5██$f7███$f5█▄  $f6▄██$f7█▀█$f6██$f7█▀█$f6▄
+ $f3███████▀      $f7▄▄  ▄▄  ▄▄   $f1█$f7▄▄█$f1██$f7▄▄█$f1███  $f2██$f7█ █$f2██$f7█ █$f2██  $f4██$f7█ █$f4██$f7█ █$f4██  $f5██$f7█ █$f5██$f7█ █$f5██  $f6███$f7█▄▄$f6██$f7█▄▄$f6█
+ $f3███████▄      $f7▀▀  ▀▀  ▀▀   $f1████████████  $f2████████████  $f4████████████  $f5████████████  $f6████████████  
+ $f3▀█████████▄▄               $f1██▀██▀▀██▀██  $f2██▀██▀▀██▀██  $f4██▀██▀▀██▀██  $f5██▀██▀▀██▀██  $f6██▀██▀▀██▀██
+ $f3  ▀███████▀                $f1▀   ▀  ▀   ▀  $f2▀   ▀  ▀   ▀  $f4▀   ▀  ▀   ▀  $f5▀   ▀  ▀   ▀  $f6▀   ▀  ▀   ▀ 
+$bld
+ $f3  ▄███████▄                $f1  ▄██████▄    $f2  ▄██████▄    $f4  ▄██████▄    $f5  ▄██████▄    $f6  ▄██████▄    
+ $f3▄█████████▀▀               $f1▄$f7█▀█$f1██$f7█▀█$f1██▄  $f2▄█$f7█ █$f2██$f7█ █$f2█▄  $f4▄█$f7█ █$f4██$f7█ █$f4█▄  $f5▄█$f7█ █$f5██$f7█ █$f5█▄  $f6▄██$f7█▀█$f6██$f7█▀█$f6▄
+ $f3███████▀      $f7▄▄  ▄▄  ▄▄   $f1█$f7▄▄█$f1██$f7▄▄█$f1███  $f2██$f7███$f2██$f7███$f2██  $f4██$f7███$f4██$f7███$f4██  $f5██$f7███$f5██$f7███$f5██  $f6███$f7█▄▄$f6██$f7█▄▄$f6█
+ $f3███████▄      $f7▀▀  ▀▀  ▀▀   $f1████████████  $f2████████████  $f4████████████  $f5████████████  $f6████████████  
+ $f3▀█████████▄▄               $f1██▀██▀▀██▀██  $f2██▀██▀▀██▀██  $f4██▀██▀▀██▀██  $f5██▀██▀▀██▀██  $f6██▀██▀▀██▀██
+ $f3  ▀███████▀                $f1▀   ▀  ▀   ▀  $f2▀   ▀  ▀   ▀  $f4▀   ▀  ▀   ▀  $f5▀   ▀  ▀   ▀  $f6▀   ▀  ▀   ▀ 
+$rst
+EOF
+            exit
+        ;;
+        P) # PACMAN 2 by: pfh
+cat << EOF
+
+ $f3  ▄███████▄$rst   $f1  ▄██████▄$rst    $f2  ▄██████▄$rst    $f4  ▄██████▄$rst    $f5  ▄██████▄$rst    $f6  ▄██████▄$rst
+ $f3▄█████████▀▀$rst  $f1▄$f7█▀█$f1██$f7█▀█$f1██▄$rst  $f2▄$f7█▀█$f2██$f7█▀█$f2██▄$rst  $f4▄$f7█▀█$f4██$f7█▀█$f4██▄$rst  $f5▄$f7█▀█$f5██$f7█▀█$f5██▄$rst  $f6▄$f7█▀█$f6██$f7█▀█$f6██▄$rst
+ $f3███████▀$rst      $f1█$f7▄▄█$f1██$f7▄▄█$f1███$rst  $f2█$f7▄▄█$f2██$f7▄▄█$f2███$rst  $f4█$f7▄▄█$f4██$f7▄▄█$f4███$rst  $f5█$f7▄▄█$f5██$f7▄▄█$f5███$rst  $f6█$f7▄▄█$f6██$f7▄▄█$f6███$rst
+ $f3███████▄$rst      $f1████████████$rst  $f2████████████$rst  $f4████████████$rst  $f5████████████$rst  $f6████████████$rst
+ $f3▀█████████▄▄$rst  $f1██▀██▀▀██▀██$rst  $f2██▀██▀▀██▀██$rst  $f4██▀██▀▀██▀██$rst  $f5██▀██▀▀██▀██$rst  $f6██▀██▀▀██▀██$rst
+ $f3  ▀███████▀$rst   $f1▀   ▀  ▀   ▀$rst  $f2▀   ▀  ▀   ▀$rst  $f4▀   ▀  ▀   ▀$rst  $f5▀   ▀  ▀   ▀$rst  $f6▀   ▀  ▀   ▀$rst
+
+ $bld$f3  ▄███████▄   $f1  ▄██████▄    $f2  ▄██████▄    $f4  ▄██████▄    $f5  ▄██████▄    $f6  ▄██████▄$rst
+ $bld$f3▄█████████▀▀  $f1▄$f7█▀█$f1██$f7█▀█$f1██▄  $f2▄$f7█▀█$f2██$f7█▀█$f2██▄  $f4▄$f7█▀█$f4██$f7█▀█$f4██▄  $f5▄$f7█▀█$f5██$f7█▀█$f5██▄  $f6▄$f7█▀█$f6██$f7█▀█$f6██▄$rst
+ $bld$f3███████▀      $f1█$f7▄▄█$f1██$f7▄▄█$f1███  $f2█$f7▄▄█$f2██$f7▄▄█$f2███  $f4█$f7▄▄█$f4██$f7▄▄█$f4███  $f5█$f7▄▄█$f5██$f7▄▄█$f5███  $f6█$f7▄▄█$f6██$f7▄▄█$f6███$rst
+ $bld$f3███████▄      $f1████████████  $f2████████████  $f4████████████  $f5████████████  $f6████████████$rst
+ $bld$f3▀█████████▄▄  $f1██▀██▀▀██▀██  $f2██▀██▀▀██▀██  $f4██▀██▀▀██▀██  $f5██▀██▀▀██▀██  $f6██▀██▀▀██▀██$rst
+ $bld$f3  ▀███████▀   $f1▀   ▀  ▀   ▀  $f2▀   ▀  ▀   ▀  $f4▀   ▀  ▀   ▀  $f5▀   ▀  ▀   ▀  $f6▀   ▀  ▀   ▀$rst
+
+EOF
+            exit
+        ;;
+        r) # Rally-X by: pfh
+cat << EOF
+
+ $f3 ▄      $f1      ▄▄      $f2      ▄▄      $f4      ▄▄      $f5      ▄▄      $f6      ▄▄     
+ $f3 ███▄▄  $f1   ██▬██▬██   $f2   ██▬██▬██   $f4   ██▬██▬██   $f5   ██▬██▬██   $f6   ██▬██▬██  
+ $f3 █████▀▀$f1     ████     $f2     ████     $f4     ████     $f5     ████     $f6     ████    
+ $f3 █▀▀    $f1   ▄██  ██▄   $f2   ▄██  ██▄   $f4   ▄██  ██▄   $f5   ▄██  ██▄   $f6   ▄██  ██▄  
+ $f3 █      $f1 ▄▄▄▀█  █▀▄▄▄ $f2 ▄▄▄▀█  █▀▄▄▄ $f4 ▄▄▄▀█  █▀▄▄▄ $f5 ▄▄▄▀█  █▀▄▄▄ $f6 ▄▄▄▀█  █▀▄▄▄
+ $f3▄█▄     $f1 ███▀████▀███ $f2 ███▀████▀███ $f4 ███▀████▀███ $f5 ███▀████▀███ $f6 ███▀████▀███
+            $f1  ▀  ▀        $f2  ▀  ▀        $f4  ▀  ▀        $f5  ▀  ▀        $f6  ▀  ▀       
+
+$bld
+ $f3 ▄      $f1      ▄▄      $f2      ▄▄      $f4      ▄▄      $f5      ▄▄      $f6      ▄▄     
+ $f3 ███▄▄  $f1   ██▬██▬██   $f2   ██▬██▬██   $f4   ██▬██▬██   $f5   ██▬██▬██   $f6   ██▬██▬██  
+ $f3 █████▀▀$f1     ████     $f2     ████     $f4     ████     $f5     ████     $f6     ████    
+ $f3 █▀▀    $f1   ▄██  ██▄   $f2   ▄██  ██▄   $f4   ▄██  ██▄   $f5   ▄██  ██▄   $f6   ▄██  ██▄  
+ $f3 █      $f1 ▄▄▄▀█  █▀▄▄▄ $f2 ▄▄▄▀█  █▀▄▄▄ $f4 ▄▄▄▀█  █▀▄▄▄ $f5 ▄▄▄▀█  █▀▄▄▄ $f6 ▄▄▄▀█  █▀▄▄▄
+ $f3▄█▄     $f1 ███▀████▀███ $f2 ███▀████▀███ $f4 ███▀████▀███ $f5 ███▀████▀███ $f6 ███▀████▀███
+            $f1  ▀  ▀        $f2  ▀  ▀        $f4  ▀  ▀        $f5  ▀  ▀        $f6  ▀  ▀       
+$rst
+EOF
+            exit
+        ;;
+        s) # Space Invaders by: pfh
+cat << EOF
+
+   $bld$f1▀▄   ▄▀  $rst    $bld$f2▄▄▄████▄▄▄ $rst   $bld$f3  ▄██▄  $rst     $bld$f4▀▄   ▄▀  $rst    $bld$f5▄▄▄████▄▄▄ $rst   $bld$f6  ▄██▄  $rst
+  $bld$f1▄█▀███▀█▄ $rst   $bld$f2███▀▀██▀▀███$rst   $bld$f3▄█▀██▀█▄$rst    $bld$f4▄█▀███▀█▄ $rst   $bld$f5███▀▀██▀▀███$rst   $bld$f6▄█▀██▀█▄$rst
+ $bld$f1█▀███████▀█$rst   $bld$f2▀▀▀██▀▀██▀▀▀$rst   $bld$f3▀▀█▀▀█▀▀$rst   $bld$f4█▀███████▀█$rst   $bld$f5▀▀▀██▀▀██▀▀▀$rst   $bld$f6▀▀█▀▀█▀▀$rst
+ $bld$f1▀ ▀▄▄ ▄▄▀ ▀$rst   $bld$f2▄▄▀▀ ▀▀ ▀▀▄▄$rst   $bld$f3▄▀▄▀▀▄▀▄$rst   $bld$f4▀ ▀▄▄ ▄▄▀ ▀$rst   $bld$f5▄▄▀▀ ▀▀ ▀▀▄▄$rst   $bld$f6▄▀▄▀▀▄▀▄$rst
+ 
+   $f1▀▄   ▄▀  $rst    $f2▄▄▄████▄▄▄ $rst   $f3  ▄██▄  $rst     $f4▀▄   ▄▀  $rst    $f5▄▄▄████▄▄▄ $rst   $f6  ▄██▄  $rst
+  $f1▄█▀███▀█▄ $rst   $f2███▀▀██▀▀███$rst   $f3▄█▀██▀█▄$rst    $f4▄█▀███▀█▄ $rst   $f5███▀▀██▀▀███$rst   $f6▄█▀██▀█▄$rst
+ $f1█▀███████▀█$rst   $f2▀▀▀██▀▀██▀▀▀$rst   $f3▀▀█▀▀█▀▀$rst   $f4█▀███████▀█$rst   $f5▀▀▀██▀▀██▀▀▀$rst   $f6▀▀█▀▀█▀▀$rst
+ $f1▀ ▀▄▄ ▄▄▀ ▀$rst   $f2▄▄▀▀ ▀▀ ▀▀▄▄$rst   $f3▄▀▄▀▀▄▀▄$rst   $f4▀ ▀▄▄ ▄▄▀ ▀$rst   $f5▄▄▀▀ ▀▀ ▀▀▄▄$rst   $f6▄▀▄▀▀▄▀▄$rst
+ 
+                                     $f7▌$rst
+ 
+                                   $f7▌$rst
+
+                                  $f7▄█▄$rst
+                              $f7▄█████████▄$rst
+                              $f7▀▀▀▀▀▀▀▀▀▀▀$rst
+EOF
+            exit
+        ;;
+        t) # Battle Tanks by: muzieca
+cat << EOF
+
+  $bld$f1    █    $rst    $bld$f2    █    $rst    $bld$f3    █    $rst    $bld$f4    █    $rst    $bld$f5    █    $rst    $bld$f6    █    $rst
+  $bld$f1▄▄  █  ▄▄$rst    $bld$f2▄▄  █  ▄▄$rst    $bld$f3▄▄  █  ▄▄$rst    $bld$f4▄▄  █  ▄▄$rst    $bld$f5▄▄  █  ▄▄$rst    $bld$f6▄▄  █  ▄▄$rst
+  $bld$f1███▀▀▀███$rst    $bld$f2███▀▀▀███$rst    $bld$f3███▀▀▀███$rst    $bld$f4███▀▀▀███$rst    $bld$f5███▀▀▀███$rst    $bld$f6███▀▀▀███$rst
+  $bld$f1███ █ ███$rst    $bld$f2███ █ ███$rst    $bld$f3███ █ ███$rst    $bld$f4███ █ ███$rst    $bld$f5███ █ ███$rst    $bld$f6███ █ ███$rst
+  $bld$f1██ ▀▀▀ ██$rst    $bld$f2██ ▀▀▀ ██$rst    $bld$f3██ ▀▀▀ ██$rst    $bld$f4██ ▀▀▀ ██$rst    $bld$f5██ ▀▀▀ ██$rst    $bld$f6██ ▀▀▀ ██$rst
+  
+  $f1    █    $rst    $f2    █    $rst    $f3    █    $rst    $f4    █    $rst    $f5    █    $rst    $f6    █    $rst
+  $f1▄▄  █  ▄▄$rst    $f2▄▄  █  ▄▄$rst    $f3▄▄  █  ▄▄$rst    $f4▄▄  █  ▄▄$rst    $f5▄▄  █  ▄▄$rst    $f6▄▄  █  ▄▄$rst
+  $f1███▀▀▀███$rst    $f2███▀▀▀███$rst    $f3███▀▀▀███$rst    $f4███▀▀▀███$rst    $f5███▀▀▀███$rst    $f6███▀▀▀███$rst
+  $f1███ █ ███$rst    $f2███ █ ███$rst    $f3███ █ ███$rst    $f4███ █ ███$rst    $f5███ █ ███$rst    $f6███ █ ███$rst
+  $f1██ ▀▀▀ ██$rst    $f2██ ▀▀▀ ██$rst    $f3██ ▀▀▀ ██$rst    $f4██ ▀▀▀ ██$rst    $f5██ ▀▀▀ ██$rst    $f6██ ▀▀▀ ██$rst  
+  
+EOF
+            exit
+        ;;
+        x) # Hexadecimal Values by: SuNjACk (ahoka: ported to bash and added mintty Support)
+            if [ -f "$HOME/.Xdefaults" ]; then
+                xdef="$HOME/.Xdefaults"
+                colors=($(sed -re '/^!/d; /^$/d; /^#/d; s/(\*color)([0-9]):/\10\2:/g;' $xdef | grep 'color[01][0-9]:' | sort | sed  's/^.*: *//g'))
+            elif [ -f "$HOME/.minttyrc" ]; then
+                mrc="$HOME/.bashrc"
+                colors=($(sed -re '/^!/d; /^$/d; /^#/d; s/(\*color)([0-9]):/\10\2:/g;' ~/.bashrc | grep -io -e '#[A-Z0-9]\{6\}'))
+            fi
+
+            echo -e "\e[1;37m 
+ Black    Red      Green    Yellow   Blue     Magenta  Cyan     White   
+ ──────────────────────────────────────────────────────────────────────\e[0m"
+            for i in {0..7}; do
+                echo -en "\e[$((30+$i))m ${colors[i]} \e[0m"
+            done
+            echo
+            for i in {8..15}; do
+                echo -en "\e[1;$((22+$i))m ${colors[i]} \e[0m"
+            done
+            echo -e "\n"
+            exit
+        ;;
+        * )
+            printf "Unknown option $opt. Use -h to see options.\n\n"
+            exit 1;;
+    esac
+done

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+kick /usr/bin/smplayer2 "$*"
+
