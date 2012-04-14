@@ -17,27 +17,29 @@ beautiful.init("/home/mokou/.config/awesome/ahoka.lua")
 
 settings.modkey     = "Mod4"
 settings.term       = "urxvt"
-settings.editor     = settings.term .. " -e vim"
 settings.browser    = "nightly"
+settings.fileman    = "thunar"
 settings.dateformat = "%H:%M:%S"
 settings.layouts    =
 {
     awful.layout.suit.floating,
     awful.layout.suit.tile.left,
-    awful.layout.suit.fair,
+    awful.layout.suit.tile.right,
+    awful.layout.suit.magnifier,
     awful.layout.suit.max
 }
 
-mm = awful.menu({ 
+mm = awful.menu({
     items =
     {
-        { "urxvt",   settings.term },
-        { "nightly", "nightly" },
-        { "thunar",  "thunar" },
-        { "──────", },
-        { "random bg",  "rWall.sh" },
-        { "──────", },
-        { "Restart", "sudo shutdown -r now" },
+        { settings.term,    settings.term    },
+        { settings.browser, settings.browser },
+        { settings.fileman, settings.fileman },
+        { "────────",                        },
+        { "random bg", "rWall.sh"            },
+        { "────────",                        },
+        { "Suspend",  "sudo pm-suspend"      },
+        { "Restart",  "sudo shutdown -r now" },
         { "Shutdown", "sudo shutdown -h now" }
     }
 })
@@ -73,10 +75,10 @@ end
 )
 
 tags.settings = {
-    { name = "一",   layout = settings.layouts[1], mwfact = .625 },
-    { name = "二",   layout = settings.layouts[1], mwfact = .625 },
-    { name = "三",   layout = settings.layouts[2], mwfact = .625 },
-    { name = "四",   layout = settings.layouts[2], mwfact = .625 }
+    { name = "東", layout = settings.layouts[1], mwfact = .625 },
+    { name = "南", layout = settings.layouts[1], mwfact = .625 },
+    { name = "西", layout = settings.layouts[2], mwfact = .625 },
+    { name = "北", layout = settings.layouts[2], mwfact = .625 }
 }
 
 for s = 1, screen.count() do
@@ -96,18 +98,8 @@ mpdwidget       = widget({ type = "textbox" })
 cpuwidget       = widget({ type = "textbox" })
 cputempwidget   = widget({ type = "textbox" })
 memwidget       = widget({ type = "textbox" })
-netdnwidget     = widget({ type = "textbox" })
-netupwidget     = widget({ type = "textbox" })
+netwidget       = widget({ type = "textbox" })
 clockwidget     = widget({ type = "textbox" })
-
-cpuwidget.width     = 28
-cputempwidget.width = 26
-memwidget.width     = 35
-memwidget.align     = "center"
-netdnwidget.width   = 45
-netupwidget.width   = 45
-netupwidget.align   = "right"
-clockwidget.width   = 45
 
 mpdicon         = widget({ type = "imagebox" })
 cpuicon         = widget({ type = "imagebox" })
@@ -128,9 +120,8 @@ clockicon.image = image(beautiful.widget_clock)
 
 vicious.register(cpuwidget, vicious.widgets.cpu, " $1% ", 1)
 vicious.register(cputempwidget, vicious.widgets.thermal, " $1°C", 1, { "coretemp.0", "core" })
-vicious.register(memwidget, vicious.widgets.mem, "$2mb", 1)
-vicious.register(netdnwidget, vicious.widgets.net, " ${eth0 down_kb}kb/s", 1)
-vicious.register(netupwidget, vicious.widgets.net, "${eth0 up_kb}kb/s ", 1)
+vicious.register(memwidget, vicious.widgets.mem, " $2mb", 1)
+vicious.register(netwidget, vicious.widgets.net, " ${eth0 down_kb}kb/s ${eth0 up_kb}kb/s ", 1)
 vicious.register(clockwidget, vicious.widgets.date, " " .. settings.dateformat .. " ", 1)
 
 mpdwidget                   = awesompd:create()
@@ -181,46 +172,46 @@ for s = 1, screen.count() do
         fg = beautiful.fg_normal,
         bg = beautiful.bg_normal,
         screen = s
-    })    if s == 2 then
-    statusbar[s].widgets =
-    {
-        taglist[s],
-        promptbox[s],
-        layoutbox[s],
-        mytasklist[s],
-        layout = awful.widget.layout.horizontal.leftright
-    }
-    else
-    statusbar[s].widgets =
-    {
+    })
+    if s == 2 then
+        statusbar[s].widgets =
         {
             taglist[s],
             promptbox[s],
             layoutbox[s],
+            mytasklist[s],
             layout = awful.widget.layout.horizontal.leftright
-        },
-        systray,
-        clockwidget,
-        clockicon,
-        separator,
-        netupicon,
-        netupwidget,
-        netdnwidget,
-        neticon,
-        separator,
-        memwidget,
-        memicon,
-        separator,
-        cputempwidget,
-        tempicon,
-        cpuwidget,
-        cpuicon,
-        separator,
-        mpdwidget.widget,
-        mpdicon,
-        mytasklist[s],
-        layout = awful.widget.layout.horizontal.rightleft
-    }
+        }
+    else
+        statusbar[s].widgets =
+        {
+            {
+                taglist[s],
+                promptbox[s],
+                layoutbox[s],
+                layout = awful.widget.layout.horizontal.leftright
+            },
+            systray,
+            clockwidget,
+            clockicon,
+            separator,
+            netupicon,
+            netwidget,
+            neticon,
+            separator,
+            memwidget,
+            memicon,
+            separator,
+            cputempwidget,
+            tempicon,
+            cpuwidget,
+            cpuicon,
+            separator,
+            mpdwidget.widget,
+            mpdicon,
+            mytasklist[s],
+            layout = awful.widget.layout.horizontal.rightleft
+        }
     end
 end
 
@@ -237,6 +228,7 @@ local globalkeys = awful.util.table.join(
     awful.key({ settings.modkey,           }, "Escape",awful.tag.history.restore),
     awful.key({ settings.modkey            }, "x",     function () awful.util.spawn(settings.term) end),
     awful.key({ settings.modkey            }, "f",     function () awful.util.spawn(settings.browser) end),
+    awful.key({ settings.modkey            }, "e",     function () awful.util.spawn(settings.fileman) end),
     awful.key({ settings.modkey, "Control" }, "r",     awesome.restart),
     awful.key({ settings.modkey, "Shift"   }, "q",     awesome.quit),
     awful.key({ settings.modkey,           }, "j",     function ()
@@ -340,10 +332,10 @@ awful.rules.rules =
                      border_color = beautiful.border_normal,
                      focus = true,
                      keys = clientkeys,
-                     buttons = clientbuttons } },
+                     buttons = clientbuttons,
+                     size_hints_honor = false } },
     { rule = { class = "Smplayer2" }, properties = { floating = true } },
     { rule = { class = "Gimp" }, properties = { floating = true } },
-    { rule = { class = "URxvt" }, properties = { size_hints_honor = false } },
     { rule = { class = "Wine" }, properties = { floating = true } }
 }
 

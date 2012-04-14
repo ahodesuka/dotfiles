@@ -3,11 +3,15 @@ Xft.antialias:          true
 Xft.hinting:            true
 Xft.rgba:               rgb
 Xft.autohint:           true
-Xft.hintstyle:          hintfull
+Xft.hintstyle:          hintmedium
 Xft.lcdfilter:          lcddefault
 
-urxvt*font:             xft:profont:pixelsize=11,xft:MS Gothic,xft:Bitstream Vera Sans
-urxvt*boldFont:         xft:profont:pixelsize=11,xft:MS Gothic,xft:Bitstream Vera Sans
+urxvt*font:             xft:Profont:pixelsize=11:antialias=false:hinting=false,\
+                        [codeset=JISX0208]xft:Kochi Gothic:antialias=true,\
+                        xft:FreeMono:antialias=false:hinting=false
+urxvt*boldFont:         xft:Profont:pixelsize=11:antialias=false:hinting=false,\
+                        [codeset=JISX0208]xft:Kochi Gothic:antialias=false,\
+                        xft:FreeMono:antialias=false:hinting=false
 
 urxvt.fading:           false
 urxvt.shading:          false 
@@ -47,7 +51,7 @@ urxvt*color7:           #a8a8a8
 urxvt*color15:          #cacccc
 
 urxvt.perl-lib:         /home/mokou/.config/urxvt
-urxvt.perl-ext:         default,matcher,tabbedex
+urxvt.perl-ext:         default,matcher
 
 urxvt.urlLauncher:      nightly
 urxvt.colorUL:          #db7d7d

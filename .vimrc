@@ -57,6 +57,13 @@ set autoindent
 set switchbuf+=usetab,newtab
 set nowrap
 set cursorline
+set title
+set t_Co=256
+
+" gVim
+set guioptions-=m
+set guioptions-=T
+set guioptions-=r
 
 hi LineNr       term=underline ctermfg=8 guifg=Brown
 hi Search       term=standout ctermfg=0 ctermbg=12 guifg=Black guibg=Blue
@@ -65,4 +72,14 @@ hi PmenuSel     ctermfg=0 ctermbg=7 guibg=Grey
 hi PmenuSbar    ctermfg=7 ctermbg=0 guibg=Grey
 hi PmenuThumb   cterm=reverse gui=reverse
 hi CursorLine   term=NONE cterm=NONE ctermbg=black 
+
+colorscheme jellybeans
+set guifont=Profont\ 8
+
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:block-Cursor
+set guicursor+=n-v-c:blinkon0
+set guicursor+=i:blinkon0
+
+set noerrorbells visualbell t_vb=
 

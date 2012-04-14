@@ -7,8 +7,8 @@ confdir = awful.util.getdir("config")
 
 theme.font      = "cure 8"
 
-theme.fg_normal = "#acaaaa"
-theme.fg_focus  = "#cccaca"
+theme.fg_normal = "#cccaca"
+theme.fg_focus  = "#eeecec"
 theme.fg_urgent = "#c7838f"
 theme.bg_normal = "#222222dd"
 theme.bg_focus  = "#161616dd"

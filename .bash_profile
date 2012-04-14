@@ -2,7 +2,9 @@ source "${HOME}/.bashrc"
 PATH=$HOME/bin:$PATH
 
 export BROWSER="nightly"
-export EDITOR="vim"
+export EDITOR="gvim"
 
-startx
+if [[ -z $DISPLAY ]] && ! [[ -e /tmp/.X11-unix/X0 ]] && (( EUID )); then
+    exec startx
+fi
 
