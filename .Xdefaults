@@ -7,10 +7,10 @@ Xft.hintstyle:          hintmedium
 Xft.lcdfilter:          lcddefault
 
 urxvt*font:             xft:Profont:pixelsize=11:antialias=false:hinting=false,\
-                        [codeset=JISX0208]xft:Kochi Gothic:antialias=true,\
+                        [codeset=JISX0208]xft:Kochi Gothic:antialias=false:hinting=false,\
                         xft:FreeMono:antialias=false:hinting=false
 urxvt*boldFont:         xft:Profont:pixelsize=11:antialias=false:hinting=false,\
-                        [codeset=JISX0208]xft:Kochi Gothic:antialias=false,\
+                        [codeset=JISX0208]xft:Kochi Gothic:antialias=false:hintstyle=hintnone,\
                         xft:FreeMono:antialias=false:hinting=false
 
 urxvt.fading:           false
