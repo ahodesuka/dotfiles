@@ -1,0 +1,16 @@
+#!/bin/bash
+
+function getProp()
+{
+    echo $(echo "$info" | grep -oe "$1.*:  \?[0-9]\+" | grep -oe '[0-9]\+')
+}
+
+info=$(xwininfo)
+B=$(getProp Border)
+W=$[$(getProp Width) + B]
+H=$[$(getProp Height) + B]
+X=$(getProp 'Relative upper-left X')
+Y=$(getProp 'Relative upper-left Y')
+
+byz -x $X -y $Y -w $W -h $H $@
+
