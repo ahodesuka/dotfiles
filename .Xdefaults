@@ -2,16 +2,16 @@ Xft.dpi:                96
 Xft.antialias:          true
 Xft.hinting:            true
 Xft.rgba:               rgb
-Xft.autohint:           true
-Xft.hintstyle:          hintmedium
+Xft.autohint:           false
+Xft.hintstyle:          hintfull
 Xft.lcdfilter:          lcddefault
 
-urxvt*font:             xft:Profont:pixelsize=11:antialias=false:hinting=false,\
-                        [codeset=JISX0208]xft:Kochi Gothic:antialias=false:hinting=false,\
-                        xft:FreeMono:antialias=false:hinting=false
-urxvt*boldFont:         xft:Profont:pixelsize=11:antialias=false:hinting=false,\
-                        [codeset=JISX0208]xft:Kochi Gothic:antialias=false:hintstyle=hintnone,\
-                        xft:FreeMono:antialias=false:hinting=false
+urxvt*font:             xft:Profont:pixelsize=11,\
+                        [codeset=JISX0208]xft:Kochi Gothic,\
+                        xft:Code2000:antialias=false:autohint=true
+urxvt*boldFont:         xft:Profont:pixelsize=11,\
+                        [codeset=JISX0208]xft:Kochi Gothic,\
+                        xft:Code2000:antialias=true
 
 urxvt.fading:           false
 urxvt.shading:          false 
@@ -26,11 +26,11 @@ urxvt*foreground:       #cccaca
 urxvt*cursorColor:      #ffffff
 
 !Black
-urxvt*color0:           #171514
+urxvt*color0:           #131212
 urxvt*color8:           #5b595a
 !Red
 urxvt*color1:           #a16a71
-urxvt*color9:           #c78383
+urxvt*color9:           #c98383
 !Green
 urxvt*color2:           #7aa16a
 urxvt*color10:          #93c783
@@ -47,8 +47,8 @@ urxvt*color13:          #c483c7
 urxvt*color6:           #629c99
 urxvt*color14:          #51c4bf
 !White
-urxvt*color7:           #a8a8a8
-urxvt*color15:          #cacccc
+urxvt*color7:           #a8a5a5
+urxvt*color15:          #cccaca
 
 urxvt.perl-lib:         /home/mokou/.config/urxvt
 urxvt.perl-ext:         default,matcher

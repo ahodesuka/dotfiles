@@ -10,9 +10,9 @@ theme.font      = "cure 8"
 theme.fg_normal = "#cccaca"
 theme.fg_focus  = "#eeecec"
 theme.fg_urgent = "#c7838f"
-theme.bg_normal = "#222222dd"
-theme.bg_focus  = "#161616dd"
-theme.bg_urgent = "#161616dd"
+theme.bg_normal = "#222222"
+theme.bg_focus  = "#161616"
+theme.bg_urgent = "#161616"
 
 theme.border_width  = "2"
 theme.border_normal = "#161616"
@@ -22,7 +22,7 @@ theme.border_marked = "#c7838f"
 theme.titlebar_bg_focus  = "#222222"
 theme.titlebar_bg_normal = "#222222"
 
-theme.menu_height = "12"
+theme.menu_height = "16"
 theme.menu_border_width = "1"
 theme.menu_border_color = "#161616"
 
@@ -49,6 +49,14 @@ theme.layout_max        = confdir .. "/icons/layouts/max.png"
 theme.layout_fullscreen = confdir .. "/icons/layouts/fullscreen.png"
 theme.layout_magnifier  = confdir .. "/icons/layouts/magnifier.png"
 theme.layout_floating   = confdir .. "/icons/layouts/floating.png"
+
+theme.menu_terminal     = confdir .. "/icons/menu/terminal.png"
+theme.menu_wbrowser     = confdir .. "/icons/menu/wbrowser.png"
+theme.menu_fbrowser     = confdir .. "/icons/menu/fbrowser.png"
+theme.menu_rwall        = confdir .. "/icons/menu/rwall.png"
+theme.menu_suspend      = confdir .. "/icons/menu/suspend.png"
+theme.menu_reboot       = confdir .. "/icons/menu/reboot.png"
+theme.menu_shutdown     = confdir .. "/icons/menu/shutdown.png"
 
 return theme
 

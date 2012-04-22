@@ -32,15 +32,15 @@ settings.layouts    =
 mm = awful.menu({
     items =
     {
-        { settings.term,    settings.term    },
-        { settings.browser, settings.browser },
-        { settings.fileman, settings.fileman },
-        { "────────",                        },
-        { "random bg", "rWall.sh"            },
-        { "────────",                        },
-        { "Suspend",  "sudo pm-suspend"      },
-        { "Restart",  "sudo shutdown -r now" },
-        { "Shutdown", "sudo shutdown -h now" }
+        { settings.term,    settings.term,    theme.menu_terminal },
+        { settings.browser, settings.browser, theme.menu_wbrowser },
+        { settings.fileman, settings.fileman, theme.menu_fbrowser },
+        { "──────",                                               },
+        { "random bg", "rWall.sh next",       theme.menu_rwall    },
+        { "──────",                                               },
+        { "Suspend",  "sudo pm-suspend",      theme.menu_suspend  },
+        { "Reboot",  "sudo shutdown -r now",  theme.menu_reboot   },
+        { "Shutdown", "sudo shutdown -h now", theme.menu_shutdown }
     }
 })
 
@@ -128,7 +128,7 @@ mpdwidget                   = awesompd:create()
 mpdwidget.font              = beautiful.font
 mpdwidget.output_size       = 35
 mpdwidget.update_interval   = 1
-mpdwidget.path_to_icons     = awful.util.getdir("config") .. "/awesompd/icons"
+mpdwidget.path_to_icons     = awful.util.getdir("config") .. "/icons/awesompd"
 mpdwidget.mpd_config        = "/home/mokou/.mpd/mpd.conf"
 mpdwidget.browser           = settings.browser
 mpdwidget.ldecorator        = " "
@@ -173,7 +173,7 @@ for s = 1, screen.count() do
         bg = beautiful.bg_normal,
         screen = s
     })
-    if s == 2 then
+    if s == 1 then
         statusbar[s].widgets =
         {
             taglist[s],
@@ -192,6 +192,7 @@ for s = 1, screen.count() do
                 layout = awful.widget.layout.horizontal.leftright
             },
             systray,
+            separator,
             clockwidget,
             clockicon,
             separator,
@@ -336,7 +337,13 @@ awful.rules.rules =
                      size_hints_honor = false } },
     { rule = { class = "Smplayer2" }, properties = { floating = true } },
     { rule = { class = "Gimp" }, properties = { floating = true } },
-    { rule = { class = "Wine" }, properties = { floating = true } }
+    { rule = { class = "Wine" }, properties = { floating = true } },
+    { rule = { instance = "sun-awt-X11-XWindowPeer" }, properties = {
+        border_width = "0",
+        buttons = nil,
+        keys = nil,
+        floating = true
+    } }
 }
 
 client.add_signal("manage", function (c, startup)
