@@ -32,7 +32,6 @@ map <F4> :ccl<CR>
 set tags+=~/.vim/tags/cpp
 set tags+=~/.vim/tags/gl
 set tags+=~/.vim/tags/sdl
-set tags+=~/.vim/tags/qt4
 
 map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
@@ -51,7 +50,6 @@ set completeopt=menuone,menu,longest,preview
 set smartindent
 set tabstop=4
 set shiftwidth=4
-set softtabstop=4
 set expandtab
 set autoindent
 set switchbuf+=usetab,newtab
@@ -59,6 +57,11 @@ set nowrap
 set cursorline
 set title
 set t_Co=256
+filetype plugin indent on
+
+au FileType ruby setlocal shiftwidth=2 tabstop=2
+au FileType coffee setlocal shiftwidth=2 tabstop=2
+au FileType python setlocal shiftwidth=2 tabstop=2
 
 " gVim
 set guioptions-=m

@@ -5,6 +5,7 @@
 theme   = {}
 confdir = awful.util.getdir("config")
 
+theme.wallpaper_cmd = { "rWall.sh" }
 theme.font      = "cure 8"
 
 theme.fg_normal = "#cccaca"

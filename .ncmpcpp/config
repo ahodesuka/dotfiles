@@ -49,30 +49,29 @@
 visualizer_in_stereo = "no"
 visualizer_fifo_path = "/tmp/mpd.fifo"
 visualizer_output_name = "FIFO"
-visualizer_sync_interval = "30"
-visualizer_type = "spectrum"
-visualizer_look = "♦┇"
+visualizer_type = "wave"
 
 # Playlist
-song_columns_list_format = " (3f)[yellow]{nr} (47)[red]{t|f} (47)[magenta]{ar} (5f)[yellow]{l}"
+song_columns_list_format = "(50)[red]{t|f} (50)[magenta]{ar} (5f)[white]{lr}"
 now_playing_prefix = "$b"
-now_playing_suffix = "$6>>>> $/b$9"
-playlist_display_mode = "columns" (classic/columns)
+now_playing_suffix = "$6 >>>>$/b$9"
+playlist_display_mode = "columns"
 autocenter_mode = "yes"
 centered_cursor = "no"
 playlist_disable_highlight_delay = "3"
+playlist_separate_albums = "yes"
 
 # Bars
 alternative_header_first_line_format = "$b$1$aqqu$/a$9 $2{%t}|{%f}$9 $1$atqq$/a$9$/b"
-alternative_header_second_line_format = "{{$6$b%a$/b$9}{ $b$1-$9$/b $4%b$9}{ $b$1($9$/b$6%y$9$b$1)$9$/b}}|{%D}"
+alternative_header_second_line_format = "{{$6$b%a$/b$9}{ $b$1-$9$/b $8%b$9}{ $b$1($9$/b$6%y$9$b$1)$9$/b}}|{%D}"
 user_interface = "alternative"
-progressbar_look = "█▌░"
+progressbar_look = "█▋░"
 display_bitrate = "yes"
 titles_visibility = "no"
 
 # Browser
 browser_playlist_prefix = "[P]$9 "
-browser_display_mode = "columns" (classic/columns)
+browser_display_mode = "columns"
 
 # Colors
 active_column_color = "red"
@@ -82,27 +81,27 @@ color1 = "white"
 color2 = "black"
 empty_tag_marker = "--"
 empty_tag_color = "white"
-header_window_color = "yellow"
+header_window_color = "white"
 main_window_color = "white"
 main_window_highlight_color = "red"
 progressbar_color = "red"
-state_line_color = "yellow"
+state_line_color = "white"
 state_flags_color = "magenta"
 statusbar_color = "magenta"
 visualizer_color = "red"
-volume_color = "yellow"
+volume_color = "white"
 
 # Others
 mpd_host = "localhost"
 mpd_port = "6600"
-mpd_music_dir "/d/Music"
 mpd_connection_timeout = "5"
 mpd_crossfade_time = "2"
+mpd_music_dir = "/media/Misc/Music/"
 mpd_communication_mode = "polling"
 clock_display_seconds = "yes"
 startup_screen = "2"
 enable_window_title = "yes"
-search_engine_display_mode = "columns" (classic/columns)
+search_engine_display_mode = "columns"
 follow_now_playing_lyrics = "yes"
 display_screens_numbers_on_start = "no"
 message_delay_time = "3"

@@ -8,10 +8,12 @@ Xft.lcdfilter:          lcddefault
 
 urxvt*font:             xft:Profont:pixelsize=11,\
                         [codeset=JISX0208]xft:Kochi Gothic,\
-                        xft:Code2000:antialias=false:autohint=true
+                        [codeset=KSC5601]xft:Baekmuk Gulim,\
+                        xft:FreeMono
 urxvt*boldFont:         xft:Profont:pixelsize=11,\
                         [codeset=JISX0208]xft:Kochi Gothic,\
-                        xft:Code2000:antialias=true
+                        [codeset=KSC5601]xft:Baekmuk Gulim,\
+                        xft:FreeMono
 
 urxvt.fading:           false
 urxvt.shading:          false 
@@ -30,7 +32,7 @@ urxvt*color0:           #131212
 urxvt*color8:           #5b595a
 !Red
 urxvt*color1:           #a16a71
-urxvt*color9:           #c98383
+urxvt*color9:           #de8c8c
 !Green
 urxvt*color2:           #7aa16a
 urxvt*color10:          #93c783
@@ -41,14 +43,14 @@ urxvt*color11:          #c7a081
 urxvt*color4:           #6a80a1
 urxvt*color12:          #839fc7
 !Magenta
-urxvt*color5:           #916aa1
-urxvt*color13:          #c483c7
+urxvt*color5:           #9c445c
+urxvt*color13:          #c16780
 !Cyan
 urxvt*color6:           #629c99
 urxvt*color14:          #51c4bf
 !White
-urxvt*color7:           #a8a5a5
-urxvt*color15:          #cccaca
+urxvt*color7:           #a49195
+urxvt*color15:          #c4b1b5
 
 urxvt.perl-lib:         /home/mokou/.config/urxvt
 urxvt.perl-ext:         default,matcher

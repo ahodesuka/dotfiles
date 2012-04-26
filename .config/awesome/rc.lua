@@ -24,7 +24,7 @@ settings.layouts    =
 {
     awful.layout.suit.floating,
     awful.layout.suit.tile.left,
-    awful.layout.suit.tile.right,
+    awful.layout.suit.tile,
     awful.layout.suit.magnifier,
     awful.layout.suit.max
 }
@@ -39,10 +39,15 @@ mm = awful.menu({
         { "random bg", "rWall.sh next",       theme.menu_rwall    },
         { "──────",                                               },
         { "Suspend",  "sudo pm-suspend",      theme.menu_suspend  },
-        { "Reboot",  "sudo shutdown -r now",  theme.menu_reboot   },
+        { "Reboot",   "sudo shutdown -r now", theme.menu_reboot   },
         { "Shutdown", "sudo shutdown -h now", theme.menu_shutdown }
     }
 })
+
+
+naughty.config.timeout = 5
+naughty.config.screen = 2
+naughty.config.position = "bottom_right"
 
 mytasklist = {}
 mytasklist.buttons = awful.util.table.join(
@@ -192,7 +197,6 @@ for s = 1, screen.count() do
                 layout = awful.widget.layout.horizontal.leftright
             },
             systray,
-            separator,
             clockwidget,
             clockicon,
             separator,
