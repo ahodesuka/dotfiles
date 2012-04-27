@@ -13,7 +13,7 @@ require("vicious")
 require("naughty")
 require("awesompd/awesompd")
 
-beautiful.init("/home/mokou/.config/awesome/ahoka.lua")
+beautiful.init(awful.util.getdir("config") .. "/ahoka.lua")
 
 settings.modkey     = "Mod4"
 settings.term       = "urxvt"
@@ -105,6 +105,7 @@ cputempwidget   = widget({ type = "textbox" })
 memwidget       = widget({ type = "textbox" })
 netwidget       = widget({ type = "textbox" })
 clockwidget     = widget({ type = "textbox" })
+clockwidget.width = 42
 
 mpdicon         = widget({ type = "imagebox" })
 cpuicon         = widget({ type = "imagebox" })

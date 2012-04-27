@@ -1,0 +1,10 @@
+#!/bin/bash
+
+$ipid=$(pgrep irssi)
+
+if [ -n $ipid ]; then
+    screen -r $(ps -p $ipid -o ppid=)
+else
+    screen /usr/bin/irssi
+fi
+
