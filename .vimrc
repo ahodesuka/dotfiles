@@ -60,7 +60,7 @@ let g:neocomplcache_enable_at_startup = 1
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
-au FileType ruby,coffee,ruby setlocal shiftwidth=2 tabstop=2
+au FileType coffee,python,ruby setlocal shiftwidth=2 tabstop=2
 au FileType css setlocal omnifunc=csscomplete#CompleteCSS
 au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -68,7 +68,7 @@ au FileType python setlocal omnifunc=pythoncomplete#Complete
 au FileType ruby setlocal omnifunc=rubycomplete#Complete
 au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 au FileType cpp setlocal omnifunc=omni#cpp#complete#Main
-au VimEnter *  NERDTree
+au VimEnter * NERDTree
 
 if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
