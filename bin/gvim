@@ -1,6 +1,2 @@
 #!/bin/bash
-
-cmd="/usr/bin/gvim --servername GVIM"
-
-if [ $# -lt 1 ]; then $cmd; else $cmd --remote-tab $*; fi
-
+/usr/bin/gvim --remote-tab-silent $@ || /usr/bin/gvim $@
