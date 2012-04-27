@@ -105,7 +105,7 @@ cputempwidget   = widget({ type = "textbox" })
 memwidget       = widget({ type = "textbox" })
 netwidget       = widget({ type = "textbox" })
 clockwidget     = widget({ type = "textbox" })
-clockwidget.width = 42
+clockwidget.width = 44
 
 mpdicon         = widget({ type = "imagebox" })
 cpuicon         = widget({ type = "imagebox" })
