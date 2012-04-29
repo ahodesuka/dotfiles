@@ -9,11 +9,11 @@ Xft.lcdfilter:          lcddefault
 urxvt*font:             xft:Profont:pixelsize=11,\
                         [codeset=JISX0208]xft:Kochi Gothic,\
                         [codeset=KSC5601]xft:Baekmuk Gulim,\
-                        xft:FreeMono
+                        xft:FreeMono:antialias=false
 urxvt*boldFont:         xft:Profont:pixelsize=11,\
                         [codeset=JISX0208]xft:Kochi Gothic,\
                         [codeset=KSC5601]xft:Baekmuk Gulim,\
-                        xft:FreeMono
+                        xft:FreeMono:antialias=false
 
 urxvt.fading:           false
 urxvt.shading:          false 

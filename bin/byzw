@@ -7,10 +7,10 @@ function getProp()
 
 info=$(xwininfo)
 B=$(getProp Border)
-W=$[$(getProp Width) + B]
-H=$[$(getProp Height) + B]
+W=$[$(getProp Width) + B * 2]
+H=$[$(getProp Height) + B * 2]
 X=$(getProp 'Relative upper-left X')
 Y=$(getProp 'Relative upper-left Y')
 
-byz -x $X -y $Y -w $W -h $H $@
+byz -x $X -y $Y -w $W -h $H --delay 1 $@
 
