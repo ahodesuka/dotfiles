@@ -10,6 +10,7 @@ alias global_sync="sudo emerge --sync && sudo layman -S"
 u2space()
 {
     for file in *; do
+        if [ "$file" == "${file//_/}" ]; then continue; fi
         echo Renaming "$file" to "${file//_/ }"
         mv "$file" "${file//_/ }"
     done

@@ -13,13 +13,12 @@ require("vicious")
 require("naughty")
 require("awesompd/awesompd")
 
-beautiful.init(awful.util.getdir("config") .. "/ahoka.lua")
-
 settings.modkey     = "Mod4"
 settings.term       = "urxvt"
 settings.browser    = "nightly"
 settings.fileman    = "thunar"
 settings.dateformat = "%H:%M:%S"
+settings.configdir  = awful.util.getdir("config")
 settings.layouts    =
 {
     awful.layout.suit.floating,
@@ -28,6 +27,8 @@ settings.layouts    =
     awful.layout.suit.magnifier,
     awful.layout.suit.max
 }
+
+beautiful.init(settings.configdir .. "/ahoka.lua")
 
 mm = awful.menu({
     items =
@@ -343,6 +344,7 @@ awful.rules.rules =
     { rule = { class = "Smplayer2" }, properties = { floating = true } },
     { rule = { class = "Gimp" }, properties = { floating = true } },
     { rule = { class = "Wine" }, properties = { floating = true } },
+    { rule = { class = "Firefox", instance = "Toplevel" }, properties = { floating = true } },
     { rule = { instance = "sun-awt-X11-XWindowPeer" }, properties = {
         border_width = "0",
         buttons = nil,
