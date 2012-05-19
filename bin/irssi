@@ -1,8 +1,7 @@
 #!/bin/bash
 
-ppid=$(ps -p `pgrep irssi | sed -n 1p` -o ppid=)
-if [ -n $ppid ]; then
-    screen -r $ppid
+if [ "$(pgrep irssi)" != "$$" ]; then
+    screen -r $(ps -p `pgrep irssi | sed -n 1p` -o ppid=)
 else
     screen /usr/bin/irssi
 fi
