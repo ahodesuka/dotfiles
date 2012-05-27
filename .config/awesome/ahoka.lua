@@ -16,8 +16,8 @@ theme.bg_focus  = "#161616"
 theme.bg_urgent = "#161616"
 
 theme.border_width  = "2"
-theme.border_normal = "#161616"
-theme.border_focus  = "#222222"
+theme.border_normal = "#222222"
+theme.border_focus  = "#161616"
 theme.border_marked = "#c7838f"
 
 theme.titlebar_bg_focus  = "#222222"

@@ -22,7 +22,7 @@ urxvt.scrollBar:        false
 urxvt.geometry:         104x24
 urxvt.depth:            24
 urxvt.saveLines:        10000
-urxvt*termName:         rxvt-256color
+urxvt*termName:         rxvt-unicode
 
 urxvt*preeditType:      OverTheSpot
 urxvt*inputMethod:      XIM
