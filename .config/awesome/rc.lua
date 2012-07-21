@@ -140,7 +140,7 @@ mpdwidget.mpd_config        = "/home/mokou/.mpd/mpd.conf"
 mpdwidget.browser           = settings.browser
 mpdwidget.ldecorator        = " "
 mpdwidget.rdecorator        = ""
-mpdwidget:register_buttons({ 
+mpdwidget:register_buttons({
     { "", awesompd.MOUSE_LEFT, mpdwidget:command_playpause() },
     { "Control", awesompd.MOUSE_SCROLL_UP, mpdwidget:command_prev_track() },
   	{ "Control", awesompd.MOUSE_SCROLL_DOWN, mpdwidget:command_next_track() },
@@ -170,7 +170,9 @@ for s = 1, screen.count() do
     ))
     taglist[s] = awful.widget.taglist.new(s, awful.widget.taglist.label.all, taglist.buttons)
     mytasklist[s] = awful.widget.tasklist(function(c)
-        return awful.widget.tasklist.label.currenttags(c, s)
+		--remove tasklist-icon without modifying the original tasklist.lua
+		local tmptask = { awful.widget.tasklist.label.currenttags(c, s) }
+		return tmptask[1], tmptask[2], tmptask[3], nil
     end, mytasklist.buttons)
     statusbar[s] = awful.wibox(
     {
@@ -233,6 +235,7 @@ local globalkeys = awful.util.table.join(
     awful.key({ settings.modkey            }, "Left",  awful.tag.viewprev),
     awful.key({ settings.modkey            }, "Right", awful.tag.viewnext),
     awful.key({ settings.modkey,           }, "Escape",awful.tag.history.restore),
+    awful.key({ settings.modkey            }, "w",     function () awful.util.spawn_with_shell("rWall.sh next") end),
     awful.key({ settings.modkey            }, "x",     function () awful.util.spawn(settings.term) end),
     awful.key({ settings.modkey            }, "f",     function () awful.util.spawn(settings.browser) end),
     awful.key({ settings.modkey            }, "e",     function () awful.util.spawn(settings.fileman) end),
@@ -343,8 +346,9 @@ awful.rules.rules =
                      size_hints_honor = false } },
     { rule = { class = "Smplayer2" }, properties = { floating = true } },
     { rule = { class = "Gimp" }, properties = { floating = true } },
-    { rule = { class = "Wine" }, properties = { floating = true } },
+    { rule = { class = "Wine" }, properties = { floating = true, border_width = 0 } },
     { rule = { class = "Firefox", instance = "Toplevel" }, properties = { floating = true } },
+    { rule = { instance = "plugin-container" }, properties = { floating = true } },
     { rule = { instance = "sun-awt-X11-XWindowPeer" }, properties = {
         border_width = "0",
         buttons = nil,
