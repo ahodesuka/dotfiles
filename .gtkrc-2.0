@@ -1,7 +1,7 @@
 # DO NOT EDIT! This file will be overwritten by LXAppearance.
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
-gtk-theme-name="Vorta"
+gtk-theme-name="ahoka"
 gtk-icon-theme-name="Faenza-Black"
 gtk-font-name="cure 8"
 gtk-cursor-theme-name="Neutral_Plus"

@@ -1,0 +1,12 @@
+GtkStatusbar {
+padding: 0;
+-GtkStatusbar-shadow-type: none;
+}
+
+/* Doesn't work, grip disabled - see gtkwidget.css
+.grip {
+  background-image: url("../../../gtk-2.0/theme/gtkwidget/image/resizegrip.gif");
+  background-color: #333;
+  color: #333;
+}
+*/

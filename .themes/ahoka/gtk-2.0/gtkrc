@@ -1,0 +1,273 @@
+include "Menu-Menubar/menu.rc"
+gtk-toolbar-icon-size = GTK_ICON_SIZE_SMALL_TOOLBAR
+gtk-icon-sizes = "panel-menu=24,24:panel=24,24:gtk-button=24,16:gtk-large-toolbar=24,24"
+gtk-button-images = 0
+gtk-menu-images   = 0
+
+style "ahoka-default"
+{
+	GtkScrolledWindow::scrollbars-within-bevel    = 1
+	GtkScrolledWindow::scrollbar-spacing          = 0
+	GtkRange::trough_border                       = 0
+	GtkRange::slider_width                        = 8
+	GtkRange::stepper_size                        = 0
+	GtkRange::trough_border                       = 0
+	GtkPaned::handle_size                         = 6
+	GtkScrollbar::has-backward-stepper            = 1
+	GtkScrollbar::has-forward-stepper             = 1
+
+    GtkScale :: activate-slider = 1
+    GtkScale :: slider-length = 23
+    GtkScale :: slider-width = 14
+    GtkScale :: trough-side-details = 1
+
+    GtkRange::trough_border = 0
+    GtkRange::trough_border = 0
+    GtkRange::slider_width = 10
+    GtkRange::stepper_size = 1
+    GtkScrollbar::min_slider_length = 40
+
+    xthickness = 1
+    ythickness = 1
+
+	fg[NORMAL]	      	= "#cccaca" # Metacity and mouseover, Most text
+	fg[PRELIGHT]      	= "#dddada" # Text when mouseover
+	fg[ACTIVE]	    	  = "#dddada" # Text when mouseclicking button, Tabs, Active window list
+	fg[SELECTED]      	= "#ffffff" # Metacity X when window selected
+	fg[INSENSITIVE]   	= "#303030" # Insensitive Text
+
+	bg[NORMAL]	     	  = "#262626" # Normal Background, inactive Metacity bar, buttons
+	bg[PRELIGHT]	  	  = "#753030" # Mouseover buttons
+	bg[ACTIVE]	  	    = "#222222" # Mouseclicking, Tabs, active window list
+	bg[SELECTED]	      = "#753030" # Metacity Bar
+	bg[INSENSITIVE]   	= "#181818" # Insensitive buttons
+
+	base[NORMAL]      	= "#222222" # Background, most
+	base[PRELIGHT]    	= "#753030" # Mouseover menu
+	base[ACTIVE]	    	= "#181818" # Menu active item in inactive window
+	base[SELECTED]  	  = "#753030" # Menu active item in active window
+	base[INSENSITIVE] 	= "#262626" # Background, insensitive
+
+	text[NORMAL]	  	  = "#cccaca" # Text in window
+	text[PRELIGHT]	    = "#dddada" # Text on Mouseover
+	text[ACTIVE]	  	  = "#dddada" # Active text in inactive window
+	text[SELECTED]    	= "#ffffff" # Active text in active window
+	text[INSENSITIVE] 	= "#dddada" # Unknown
+
+
+	engine "murrine"
+	{
+        animation           = TRUE
+        colorize_scrollbar  = TRUE
+
+        menustyle           = 0
+        glazestyle          = 2
+        glowstyle           = 1
+        menubarstyle        = 2
+        menubaritemstyle    = 1
+        menuitemstyle       = 1
+        listviewheaderstyle = 1
+        listviewstyle       = 0
+        lightborderstyle    = 1
+        progressbarstyle    = 1
+        separatorstyle      = 1
+        textstyle           = 3
+        sliderstyle         = 1
+
+        contrast            = 1.25
+        glow_shade          = 1.6
+        highlight_shade     = 1.125
+        text_shade          = 0.65
+        lightborder_shade   = 1.35
+        roundness           = 2
+        gradient_colors     = { "#262626", "#222222", "#222222", "#222222" }
+        trough_shades       = { 1.0, 1.2 }
+	}
+}
+
+style "ahoka-wide" = "ahoka-default"
+{
+	xthickness = 2
+	ythickness = 2
+}
+
+style "ahoka-wider" = "ahoka-default"
+{
+	xthickness = 3
+	ythickness = 3
+}
+
+style "ahoka-entry" = "ahoka-wider"
+{
+
+}
+
+style "ahoka-button" = "ahoka-wider"
+{
+	xthickness = 2
+	ythickness = 0
+}
+
+style "ahoka-slider" = "ahoka-button"
+{
+}
+
+style "ahoka-notebook" = "ahoka-wide"
+{
+	ythickness = 0
+}
+
+style "ahoka-tasklist" = "ahoka-default"
+{
+	xthickness = 5
+	ythickness = 3
+}
+
+style "ahoka-menu" = "ahoka-default"
+{
+	xthickness = 0
+	ythickness = 3
+	bg[SELECTED] = "#222222"
+}
+
+style "ahoka-menu-item" = "ahoka-default"
+{
+	text[PRELIGHT]	= "#a16a71" # Text on Mouseover
+	fg[PRELIGHT]	= "#a16a71" # Text on Mouseover
+	text[SELECTED] 	= "#a16a71" # Active text in active window
+    ythickness = 2
+}
+
+style "ahoka-menubar" = "ahoka-default"
+{
+    fg[NORMAL]   = "#222222"
+    engine "murrine" {
+        gradient_colors = { "#222222", "#222222", "#222222", "#262626" }
+    }
+}
+
+style "ahoka-menubar-item"
+{
+	ythickness = 0
+}
+
+style "ahoka-tree" = "ahoka-default"
+{
+    xthickness = 2
+    ythickness = 2
+}
+
+style "ahoka-frame-title" = "ahoka-default"
+{
+
+}
+
+style "ahoka-tooltips" = "ahoka-default"
+{
+    xthickness = 4
+    ythickness = 4
+}
+
+style "ahoka-progressbar"
+{
+	xthickness = 0
+	ythickness = 0
+	fg[PRELIGHT]  = "#ffffff"
+	engine "murrine" {
+        gradient_colors = { "#753030", "#572D2D", "#572D2D", "#753030" }
+	}
+}
+
+style "ahoka-range"
+{
+
+}
+
+style "ahoka-combo" = "ahoka-button"
+{
+}
+
+style "ahoka-scrollbar"
+{
+  fg[NORMAL]   = "#222222"
+  bg[SELECTED] = "#262626"
+	engine "murrine"
+	{
+        glazestyle      = 0
+        roundness       = 0
+        scrollbarstyle	= 2   # 2 adds handles to scrollbars.
+        stepperstyle		= 1   # 0 = standard, 1 = integrated stepper handles.
+        contrast        = 1.15
+
+        trough_shades       = { 0.85, 0.85 }
+        gradient_colors     = FALSE
+	}
+}
+
+## Thunar
+style "thunarentry"
+{
+    base[NORMAL] = "#262626"
+    xthickness = 0
+    ythickness = 0
+}
+style "thunarbutton"
+{
+    fg[PRELIGHT] = "#753030"
+    fg[ACTIVE]   = "#753030"
+
+    engine "pixmap"
+    {
+        image
+        {
+            function = BOX
+            recolorable = TRUE
+            file = ""
+            border = { 0, 0, 0, 0 }
+            stretch = TRUE
+        }
+    }
+}
+
+class "ThunarPathEntry"		style "thunarentry"
+
+# widget styles
+class "GtkWidget"      style "ahoka-default"
+class "GtkButton"      style "ahoka-button"
+class "GtkScale"       style "ahoka-slider"
+class "GtkCombo"       style "ahoka-button"
+class "GtkRange"       style "ahoka-range"
+class "GtkFrame"       style "ahoka-wide"
+class "GtkMenu"        style "ahoka-menu"
+class "GtkEntry"       style "ahoka-entry"
+class "GtkMenuItem"    style "ahoka-menu-item"
+class "GtkNotebook"    style "ahoka-notebook"
+class "GtkProgressBar" style "ahoka-progressbar"
+class "*MenuBar*"      style "ahoka-menubar"
+class "GtkScrollbar"   style "ahoka-scrollbar"
+
+widget_class "*MenuItem.*" style "ahoka-menu-item"
+widget_class "*MenuBar.*"  style "ahoka-menubar-item"
+
+# combobox stuff
+widget_class "*.GtkComboBox.GtkButton" style "ahoka-combo"
+widget_class "*.GtkCombo.GtkButton"    style "ahoka-combo"
+
+# tooltips stuff
+widget_class "*.tooltips.*.GtkToggleButton" style "ahoka-tasklist"
+widget "gtk-tooltips" style "ahoka-tooltips"
+
+# treeview stuff
+widget_class "*.GtkTreeView.GtkButton" style "ahoka-tree"
+widget_class "*.GtkCTree.GtkButton" style "ahoka-tree"
+widget_class "*.GtkList.GtkButton" style "ahoka-tree"
+widget_class "*.GtkCList.GtkButton" style "ahoka-tree"
+widget_class "*.GtkFrame.GtkLabel" style "ahoka-frame-title"
+
+# notebook stuff
+widget_class "*.GtkNotebook.*.GtkEventBox" style "ahoka-notebook"
+widget_class "*.GtkNotebook.*.GtkViewport" style "ahoka-notebook"
+
+# thunar
+widget_class "*ThunarWindow*ThunarLocationEntry.GtkToggleButton*" style "thunarbutton"
+

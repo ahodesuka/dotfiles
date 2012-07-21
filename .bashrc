@@ -6,6 +6,7 @@ alias byzm2="byz -x 1680 -y 0 -w 1920 -h 1080"
 alias ls="ls --color=always"
 alias ll="ls -l"
 alias global_sync="sudo emerge --sync && sudo layman -S"
+alias cue2flac="find -type f -name '*.cue' -execdir cue2tracks -R -n 19 -o '%N. %p ─ %t' {} \;"
 
 u2space()
 {

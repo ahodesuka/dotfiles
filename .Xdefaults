@@ -9,16 +9,21 @@ Xft.lcdfilter:          lcddefault
 urxvt*font:             xft:Profont:pixelsize=11,\
                         [codeset=JISX0208]xft:Kochi Gothic,\
                         [codeset=KSC5601]xft:Baekmuk Gulim,\
-                        xft:FreeMono:antialias=false
+                        xft:FreeMono:antialias=false,\
+                        xft:Arial Unicode MS:antialias=false,\
+                        xft:DejaVu Sans Mono:antialias=false
 urxvt*boldFont:         xft:Profont:pixelsize=11,\
                         [codeset=JISX0208]xft:Kochi Gothic,\
                         [codeset=KSC5601]xft:Baekmuk Gulim,\
-                        xft:FreeMono:antialias=false
+                        xft:FreeMono:antialias=false,\
+                        xft:Arial Unicode MS:antialias=false,\
+                        xft:DejaVu Sans Mono:antialias=false
 urxvt*imFont:           -*-Kochi Gothic-medium-r-normal--11-140-*-*-*-*-*-*
 
 urxvt.fading:           false
-urxvt.shading:          false 
+urxvt.shading:          false
 urxvt.scrollBar:        false
+urxvt.urgentOnBell:     true
 urxvt.geometry:         104x24
 urxvt.depth:            24
 urxvt.saveLines:        10000

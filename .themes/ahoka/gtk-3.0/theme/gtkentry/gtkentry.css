@@ -1,0 +1,24 @@
+ *{
+-GtkEntry-icon-prelight: 0;
+-GtkEntry-inner-border: 1;
+-GtkEntry-shadow-type: none;
+}
+
+GtkEntry {
+	background-color: #222;
+	border-top-width: 1;
+	border-style: solid;
+	border-top-color: #1b1b1b;
+	border-left-width: 1;
+	border-left-color: #1b1b1b;
+	border-right-width: 1;
+	border-right-color: #1b1b1b;
+	border-bottom-width: 1;
+	border-bottom-color: #1b1b1b;
+    color: #b1b1b1;
+}
+
+GtkEntry:insensitive{
+	background-color: #2e2e2e;
+	color: #303030;
+}

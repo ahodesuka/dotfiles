@@ -1,0 +1,11 @@
+* {
+-GtkToolbar-internal-padding: 1;
+-GtkToolbar-shadow-type: none;
+}
+GtkToolbar {
+	border-width: 1px 1px 1px 1px;
+}
+
+GtkToolbar .hseperator, .vseperator, .seperator, .vline {
+	color: #333;
+}

@@ -1,0 +1,22 @@
+GtkWidget ,GtkWindow {
+-GtkWidget-wide-separators: 1;
+-GtkWidget-draw-border: 0;
+-GtkWidget-focus-line-width: 0;
+-GtkWidget-link_color: #006eff;
+-GtkHTML-link-color: #006eff;
+-GtkIMHtml-hyperlink-color: #006eff;
+-GnomeHRef-link-color: #006eff;
+-GtkWidget-visited-link-color: #930093;
+-GtkHTML-visited-link-color: #930093;
+-GtkIMHtml-hyperlink-visited-color: #930093;
+-GtkExpander-expander-size: 7;
+-GtkExpander-expander-spacing: 2;
+-GtkExpander-expander-spacing: 2;
+-GtkHandleBox-shadow-type: none;
+-GtkHandleBox-shadow: none;
+-GtkPaned-handle-size: 9;
+-GtkWidget-focus-line-width: 0;
+-GtkWidget-window-dragging: true;
+-GtkWindow-resize-grip-height: 0;
+-GtkWindow-resize-grip-width: 0;
+}

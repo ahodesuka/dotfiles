@@ -1,0 +1,181 @@
+
+# next line indicates where the icons are located
+pixmap_path "/usr/share/icons/JiniBlueSky/scalable/stock" 
+
+
+## here's an example:
+##
+## stock["name-of-the-key"] =						{{ "filename.svg" }}
+##
+
+style "icon-style"
+{
+  stock["gnome-stock-about"] =						{{ "stock_about.svg" }}
+  stock["gnome-stock-volume"] = 					{{ "stock_volume-max.svg" }}
+  stock["gnome-stock-mic"] = 						{{ "stock_mic.svg" }}
+  stock["gnome-stock-line-in"] = 					{{ "stock_line-in.svg" }}
+  stock["gnome-stock-attach"] = 					{{ "stock_attach.svg" }}
+  stock["gnome-stock-book-blue"] = 					{{ "stock_book.svg" }}
+  stock["gnome-stock-book-green"] = 					{{ "stock_book.svg" }}
+  stock["gnome-stock-book-red"] = 					{{ "stock_book.svg" }}
+  stock["gnome-stock-book-yellow"] = 					{{ "stock_book.svg" }}
+  stock["gnome-stock-book-open"] = 					{{ "stock_book-open.svg" }}
+  stock["gtk-dialog-info"] =   						{{ "gtk-dialog-info.svg" }}
+  stock["gtk-dialog-question"] = 					{{ "gtk-dialog-question.svg" }}
+  stock["gtk-dialog-error"] =  						{{ "gtk-dialog-error.svg" }}
+  stock["gtk-dialog-warning"] =  					{{ "gtk-dialog-warning.svg" }}
+  stock["gtk-dnd"] = 							{{ "gtk-dnd.svg" }} 
+  stock["gtk-dnd-multiple"] = 						{{ "gtk-dnd-multiple.svg" }} 
+  stock["gtk-add"] =	       						{{ "gtk-add.svg" }}
+  stock["gtk-apply"] =	       						{{ "gtk-apply.svg" }}
+  stock["gtk-bold"] =	       						{{ "gtk-bold.svg" }} 
+  stock["gtk-cancel"] =	       						{{ "gtk-cancel.svg" }}
+  stock["gtk-cdrom"] =	       						{{ "gtk-cdrom.svg" }}
+  stock["gtk-clear"] =	       						{{ "gtk-clear.svg" }}
+  stock["gtk-close"] =	       						{{ "gtk-close.svg" }}
+  stock["gtk-convert"] =       						{{ "gtk-convert.svg" }}
+  stock["gtk-copy"] =	       						{{ "gtk-copy.svg" }}
+  stock["gtk-cut"] =	       						{{ "gtk-cut.svg" }}
+  stock["gtk-delete"] =							{{ "gtk-delete.svg" }}
+  stock["gtk-execute"] =       						{{ "gtk-execute.svg" }}
+  stock["gtk-find"] =	       						{{ "gtk-find.svg" }}
+  stock["gtk-find-and-replace"] = 					{{ "gtk-find-and-replace.svg" }}
+  stock["gtk-floppy"] =							{{ "gtk-floppy.svg" }}
+  stock["gtk-go-back"] =						{{ "gtk-go-back-ltr.svg" }}
+  stock["gtk-go-down"] =						{{ "gtk-go-down.svg" }}
+  stock["gtk-go-forward"] =						{{ "gtk-go-forward-ltr.svg" }}
+  stock["gtk-go-up"] =							{{ "gtk-go-up.svg" }}
+  stock["gtk-goto-first"] = 						{{ "gtk-goto-first-ltr.svg" }}
+  stock["gtk-goto-last"] = 						{{ "gtk-goto-last-ltr.svg" }}
+  stock["gtk-goto-top"] = 						{{ "gtk-goto-top.svg" }}
+  stock["gtk-goto-bottom"] =						{{ "gtk-goto-bottom.svg" }}
+  stock["gtk-help"] =							{{ "gtk-help.svg" }}
+  stock["gtk-home"] =							{{ "gtk-home.svg" }}
+# stock["gtk-index"] =stock						{{ "gtk-index.svg" }}
+  stock["gtk-italic"] =							{{ "gtk-italic.svg" }}
+  stock["gtk-jump-to"] =							{{ "gtk-jump-to-ltr.svg" }}
+  stock["gtk-justify-center"] =						{{ "gtk-justify-center.svg" }}
+  stock["gtk-justify-fill"] =						{{ "gtk-justify-fill.svg" }}
+  stock["gtk-justify-left"] =						{{ "gtk-justify-left.svg" }}
+  stock["gtk-justify-right"] =						{{ "gtk-justify-right.svg" }}
+  stock["gtk-missing-image"] =						{{ "gtk-missing-image.svg" }}
+  stock["gtk-new"] =	     						{{ "gtk-new.svg" }}
+  stock["gtk-no"] =							{{ "gtk-no.svg" }} 
+  stock["gtk-ok"] =							{{ "gtk-ok.svg" }}
+  stock["gtk-open"] =							{{ "gtk-open.svg" }} 
+  stock["gtk-paste"] =							{{ "gtk-paste.svg" }}
+  stock["gtk-print"] =							{{ "gtk-print.svg" }}
+  stock["gtk-print-preview"] =						{{ "gtk-print-preview.svg" }}
+  stock["gtk-preferences"] =						{{ "gtk-preferences.svg" }}
+  stock["gtk-properties"] =						{{ "gtk-properties.svg" }}
+  stock["gtk-quit"] =							{{ "gtk-quit.svg" }}
+  stock["gtk-redo"] =							{{ "gtk-redo-ltr.svg" }}
+  stock["gtk-refresh"] =						{{ "gtk-refresh.svg" }}
+  stock["gtk-remove"] =							{{ "gtk-remove.svg" }}
+  stock["gtk-revert-to-saved"] =					{{ "gtk-revert-to-saved.svg" }}
+  stock["gtk-save"] =							{{ "gtk-save.svg" }}
+  stock["gtk-save-as"] =						{{ "gtk-save-as.svg" }}
+# stock["gtk-select-color"] =						{{ "gtk-select-color.svg" }}
+  stock["gtk-select-font"] =						{{ "gtk-select-font.svg" }}
+# stock["gtk-sort-ascending"] =						{{ "gtk-sort-ascending.svg" }}
+# stock["gtk-sort-descending"] =					{{ "gtk-sort-descending.svg" }}
+  stock["gtk-spell-check"] =						{{ "gtk-spell-check.svg" }}
+  stock["gtk-stop"] =							{{ "gtk-stop.svg" }}
+# stock["gtk-strikethrough"] =						{{ "gtk-strikethrough.svg" }}
+  stock["gtk-undelete"] =						{{ "gtk-undelete.svg" }}
+  stock["gtk-underline"] =						{{ "gtk-underline.svg" }}
+  stock["gtk-undo"] =							{{ "gtk-undo-ltr.svg" }}
+  stock["gtk-yes"] =							{{ "gtk-yes.svg" }} 
+  stock["gtk-zoom-100"] =						{{ "gtk-zoom-100.svg" }}
+  stock["gtk-zoom-fit"] =						{{ "gtk-zoom-fit.svg" }}
+  stock["gtk-zoom-in"] =						{{ "gtk-zoom-in.svg" }}
+  stock["gtk-zoom-out"] =						{{ "gtk-zoom-out.svg" }}
+# stock["terminal-edit"] =      					{{ "stock_preferences.svg" }}
+# stock["session-stock-edit"] = 					{{ "stock_preferences.svg" }}
+  stock["gtk-stock-edit"] =      					{{ "gtk-stock-edit.svg" }}
+  stock["gtk-stock-import"] =      					{{ "gtk-stock-import.svg" }}
+  stock["gtk-stock-export"] =      					{{ "gtk-stock-export.svg" }}
+# stock["gtk-stock-insert-image"] =      				{{ "gtk-stock-insert-image.svg" }}
+# stock["gtk-stock-insert-object"] =      				{{ "gtk-stock-insert-object.svg" }}
+# stock["gtk-stock-insert-table"] =      				{{ "gtk-stock-insert-table.svg" }}
+# stock["gtk-stock-connect"] = 						{{ "gtk-stock-connect.svg" }}
+# stock["gtk-stock-disconnect"] = 					{{ "gtk-stock-disconnect.svg" }}
+# stock["gtk-stock-reset"] = 						{{ "gtk-stock-reset.svg" }}
+  stock ["panel-run"] =           					{{"panel-run.svg"}}
+  stock ["panel-searchtool"] =    					{{"panel-searchtool.svg"}}
+  stock ["panel-screenshot"] =    					{{"panel-screenshot.svg"}}
+  stock ["panel-lockscreen"] =    					{{"panel-lockscreen.svg"}}
+  stock ["panel-logout"] =        					{{"panel-logout.svg"}}
+  stock ["panel-gnome-logo"] =    					{{"gnome-logo.svg"}}
+# stock ["panel-cde"] =           					{{"stock_cde-menu.svg"}}
+# stock ["panel-amusements"] =    					{{"stock_amusements.svg"}}
+# stock ["panel-accessories"] =   					{{"stock_accessories.svg"}}
+# stock ["panel-multimedia"] =    					{{"stock_multimedia.svg"}}
+# stock ["panel-internet"] =      					{{"stock_internet.svg"}}
+# stock ["panel-utility"] =       						{{"stock_gnome-util.svg"}}
+# stock ["panel-corner-type"] =   					{{"stock_corner-panel.svg"}}
+# stock ["panel-edge-type"] =     					{{"stock_edge-panel.svg"}}
+# stock ["panel-floating-type"] = 					{{"stock_floating-panel.svg"}}
+# stock ["panel-sliding-type"] =  					{{"stock_sliding-panel.svg"}}
+# stock ["panel-menu-type"] =     					{{"stock_menu-panel.svg"}}
+# stock ["panel-launcher"] =      					{{"stock_launcher-program.svg"}}
+# stock ["panel-drawer"] =        					{{"stock_drawer.svg"}}
+# stock ["panel-applet"] =        					{{"panel-applet.svg"}}
+  stock ["panel-desktop"] =       					{{"panel-desktop.svg"}}
+# stock ["commandline-browser"] =					{{"stock_commandline-browser.xpm"}}
+# stock ["commandline-history"] =					{{"stock_commandline-history.xpm"}}
+# stock ["cdplayer-stop"] =       					{{"stock-media-stop.svg"}}
+# stock ["cdplayer-play"] = 						{{"stock-media-play.svg"}}
+# stock ["cdplayer-pause"] = 						{{"stock-media-pause.svg"}}
+# stock ["cdplayer-prev"] =       					{{"stock-media-prev.svg"}}
+# stock ["cdplayer-next"] =       					{{"stock-media-next.svg"}}
+# stock ["cdplayer-eject"] =      					{{"stock-media-eject.svg"}}
+  stock["volume-mute"] =      						{{"stock_volume-mute.svg"}}
+  stock["volume-zero"] =      						{{"stock_volume-zero.svg"}}
+  stock["volume-min"] =      						{{"stock_volume-min.svg"}}
+  stock["volume-med"] =      						{{"stock_volume-med.svg"}}
+  stock["volume-max"] =      						{{"stock_volume-max.svg"}}    
+  stock ["mouse-dblclck-maybe"] =    					{{"mouse-dblclck-maybe.svg"}}
+  stock ["mouse-dblclck-on"] =       					{{"mouse-dblclck-on.svg"}}
+  stock ["mouse-dblclck-off"] =      					{{"mouse-dblclck-off.svg"}}
+
+## Gaim stock icons
+
+  stock["gaim-send"] =      						{{"gaim-send.svg"}}
+  stock["gaim-im"] =      						{{"gaim-im.svg"}}
+  stock["gaim-accounts"] = 						{{"gaim-accounts.svg"}}
+  stock["gaim-link"]= 							{{"gaim-link.svg"}}
+  stock["gaim-image"]= 							{{"gaim-image.svg"}}
+  stock["gaim-smiley"]= 						{{"gaim-smiley.svg"}}
+  stock["gaim-info"]= 							{{"gaim-info.svg"}}
+  stock["gaim-about"]= 							{{"gtk-about.svg"}}
+  stock["gaim-text-bigger"]= 						{{"gaim-text-bigger.svg"}}
+  stock["gaim-text-smaller"]= 						{{"gaim-text-smaller.svg"}}
+  stock["gaim-fgcolor"]= 						{{"gaim-fgcolor.svg"}}
+  stock["gaim-bgcolor"]= 						{{"gaim-bgcolor.svg"}}
+  stock["gaim-logo"]= 							{{"gaim-logo.png"}}
+  stock["gaim-dialog-question"]= 					{{"gaim-dialog-question.svg"}}
+  stock["gaim-dialog-error"]= 						{{"gaim-dialog-error.svg"}}
+  stock["gaim-dialog-warning"]= 					{{"gaim-dialog-error.svg"}}
+  stock["gaim-dialog-info"]= 						{{"gaim-dialog-info.svg"}}
+  stock["gaim-typed"]= 							{{"gaim-typed.svg"}}
+  stock["gaim-typing"]= 						{{"gaim-typing.svg"}}
+  stock["gaim-icon-online"]= 						{{"gaim-icon-online.svg"}}
+  stock["gaim-icon-offline"]= 						{{"gaim-icon-offline.svg"}}
+  stock["gaim-icon-away"]= 						{{"gaim-icon-away.svg"}}
+  stock["gaim-icon-connect"]= 						{{"gaim-icon-connect.svg"}}
+
+## end Gaim stock icons  
+## Rythmbox stock icons
+
+  stock ["rhythmbox-tray-icon"] = 					{{ "rhythmbox-tray-icon.svg"}}
+  stock ["rhythmbox-volume-max"] = 					{{ "stock_volume-max.svg" }}
+  stock ["rhythmbox-volume-medium"] = 					{{ "stock_volume-med.svg" }}
+  stock ["rhythmbox-volume-min"] = 					{{ "stock_volume-min.svg" }}
+  stock ["rhythmbox-volume-zero"] = 					{{ "stock_volume-zero.svg"}}
+  stock ["rhythmbox-volume-mute"] = 					{{ "stock_volume-mute.svg" }}
+
+## end Rythmbox stock icons
+
+}
+class "GtkWidget" style "icon-style"

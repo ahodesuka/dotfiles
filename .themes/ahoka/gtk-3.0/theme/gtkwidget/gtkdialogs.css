@@ -1,0 +1,6 @@
+GtkAboutDialog,GtkColorSelectionDialog,GtkFileChooserDialog,GtkFileSelection,GtkFontSelectionDialog,GtkInputDialog,GtkMessageDialog,GtkPageSetupUnixDialog,GtkPrintUnixDialog,GtkRecentChooserDialog,GtkDialog {
+border-top-color: #9c4141;
+border-top-width: 2;
+border-style: solid;
+border-color: #9c4141;
+}
