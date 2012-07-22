@@ -1,4 +1,2 @@
 #!/bin/bash
-
-kick /usr/bin/smplayer2 "$*"
-
+kick /usr/bin/smplayer2 "$@"
