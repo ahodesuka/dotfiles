@@ -35,16 +35,6 @@ set cursorline
 set title
 set t_Co=256
 
-function! SplitHeaderC()
-    if match(expand("%"), '\.c') > 0
-        let s:filename = substitute(substitute(expand("%"), '\.c.*$', '.h', ''), ' ', '\\ ', 'g')
-        set syntax=on
-        exe ":sp" s:filename
-        exe ":res 30"
-        set filetype=c
-    endif
-endfun
-
 map Y y$
 nnoremap <C-L> :nohl<CR><C-L>
 command! Make make! | copen
@@ -65,6 +55,13 @@ let g:neocomplcache_enable_auto_select = 1
 
 let g:Powerline_symbols = "fancy"
 
+let g:session_autoload = 1
+let g:session_autosave = 1
+let g:session_default_to_last = 1
+
+ca SS SaveSession
+ca OS OpenSession
+
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
@@ -78,7 +75,6 @@ au FileType python set omnifunc=pythoncomplete#Complete
 au FileType ruby set omnifunc=rubycomplete#Complete
 au FileType xml set omnifunc=xmlcomplete#CompleteTags
 au FileType cpp set omnifunc=omni#cpp#complete#Main
-au FileType c,cpp call SplitHeaderC()
 
 au VimEnter * NERDTree
 
