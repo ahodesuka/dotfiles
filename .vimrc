@@ -42,6 +42,9 @@ map <F2> :NERDTreeToggle \| :silent NERDTreeMirror<CR>
 map <F5> :Make<CR><C-w>
 map <F4> :ccl<CR>
 map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+" Move tabs with alt + left|right
+nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
 
 set tags+=~/.vim/tags/cpp
 set tags+=~/.vim/tags/gl
@@ -55,12 +58,14 @@ let g:neocomplcache_enable_auto_select = 1
 
 let g:Powerline_symbols = "fancy"
 
-let g:session_autoload = 1
 let g:session_autosave = 1
+let g:session_autoload = 1
 let g:session_default_to_last = 1
 
 ca SS SaveSession
 ca OS OpenSession
+ca CS CloseSession
+ca DS DeleteSession
 
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview

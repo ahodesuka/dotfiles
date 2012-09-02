@@ -6,71 +6,72 @@ Xft.autohint:           false
 Xft.hintstyle:          hintfull
 Xft.lcdfilter:          lcddefault
 
-urxvt*font:             xft:Profont:pixelsize=11,\
+URxvt*font:             xft:Profont:pixelsize=11,\
                         [codeset=JISX0208]xft:Kochi Gothic,\
                         [codeset=KSC5601]xft:Baekmuk Gulim,\
                         xft:FreeMono:antialias=false,\
                         xft:Arial Unicode MS:antialias=false,\
                         xft:DejaVu Sans Mono:antialias=false
-urxvt*boldFont:         xft:Profont:pixelsize=11,\
+URxvt*boldFont:         xft:Profont:pixelsize=11,\
                         [codeset=JISX0208]xft:Kochi Gothic,\
                         [codeset=KSC5601]xft:Baekmuk Gulim,\
                         xft:FreeMono:antialias=false,\
+                        xft:unifont:antialias=false,\
                         xft:Arial Unicode MS:antialias=false,\
                         xft:DejaVu Sans Mono:antialias=false
-urxvt*imFont:           -*-Kochi Gothic-medium-r-normal--11-140-*-*-*-*-*-*
+URxvt*imFont:           -*-Kochi Gothic-medium-r-normal--11-140-*-*-*-*-*-*
 
-urxvt.fading:           false
-urxvt.shading:          false
-urxvt.scrollBar:        false
-urxvt.urgentOnBell:     true
-urxvt.geometry:         104x24
-urxvt.depth:            24
-urxvt.saveLines:        10000
-urxvt*termName:         rxvt-unicode
+URxvt.fading:           false
+URxvt.shading:          false
+URxvt.scrollBar:        false
+URxvt.urgentOnBell:     true
+URxvt.geometry:         104x24
+URxvt.depth:            24
+URxvt.saveLines:        10000
+URxvt*termName:         rxvt-unicode
 
-urxvt*preeditType:      OverTheSpot
-urxvt*inputMethod:      XIM
-urxvt*background:       #1b1b1b
-urxvt*foreground:       #cccaca
-urxvt*cursorColor:      #ffffff
+URxvt*preeditType:      OverTheSpot
+URxvt*inputMethod:      SCIM
+URxvt*background:       #1b1b1b
+URxvt*foreground:       #cccaca
+URxvt*cursorColor:      #ffffff
 
 !Black
-urxvt*color0:           #131212
-urxvt*color8:           #5b595a
+URxvt*color0:           #222222
+URxvt*color8:           #5b595a
 !Red
-urxvt*color1:           #a16a71
-urxvt*color9:           #de8c8c
+URxvt*color1:           #966767
+URxvt*color9:           #c48181
 !Green
-urxvt*color2:           #7aa16a
-urxvt*color10:          #93c783
+URxvt*color2:           #7c915a
+URxvt*color10:          #91a76e
 !Yellow
-urxvt*color3:           #a1846a
-urxvt*color11:          #c7a081
+URxvt*color3:           #9e8762
+URxvt*color11:          #b19c7a
 !Blue
-urxvt*color4:           #6a80a1
-urxvt*color12:          #839fc7
+URxvt*color4:           #424e60
+URxvt*color12:          #73839b
 !Magenta
-urxvt*color5:           #9c445c
-urxvt*color13:          #c16780
+URxvt*color5:           #9d4e6e
+URxvt*color13:          #b67f9c
 !Cyan
-urxvt*color6:           #629c99
-urxvt*color14:          #51c4bf
+URxvt*color6:           #457f7b
+URxvt*color14:          #639b97
 !White
-urxvt*color7:           #a49195
-urxvt*color15:          #c4b1b5
+URxvt*color7:           #a49195
+URxvt*color15:          #c4b1b5
 
-urxvt.perl-lib:         /home/mokou/.config/urxvt
-urxvt.perl-ext:         default,matcher
+URxvt.perl-lib:         /home/mokou/.config/urxvt
+URxvt.perl-ext:         default,matcher
 
-urxvt.urlLauncher:      nightly
-urxvt.colorUL:          #db7d7d
-urxvt.matcher.button:   1
+URxvt.urlLauncher:      nightly
+URxvt.colorUL:          #c48181
+URxvt.matcher.button:   1
 
-urxvt.tabbedex.tabbar-fg:       7
-urxvt.tabbedex.tabbar-bg:       0
-urxvt.tabbedex.tab-fg:          1
-urxvt.tabbedex.tab-bg:          234
-urxvt.tabbedex.title-fg:        1
-urxvt.tabbedex.title-bg:        0
+URxvt.tabbedex.tabbar-fg:       7
+URxvt.tabbedex.tabbar-bg:       0
+URxvt.tabbedex.tab-fg:          1
+URxvt.tabbedex.tab-bg:          234
+URxvt.tabbedex.title-fg:        1
+URxvt.tabbedex.title-bg:        0
 

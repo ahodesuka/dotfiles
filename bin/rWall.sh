@@ -1,7 +1,7 @@
 #!/bin/bash
 
-STIME="60m"
-WALLDIR="$HOME/Pictures/Backgrounds/mokou"
+STIME="120m"
+WALLDIR="/media/Misc/Pictures/Backgrounds/mokou"
 
 for pid in $(pgrep $(basename $0)); do
     if [ "$pid" != "$$" ]; then

@@ -4,10 +4,10 @@ cmd=$1
 shift
 
 pkill compton
-if [ -z $* ]; then
+if [ -z "$*" ]; then
     $cmd
 else
-    $cmd "$@"
+    $cmd $@
 fi
 wait $!
 cmptn

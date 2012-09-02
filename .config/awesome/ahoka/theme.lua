@@ -1,9 +1,8 @@
 -------------------------------
 --   ahoka's awesome theme   --
 -------------------------------
-
 theme   = {}
-confdir = awful.util.getdir("config")
+confdir = awful.util.getdir("config") .. "/ahoka"
 
 theme.wallpaper_cmd = { "rWall.sh" }
 theme.font      = "cure 8"
@@ -17,8 +16,8 @@ theme.bg_urgent = "#161616"
 
 theme.border_width  = "2"
 theme.border_normal = "#222222"
-theme.border_focus  = "#161616"
-theme.border_marked = "#c7838f"
+theme.border_focus  = "#5a4343"
+theme.border_marked = "#5a4343"
 
 theme.titlebar_bg_focus  = "#222222"
 theme.titlebar_bg_normal = "#222222"
@@ -27,16 +26,18 @@ theme.menu_height = "16"
 theme.menu_border_width = "1"
 theme.menu_border_color = "#161616"
 
+theme.padding = "13"
+
 theme.taglist_squares_sel   = confdir .. "/icons/taglist/squarefza.png"
 theme.taglist_squares_unsel = confdir .. "/icons/taglist/squareza.png"
 
-theme.widget_net        = confdir .. "/icons/ahoka/net_down_03.png"
-theme.widget_netup      = confdir .. "/icons/ahoka/net_up_03.png"
-theme.widget_clock      = confdir .. "/icons/ahoka/clock.png"
-theme.widget_mem        = confdir .. "/icons/ahoka/mem.png"
-theme.widget_cputemp    = confdir .. "/icons/ahoka/temp.png"
-theme.widget_cpu        = confdir .. "/icons/ahoka/cpu.png"
-theme.widget_mpd        = confdir .. "/icons/ahoka/note.png"
+theme.widget_net        = confdir .. "/icons/vicious/net_down_03.png"
+theme.widget_netup      = confdir .. "/icons/vicious/net_up_03.png"
+theme.widget_clock      = confdir .. "/icons/vicious/clock.png"
+theme.widget_mem        = confdir .. "/icons/vicious/mem.png"
+theme.widget_cputemp    = confdir .. "/icons/vicious/temp.png"
+theme.widget_cpu        = confdir .. "/icons/vicious/cpu.png"
+theme.widget_mpd        = confdir .. "/icons/vicious/note.png"
 
 theme.layout_tile       = confdir .. "/icons/layouts/tile.png"
 theme.layout_tileleft   = confdir .. "/icons/layouts/tileleft.png"

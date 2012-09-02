@@ -7,6 +7,7 @@ alias ls="ls --color=always"
 alias ll="ls -l"
 alias global_sync="sudo emerge --sync && sudo layman -S"
 alias cue2flac="find -type f -name '*.cue' -execdir cue2tracks -R -n 19 -o '%N. %p ─ %t' {} \;"
+alias patchAnime="find -type f -name '*.xdelta' -maxdepth 1 -exec xdelta3 -d '{}' \;"
 
 u2space()
 {
@@ -17,7 +18,18 @@ u2space()
     done
 }
 
-mkdir(){ /bin/mkdir -p "$@" && cd "$_"; }
+rAnime()
+{
+    anime=(~/Anime/*)
+    printf "You should watch %s.\n" "${anime[RANDOM % ${#anime[@]}]}"
+}
+
+youtube()
+{
+    mplayer2 -fs $(youtube-dl -g $1)
+}
+
+mkcdir(){ /bin/mkdir -p "$@" && cd "$_"; }
 
 export PS1="\[\e[0;31m\]┌\[\e[0;37m\][\[\e[1;31m\]\u\[\e[0;37m\]@\[\e[0;35m\]\h\[\e[0;37m\]]\[\e[0;31m\]─\[\e[0;37m\][\[\e[1;37m\]\w\[\e[0;35m\]\$(__git_ps1)\[\e[0;37m\]]
 \[\e[0;31m\]└─\[\e[1;31m\]$ \[\e[0m\]"

@@ -57,7 +57,7 @@ song_columns_list_format = "(50)[red]{t|f} (50)[magenta]{ar} (5f)[white]{lr}"
 now_playing_prefix = "$b"
 now_playing_suffix = "$6 >>>>$/b$9"
 playlist_display_mode = "columns"
-autocenter_mode = "yes"
+autocenter_mode = "no"
 centered_cursor = "no"
 playlist_disable_highlight_delay = "3"
 playlist_separate_albums = "yes"
@@ -69,6 +69,7 @@ user_interface = "alternative"
 progressbar_look = "█▋░"
 display_bitrate = "yes"
 titles_visibility = "no"
+header_visibility = "no"
 
 # Browser
 browser_playlist_prefix = "[P]$9 "
@@ -91,6 +92,10 @@ state_flags_color = "magenta"
 statusbar_color = "magenta"
 visualizer_color = "red"
 volume_color = "white"
+
+# Screen
+locked_screen_width_part = "35"
+ask_for_locked_screen_width_part = "no"
 
 # Others
 mpd_host = "localhost"

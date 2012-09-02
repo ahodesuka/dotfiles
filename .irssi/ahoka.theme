@@ -7,6 +7,7 @@ info_eol = "false";
 # these characters are automatically replaced with specified color
 replaces = { "[]=" = "%K$*%n"; };
 
+timestamp_format = "%H:%M:%S";
 abstracts = {
   # Generic
   #
@@ -22,7 +23,7 @@ abstracts = {
   # any kind of error message
   error = "%Y$*%n";
   # channel name is printed
-  channel = "%B$*%n";
+  channel = "";
   # nick is printed
   nick = "%W$*";
   # nick host is printed
@@ -53,7 +54,7 @@ abstracts = {
 
   # Messages
   #
-  # the basic styling of how to print message, $0 = nick mode, $1 = nick  
+  # the basic styling of how to print message, $0 = nick mode, $1 = nick
   msgnick = "$0$1-%w│%n %|";
   # $0 = nick mode, $1 = nick
   ownmsgnick = "{msgnick $0 $1-%R}%n";
@@ -182,11 +183,11 @@ abstracts = {
   # away display
   sbaway = " %K:away:%n";
   # server display
-  sbservertag = "%B$0%n";
+  sbservertag = "%M$0%n";
   # nick display
   sbnick = "%R$*%n";
   # time display
-  sbtime = "%c$*%n";
+  sbtime = "%w$*%n";
 
   # Statusbar activity
   #
@@ -205,7 +206,7 @@ abstracts = {
   # Scripts
   #
   # user count
-  sb_usercount = "{sb %W(%B$0%W)}";
+  sb_usercount = "{sb %W(%w$0%W)}";
   # operators are printed
   sb_uc_ircops = "*$*";
   # channel operators are printed
@@ -222,11 +223,10 @@ abstracts = {
   sb_dccstat = "{sb $0-}";
   sb_ds_short = "$0%G:%n$1%Y@%n$2kB/s%G:%n$4%G:%n$3";
   sb_ds_short_waiting = "$0%G:%n$1 $2 $3 waiting";
-  sb_ds_normal = "$1: '$2' $3 / $4 [$8] $6kB/s ETA: $7";
+  sb_ds_normal = "%R$0%n $M$1%n: '$2' %W$3%n / %R$4%n %R$6%n kB/s";
   sb_ds_normal_waiting = "$0 $1: '$2' $3 $4 $5 waiting";
   sb_ds_separator = "%W│%n";
 };
-
 
 # Override irssi core settings
 formats = {
@@ -249,22 +249,25 @@ formats = {
     # text to insert at the beginning of each non-message line
     line_start_irssi = "";
     # timestamp styling
-    timestamp = "{timestamp %%H:%%M} ";
-    own_msg = "{ownmsgnick $2 {ownnick $[-8]0}}$1";
-    own_msg_channel = "{ownmsgnick $3 {ownnick $[-8]0}{msgchannel $1}}$2";
-    own_msg_private_query = "{ownprivmsgnick {ownprivnick $[-8]2}}$1";
-    pubmsg_me = "{pubmsgmenick $2 {menick $[-8]0}}$1";
-    pubmsg_me_channel = "{pubmsgmenick $3 {menick $[-8]0}{msgchannel $1}}$2";
-    pubmsg_hilight = "{pubmsghinick $0 $3 $[-8]1%n}$2";
-    pubmsg_hilight_channel = "{pubmsghinick $0 $4 $[-8]1{msgchannel $2}}$3";
-    pubmsg = "{pubmsgnick $2 {pubnick %w$[-8]0}}$1";
-    pubmsg_channel = "{pubmsgnick $2 {pubnick %w$[-8]0}}$1";
-    msg_private_query = "{privmsgnick $[-8]0}$2";
+    timestamp = "{timestamp %%H:%%M:%%S} ";
+    own_msg = "{ownmsgnick $2 {ownnick $[-12]0}}$1";
+    own_msg_channel = "{ownmsgnick $3 {ownnick $[-12]0}{msgchannel $1}}$2";
+    own_msg_private_query = "{ownprivmsgnick {ownprivnick $[-12]2}}$1";
+    pubmsg_me = "{pubmsgmenick $2 {menick $[-12]0}}$1";
+    pubmsg_me_channel = "{pubmsgmenick $3 {menick $[-12]0}{msgchannel $1}}$2";
+    pubmsg_hilight = "{pubmsghinick $0 $3 $[-12]1%n}$2";
+    pubmsg_hilight_channel = "{pubmsghinick $0 $4 $[-12]1{msgchannel $2}}$3";
+    pubmsg = "{pubmsgnick $2 {pubnick %M$[-12]0}}$1";
+    pubmsg_channel = "{pubmsgnick $2 {pubnick %M$[-12]0}}$1";
+    msg_private_query = "{privmsgnick $[-12]0}$2";
   };
   "fe-common/irc" = {
     own_action = "{ownaction $[-0]0} $1";
     action_private = "{pvtaction $[-0]0}$1";
     action_private_query = "{pvtaction_query $[-0]0} $2";
     action_public = "{pubaction $[-0]0}$1";
+  };
+  "Irssi::Script::nickcolor" = {
+    pubmsg_hilight = "{pubmsghinick $0 $3 $[-12]1%n}$2";
   };
 };

@@ -19,7 +19,8 @@ chatnets = {
   };
 };
 
-channels = ( );
+channels = (
+);
 
 aliases = {
   J = "join";
@@ -104,29 +105,6 @@ statusbar = {
   default = {
     # the "default statusbar" to be displayed at the bottom of the window.
     # contains all the normal items.
-    window = {
-      disabled = "no";
-
-      # window, root
-      type = "window";
-      # top, bottom
-      placement = "top";
-      # number
-      position = "4";
-      # active, inactive, always
-      visible = "always";
-
-      # list of items in statusbar in the display order
-      items = {
-        barstart = { priority = "100"; };
-        time = { };
-        user = { };
-        usercount = { };
-        window = { };
-        window_empty = { };
-        barend = { priority = "100"; alignment = "right"; };
-      };
-    };
 
     # we treat input line as yet another statusbar :) It's possible to
     # add other items before or after the input line item.
@@ -152,8 +130,10 @@ statusbar = {
       items = {
         topicbarstart = { priority = "100"; };
         topic = { };
+        topic_empty = { };
         topicbarend = { priority = "100"; alignment = "right"; };
       };
+      disabled = "yes";
     };
     dccstat = {
       placement = "top";
@@ -161,23 +141,37 @@ statusbar = {
       items = { dccstat = { }; };
       disabled = "yes";
     };
+    window = {
+      items = {
+        barstart = { priority = "100"; };
+        time = { };
+        user = { };
+        usercount = { };
+        #window = { };
+        #window_empty = { };
+        lag = { priority = "-1"; };
+        chanact = { alignment = "right"; };
+        more = { priority = "-1"; alignment = "right"; };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+      position = "100";
+      placement = "top";
+    };
   };
 };
 settings = {
-  core = { real_name = ""; user_name = ""; nick = ""; };
-  "fe-text" = { actlist_sort = "refnum"; };
+  core = {
+    real_name = "";
+    user_name = "";
+    nick = "";
+    timestamp_format = "%H:%M:%S";
+  };
+  "fe-text" = { actlist_sort = "refnum"; indent_always = "no"; };
   "perl/core/scripts" = {
-    awl_display_key = "$Q%K|%n$H$C$S";
+    awl_display_key = "%R$Q%K|%n$H$C$S";
     awl_block = "12";
-    neat_melength = "8";
-    neat_maxlength = "8";
-    dccstat_progbar_transferred = "%G═%n";
-    dccstat_progbar_position = "%B╡%n";
-    dccstat_progbar_remaining = "%K─%n";
-    dccstat_refresh = "1";
-    dccstat_cycle_through_transfers = "no";
-    dccstat_hide_sbar_when_inactive = "yes";
-    dccstat_short_mode = "yes";
+    neat_melength = "12";
+    neat_maxlength = "12";
     awl_maxlines = "2";
     awl_placement = "bottom";
     awl_position = "0";
@@ -186,14 +180,39 @@ settings = {
     awl_hide_data = "1";
     awl_prefer_name = "yes";
     awl_custom_sb = "yes";
-    nicklist_automode = "SCREEN";
-    nicklist_width = "15";
+    nicklist_automode = "fifo";
+    nicklist_width = "14";
     autoaway_timeout = "3600";
     neat_right_mode = "no";
+    twtopic_size = "86";
+    twtopic_refresh = "150";
+    twtopic = "no";
+    neat_colors = "rRyYmM";
+    neat_left_actions = "no";
+    neat_left_messages = "no";
+    neat_allow_shrinking = "no";
+    dccstat_cycle_through_transfers = "yes";
+    dccstat_refresh = "1";
+    dccstat_hide_sbar_when_inactive = "yes";
+    dccstat_progbar_remaining = "%K─%n";
+    dccstat_progbar_transferred = "%r━%n";
+    dccstat_progbar_position = "%r┥%n";
+    nicklist_height = "65";
+    title_string = "[$N@$tag]";
+    chanact_display = "%r$N%K|%W$C";
+    chanact_filter = "1";
+    chanact_header = " ";
+    chanact_remove_hash = "no";
+    chanact_abbreviate_names = "6";
   };
-  "fe-common/core" = { theme = "ahoka"; };
+  "fe-common/core" = {
+    theme = "ahoka";
+    bell_beeps = "yes";
+    beep_msg_level = "MSGS NOTICES INVITES DCC DCCMSGS HILIGHT";
+  };
   "irc/dcc" = { dcc_autoget = "yes"; dcc_autoresume = "yes"; };
 };
-keyboard = ( 
-  { key = "meta-[M"; id = "command"; data = "mouse_xterm "; }
+keyboard = (
+  { key = "meta-[M"; id = "command"; data = "mouse_xterm "; },
 );
+logs = { };

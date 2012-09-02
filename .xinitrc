@@ -1,12 +1,23 @@
+## SETTINGS ##
 xset m 1 2
 xset r rate 250 50
-mpd && scrobby
-export XMODIFIERS=@im="uim"
 nvidia-settings --load-config-only
+
+## GLOBALS ##
+export XMODIFIERS=@im="SCIM"
+export GTK_IM_MODULE=scim
+export QT_IM_MODULE="scim"
+
+## DAEMONS ##
+nixlibsd
+mpd && scrobby
+scim -d
+cmptn
+
+## PROGRAMS ##
 transmission &
-cmptn &
-uim-toolbar-gtk-systray &
-uim-xim &
-sleep 10 && urxvt -e irssi &
-sleep 10 && godzillas_waifu &
+parcellite &
+irc-start &
+
+## WM ##
 exec ck-launch-session dbus-launch --sh-syntax --exit-with-session awesome

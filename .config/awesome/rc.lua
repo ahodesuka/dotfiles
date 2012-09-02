@@ -5,10 +5,10 @@ local taglist   = { }
 local layoutbox = { }
 local settings  = { }
 
+require("beautiful")
 require("awful")
 require("awful.autofocus")
 require("awful.rules")
-require("beautiful")
 require("vicious")
 require("naughty")
 require("awesompd/awesompd")
@@ -17,18 +17,16 @@ settings.modkey     = "Mod4"
 settings.term       = "urxvt"
 settings.browser    = "nightly"
 settings.fileman    = "thunar"
-settings.dateformat = "%H:%M:%S"
+settings.dateformat = "%Y.%m.%d %H:%M:%S"
 settings.configdir  = awful.util.getdir("config")
 settings.layouts    =
 {
     awful.layout.suit.floating,
     awful.layout.suit.tile.left,
-    awful.layout.suit.tile,
-    awful.layout.suit.magnifier,
-    awful.layout.suit.max
+    awful.layout.suit.tile
 }
 
-beautiful.init(settings.configdir .. "/ahoka.lua")
+beautiful.init(settings.configdir .. "/ahoka/theme.lua")
 
 mm = awful.menu({
     items =
@@ -46,12 +44,12 @@ mm = awful.menu({
 })
 
 
-naughty.config.timeout = 5
-naughty.config.screen = 2
-naughty.config.position = "bottom_right"
+naughty.config.default_preset.timeout = 5
+naughty.config.default_preset.screen = 2
+naughty.config.default_preset.position = "top_right"
 
-mytasklist = {}
-mytasklist.buttons = awful.util.table.join(
+tasklist = {}
+tasklist.buttons = awful.util.table.join(
 awful.button({ }, 1, function (c)
     if c == client.focus then
         c.minimized = true
@@ -81,10 +79,10 @@ end
 )
 
 tags.settings = {
-    { name = "東", layout = settings.layouts[1], mwfact = .625 },
-    { name = "南", layout = settings.layouts[1], mwfact = .625 },
-    { name = "西", layout = settings.layouts[2], mwfact = .625 },
-    { name = "北", layout = settings.layouts[2], mwfact = .625 }
+    { name = "東", layout = settings.layouts[1], mwfact = .65 },
+    { name = "南", layout = settings.layouts[1], mwfact = .65 },
+    { name = "西", layout = settings.layouts[2], mwfact = .65 },
+    { name = "北", layout = settings.layouts[2], mwfact = .65 }
 }
 
 for s = 1, screen.count() do
@@ -99,44 +97,57 @@ for s = 1, screen.count() do
     tags[s][1].selected = true
 end
 
-separator       = widget({ type = "textbox" })
-mpdwidget       = widget({ type = "textbox" })
-cpuwidget       = widget({ type = "textbox" })
-cputempwidget   = widget({ type = "textbox" })
-memwidget       = widget({ type = "textbox" })
-netwidget       = widget({ type = "textbox" })
-clockwidget     = widget({ type = "textbox" })
-clockwidget.width = 44
+separator           = widget({ type = "textbox" })
+mpdwidget           = widget({ type = "textbox" })
+cpuwidget           = widget({ type = "textbox" })
+cpuwidget.width     = 28
+cputempwidget       = widget({ type = "textbox" })
+cputempwidget.width = 28
+memwidget           = widget({ type = "textbox" })
+memwidget.width     = 36
+memwidget.align     = "center"
+netdownwidget       = widget({ type = "textbox" })
+netdownwidget.width = 56
+netdownwidget.align = "center"
+netupwidget         = widget({ type = "textbox" })
+netupwidget.width   = 48
+netupwidget.align   = "center"
+clockwidget         = widget({ type = "textbox" })
+clockwidget.width   = 91
+clockwidget.align   = "center"
 
 mpdicon         = widget({ type = "imagebox" })
 cpuicon         = widget({ type = "imagebox" })
 tempicon        = widget({ type = "imagebox" })
 memicon         = widget({ type = "imagebox" })
-neticon         = widget({ type = "imagebox" })
+netdownicon     = widget({ type = "imagebox" })
 netupicon       = widget({ type = "imagebox" })
 clockicon       = widget({ type = "imagebox" })
 
-separator.text  = "<span color='#444'> | </span>"
-mpdicon.image   = image(beautiful.widget_mpd)
-cpuicon.image   = image(beautiful.widget_cpu)
-tempicon.image  = image(beautiful.widget_cputemp)
-memicon.image   = image(beautiful.widget_mem)
-neticon.image   = image(beautiful.widget_net)
-netupicon.image = image(beautiful.widget_netup)
-clockicon.image = image(beautiful.widget_clock)
+separator.text      = "<span color='#444'> | </span>"
+mpdicon.image       = image(beautiful.widget_mpd)
+cpuicon.image       = image(beautiful.widget_cpu)
+tempicon.image      = image(beautiful.widget_cputemp)
+memicon.image       = image(beautiful.widget_mem)
+netdownicon.image   = image(beautiful.widget_net)
+netupicon.image     = image(beautiful.widget_netup)
+clockicon.image     = image(beautiful.widget_clock)
 
 vicious.register(cpuwidget, vicious.widgets.cpu, " $1% ", 1)
 vicious.register(cputempwidget, vicious.widgets.thermal, " $1°C", 1, { "coretemp.0", "core" })
 vicious.register(memwidget, vicious.widgets.mem, " $2mb", 1)
-vicious.register(netwidget, vicious.widgets.net, " ${eth0 down_kb}kb/s ${eth0 up_kb}kb/s ", 1)
-vicious.register(clockwidget, vicious.widgets.date, " " .. settings.dateformat .. " ", 1)
+vicious.register(netdownwidget, vicious.widgets.net, " ${eth0 down_kb}kb/s", 1)
+vicious.register(netupwidget, vicious.widgets.net, "${eth0 up_kb}kb/s ", 1)
+vicious.cache(vicious.widgets.net)
+vicious.register(clockwidget, vicious.widgets.date, " " .. settings.dateformat, 1)
 
 mpdwidget                   = awesompd:create()
 mpdwidget.font              = beautiful.font
-mpdwidget.output_size       = 35
+mpdwidget.scrolling         = false
 mpdwidget.update_interval   = 1
-mpdwidget.path_to_icons     = awful.util.getdir("config") .. "/icons/awesompd"
+mpdwidget.path_to_icons     = awful.util.getdir("config") .. "/ahoka/icons/awesompd"
 mpdwidget.mpd_config        = "/home/mokou/.mpd/mpd.conf"
+mpdwidget.album_cover_size  = 40
 mpdwidget.browser           = settings.browser
 mpdwidget.ldecorator        = " "
 mpdwidget.rdecorator        = ""
@@ -169,11 +180,11 @@ for s = 1, screen.count() do
                          awful.button({ }, 3, function () awful.layout.inc(settings.layouts, -1) end)
     ))
     taglist[s] = awful.widget.taglist.new(s, awful.widget.taglist.label.all, taglist.buttons)
-    mytasklist[s] = awful.widget.tasklist(function(c)
+    tasklist[s] = awful.widget.tasklist(function(c)
 		--remove tasklist-icon without modifying the original tasklist.lua
 		local tmptask = { awful.widget.tasklist.label.currenttags(c, s) }
 		return tmptask[1], tmptask[2], tmptask[3], nil
-    end, mytasklist.buttons)
+    end, tasklist.buttons)
     statusbar[s] = awful.wibox(
     {
         position = "top",
@@ -188,7 +199,7 @@ for s = 1, screen.count() do
             taglist[s],
             promptbox[s],
             layoutbox[s],
-            mytasklist[s],
+            tasklist[s],
             layout = awful.widget.layout.horizontal.leftright
         }
     else
@@ -201,12 +212,14 @@ for s = 1, screen.count() do
                 layout = awful.widget.layout.horizontal.leftright
             },
             systray,
+            separator,
             clockwidget,
             clockicon,
             separator,
             netupicon,
-            netwidget,
-            neticon,
+            netupwidget,
+            netdownwidget,
+            netdownicon,
             separator,
             memwidget,
             memicon,
@@ -218,7 +231,7 @@ for s = 1, screen.count() do
             separator,
             mpdwidget.widget,
             mpdicon,
-            mytasklist[s],
+            tasklist[s],
             layout = awful.widget.layout.horizontal.rightleft
         }
     end
@@ -266,7 +279,8 @@ local globalkeys = awful.util.table.join(
     awful.key({ settings.modkey, "Control" }, "l",     function () awful.tag.incnmaster(-1) end),
     awful.key({ settings.modkey            }, "space", function () awful.layout.inc(settings.layouts, 1) end),
     awful.key({ settings.modkey, "Shift"   }, "space", function () awful.layout.inc(settings.layouts, -1) end),
-    awful.key({ settings.modkey            }, "r",     function () promptbox[mouse.screen]:run() end)
+    awful.key({ settings.modkey            }, "r",     function () promptbox[mouse.screen]:run() end),
+    awful.key({ }, "XF86AudioPlay", function () awful.util.spawn_with_shell("mpc toggle") end)
 )
 
 local clientkeys = awful.util.table.join(
@@ -345,9 +359,11 @@ awful.rules.rules =
                      buttons = clientbuttons,
                      size_hints_honor = false } },
     { rule = { class = "Smplayer2" }, properties = { floating = true } },
+    { rule = { class = "Thunar", name = "File Operation Progress" }, properties = { floating = true } },
     { rule = { class = "Gimp" }, properties = { floating = true } },
     { rule = { class = "Wine" }, properties = { floating = true, border_width = 0 } },
     { rule = { class = "Firefox", instance = "Toplevel" }, properties = { floating = true } },
+    { rule = { class = "Firefox", instance = "Update" }, properties = { floating = true } },
     { rule = { instance = "plugin-container" }, properties = { floating = true } },
     { rule = { instance = "sun-awt-X11-XWindowPeer" }, properties = {
         border_width = "0",
