@@ -1,0 +1,28 @@
+#!/bin/bash
+
+STIME="60m"
+WALLS=(/media/Misc/Pictures/Backgrounds/mokou/*.png)
+
+# kill other instances and their children
+for pid in $(pgrep $(basename $0)); do
+  if [ "$pid" != "$$" ]; then
+    kill -TERM -$pid;
+  fi
+done
+
+if [ "$1" == "new" -a -f "/tmp/.rWall" ]; then
+  c=$(cat "/tmp/.rWall");
+fi
+
+while true; do
+  n="${WALLS[RANDOM % ${#WALLS[@]}]}"
+  while [ -n "$c" ]; do
+    if [ "$n" != "$c" ]; then break; fi
+    n="${WALLS[RANDOM % ${#WALLS[@]}]}"
+  done
+  nitrogen --set-scaled --save "$n"
+  $(echo "$n" > "/tmp/.rWall")
+  sleep $STIME
+done
+
+exit

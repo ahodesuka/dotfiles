@@ -19,6 +19,7 @@ settings.browser    = "nightly"
 settings.fileman    = "thunar"
 settings.dateformat = "%Y.%m.%d %H:%M:%S"
 settings.configdir  = awful.util.getdir("config")
+settings.new_wall   = "rWall new"
 settings.layouts    =
 {
     awful.layout.suit.floating,
@@ -31,15 +32,13 @@ beautiful.init(settings.configdir .. "/ahoka/theme.lua")
 mm = awful.menu({
     items =
     {
-        { settings.term,    settings.term,    theme.menu_terminal },
-        { settings.browser, settings.browser, theme.menu_wbrowser },
-        { settings.fileman, settings.fileman, theme.menu_fbrowser },
-        { "──────",                                               },
-        { "random bg", "rWall.sh next",       theme.menu_rwall    },
-        { "──────",                                               },
-        { "Suspend",  "sudo pm-suspend",      theme.menu_suspend  },
-        { "Reboot",   "sudo shutdown -r now", theme.menu_reboot   },
-        { "Shutdown", "sudo shutdown -h now", theme.menu_shutdown }
+        { settings.term,    settings.term,      theme.menu_terminal },
+        { settings.browser, settings.browser,   theme.menu_wbrowser },
+        { settings.fileman, settings.fileman,   theme.menu_fbrowser },
+        { "random bg", settings.new_wall,       theme.menu_rwall    },
+        { "Suspend",  "gksu pm-suspend",        theme.menu_suspend  },
+        { "Reboot",   "gksu 'shutdown -r now'", theme.menu_reboot   },
+        { "Shutdown", "gksu 'shutdown -h now'", theme.menu_shutdown }
     }
 })
 
@@ -50,22 +49,22 @@ naughty.config.default_preset.position = "top_right"
 
 tasklist = {}
 tasklist.buttons = awful.util.table.join(
-awful.button({ }, 1, function (c)
-    if c == client.focus then
-        c.minimized = true
-    else if not c:isvisible() then
-        awful.tag.viewonly(c:tags()[1])
+    awful.button({ }, 1, function (c)
+        if c == client.focus then
+            c.minimized = true
+        else if not c:isvisible() then
+            awful.tag.viewonly(c:tags()[1])
+        end
+        client.focus = c
+        c:raise()
     end
-    client.focus = c
-    c:raise()
-end
     end),
     awful.button({ }, 3, function ()
         if instance then
             instance:hide()
             instance = nil
         else
-            instance = awful.menu.clients({ width=250 })
+            instance = awful.menu.clients({ width = 250 })
         end
     end),
     awful.button({ }, 4, function ()
@@ -181,7 +180,6 @@ for s = 1, screen.count() do
     ))
     taglist[s] = awful.widget.taglist.new(s, awful.widget.taglist.label.all, taglist.buttons)
     tasklist[s] = awful.widget.tasklist(function(c)
-		--remove tasklist-icon without modifying the original tasklist.lua
 		local tmptask = { awful.widget.tasklist.label.currenttags(c, s) }
 		return tmptask[1], tmptask[2], tmptask[3], nil
     end, tasklist.buttons)
@@ -248,7 +246,7 @@ local globalkeys = awful.util.table.join(
     awful.key({ settings.modkey            }, "Left",  awful.tag.viewprev),
     awful.key({ settings.modkey            }, "Right", awful.tag.viewnext),
     awful.key({ settings.modkey,           }, "Escape",awful.tag.history.restore),
-    awful.key({ settings.modkey            }, "w",     function () awful.util.spawn_with_shell("rWall.sh next") end),
+    awful.key({ settings.modkey            }, "w",     function () awful.util.spawn_with_shell(settings.new_wall) end),
     awful.key({ settings.modkey            }, "x",     function () awful.util.spawn(settings.term) end),
     awful.key({ settings.modkey            }, "f",     function () awful.util.spawn(settings.browser) end),
     awful.key({ settings.modkey            }, "e",     function () awful.util.spawn(settings.fileman) end),
@@ -362,6 +360,7 @@ awful.rules.rules =
     { rule = { class = "Thunar", name = "File Operation Progress" }, properties = { floating = true } },
     { rule = { class = "Gimp" }, properties = { floating = true } },
     { rule = { class = "Wine" }, properties = { floating = true, border_width = 0 } },
+    { rule = { class = "Torchlight.bin.x86_64" }, properties = { floating = true, border_width = 0 } },
     { rule = { class = "Firefox", instance = "Toplevel" }, properties = { floating = true } },
     { rule = { class = "Firefox", instance = "Update" }, properties = { floating = true } },
     { rule = { instance = "plugin-container" }, properties = { floating = true } },

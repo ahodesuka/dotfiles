@@ -1,10 +1,12 @@
 -------------------------------
 --   ahoka's awesome theme   --
 -------------------------------
+local awful = require("awful")
+
 theme   = {}
 confdir = awful.util.getdir("config") .. "/ahoka"
 
-theme.wallpaper_cmd = { "rWall.sh" }
+theme.wallpaper_cmd = { "rWall" }
 theme.font      = "cure 8"
 
 theme.fg_normal = "#cccaca"
@@ -14,19 +16,16 @@ theme.bg_normal = "#222222"
 theme.bg_focus  = "#161616"
 theme.bg_urgent = "#161616"
 
-theme.border_width  = "2"
+theme.border_width  = 2
 theme.border_normal = "#222222"
 theme.border_focus  = "#5a4343"
 theme.border_marked = "#5a4343"
 
-theme.titlebar_bg_focus  = "#222222"
-theme.titlebar_bg_normal = "#222222"
-
-theme.menu_height = "16"
-theme.menu_border_width = "1"
+theme.menu_height = 16
+theme.menu_border_width = 1
 theme.menu_border_color = "#161616"
 
-theme.padding = "13"
+theme.padding = 13
 
 theme.taglist_squares_sel   = confdir .. "/icons/taglist/squarefza.png"
 theme.taglist_squares_unsel = confdir .. "/icons/taglist/squareza.png"

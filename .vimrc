@@ -34,6 +34,7 @@ set textwidth=120
 set cursorline
 set title
 set t_Co=256
+set encoding=utf-8
 
 map Y y$
 nnoremap <C-L> :nohl<CR><C-L>

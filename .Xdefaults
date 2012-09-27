@@ -6,15 +6,17 @@ Xft.autohint:           false
 Xft.hintstyle:          hintfull
 Xft.lcdfilter:          lcddefault
 
-URxvt*font:             xft:Profont:pixelsize=11,\
+URxvt*font:             xft:ProFont:pixelsize=11:antialias=false,\
                         [codeset=JISX0208]xft:Kochi Gothic,\
                         [codeset=KSC5601]xft:Baekmuk Gulim,\
+                        xft:GohuFont:antialias=false,\
                         xft:FreeMono:antialias=false,\
                         xft:Arial Unicode MS:antialias=false,\
                         xft:DejaVu Sans Mono:antialias=false
-URxvt*boldFont:         xft:Profont:pixelsize=11,\
+URxvt*boldFont:         xft:ProFont:pixelsize=11:antialias=false,\
                         [codeset=JISX0208]xft:Kochi Gothic,\
                         [codeset=KSC5601]xft:Baekmuk Gulim,\
+                        xft:GohuFont:antialias=false,\
                         xft:FreeMono:antialias=false,\
                         xft:unifont:antialias=false,\
                         xft:Arial Unicode MS:antialias=false,\
@@ -25,7 +27,7 @@ URxvt.fading:           false
 URxvt.shading:          false
 URxvt.scrollBar:        false
 URxvt.urgentOnBell:     true
-URxvt.geometry:         104x24
+URxvt.geometry:         84x20
 URxvt.depth:            24
 URxvt.saveLines:        10000
 URxvt*termName:         rxvt-unicode
@@ -40,7 +42,7 @@ URxvt*cursorColor:      #ffffff
 URxvt*color0:           #222222
 URxvt*color8:           #5b595a
 !Red
-URxvt*color1:           #966767
+URxvt*color1:           #8f5b5b
 URxvt*color9:           #c48181
 !Green
 URxvt*color2:           #7c915a
@@ -68,10 +70,6 @@ URxvt.urlLauncher:      nightly
 URxvt.colorUL:          #c48181
 URxvt.matcher.button:   1
 
-URxvt.tabbedex.tabbar-fg:       7
-URxvt.tabbedex.tabbar-bg:       0
-URxvt.tabbedex.tab-fg:          1
-URxvt.tabbedex.tab-bg:          234
-URxvt.tabbedex.title-fg:        1
-URxvt.tabbedex.title-bg:        0
+URxvt*keysym.Home:      [1~
+URxvt*keysym.End:       [4~
 
