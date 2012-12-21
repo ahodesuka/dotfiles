@@ -247,6 +247,11 @@ style "theme-entry" = "theme-button" {
   text[NORMAL] = @text_color
 }
 
+style "theme-thunar-path-entry" = "theme-entry" {
+  xthickness = 4
+  ythickness = 6
+}
+
 style "theme-frame" = "theme-wide" {
   GtkWidget::draw-border = {1,1,1,1}
 }
@@ -361,11 +366,14 @@ style "theme-tooltips" = "theme-widest" {
 }
 
 style "theme-progressbar" = "theme-default" {
-  xthickness   = 2
-  ythickness   = 2
+  xthickness   = 1
+  ythickness   = 1
   bg[NORMAL]   = shade (1.20, @bg_color)
   bg[SELECTED] = mix(0.2, @bg_color, shade (1.35, @selected_bg_color))
   fg[PRELIGHT] = shade(1.30, @selected_fg_color)
+  engine "murrine" {
+        roundness = 3
+  }
 }
 
 style "theme-combo" = "theme-button" {
@@ -463,5 +471,6 @@ widget_class "*<GtkCTree>.<GtkButton>.*" 	    style "theme-treeview-header"
 widget_class "*<GtkList>.<GtkButton>.*" 	    style "theme-treeview-header"
 widget_class "*<GtkCList>.<GtkButton>.*" 	    style "theme-treeview-header"
 
-include "fixes/fixes.rc"
+# app specific
+class "ThunarPathEntry"     style "theme-thunar-path-entry"
 
