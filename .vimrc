@@ -14,8 +14,7 @@ set nostartofline
 set ruler
 set laststatus=2
 set confirm
-set visualbell
-set t_vb=
+set noerrorbells visualbell t_vb=
 set mouse=a
 set cmdheight=1
 set number
@@ -35,6 +34,11 @@ set cursorline
 set title
 set t_Co=256
 set encoding=utf-8
+set wrap
+set wrapmargin=0
+set linebreak
+set nolist
+set formatoptions+=l
 
 map Y y$
 nnoremap <C-L> :nohl<CR><C-L>
@@ -119,6 +123,4 @@ set guicursor=n-v-c:block-Cursor
 set guicursor+=i:block-Cursor
 set guicursor+=n-v-c:blinkon0
 set guicursor+=i:blinkon0
-
-set noerrorbells visualbell t_vb=
 

@@ -360,9 +360,11 @@ awful.rules.rules =
     { rule = { class = "Thunar", name = "File Operation Progress" }, properties = { floating = true } },
     { rule = { class = "Gimp" }, properties = { floating = true } },
     { rule = { class = "Wine" }, properties = { floating = true, border_width = 0 } },
+    { rule = { class = "Steam" }, properties = { floating = true, border_width = 0 } },
     { rule = { class = "Torchlight.bin.x86_64" }, properties = { floating = true, border_width = 0 } },
-    { rule = { class = "Firefox", instance = "Toplevel" }, properties = { floating = true } },
+    { rule = { class = "Firefox", instance = "Browser" }, properties = { floating = true } },
     { rule = { class = "Firefox", instance = "Update" }, properties = { floating = true } },
+    { rule = { class = "Firefox", instance = "Devtools" }, properties = { floating = true } },
     { rule = { instance = "plugin-container" }, properties = { floating = true } },
     { rule = { instance = "sun-awt-X11-XWindowPeer" }, properties = {
         border_width = "0",
@@ -382,8 +384,10 @@ client.add_signal("manage", function (c, startup)
 
     if not startup then
         awful.client.setslave(c)
-        awful.placement.no_overlap(c)
-        awful.placement.no_offscreen(c)
+        if not c.size_hints.user_position and not c.size_hints.program_position then
+            awful.placement.no_overlap(c)
+            awful.placement.no_offscreen(c)
+        end
     end
 end)
 

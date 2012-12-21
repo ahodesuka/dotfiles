@@ -4,23 +4,32 @@ xset r rate 250 50
 nvidia-settings --load-config-only
 
 ## GLOBALS ##
+export __GL_SYNC_DISPLAY_DEVICE="DFP-2"
 export XMODIFIERS="@im=SCIM"
 export GTK_IM_MODULE="scim"
 export QT_IM_MODULE="scim"
+export BROWSER="nightly"
+export EDITOR="gvim"
+export DE="xfce"
 
 ## DAEMONS ##
 thunar --daemon &
 nixlibsd
-cmptn
 scim -d
+cmptn
 mpd
 
 ## PROGRAMS ##
 transmission -m &
 thunderbird     &
 parcellite      &
-mpdas           &
 irc-start       &
+mpdas           &
+skype           &
 
 ## WM ##
-exec ck-launch-session dbus-launch --sh-syntax --exit-with-session /usr/bin/awesome
+case $1 in
+*)
+    exec /usr/bin/awesome
+    ;;
+esac

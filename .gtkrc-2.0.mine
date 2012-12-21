@@ -1,9 +1,7 @@
-style "vimfix" {
-  bg[NORMAL] = "#1b1b1b"
+style "gvimfix" {
+    bg[NORMAL] = "#1b1b1b"
 }
-style "vim-tabs" {
-	bg[NORMAL] = "#1b1b1b"
-}
-widget "vim-main-window.*GtkForm" style "vimfix"
-widget "vim-main-window*GtkNotebook*GtkEventBox"     style "vim-tabs"
-widget "vim-main-window*GtkNotebook"                 style "vim-tabs"
+
+widget "vim-main-window.*GtkForm"                    style "gvimfix"
+widget "vim-main-window*GtkNotebook*GtkEventBox"     style "gvimfix"
+widget "vim-main-window*GtkNotebook"                 style "gvimfix"

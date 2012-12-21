@@ -9,16 +9,17 @@ Xft.lcdfilter:          lcddefault
 URxvt*font:             xft:ProFont:pixelsize=11:antialias=false,\
                         [codeset=JISX0208]xft:Kochi Gothic,\
                         [codeset=KSC5601]xft:Baekmuk Gulim,\
+                        xft:WenQuanYi Bitmap Song,\
                         xft:GohuFont:antialias=false,\
-                        xft:FreeMono:antialias=false,\
+                        xft:Liberation Mono:antialias=false,\
                         xft:Arial Unicode MS:antialias=false,\
                         xft:DejaVu Sans Mono:antialias=false
 URxvt*boldFont:         xft:ProFont:pixelsize=11:antialias=false,\
                         [codeset=JISX0208]xft:Kochi Gothic,\
                         [codeset=KSC5601]xft:Baekmuk Gulim,\
+                        xft:WenQuanYi Bitmap Song,\
                         xft:GohuFont:antialias=false,\
-                        xft:FreeMono:antialias=false,\
-                        xft:unifont:antialias=false,\
+                        xft:Liberation Mono:antialias=false,\
                         xft:Arial Unicode MS:antialias=false,\
                         xft:DejaVu Sans Mono:antialias=false
 URxvt*imFont:           -*-Kochi Gothic-medium-r-normal--11-140-*-*-*-*-*-*
@@ -32,7 +33,7 @@ URxvt.depth:            24
 URxvt.saveLines:        10000
 URxvt*termName:         rxvt-unicode
 
-URxvt*preeditType:      OverTheSpot
+URxvt*preeditType:      Root
 URxvt*inputMethod:      SCIM
 URxvt*background:       #1b1b1b
 URxvt*foreground:       #cccaca
