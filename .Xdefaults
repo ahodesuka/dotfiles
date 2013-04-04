@@ -67,7 +67,7 @@ URxvt*color15:          #c4b1b5
 URxvt.perl-lib:         /home/mokou/.config/urxvt
 URxvt.perl-ext:         default,matcher
 
-URxvt.urlLauncher:      nightly
+URxvt.url-launcher:      nightly
 URxvt.colorUL:          #c48181
 URxvt.matcher.button:   1
 

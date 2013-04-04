@@ -1,2 +1,2 @@
 #!/bin/bash
-LANG=ja_JP.UTF-8 /usr/bin/wine $@
+LANG=ja_JP.UTF-8 /usr/bin/wine "$@"

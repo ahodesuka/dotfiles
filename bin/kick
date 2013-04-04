@@ -4,11 +4,15 @@ cmd=$1
 shift
 
 pkill compton
-if [ -z "$*" ]; then
+r=$?
+
+if [ -z "$@" ]; then
     $cmd
 else
-    $cmd $@
+    $cmd "$@"
 fi
-wait $!
-cmptn
 
+if [ "$r" == "0" ]; then
+    wait $!
+    cmptn
+fi

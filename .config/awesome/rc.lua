@@ -13,6 +13,31 @@ require("vicious")
 require("naughty")
 require("awesompd/awesompd")
 
+-- {{{ Error handling
+-- Check if awesome encountered an error during startup and fell back to
+-- another config (This code will only ever execute for the fallback config)
+if awesome.startup_errors then
+    naughty.notify({ preset = naughty.config.presets.critical,
+                     title = "Oops, there were errors during startup!",
+                     text = awesome.startup_errors })
+end
+
+-- Handle runtime errors after startup
+do
+    local in_error = false
+    awesome.add_signal("debug::error", function (err)
+        -- Make sure we don't go into an endless error loop
+        if in_error then return end
+        in_error = true
+
+        naughty.notify({ preset = naughty.config.presets.critical,
+                         title = "Oops, an error happened!",
+                         text = err })
+        in_error = false
+    end)
+end
+-- }}}
+
 settings.modkey     = "Mod4"
 settings.term       = "urxvt"
 settings.browser    = "nightly"
@@ -36,9 +61,9 @@ mm = awful.menu({
         { settings.browser, settings.browser,   theme.menu_wbrowser },
         { settings.fileman, settings.fileman,   theme.menu_fbrowser },
         { "random bg", settings.new_wall,       theme.menu_rwall    },
-        { "Suspend",  "gksu pm-suspend",        theme.menu_suspend  },
-        { "Reboot",   "gksu 'shutdown -r now'", theme.menu_reboot   },
-        { "Shutdown", "gksu 'shutdown -h now'", theme.menu_shutdown }
+        { "suspend",  "gksu pm-suspend",        theme.menu_suspend  },
+        { "reboot",   "gksu 'shutdown -r now'", theme.menu_reboot   },
+        { "shutdown", "gksu 'shutdown -h now'", theme.menu_shutdown }
     }
 })
 
@@ -148,12 +173,10 @@ mpdwidget.path_to_icons     = awful.util.getdir("config") .. "/ahoka/icons/aweso
 mpdwidget.mpd_config        = "/home/mokou/.mpd/mpd.conf"
 mpdwidget.album_cover_size  = 40
 mpdwidget.browser           = settings.browser
-mpdwidget.ldecorator        = " "
+mpdwidget.ldecorator        = ""
 mpdwidget.rdecorator        = ""
 mpdwidget:register_buttons({
     { "", awesompd.MOUSE_LEFT, mpdwidget:command_playpause() },
-    { "Control", awesompd.MOUSE_SCROLL_UP, mpdwidget:command_prev_track() },
-  	{ "Control", awesompd.MOUSE_SCROLL_DOWN, mpdwidget:command_next_track() },
   	{ "", awesompd.MOUSE_SCROLL_UP, mpdwidget:command_volume_up() },
   	{ "", awesompd.MOUSE_SCROLL_DOWN, mpdwidget:command_volume_down() },
   	{ "", awesompd.MOUSE_RIGHT, mpdwidget:command_show_menu() }
@@ -239,7 +262,7 @@ root.buttons(awful.util.table.join(
     awful.button({ }, 3, function () mm:toggle() end),
     awful.button({ }, 8, function () awful.util.spawn_with_shell("mpc prev") end),
     awful.button({ }, 9, function () awful.util.spawn_with_shell("mpc next") end),
-    awful.button({ }, 10, function () awful.util.spawn_with_shell("mpc toggle") end)
+    awful.button({ }, 10,function () awful.util.spawn_with_shell("mpc toggle") end)
 ))
 
 local globalkeys = awful.util.table.join(
@@ -345,7 +368,7 @@ local clientbuttons = awful.util.table.join(
     end)
 )
 
-root.keys(mpdwidget:append_global_keys(globalkeys))
+root.keys(globalkeys)
 
 awful.rules.rules =
 {
@@ -359,12 +382,14 @@ awful.rules.rules =
     { rule = { class = "Smplayer2" }, properties = { floating = true } },
     { rule = { class = "Thunar", name = "File Operation Progress" }, properties = { floating = true } },
     { rule = { class = "Gimp" }, properties = { floating = true } },
+    { rule = { class = "Skype" }, properties = { floating = true } },
     { rule = { class = "Wine" }, properties = { floating = true, border_width = 0 } },
     { rule = { class = "Steam" }, properties = { floating = true, border_width = 0 } },
     { rule = { class = "Torchlight.bin.x86_64" }, properties = { floating = true, border_width = 0 } },
     { rule = { class = "Firefox", instance = "Browser" }, properties = { floating = true } },
     { rule = { class = "Firefox", instance = "Update" }, properties = { floating = true } },
     { rule = { class = "Firefox", instance = "Devtools" }, properties = { floating = true } },
+    { rule = { instance = "TERA.exe" }, properties = { x = 0, y = 0 } },
     { rule = { instance = "plugin-container" }, properties = { floating = true } },
     { rule = { instance = "sun-awt-X11-XWindowPeer" }, properties = {
         border_width = "0",

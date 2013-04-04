@@ -1,10 +1,9 @@
 ## SETTINGS ##
 xset m 1 2
 xset r rate 250 50
-nvidia-settings --load-config-only
+xset -r 172 # disable key repeat on XF86AudioPlay (pause/play)
 
 ## GLOBALS ##
-export __GL_SYNC_DISPLAY_DEVICE="DFP-2"
 export XMODIFIERS="@im=SCIM"
 export GTK_IM_MODULE="scim"
 export QT_IM_MODULE="scim"
@@ -25,7 +24,6 @@ thunderbird     &
 parcellite      &
 irc-start       &
 mpdas           &
-skype           &
 
 ## WM ##
 case $1 in

@@ -2,6 +2,7 @@
 
 STIME="60m"
 WALLS=(/media/Misc/Pictures/Backgrounds/mokou/*.png)
+if [ ${#WALLS[@]} == 0 ]; then exit; fi
 
 # kill other instances and their children
 for pid in $(pgrep $(basename $0)); do

@@ -1,2 +1,8 @@
 #!/bin/bash
-kick /usr/bin/smplayer2 "$@"
+export __GL_SYNC_DISPLAY_DEVICE="DFP-2"
+
+qjoypad smplayer &
+kick /usr/bin/smplayer2 "$@" &
+
+wait $!
+pkill qjoypad

@@ -5,6 +5,7 @@ alias ls="ls --color=always"
 alias ll="ls -l"
 alias cue2flac="find -type f -name '*.cue' -execdir cue2tracks -R -n 19 -o '%N. %p ─ %t' {} \;"
 alias patchAnime="find -type f -name '*.xdelta' -maxdepth 1 -exec xdelta3 -d '{}' \;"
+alias make="make -j5"
 
 u2space()
 {

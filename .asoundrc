@@ -1,0 +1,26 @@
+pcm.duplex {
+   type asym
+   playback.pcm "dmix"
+   capture.pcm "dsnoop"
+}
+
+pcm.skype_control {
+    type softvol
+    slave {
+        pcm "dmix"
+    }
+    control {
+        name "Skype"
+        card 0
+    }
+}
+
+pcm.skype {
+    type plug
+    slave.pcm "skype_control"
+}
+
+pcm.!default {
+   type plug
+   slave.pcm "duplex"
+}
