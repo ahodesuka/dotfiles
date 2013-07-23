@@ -42,6 +42,7 @@ settings.modkey     = "Mod4"
 settings.term       = "urxvt"
 settings.browser    = "nightly"
 settings.fileman    = "thunar"
+settings.taskman    = "xfce4-taskmanager"
 settings.dateformat = "%Y.%m.%d %H:%M:%S"
 settings.configdir  = awful.util.getdir("config")
 settings.new_wall   = "rWall new"
@@ -167,13 +168,14 @@ vicious.register(clockwidget, vicious.widgets.date, " " .. settings.dateformat, 
 
 mpdwidget                   = awesompd:create()
 mpdwidget.font              = beautiful.font
-mpdwidget.scrolling         = false
+mpdwidget.scrolling         = true
+mpdwidget.output_size       = 50
 mpdwidget.update_interval   = 1
 mpdwidget.path_to_icons     = awful.util.getdir("config") .. "/ahoka/icons/awesompd"
 mpdwidget.mpd_config        = "/home/mokou/.mpd/mpd.conf"
 mpdwidget.album_cover_size  = 40
 mpdwidget.browser           = settings.browser
-mpdwidget.ldecorator        = ""
+mpdwidget.ldecorator        = " "
 mpdwidget.rdecorator        = ""
 mpdwidget:register_buttons({
     { "", awesompd.MOUSE_LEFT, mpdwidget:command_playpause() },
@@ -273,6 +275,7 @@ local globalkeys = awful.util.table.join(
     awful.key({ settings.modkey            }, "x",     function () awful.util.spawn(settings.term) end),
     awful.key({ settings.modkey            }, "f",     function () awful.util.spawn(settings.browser) end),
     awful.key({ settings.modkey            }, "e",     function () awful.util.spawn(settings.fileman) end),
+    awful.key({ "Control", "Shift"         }, "Escape",function () awful.util.spawn(settings.taskman) end),
     awful.key({ settings.modkey, "Control" }, "r",     awesome.restart),
     awful.key({ settings.modkey, "Shift"   }, "q",     awesome.quit),
     awful.key({ settings.modkey,           }, "j",     function ()
@@ -308,6 +311,7 @@ local clientkeys = awful.util.table.join(
     awful.key({ settings.modkey            }, "c",     function (c) c:kill() end),
     awful.key({ settings.modkey, "Control" }, "space", awful.client.floating.toggle),
     awful.key({ settings.modkey, "Shift"   }, "r",     function (c) c:redraw() end),
+    awful.key({ settings.modkey, "Shift"   }, "f",     function (c) c.fullscreen = not c.fullscreen end),
     awful.key({ settings.modkey            }, "m",     function (c)
         c.maximized_horizontal = not c.maximized_horizontal
         c.maximized_vertical   = not c.maximized_vertical
@@ -368,7 +372,7 @@ local clientbuttons = awful.util.table.join(
     end)
 )
 
-root.keys(globalkeys)
+root.keys(mpdwidget:append_global_keys(globalkeys))
 
 awful.rules.rules =
 {
@@ -379,7 +383,10 @@ awful.rules.rules =
                      keys = clientkeys,
                      buttons = clientbuttons,
                      size_hints_honor = false } },
+    { rule = { name = "^Mahjong$" }, properties = { floating = true } },
+    { rule = { name = "Qalculate!" }, properties = { floating = true } },
     { rule = { class = "Smplayer2" }, properties = { floating = true } },
+    { rule = { class = "Blender" }, properties = { floating = true } },
     { rule = { class = "Thunar", name = "File Operation Progress" }, properties = { floating = true } },
     { rule = { class = "Gimp" }, properties = { floating = true } },
     { rule = { class = "Skype" }, properties = { floating = true } },

@@ -1,2 +1,2 @@
-#!/bin/bash
-/usr/bin/gvim --remote-tab-silent "$@" || /usr/bin/gvim "$@"
+#!/bin/sh
+/usr/bin/gvim -U ~/.vimrc "$@"

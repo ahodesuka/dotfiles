@@ -2,6 +2,7 @@
 xset m 1 2
 xset r rate 250 50
 xset -r 172 # disable key repeat on XF86AudioPlay (pause/play)
+nvidia-settings -l
 
 ## GLOBALS ##
 export XMODIFIERS="@im=SCIM"
@@ -16,6 +17,7 @@ thunar --daemon &
 nixlibsd
 scim -d
 cmptn
+pman            &
 mpd
 
 ## PROGRAMS ##
@@ -23,7 +25,9 @@ transmission -m &
 thunderbird     &
 parcellite      &
 irc-start       &
+checksmb        &
 mpdas           &
+steam           &
 
 ## WM ##
 case $1 in

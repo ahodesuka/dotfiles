@@ -1,0 +1,67 @@
+#!/bin/sh
+
+export DISPLAY=:0.0
+VERSION="0.1"
+PMAN="$(which xfce4-power-manager)"
+PACKAGE="$(basename $0)"
+
+debug()
+{
+    if $DEBUG; then
+        printf "debug: %s\n" "$1"
+    fi
+}
+
+print_usage()
+{
+    printf "
+Usage:
+ %s [options]
+
+Options:
+ -d     enable debugging output
+ -h     show this help dialog
+ -v     show program version
+" "$PACKAGE"
+}
+
+while getopts dhv opt; do
+    case $opt in
+    d)
+        DEBUG=true
+        ;;
+    h)
+        print_usage
+        exit
+        ;;
+    v)
+        printf "%s v%s\n\n" "$PACKAGE" "$VERSION"
+        exit
+        ;;
+    ?)
+        print_usage
+        exit
+        ;;
+    esac
+done
+
+for pid in $(pgrep $PACKAGE); do
+    if [ "$pid" != "$$" ]; then
+        debug "$PACKAGE is already running"
+        exit
+    fi
+done
+
+while true; do
+    if ! $(smbstatus -L | grep -q "No locked files"); then
+        debug "Active samba sharing"
+        if [[ -n "$(pidof $PMAN)" ]]; then
+            debug "Killing $(basename $PMAN)"
+            killall -9 $PMAN
+        fi
+    elif [[ -z "$(pidof $PMAN)" ]]; then
+        debug "Starting $(basename $PMAN)"
+        $PMAN
+    fi
+    sleep 1m
+done

@@ -3,10 +3,10 @@
 -------------------------------
 local awful = require("awful")
 
-theme   = {}
+theme   = { }
 confdir = awful.util.getdir("config") .. "/ahoka"
 
-theme.wallpaper_cmd = { "rWall" }
+theme.wallpaper_cmd = { "/home/mokou/bin/rWall" }
 theme.font      = "cure 8"
 
 theme.fg_normal = "#cccaca"
@@ -16,16 +16,16 @@ theme.bg_normal = "#222222"
 theme.bg_focus  = "#161616"
 theme.bg_urgent = "#161616"
 
-theme.border_width  = 2
+theme.border_width  = 1
 theme.border_normal = "#222222"
 theme.border_focus  = "#5a4343"
 theme.border_marked = "#5a4343"
 
 theme.menu_height = 16
 theme.menu_border_width = 1
-theme.menu_border_color = "#161616"
+theme.menu_border_color = "#1b1b1b"
 
-theme.padding = 13
+theme.padding = 10
 
 theme.taglist_squares_sel   = confdir .. "/icons/taglist/squarefza.png"
 theme.taglist_squares_unsel = confdir .. "/icons/taglist/squareza.png"

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-STIME="60m"
+STIME="4h"
 WALLS=(/media/Misc/Pictures/Backgrounds/mokou/*.png)
 if [ ${#WALLS[@]} == 0 ]; then exit; fi
 

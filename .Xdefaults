@@ -8,20 +8,20 @@ Xft.lcdfilter:          lcddefault
 
 URxvt*font:             xft:ProFont:pixelsize=11:antialias=false,\
                         [codeset=JISX0208]xft:Kochi Gothic,\
-                        [codeset=KSC5601]xft:Baekmuk Gulim,\
+                        [codeset=KSC5601]xft:Baekmuk Dotum,\
                         xft:WenQuanYi Bitmap Song,\
                         xft:GohuFont:antialias=false,\
                         xft:Liberation Mono:antialias=false,\
-                        xft:Arial Unicode MS:antialias=false,\
-                        xft:DejaVu Sans Mono:antialias=false
+                        xft:DejaVu Sans Mono:antialias=false, \
+                        xft:WenQuanYi Zen Hei:antialias=false
 URxvt*boldFont:         xft:ProFont:pixelsize=11:antialias=false,\
                         [codeset=JISX0208]xft:Kochi Gothic,\
-                        [codeset=KSC5601]xft:Baekmuk Gulim,\
+                        [codeset=KSC5601]xft:Baekmuk Dotum,\
                         xft:WenQuanYi Bitmap Song,\
                         xft:GohuFont:antialias=false,\
                         xft:Liberation Mono:antialias=false,\
-                        xft:Arial Unicode MS:antialias=false,\
-                        xft:DejaVu Sans Mono:antialias=false
+                        xft:DejaVu Sans Mono:antialias=false, \
+                        xft:WenQuanYi Zen Hei:antialias=false
 URxvt*imFont:           -*-Kochi Gothic-medium-r-normal--11-140-*-*-*-*-*-*
 
 URxvt.fading:           false
@@ -37,7 +37,7 @@ URxvt*preeditType:      Root
 URxvt*inputMethod:      SCIM
 URxvt*background:       #1b1b1b
 URxvt*foreground:       #cccaca
-URxvt*cursorColor:      #ffffff
+URxvt*cursorColor:      #eeecec
 
 !Black
 URxvt*color0:           #222222
@@ -67,7 +67,7 @@ URxvt*color15:          #c4b1b5
 URxvt.perl-lib:         /home/mokou/.config/urxvt
 URxvt.perl-ext:         default,matcher
 
-URxvt.url-launcher:      nightly
+URxvt.url-launcher:     nightly
 URxvt.colorUL:          #c48181
 URxvt.matcher.button:   1
 

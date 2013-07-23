@@ -1,4 +1,4 @@
-alias __git_ps1="git branch 2> /dev/null | grep '*' | sed 's/* \(.*\)/\1/'"
+alias __git_ps1="git branch 2> /dev/null | grep '*' | sed 's/* \(.*\)/ \1/'"
 alias byzm1="byz -x 0 -y 0 -w 1680 -h 1050"
 alias byzm2="byz -x 1680 -y 0 -w 1920 -h 1080"
 alias ls="ls --color=always"
@@ -38,13 +38,9 @@ bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 bindkey "^[[2~" overwrite-mode
 bindkey "^[[3~" delete-char
-bindkey "^[[5~" up-line-or-history
-bindkey "^[[6~" down-line-or-history
+bindkey "^[[5~" history-beginning-search-backward
+bindkey "^[[6~" history-beginning-search-forward
 
 function precmd { print -Pn "\e]0;%n@%M:%~\a" }
 
-export PS1="%{[38;05;9;48;05;235m%} %(!.%S-ROOT-%s.%n)%{[38;05;15m%}@%{[38;05;5m%}%m %{[38;05;235;48;05;1m%}⮀%{[00m%}%{[38;05;1m%}⮀ %{[00m%}"
-export RPS1=" %{[38;05;1m%}⮂%{[38;05;0;48;05;1m%}\$(__git_ps1)%{[38;05;235m%}⮂%{[38;05;15;48;05;235m%} %~ %{[00m%}"
-
-#export PS1="%{[38;05;7m%}[%{[38;05;9m%}%(!.%S-ROOT-%s.%n)%{[38;05;7m%}@%{[38;05;5m%}%m%{[38;05;7m%}]%{[38;05;1m%} %{[00m%}"
-#export RPS1="%{[38;05;7m%}[%{[38;05;0%{[38;05;0m%}\$(__git_ps1)m%}\$(__git_ps1)%{[38;05;9m%}%~%{[38;05;7m%}]%{[00m%}"
+export PS1="%{[38;05;236;48;05;235m%}%{[38;05;9;48;05;235m%} %~ %{[38;05;235;48;05;1m%}%{[00m%}%{[38;05;0;48;05;1m%}\$(__git_ps1)%{[00m%}%{[38;05;1m%} %{[00m%}"
