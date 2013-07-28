@@ -1,22 +1,16 @@
 servers = (
   {
     address = "irc.rizon.net";
-    chatnet = "Rizon";
-    port = "6667";
-    use_ssl = "no";
+    chatnet = "rizon";
+    port = "6697";
+    use_ssl = "yes";
     ssl_verify = "no";
-    autoconnect = "yes";
+    autoconnect = "no";
   }
 );
 
 chatnets = {
-  Rizon = {
-    type = "IRC";
-    autosendcmd = "";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
+  rizon = { type = "IRC"; };
 };
 
 channels = (
@@ -78,21 +72,12 @@ statusbar = {
   # but {sb $T} is printed only if $T isn't empty.
 
   items = {
-    # start/end text in statusbars
     barstart = "{sbstart}";
     barend = "{sbend}";
-
     topicbarstart = "{topicsbstart}";
     topicbarend = "{topicsbend}";
-
-    # treated "normally", you could change the time/user name to whatever
-    time = "{sb {sbtime $Z}}";
-    user = "{sb {sbnick $cumode$N}{sbmode $usermode}{sbaway $A}}";
-
-    # treated specially .. window is printed with non-empty windows,
-    # window_empty is printed with empty windows
-    window = "{sbchan $C}{sbquery $Q}{sbmode $M} {sbdim on} {sbservertag $tag}";
-    window_empty = "{sbdim on} {sbservertag $tag}";
+    time = "{sb {sbtime $Z}{sbaway $A}}";
+    channel = "{sb {sbchan $C}{sbmode $M}}";
     prompt = "{prompt $[.15]itemname}";
     prompt_empty = "{prompt $winname}";
     topic = "{sb $topic}";
@@ -144,12 +129,8 @@ statusbar = {
     window = {
       items = {
         barstart = { priority = "100"; };
-        time = { };
-        user = { };
+        channel = { };
         usercount = { };
-        #window = { };
-        #window_empty = { };
-        lag = { priority = "-1"; };
         chanact = { alignment = "right"; };
         more = { priority = "-1"; alignment = "right"; };
         barend = { priority = "100"; alignment = "right"; };
@@ -187,7 +168,7 @@ settings = {
     twtopic_size = "86";
     twtopic_refresh = "150";
     twtopic = "no";
-    neat_colors = "rRyYmM";
+    neat_colors = "mMrRwgGcCbB";
     neat_left_actions = "no";
     neat_left_messages = "no";
     neat_allow_shrinking = "no";
@@ -198,19 +179,31 @@ settings = {
     dccstat_progbar_transferred = "%r━%n";
     dccstat_progbar_position = "%r┥%n";
     nicklist_height = "65";
-    title_string = "[$N@$tag]";
+    title_string = "[$N@$tag]$.C";
     chanact_display = "%r$N%K|%W$C";
     chanact_filter = "1";
     chanact_header = " ";
     chanact_remove_hash = "no";
     chanact_abbreviate_names = "6";
+    neat_colorize = "yes";
+    neat_ignorechars = "_`";
+    notify_icon = "/home/mokou/.irssi/scripts/notify-icon.png";
+    mg_next_delay = "5";
+    mg_no_transfer_delay = "60";
+    mg_dcc_closed_retry_delay = "10";
+    mg_transfer_confirmation_delay = "30";
+    mg_message_prefix = "xdcc send ";
   };
   "fe-common/core" = {
     theme = "ahoka";
     bell_beeps = "yes";
     beep_msg_level = "MSGS NOTICES INVITES DCC DCCMSGS HILIGHT";
+    hilight_color = "%Y";
+    activity_hide_level = "MODES";
+    completion_char = "";
   };
   "irc/dcc" = { dcc_autoget = "yes"; dcc_autoresume = "yes"; };
+  "irc/core" = { lag_max_before_disconnect = "300"; skip_motd = "yes"; };
 };
 keyboard = (
   { key = "meta-[M"; id = "command"; data = "mouse_xterm "; },

@@ -116,7 +116,6 @@ hi PmenuSbar    ctermfg=7 ctermbg=0 guibg=Grey
 hi PmenuThumb   cterm=reverse gui=reverse
 
 colorscheme jellybeans
-colorscheme jellybeans
 
 hi TabLineFill  ctermfg=242 ctermbg=235 guifg=#666 guibg=#111
 hi TabLineSel   ctermfg=255 ctermbg=234 guifg=#eee guibg=#1b1b1b

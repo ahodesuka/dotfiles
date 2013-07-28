@@ -184,8 +184,8 @@ abstracts = {
   sbaway = " %K:away:%n";
   # server display
   sbservertag = "%M$0%n";
-  # nick display
-  sbnick = "%R$*%n";
+  # channel display
+  sbchan = "%w$*%n";
   # time display
   sbtime = "%w$*%n";
 
