@@ -1,7 +1,0 @@
-#!/bin/bash
-
-qjoypad smplayer &
-/usr/bin/smplayer2 "$@" &
-
-wait $!
-pkill qjoypad
