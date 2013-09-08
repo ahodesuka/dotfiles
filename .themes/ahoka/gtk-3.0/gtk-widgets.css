@@ -33,7 +33,7 @@
 
     -GtkWindow-resize-grip-default: false;
     -GtkWindow-resize-grip-height: 0;
-	-GtkWindow-resize-grip-width: 0;
+    -GtkWindow-resize-grip-width: 0;
 
     -GtkWidget-link-color: @link_color;
     -GtkWidget-visited-link-color: @link_color;
@@ -1180,11 +1180,11 @@ GtkTreeView {
 }
 
 GtkTreeView row:nth-child(even) {
-	background-color: @base_color;
+    background-color: @base_color;
 }
 
 GtkTreeView row:nth-child(odd) {
-	background-color: shade (@base_color, 0.96);
+    background-color: shade (@base_color, 0.96);
 }
 
 GtkTreeView.separator {

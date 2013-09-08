@@ -42,7 +42,7 @@ settings.modkey     = "Mod4"
 settings.term       = "urxvt"
 settings.browser    = "nightly"
 settings.fileman    = "thunar"
-settings.taskman    = "xfce4-taskmanager"
+settings.taskman    = settings.term .. " -e htop"
 settings.dateformat = "%Y.%m.%d %H:%M:%S"
 settings.configdir  = awful.util.getdir("config")
 settings.new_wall   = "rWall new"
@@ -104,10 +104,10 @@ tasklist.buttons = awful.util.table.join(
 )
 
 tags.settings = {
-    { name = "東", layout = settings.layouts[1], mwfact = .65 },
-    { name = "南", layout = settings.layouts[1], mwfact = .65 },
-    { name = "西", layout = settings.layouts[2], mwfact = .65 },
-    { name = "北", layout = settings.layouts[2], mwfact = .65 }
+    { name = "東", layout = settings.layouts[1], mwfact = .6805 },
+    { name = "南", layout = settings.layouts[1], mwfact = .6805 },
+    { name = "西", layout = settings.layouts[2], mwfact = .6805 },
+    { name = "北", layout = settings.layouts[2], mwfact = .6805 }
 }
 
 for s = 1, screen.count() do
@@ -179,9 +179,9 @@ mpdwidget.ldecorator        = " "
 mpdwidget.rdecorator        = ""
 mpdwidget:register_buttons({
     { "", awesompd.MOUSE_LEFT, mpdwidget:command_playpause() },
-  	{ "", awesompd.MOUSE_SCROLL_UP, mpdwidget:command_volume_up() },
-  	{ "", awesompd.MOUSE_SCROLL_DOWN, mpdwidget:command_volume_down() },
-  	{ "", awesompd.MOUSE_RIGHT, mpdwidget:command_show_menu() }
+    { "", awesompd.MOUSE_SCROLL_UP, mpdwidget:command_volume_up() },
+    { "", awesompd.MOUSE_SCROLL_DOWN, mpdwidget:command_volume_down() },
+    { "", awesompd.MOUSE_RIGHT, mpdwidget:command_show_menu() }
 })
 mpdwidget:run()
 
@@ -205,8 +205,8 @@ for s = 1, screen.count() do
     ))
     taglist[s] = awful.widget.taglist.new(s, awful.widget.taglist.label.all, taglist.buttons)
     tasklist[s] = awful.widget.tasklist(function(c)
-		local tmptask = { awful.widget.tasklist.label.currenttags(c, s) }
-		return tmptask[1], tmptask[2], tmptask[3], nil
+        local tmptask = { awful.widget.tasklist.label.currenttags(c, s) }
+        return tmptask[1], tmptask[2], tmptask[3], nil -- remove task icon
     end, tasklist.buttons)
     statusbar[s] = awful.wibox(
     {
@@ -264,7 +264,7 @@ root.buttons(awful.util.table.join(
     awful.button({ }, 3, function () mm:toggle() end),
     awful.button({ }, 8, function () awful.util.spawn_with_shell("mpc prev") end),
     awful.button({ }, 9, function () awful.util.spawn_with_shell("mpc next") end),
-    awful.button({ }, 10,function () awful.util.spawn_with_shell("mpc toggle") end)
+    awful.button({ }, 10, function () awful.util.spawn_with_shell("mpc toggle") end)
 ))
 
 local globalkeys = awful.util.table.join(
@@ -297,14 +297,13 @@ local globalkeys = awful.util.table.join(
     end),
     awful.key({ settings.modkey            }, "l",     function () awful.tag.incmwfact(0.025) end),
     awful.key({ settings.modkey            }, "h",     function () awful.tag.incmwfact(-0.025) end),
-    awful.key({ settings.modkey, "Shift"   }, "h",     function () awful.client.incwfact(0.05) end),
-    awful.key({ settings.modkey, "Shift"   }, "l",     function () awful.client.incwfact(-0.05) end),
+    awful.key({ settings.modkey, "Shift"   }, "h",     function () awful.client.incwfact(0.0275) end),
+    awful.key({ settings.modkey, "Shift"   }, "l",     function () awful.client.incwfact(-0.0275) end),
     awful.key({ settings.modkey, "Control" }, "h",     function () awful.tag.incnmaster(1) end),
     awful.key({ settings.modkey, "Control" }, "l",     function () awful.tag.incnmaster(-1) end),
     awful.key({ settings.modkey            }, "space", function () awful.layout.inc(settings.layouts, 1) end),
     awful.key({ settings.modkey, "Shift"   }, "space", function () awful.layout.inc(settings.layouts, -1) end),
-    awful.key({ settings.modkey            }, "r",     function () promptbox[mouse.screen]:run() end),
-    awful.key({ }, "XF86AudioPlay", function () awful.util.spawn_with_shell("mpc toggle") end)
+    awful.key({ settings.modkey            }, "r",     function () promptbox[mouse.screen]:run() end)
 )
 
 local clientkeys = awful.util.table.join(
@@ -376,34 +375,69 @@ root.keys(mpdwidget:append_global_keys(globalkeys))
 
 awful.rules.rules =
 {
-    { rule = { },
-      properties = { border_width = beautiful.border_width,
-                     border_color = beautiful.border_normal,
-                     focus = true,
-                     keys = clientkeys,
-                     buttons = clientbuttons,
-                     size_hints_honor = false } },
-    { rule = { name = "^Mahjong$" }, properties = { floating = true } },
-    { rule = { name = "Qalculate!" }, properties = { floating = true } },
-    { rule = { class = "Smplayer2" }, properties = { floating = true } },
-    { rule = { class = "Blender" }, properties = { floating = true } },
-    { rule = { class = "Thunar", name = "File Operation Progress" }, properties = { floating = true } },
-    { rule = { class = "Gimp" }, properties = { floating = true } },
-    { rule = { class = "Skype" }, properties = { floating = true } },
-    { rule = { class = "Wine" }, properties = { floating = true, border_width = 0 } },
-    { rule = { class = "Steam" }, properties = { floating = true, border_width = 0 } },
-    { rule = { class = "Torchlight.bin.x86_64" }, properties = { floating = true, border_width = 0 } },
-    { rule = { class = "Firefox", instance = "Browser" }, properties = { floating = true } },
-    { rule = { class = "Firefox", instance = "Update" }, properties = { floating = true } },
-    { rule = { class = "Firefox", instance = "Devtools" }, properties = { floating = true } },
-    { rule = { instance = "TERA.exe" }, properties = { x = 0, y = 0 } },
-    { rule = { instance = "plugin-container" }, properties = { floating = true } },
-    { rule = { instance = "sun-awt-X11-XWindowPeer" }, properties = {
-        border_width = "0",
-        buttons = nil,
-        keys = nil,
-        floating = true
-    } }
+    {
+        rule = { },
+        properties =
+        {
+            border_width = beautiful.border_width,
+            border_color = beautiful.border_normal,
+            focus = true,
+            keys = clientkeys,
+            buttons = clientbuttons,
+            size_hints_honor = false
+        }
+    },
+    {
+        rule_any =
+        {
+            class =
+            {
+                "Ampv",
+                "Blender",
+                "dota_linux",
+                "Firefox",
+                "Gimp",
+                "mahjong",
+                "Plugin-container",
+                "Skype",
+                "Steam",
+                "Torchlight.bin.x86_64",
+                "Wine",
+            },
+            name =
+            {
+                "Qalculate!"
+            }
+        },
+        properties = { floating = true }
+    },
+    {
+        rule_any =
+        {
+            class =
+            {
+                "dota_linux",
+                "Plugin-container",
+                "Steam",
+                "Torchlight.bin.x86_64",
+                "Wine"
+            }
+        },
+        properties = { border_width = 0 }
+    },
+    {
+        rule_any =
+        {
+            class =
+            {
+                "dota_linux",
+                "Torchlight.bin.x86_64",
+            }
+        },
+        properties = { x = 0, y = 0 }
+    },
+    { rule = { class = "Thunar", name = "File Operation Progress" }, properties = { floating = false } },
+    { rule = { class = "Firefox", instance = "Navigator" }, properties = { floating = false } }
 }
 
 client.add_signal("manage", function (c, startup)
@@ -416,6 +450,7 @@ client.add_signal("manage", function (c, startup)
 
     if not startup then
         awful.client.setslave(c)
+        c:geometry(geometry)
         if not c.size_hints.user_position and not c.size_hints.program_position then
             awful.placement.no_overlap(c)
             awful.placement.no_offscreen(c)

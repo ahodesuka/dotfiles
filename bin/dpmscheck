@@ -1,0 +1,29 @@
+#!/bin/sh
+
+xprop_active_info () {
+    xprop -id $(xprop -root _NET_ACTIVE_WINDOW | awk '{print $5}')
+}
+
+isFullscreen () {
+    xprop_active_info | grep -q _NET_WM_STATE_FULLSCREEN
+}
+
+isRunning () {
+    title=$(xprop_active_info | grep "WM_CLASS(STRING)")
+
+    if isFullscreen && [[ $title = *Navigator* ]] || [[ $title = *plugin-container* ]]; then
+        return 0
+    fi
+
+    return 1
+}
+
+while true; do
+    if isRunning; then
+        if xset -q | grep -q 'DPMS is Enabled'; then
+            xset -dpms
+            xset dpms
+        fi
+    fi
+    sleep 1m
+done

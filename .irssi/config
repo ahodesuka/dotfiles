@@ -175,9 +175,9 @@ settings = {
     dccstat_cycle_through_transfers = "yes";
     dccstat_refresh = "1";
     dccstat_hide_sbar_when_inactive = "yes";
-    dccstat_progbar_remaining = "%K─%n";
-    dccstat_progbar_transferred = "%r━%n";
-    dccstat_progbar_position = "%r┥%n";
+    dccstat_progbar_remaining = "%K━%n";
+    dccstat_progbar_transferred = "%R━%n";
+    dccstat_progbar_position = "%R━%n";
     nicklist_height = "65";
     title_string = "[$N@$tag]$.C";
     chanact_display = "%r$N%K|%W$C";
@@ -193,6 +193,8 @@ settings = {
     mg_dcc_closed_retry_delay = "10";
     mg_transfer_confirmation_delay = "30";
     mg_message_prefix = "xdcc send ";
+    dccstat_progbar_width = "12";
+    dccstat_filename_max_length = "30";
   };
   "fe-common/core" = {
     theme = "ahoka";
@@ -202,7 +204,11 @@ settings = {
     activity_hide_level = "MODES";
     completion_char = "";
   };
-  "irc/dcc" = { dcc_autoget = "yes"; dcc_autoresume = "yes"; };
+  "irc/dcc" = {
+    dcc_autoget = "yes";
+    dcc_autoresume = "yes";
+    dcc_download_path = "~";
+  };
   "irc/core" = { lag_max_before_disconnect = "300"; skip_motd = "yes"; };
 };
 keyboard = (

@@ -7,21 +7,19 @@ Xft.hintstyle:          hintfull
 Xft.lcdfilter:          lcddefault
 
 URxvt*font:             xft:ProFont:pixelsize=11:antialias=false,\
-                        [codeset=JISX0208]xft:Kochi Gothic,\
-                        [codeset=KSC5601]xft:Baekmuk Dotum,\
+                        xft:Kochi Gothic,\
+                        xft:Baekmuk Dotum,\
                         xft:WenQuanYi Bitmap Song,\
                         xft:GohuFont:antialias=false,\
-                        xft:Liberation Mono:antialias=false,\
-                        xft:DejaVu Sans Mono:antialias=false, \
-                        xft:WenQuanYi Zen Hei:antialias=false
+                        xft:WenQuanYi Zen Hei:antialias=false,\
+                        xft:DejaVu Sans Mono:antialias=false
 URxvt*boldFont:         xft:ProFont:pixelsize=11:antialias=false,\
-                        [codeset=JISX0208]xft:Kochi Gothic,\
-                        [codeset=KSC5601]xft:Baekmuk Dotum,\
+                        xft:Kochi Gothic,\
+                        xft:Baekmuk Dotum,\
                         xft:WenQuanYi Bitmap Song,\
                         xft:GohuFont:antialias=false,\
-                        xft:Liberation Mono:antialias=false,\
-                        xft:DejaVu Sans Mono:antialias=false, \
-                        xft:WenQuanYi Zen Hei:antialias=false
+                        xft:WenQuanYi Zen Hei:antialias=false,\
+                        xft:DejaVu Sans Mono:antialias=false
 URxvt*imFont:           -*-Kochi Gothic-medium-r-normal--11-140-*-*-*-*-*-*
 
 URxvt.fading:           false
@@ -37,38 +35,38 @@ URxvt*preeditType:      Root
 URxvt*inputMethod:      SCIM
 URxvt*background:       #1b1b1b
 URxvt*foreground:       #cccaca
-URxvt*cursorColor:      #eeecec
+URxvt*cursorColor:      #e9e6e6
 
 !Black
 URxvt*color0:           #222222
 URxvt*color8:           #5b595a
 !Red
 URxvt*color1:           #8f5b5b
-URxvt*color9:           #c48181
+URxvt*color9:           #cf7275
 !Green
-URxvt*color2:           #7c915a
-URxvt*color10:          #91a76e
+URxvt*color2:           #758763
+URxvt*color10:          #9ebf7c
 !Yellow
-URxvt*color3:           #9e8762
-URxvt*color11:          #b19c7a
+URxvt*color3:           #c59f6f
+URxvt*color11:          #edc472
 !Blue
-URxvt*color4:           #424e60
-URxvt*color12:          #73839b
+URxvt*color4:           #70819e
+URxvt*color12:          #94aad1
 !Magenta
-URxvt*color5:           #9d4e6e
-URxvt*color13:          #b67f9c
+URxvt*color5:           #947686
+URxvt*color13:          #c98dad
 !Cyan
-URxvt*color6:           #457f7b
-URxvt*color14:          #639b97
+URxvt*color6:           #688f8a
+URxvt*color14:          #8ab4be
 !White
-URxvt*color7:           #a49195
-URxvt*color15:          #c4b1b5
+URxvt*color7:           #a49c9c
+URxvt*color15:          #e9e6e6
 
 URxvt.perl-lib:         /home/mokou/.config/urxvt
 URxvt.perl-ext:         default,matcher
 
 URxvt.url-launcher:     nightly
-URxvt.colorUL:          #c48181
+URxvt.colorUL:          #cf7275
 URxvt.matcher.button:   1
 
 URxvt*keysym.Home:      [1~

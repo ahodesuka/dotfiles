@@ -223,7 +223,7 @@ abstracts = {
   sb_dccstat = "{sb $0-}";
   sb_ds_short = "$0%G:%n$1%Y@%n$2kB/s%G:%n$4%G:%n$3";
   sb_ds_short_waiting = "$0%G:%n$1 $2 $3 waiting";
-  sb_ds_normal = "%R$0%n $M$1%n: '$2' %W$3%n / %R$4%n %R$6%n kB/s";
+  sb_ds_normal = "$2 $8 %R$6%n kB/s %wETA:%n %W$7%n";
   sb_ds_normal_waiting = "$0 $1: '$2' $3 $4 $5 waiting";
   sb_ds_separator = "%W│%n";
 };
@@ -250,16 +250,16 @@ formats = {
     line_start_irssi = "";
     # timestamp styling
     timestamp = "{timestamp %%H:%%M:%%S} ";
-    own_msg = "{ownmsgnick $2 {ownnick $[-5]0}}$1";
-    own_msg_channel = "{ownmsgnick $3 {ownnick $[-5]0}{msgchannel $1}}$2";
-    own_msg_private_query = "{ownprivmsgnick {ownprivnick $[-5]2}}$1";
-    pubmsg_me = "{pubmsgmenick $2 {menick $[-5]0}}$1";
-    pubmsg_me_channel = "{pubmsgmenick $3 {menick $[-5]0}{msgchannel $1}}$2";
-    pubmsg_hilight = "{pubmsghinick $0 $3 $[-5]1%n}$2";
-    pubmsg_hilight_channel = "{pubmsghinick $0 $4 $[-5]1{msgchannel $2}}$3";
-    pubmsg = "{pubmsgnick $2 {pubnick $[-5]0}}$1";
-    pubmsg_channel = "{pubmsgnick $2 {pubnick $[-5]0}}$1";
-    msg_private_query = "{privmsgnick $[-5]0}$2";
+    own_msg = "{ownmsgnick $2 {ownnick $[-12]0}}$1";
+    own_msg_channel = "{ownmsgnick $3 {ownnick $[-12]0}{msgchannel $1}}$2";
+    own_msg_private_query = "{ownprivmsgnick {ownprivnick $[-12]2}}$1";
+    pubmsg_me = "{pubmsgmenick $2 {menick $[-12]0}}$1";
+    pubmsg_me_channel = "{pubmsgmenick $3 {menick $[-12]0}{msgchannel $1}}$2";
+    pubmsg_hilight = "{pubmsghinick $0 $3 $[-12]1%n}$2";
+    pubmsg_hilight_channel = "{pubmsghinick $0 $4 $[-12]1{msgchannel $2}}$3";
+    pubmsg = "{pubmsgnick $2 {pubnick %r$[-12]0}}$1";
+    pubmsg_channel = "{pubmsgnick $2 {pubnick %r$[-12]0}}$1";
+    msg_private_query = "{privmsgnick $[-12]0}$2";
   };
   "fe-common/irc" = {
     own_action = "{ownaction $[-0]0} $1";

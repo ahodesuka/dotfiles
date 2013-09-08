@@ -1,0 +1,18 @@
+#!/bin/bash
+
+CLIENT="/usr/bin/urxvtc"
+DAEMON="/usr/bin/urxvtd"
+start=true
+
+for pid in $(pgrep $(basename $DAEMON)); do
+    if [ "$pid" != "$$" ]; then
+        start=false
+        break
+    fi
+done
+
+if $start; then
+    $DAEMON -q -o -f
+fi
+
+$CLIENT -b 1 $@
