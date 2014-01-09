@@ -4,23 +4,22 @@ xset r rate 250 50
 nvidia-settings -l
 
 ## ENV VARIABLES ##
-export XMODIFIERS="@im=SCIM"
+export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
+export XMODIFIERS=@im=SCIM
 export GTK_IM_MODULE="scim"
 export QT_IM_MODULE="scim"
-export BROWSER="nightly"
+export BROWSER="firefox"
 export EDITOR="gvim"
 export DE="xfce"
 
-### DAEMONS ##
+## DAEMONS ##
 thunar --daemon &
-urxvtd -q -o -f
 nixlibsd
 scim -d
 cmptn
-pman            &
 mpd
 
-### PROGRAMS ##
+## PROGRAMS ##
 transmission -m &
 thunderbird     &
 parcellite      &

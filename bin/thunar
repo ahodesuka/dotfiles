@@ -14,4 +14,4 @@ if $start; then
     $THUNAR --daemon &
 fi
 
-$THUNAR $@
+$THUNAR "$@"

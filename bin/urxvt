@@ -1,5 +1,8 @@
 #!/bin/bash
 
+CLIENT="/usr/bin/urxvt"
+
+: '
 CLIENT="/usr/bin/urxvtc"
 DAEMON="/usr/bin/urxvtd"
 start=true
@@ -14,5 +17,6 @@ done
 if $start; then
     $DAEMON -q -o -f
 fi
+'
 
 $CLIENT -b 1 $@

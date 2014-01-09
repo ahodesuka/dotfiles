@@ -20,7 +20,7 @@
 #  bg[NORMAL] is trough color
 #  bg[SELECTED] is fill color
 
-gtk_color_scheme = "fg_color:#dddddd\nbg_color:#1b1b1b\nbase_color:#222222\ntext_color:#dddddd\nselected_bg_color:#87353D\nselected_fg_color:#FFFFFF\ntooltip_fg_color:#EEEEEE\ntooltip_bg_color:#222222\nlink_color:#cf7275"
+gtk_color_scheme = "fg_color:#e9e6e6\nbg_color:#1b1b1b\nbase_color:#222222\ntext_color:#e9e6e6\nselected_bg_color:#87353D\nselected_fg_color:#e9e6e6\ntooltip_fg_color:#e9e6e6\ntooltip_bg_color:#222222\nlink_color:#cf7275"
 gtk-icon-sizes = "panel-menu=24,24:panel=22,22:gtk-button=16,16:gtk-large-toolbar=16,16"
 
 gtk-auto-mnemonics = 1
@@ -88,7 +88,7 @@ style "theme-default" {
   GtkCheckButton ::indicator-spacing = 1
   GtkRadioButton ::indicator-size    = 15
 
-  GtkPaned::handle-size = 5
+  GtkPaned::handle-size = 6
 
   # A new color must be defined since affectation of mix or shade functions to GtkTreeView::odd_row_color raise this message :
   # Gtk-Message: (for origin information, set GTK_DEBUG): failed to retrieve property `GtkTreeView::odd-row-color' of type `GdkColor' from rc file value "((GString*) 0x9ccba00)" of type `GString'
@@ -107,7 +107,7 @@ style "theme-default" {
   GtkEntry::honors-transparent-bg-hint = 1
   GtkEntry::state-hint = 0
 
-  GtkEntry::inner-border = { 2, 2, 2, 2 }
+  GtkEntry::inner-border = { 2, 2, 3, 4 }
 
   GtkWidget::new-tooltip-style = 1
   GtkImage::x-ayatana-indicator-dynamic = 1
@@ -145,7 +145,7 @@ style "theme-default" {
         rgba                = FALSE     # RGBA support.
 
         focus_color         = @selected_bg_color
-        focusstyle          = 0         # [ 2   ] (0) Hidden,       (1) Dots,       (2) Small Rectangle (3) Border outline
+        focusstyle          = 2         # [ 2   ] (0) Hidden,       (1) Dots,       (2) Small Rectangle (3) Border outline
 
         glazestyle          = 3         # [ 0   ] (0) Flat,         (1) Curved,     (2) Concave,        (3) Top Curved, (4) Beryl
         glowstyle           = 4         # [ 0   ] (0) Top,          (1) Bottom,     (2) Top & Bottom,   (3) Horizontal, (4) Centered
@@ -213,7 +213,7 @@ style "theme-wider" = "theme-default" {
 
 style "theme-widest" = "theme-default" {
   xthickness = 4
-  ythickness = 3
+  ythickness = 4
 }
 
 style "theme-button" = "theme-wider" {
@@ -242,12 +242,16 @@ style "theme-entry" = "theme-button" {
   bg[PRELIGHT] = @bg_color
   base[PRELIGHT] = mix(0.85, shade(1.20, @base_color), @selected_bg_color)
   text[NORMAL] = @text_color
+  engine "murrine" {
+    focusstyle = 0
+  }
 }
 
 style "theme-thunar-path-entry" = "theme-entry" {
   xthickness = 4
   ythickness = 4
   GtkEntry::icon-prelight = 0
+  GtkEntry::inner-border = { 2, 2, 2, 2 }
 }
 
 style "theme-thunar-icon-view"

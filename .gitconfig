@@ -1,7 +1,0 @@
-[color]
-	ui = true
-	diff = always
-[core]
-	autocrlf = false
-	filemode = false
-	editor = vim

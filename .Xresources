@@ -65,7 +65,7 @@ URxvt*color15:          #e9e6e6
 URxvt.perl-lib:         /home/mokou/.config/urxvt
 URxvt.perl-ext:         default,matcher
 
-URxvt.url-launcher:     nightly
+URxvt.url-launcher:     firefox
 URxvt.colorUL:          #cf7275
 URxvt.matcher.button:   1
 

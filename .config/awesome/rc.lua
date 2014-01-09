@@ -40,7 +40,7 @@ end
 
 settings.modkey     = "Mod4"
 settings.term       = "urxvt"
-settings.browser    = "nightly"
+settings.browser    = "firefox"
 settings.fileman    = "thunar"
 settings.taskman    = settings.term .. " -e htop"
 settings.dateformat = "%Y.%m.%d %H:%M:%S"
@@ -62,9 +62,9 @@ mm = awful.menu({
         { settings.browser, settings.browser,   theme.menu_wbrowser },
         { settings.fileman, settings.fileman,   theme.menu_fbrowser },
         { "random bg", settings.new_wall,       theme.menu_rwall    },
-        { "suspend",  "gksu pm-suspend",        theme.menu_suspend  },
-        { "reboot",   "gksu 'shutdown -r now'", theme.menu_reboot   },
-        { "shutdown", "gksu 'shutdown -h now'", theme.menu_shutdown }
+        { "suspend",  "sudo pm-suspend",        theme.menu_suspend  },
+        { "reboot",   "sudo shutdown -r now",   theme.menu_reboot   },
+        { "shutdown", "sudo shutdown -h now",   theme.menu_shutdown }
     }
 })
 
@@ -104,15 +104,23 @@ tasklist.buttons = awful.util.table.join(
 )
 
 tags.settings = {
-    { name = "東", layout = settings.layouts[1], mwfact = .6805 },
-    { name = "南", layout = settings.layouts[1], mwfact = .6805 },
-    { name = "西", layout = settings.layouts[2], mwfact = .6805 },
-    { name = "北", layout = settings.layouts[2], mwfact = .6805 }
+    {
+        { name = "東", layout = settings.layouts[2], mwfact = .6805 },
+        { name = "南", layout = settings.layouts[1], mwfact = .6805 },
+        { name = "西", layout = settings.layouts[2], mwfact = .6805 },
+        { name = "北", layout = settings.layouts[2], mwfact = .6805 }
+    },
+    {
+        { name = "東", layout = settings.layouts[1], mwfact = .6805 },
+        { name = "南", layout = settings.layouts[1], mwfact = .6805 },
+        { name = "西", layout = settings.layouts[2], mwfact = .6805 },
+        { name = "北", layout = settings.layouts[2], mwfact = .6805 }
+    },
 }
 
 for s = 1, screen.count() do
     tags[s] = {}
-    for i, v in ipairs(tags.settings) do
+    for i, v in ipairs(tags.settings[s]) do
         tags[s][i] = tag({ name = v.name })
         tags[s][i].screen = s
         awful.tag.setproperty(tags[s][i], "layout", v.layout)
@@ -159,7 +167,7 @@ netupicon.image     = image(beautiful.widget_netup)
 clockicon.image     = image(beautiful.widget_clock)
 
 vicious.register(cpuwidget, vicious.widgets.cpu, " $1% ", 1)
-vicious.register(cputempwidget, vicious.widgets.thermal, " $1°C", 1, { "coretemp.0", "core" })
+vicious.register(cputempwidget, vicious.widgets.thermal, " $1℃", 1, { "coretemp.0", "core" })
 vicious.register(memwidget, vicious.widgets.mem, " $2mb", 1)
 vicious.register(netdownwidget, vicious.widgets.net, " ${eth0 down_kb}kb/s", 1)
 vicious.register(netupwidget, vicious.widgets.net, "${eth0 up_kb}kb/s ", 1)
@@ -268,42 +276,43 @@ root.buttons(awful.util.table.join(
 ))
 
 local globalkeys = awful.util.table.join(
-    awful.key({ settings.modkey            }, "Left",  awful.tag.viewprev),
-    awful.key({ settings.modkey            }, "Right", awful.tag.viewnext),
-    awful.key({ settings.modkey,           }, "Escape",awful.tag.history.restore),
-    awful.key({ settings.modkey            }, "w",     function () awful.util.spawn_with_shell(settings.new_wall) end),
-    awful.key({ settings.modkey            }, "x",     function () awful.util.spawn(settings.term) end),
-    awful.key({ settings.modkey            }, "f",     function () awful.util.spawn(settings.browser) end),
-    awful.key({ settings.modkey            }, "e",     function () awful.util.spawn(settings.fileman) end),
-    awful.key({ "Control", "Shift"         }, "Escape",function () awful.util.spawn(settings.taskman) end),
-    awful.key({ settings.modkey, "Control" }, "r",     awesome.restart),
-    awful.key({ settings.modkey, "Shift"   }, "q",     awesome.quit),
-    awful.key({ settings.modkey,           }, "j",     function ()
+    awful.key({ settings.modkey            }, "Left",           awful.tag.viewprev),
+    awful.key({ settings.modkey            }, "Right",          awful.tag.viewnext),
+    awful.key({ settings.modkey,           }, "Escape",         awful.tag.history.restore),
+    awful.key({ settings.modkey            }, "w",              function () awful.util.spawn_with_shell(settings.new_wall) end),
+    awful.key({ settings.modkey            }, "x",              function () awful.util.spawn(settings.term) end),
+    awful.key({ settings.modkey            }, "f",              function () awful.util.spawn(settings.browser) end),
+    awful.key({ settings.modkey            }, "e",              function () awful.util.spawn(settings.fileman) end),
+    awful.key({ "Control", "Shift"         }, "Escape",         function () awful.util.spawn(settings.taskman) end),
+    awful.key({ settings.modkey, "Control" }, "r",              awesome.restart),
+    awful.key({ settings.modkey, "Shift"   }, "q",              awesome.quit),
+    awful.key({ settings.modkey,           }, "j",              function ()
         awful.client.focus.byidx( 1)
         if client.focus then client.focus:raise() end
     end),
-    awful.key({ settings.modkey,           }, "k",     function ()
+    awful.key({ settings.modkey,           }, "k",              function ()
         awful.client.focus.byidx(-1)
         if client.focus then client.focus:raise() end
     end),
-    awful.key({ settings.modkey, "Shift"   }, "j",    function () awful.client.swap.byidx(1) end),
-    awful.key({ settings.modkey, "Shift"   }, "k",    function () awful.client.swap.byidx(-1) end),
-    awful.key({ settings.modkey, "Control" }, "j",    function () awful.screen.focus_relative(1) end),
-    awful.key({ settings.modkey, "Control" }, "k",    function () awful.screen.focus_relative(-1) end),
-    awful.key({ settings.modkey,           }, "u",    awful.client.urgent.jumpto),
-    awful.key({ settings.modkey,           }, "Tab",  function ()
+    awful.key({ settings.modkey, "Shift"   }, "j",              function () awful.client.swap.byidx(1) end),
+    awful.key({ settings.modkey, "Shift"   }, "k",              function () awful.client.swap.byidx(-1) end),
+    awful.key({ settings.modkey, "Control" }, "j",              function () awful.screen.focus_relative(1) end),
+    awful.key({ settings.modkey, "Control" }, "k",              function () awful.screen.focus_relative(-1) end),
+    awful.key({ settings.modkey,           }, "u",              awful.client.urgent.jumpto),
+    awful.key({ settings.modkey,           }, "Tab",            function ()
         awful.client.focus.history.previous()
         if client.focus then client.focus:raise() end
     end),
-    awful.key({ settings.modkey            }, "l",     function () awful.tag.incmwfact(0.025) end),
-    awful.key({ settings.modkey            }, "h",     function () awful.tag.incmwfact(-0.025) end),
-    awful.key({ settings.modkey, "Shift"   }, "h",     function () awful.client.incwfact(0.0275) end),
-    awful.key({ settings.modkey, "Shift"   }, "l",     function () awful.client.incwfact(-0.0275) end),
-    awful.key({ settings.modkey, "Control" }, "h",     function () awful.tag.incnmaster(1) end),
-    awful.key({ settings.modkey, "Control" }, "l",     function () awful.tag.incnmaster(-1) end),
-    awful.key({ settings.modkey            }, "space", function () awful.layout.inc(settings.layouts, 1) end),
-    awful.key({ settings.modkey, "Shift"   }, "space", function () awful.layout.inc(settings.layouts, -1) end),
-    awful.key({ settings.modkey            }, "r",     function () promptbox[mouse.screen]:run() end)
+    awful.key({ settings.modkey            }, "l",              function () awful.tag.incmwfact(0.025) end),
+    awful.key({ settings.modkey            }, "h",              function () awful.tag.incmwfact(-0.025) end),
+    awful.key({ settings.modkey, "Shift"   }, "h",              function () awful.client.incwfact(0.0275) end),
+    awful.key({ settings.modkey, "Shift"   }, "l",              function () awful.client.incwfact(-0.0275) end),
+    awful.key({ settings.modkey, "Control" }, "h",              function () awful.tag.incnmaster(1) end),
+    awful.key({ settings.modkey, "Control" }, "l",              function () awful.tag.incnmaster(-1) end),
+    awful.key({ settings.modkey            }, "space",          function () awful.layout.inc(settings.layouts, 1) end),
+    awful.key({ settings.modkey, "Shift"   }, "space",          function () awful.layout.inc(settings.layouts, -1) end),
+    awful.key({ settings.modkey            }, "r",              function () promptbox[mouse.screen]:run() end),
+    awful.key({                            }, "XF86PowerOff",   function () awful.util.spawn("sudo pm-suspend") end)
 )
 
 local clientkeys = awful.util.table.join(
@@ -392,12 +401,13 @@ awful.rules.rules =
         {
             class =
             {
+                "Ahoviewer",
                 "Ampv",
                 "Blender",
                 "dota_linux",
-                "Firefox",
                 "Gimp",
                 "mahjong",
+                "mpv",
                 "Plugin-container",
                 "Skype",
                 "Steam",
@@ -437,7 +447,7 @@ awful.rules.rules =
         properties = { x = 0, y = 0 }
     },
     { rule = { class = "Thunar", name = "File Operation Progress" }, properties = { floating = false } },
-    { rule = { class = "Firefox", instance = "Navigator" }, properties = { floating = false } }
+    { rule = { class = "Firefox" }, except = { instance = "Navigator" }, properties = {floating = true} }
 }
 
 client.add_signal("manage", function (c, startup)
