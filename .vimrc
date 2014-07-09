@@ -102,7 +102,7 @@ set foldtext=FoldText()
 
 function! FoldText()"{{{
     let line = getline(v:foldstart)
-    let line = substitute(line, "^\s*\(#\|//\|/\*\|"\)\?\s*\|\s*\(#\|//\|/\*\|"\)\?\s*{{" . "{\d*\s*\(\*/\)\?", "", "g")
+    let line = substitute(line, '^\s*\(#\|//\|/\*\|"\)\?\s*\|\s*\(#\|//\|/\*\|"\)\?\s*{{' . "{\d*\s*\(\*/\)\?", "", "g")
     let line = " " . line . " "
     let lines_count = v:foldend - v:foldstart + 1
     let lines_count_text = " " . lines_count . " lines "
