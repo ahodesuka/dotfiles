@@ -23,10 +23,10 @@ sub notify {
     $message = encode_entities($message, "'\"&<>\\");
 
     my $cmd = "EXEC - notify-send" .
-	" -i " . Irssi::settings_get_str('notify_icon') .
-	" -t " . Irssi::settings_get_str('notify_time') .
-	" -- '" . $summary . "'" .
-	" '" . $message . "'";
+    " -i " . Irssi::settings_get_str('notify_icon') .
+    " -t " . Irssi::settings_get_str('notify_time') .
+    " -- '" . $summary . "'" .
+    " '" . $message . "'";
 
     $server->command($cmd);
 }
@@ -47,9 +47,8 @@ sub message_private_notify {
 
 sub dcc_request_notify {
     my ($dcc, $sendaddr) = @_;
-    my $server = $dcc->{server};
-
     return if (!$dcc);
+    my $server = $dcc->{server};
     notify($server, "DCC ".$dcc->{type}." request from ".$dcc->{nick}, $dcc->{arg});
 }
 

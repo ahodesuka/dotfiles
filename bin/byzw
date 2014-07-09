@@ -12,5 +12,4 @@ H=$(getProp Height)
 X=$[$(getProp 'Relative upper-left X') + B]
 Y=$[$(getProp 'Relative upper-left Y') + B]
 
-byz -x $X -y $Y -w $W -h $H --delay 1 $@
-
+byz -x $X -y $Y -w $W -h $H $@

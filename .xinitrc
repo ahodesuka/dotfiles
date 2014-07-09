@@ -2,6 +2,7 @@
 xset m 1 2
 xset r rate 250 50
 nvidia-settings -l
+rWall &
 
 ## ENV VARIABLES ##
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
@@ -13,19 +14,17 @@ export EDITOR="gvim"
 export DE="xfce"
 
 ## DAEMONS ##
-thunar --daemon &
-nixlibsd
-scim -d
-cmptn
+compton -b
 mpd
+mpdscribble
+scim -d
 
 ## PROGRAMS ##
-transmission -m &
-thunderbird     &
-parcellite      &
-dpmscheck       &
 irc-start       &
-mpdas           &
+dpmscheck       &
+parcellite      &
+thunderbird     &
+transmission -m &
 
 ## WM ##
 case $1 in

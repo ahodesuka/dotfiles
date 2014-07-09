@@ -6,12 +6,11 @@ local awful = require("awful")
 theme   = { }
 confdir = awful.util.getdir("config") .. "/ahoka"
 
-theme.wallpaper_cmd = { "/home/mokou/bin/rWall" }
 theme.font      = "cure 8"
 
 theme.fg_normal = "#cccaca"
-theme.fg_focus  = "#eeecec"
-theme.fg_urgent = "#c7838f"
+theme.fg_focus  = "#e9e6e6"
+theme.fg_urgent = "#cf7275"
 theme.bg_normal = "#222222"
 theme.bg_focus  = "#161616"
 theme.bg_urgent = "#161616"
@@ -23,7 +22,7 @@ theme.border_marked = "#5a4343"
 
 theme.menu_height = 16
 theme.menu_border_width = 1
-theme.menu_border_color = "#1b1b1b"
+theme.menu_border_color = "#161616"
 
 theme.padding = 10
 

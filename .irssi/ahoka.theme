@@ -221,11 +221,7 @@ abstracts = {
   sb_uc_space = " ";
 
   sb_dccstat = "{sb $0-}";
-  sb_ds_short = "$0%G:%n$1%Y@%n$2kB/s%G:%n$4%G:%n$3";
-  sb_ds_short_waiting = "$0%G:%n$1 $2 $3 waiting";
-  sb_ds_normal = "$2 $8 %R$6%n kB/s %wETA:%n %W$7%n";
-  sb_ds_normal_waiting = "$0 $1: '$2' $3 $4 $5 waiting";
-  sb_ds_separator = "%W│%n";
+  sb_ds_normal = "$2 $8 %R$6%n kB/s";
 };
 
 # Override irssi core settings
@@ -234,7 +230,7 @@ formats = {
     # Weechat-like notices
     #
     # channels joins
-    join = "{spacer}%B--> {channick $0} {chanhost $1} %Nhas joined";
+    join = "{spacer}%B--> {channick $0} %Nhas joined";
     # channel parts
     part = "{spacer}%b<-- {channick $0} %Nhas left";
     # channel kicks
@@ -257,8 +253,8 @@ formats = {
     pubmsg_me_channel = "{pubmsgmenick $3 {menick $[-12]0}{msgchannel $1}}$2";
     pubmsg_hilight = "{pubmsghinick $0 $3 $[-12]1%n}$2";
     pubmsg_hilight_channel = "{pubmsghinick $0 $4 $[-12]1{msgchannel $2}}$3";
-    pubmsg = "{pubmsgnick $2 {pubnick %r$[-12]0}}$1";
-    pubmsg_channel = "{pubmsgnick $2 {pubnick %r$[-12]0}}$1";
+    pubmsg = "{pubmsgnick $2 {pubnick %m$[-12]0}}$1";
+    pubmsg_channel = "{pubmsgnick $2 {pubnick %m$[-12]0}}$1";
     msg_private_query = "{privmsgnick $[-12]0}$2";
   };
   "fe-common/irc" = {

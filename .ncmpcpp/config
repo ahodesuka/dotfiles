@@ -48,9 +48,11 @@
 # Visualizer
 visualizer_in_stereo = "no"
 visualizer_fifo_path = "/tmp/mpd.fifo"
-visualizer_output_name = "FIFO"
+visualizer_output_name = "fifo"
 visualizer_type = "wave"
-visualizer_look = "●▋"
+visualizer_look = "⚫┃"
+visualizer_use_colors = "yes"
+visualizer_sync_interval = "10"
 
 # Playlist
 song_columns_list_format = "(50)[red]{t|f} (50)[magenta]{ar} (5f)[white]{lr}"
@@ -63,7 +65,7 @@ playlist_disable_highlight_delay = "3"
 playlist_separate_albums = "yes"
 
 # Bars
-alternative_header_first_line_format = "$b$1$aqqu$/a$9 $2{%t}|{%f}$9 $1$atqq$/a$9$/b"
+alternative_header_first_line_format = "{$b$2{%t}|{%f}$9$/b}"
 alternative_header_second_line_format = "{{$6$b%a$/b$9}{ $b$1-$9$/b $8%b$9}{ $b$1($9$/b $6%y$9 $b$1)$9$/b}}|{%D}"
 user_interface = "alternative"
 progressbar_look = "█ "
@@ -104,7 +106,7 @@ mpd_port = "6600"
 mpd_connection_timeout = "5"
 mpd_crossfade_time = "2"
 mpd_music_dir = "/media/Misc/Music/"
-clock_display_seconds = "yes"
+clock_display_seconds = "no"
 startup_screen = "2"
 enable_window_title = "yes"
 search_engine_display_mode = "columns"

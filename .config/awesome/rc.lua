@@ -45,7 +45,7 @@ settings.fileman    = "thunar"
 settings.taskman    = settings.term .. " -e htop"
 settings.dateformat = "%Y.%m.%d %H:%M:%S"
 settings.configdir  = awful.util.getdir("config")
-settings.new_wall   = "rWall new"
+settings.new_wall   = "rWall"
 settings.layouts    =
 {
     awful.layout.suit.floating,
@@ -58,13 +58,12 @@ beautiful.init(settings.configdir .. "/ahoka/theme.lua")
 mm = awful.menu({
     items =
     {
-        { settings.term,    settings.term,      theme.menu_terminal },
-        { settings.browser, settings.browser,   theme.menu_wbrowser },
-        { settings.fileman, settings.fileman,   theme.menu_fbrowser },
-        { "random bg", settings.new_wall,       theme.menu_rwall    },
-        { "suspend",  "sudo pm-suspend",        theme.menu_suspend  },
-        { "reboot",   "sudo shutdown -r now",   theme.menu_reboot   },
-        { "shutdown", "sudo shutdown -h now",   theme.menu_shutdown }
+        { settings.term,    settings.term,            theme.menu_terminal },
+        { settings.browser, settings.browser,         theme.menu_wbrowser },
+        { settings.fileman, settings.fileman,         theme.menu_fbrowser },
+        { "random bg",      settings.new_wall,        theme.menu_rwall    },
+        { "reboot",         "ktsuss shutdown -r now", theme.menu_reboot   },
+        { "shutdown",       "ktsuss shutdown -h now", theme.menu_shutdown }
     }
 })
 
@@ -107,7 +106,7 @@ tags.settings = {
     {
         { name = "東", layout = settings.layouts[2], mwfact = .6805 },
         { name = "南", layout = settings.layouts[1], mwfact = .6805 },
-        { name = "西", layout = settings.layouts[2], mwfact = .6805 },
+        { name = "西", layout = settings.layouts[1], mwfact = .6805 },
         { name = "北", layout = settings.layouts[2], mwfact = .6805 }
     },
     {
@@ -131,33 +130,36 @@ for s = 1, screen.count() do
 end
 
 separator           = widget({ type = "textbox" })
-mpdwidget           = widget({ type = "textbox" })
+spacesep            = widget({ type = "textbox" })
 cpuwidget           = widget({ type = "textbox" })
-cpuwidget.width     = 28
 cputempwidget       = widget({ type = "textbox" })
-cputempwidget.width = 28
 memwidget           = widget({ type = "textbox" })
-memwidget.width     = 36
-memwidget.align     = "center"
 netdownwidget       = widget({ type = "textbox" })
-netdownwidget.width = 56
-netdownwidget.align = "center"
 netupwidget         = widget({ type = "textbox" })
-netupwidget.width   = 48
-netupwidget.align   = "center"
 clockwidget         = widget({ type = "textbox" })
+
+cpuwidget.width     = 28
+cputempwidget.width = 28
+memwidget.width     = 36
+netdownwidget.width = 56
+netupwidget.width   = 48
 clockwidget.width   = 91
+
+memwidget.align     = "center"
+netdownwidget.align = "center"
+netupwidget.align   = "center"
 clockwidget.align   = "center"
 
-mpdicon         = widget({ type = "imagebox" })
-cpuicon         = widget({ type = "imagebox" })
-tempicon        = widget({ type = "imagebox" })
-memicon         = widget({ type = "imagebox" })
-netdownicon     = widget({ type = "imagebox" })
-netupicon       = widget({ type = "imagebox" })
-clockicon       = widget({ type = "imagebox" })
+mpdicon         	= widget({ type = "imagebox" })
+cpuicon         	= widget({ type = "imagebox" })
+tempicon        	= widget({ type = "imagebox" })
+memicon         	= widget({ type = "imagebox" })
+netdownicon     	= widget({ type = "imagebox" })
+netupicon       	= widget({ type = "imagebox" })
+clockicon       	= widget({ type = "imagebox" })
 
 separator.text      = "<span color='#444'> | </span>"
+spacesep.text       = " "
 mpdicon.image       = image(beautiful.widget_mpd)
 cpuicon.image       = image(beautiful.widget_cpu)
 tempicon.image      = image(beautiful.widget_cputemp)
@@ -180,16 +182,16 @@ mpdwidget.scrolling         = true
 mpdwidget.output_size       = 50
 mpdwidget.update_interval   = 1
 mpdwidget.path_to_icons     = awful.util.getdir("config") .. "/ahoka/icons/awesompd"
-mpdwidget.mpd_config        = "/home/mokou/.mpd/mpd.conf"
+mpdwidget.mpd_config        = os.getenv("HOME") .. "/.mpd/mpd.conf"
 mpdwidget.album_cover_size  = 40
 mpdwidget.browser           = settings.browser
 mpdwidget.ldecorator        = " "
 mpdwidget.rdecorator        = ""
 mpdwidget:register_buttons({
-    { "", awesompd.MOUSE_LEFT, mpdwidget:command_playpause() },
-    { "", awesompd.MOUSE_SCROLL_UP, mpdwidget:command_volume_up() },
-    { "", awesompd.MOUSE_SCROLL_DOWN, mpdwidget:command_volume_down() },
-    { "", awesompd.MOUSE_RIGHT, mpdwidget:command_show_menu() }
+    { "", awesompd.MOUSE_LEFT,          mpdwidget:command_playpause()   },
+    { "", awesompd.MOUSE_SCROLL_UP,     mpdwidget:command_volume_up()   },
+    { "", awesompd.MOUSE_SCROLL_DOWN,   mpdwidget:command_volume_down() },
+    { "", awesompd.MOUSE_RIGHT,         mpdwidget:command_show_menu()   }
 })
 mpdwidget:run()
 
@@ -262,6 +264,7 @@ for s = 1, screen.count() do
             separator,
             mpdwidget.widget,
             mpdicon,
+            spacesep,
             tasklist[s],
             layout = awful.widget.layout.horizontal.rightleft
         }
@@ -311,8 +314,7 @@ local globalkeys = awful.util.table.join(
     awful.key({ settings.modkey, "Control" }, "l",              function () awful.tag.incnmaster(-1) end),
     awful.key({ settings.modkey            }, "space",          function () awful.layout.inc(settings.layouts, 1) end),
     awful.key({ settings.modkey, "Shift"   }, "space",          function () awful.layout.inc(settings.layouts, -1) end),
-    awful.key({ settings.modkey            }, "r",              function () promptbox[mouse.screen]:run() end),
-    awful.key({                            }, "XF86PowerOff",   function () awful.util.spawn("sudo pm-suspend") end)
+    awful.key({ settings.modkey            }, "r",              function () promptbox[mouse.screen]:run() end)
 )
 
 local clientkeys = awful.util.table.join(
@@ -380,7 +382,8 @@ local clientbuttons = awful.util.table.join(
     end)
 )
 
-root.keys(mpdwidget:append_global_keys(globalkeys))
+mpdwidget:append_global_keys()
+root.keys(globalkeys)
 
 awful.rules.rules =
 {
@@ -403,6 +406,7 @@ awful.rules.rules =
             {
                 "Ahoviewer",
                 "Ampv",
+                "Anidbmini",
                 "Blender",
                 "dota_linux",
                 "Gimp",
@@ -410,6 +414,7 @@ awful.rules.rules =
                 "mpv",
                 "Plugin-container",
                 "Skype",
+                "starbound",
                 "Steam",
                 "Torchlight.bin.x86_64",
                 "Wine",
@@ -428,6 +433,7 @@ awful.rules.rules =
             {
                 "dota_linux",
                 "Plugin-container",
+                "starbound",
                 "Steam",
                 "Torchlight.bin.x86_64",
                 "Wine"
@@ -441,12 +447,13 @@ awful.rules.rules =
             class =
             {
                 "dota_linux",
+                "starbound",
                 "Torchlight.bin.x86_64",
             }
         },
         properties = { x = 0, y = 0 }
     },
-    { rule = { class = "Thunar", name = "File Operation Progress" }, properties = { floating = false } },
+    { rule = { class = "Thunar", name = "File Operation Progress" }, properties = { floating = true } },
     { rule = { class = "Firefox" }, except = { instance = "Navigator" }, properties = {floating = true} }
 }
 

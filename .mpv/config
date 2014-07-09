@@ -1,0 +1,16 @@
+# video settings
+osc=no
+vo=opengl-hq:scaler-resizes-only
+hwdec=vdpau
+geometry=50%:50%
+autofit=1280x720
+quvi-format=best
+screen=1
+
+# audio settings
+ao=alsa
+af=equalizer=-1:-1
+volume=50
+alang=jpn,jp,eng,en
+slang=jpn,jp,eng,en
+volstep=2

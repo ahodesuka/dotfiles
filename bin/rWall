@@ -1,29 +1,28 @@
 #!/bin/bash
 
-STIME="4h"
-WALLS=(/media/Misc/Pictures/Backgrounds/mokou/*.png)
+STIME="4h" # Amount of time to sleep between changes
+WALLS=(~/Pictures/Backgrounds/mokou/*.png)
+WALLCMD="nitrogen --set-scaled --save"
+
 if [ ${#WALLS[@]} == 0 ]; then exit; fi
 
-# kill other instances and their children
-for pid in $(pgrep $(basename $0)); do
-  if [ "$pid" != "$$" ]; then
-    kill -TERM -$pid;
-  fi
-done
-
-if [ "$1" == "new" -a -f "/tmp/.rWall" ]; then
-  c=$(cat "/tmp/.rWall");
+# if rWall is already running kill the sleep
+pid=$(pgrep -o $(basename $0))
+if [ "$pid" != "$$" ]; then
+  pkill -TERM -P $pid
+  exit
 fi
 
 while true; do
   n="${WALLS[RANDOM % ${#WALLS[@]}]}"
-  while [ -n "$c" ]; do
-    if [ "$n" != "$c" ]; then break; fi
-    n="${WALLS[RANDOM % ${#WALLS[@]}]}"
-  done
-  nitrogen --set-scaled --save "$n"
-  $(echo "$n" > "/tmp/.rWall")
+  if [ -f "/tmp/.rWall" ]; then
+    c=$(cat "/tmp/.rWall")
+    while [ ${#WALLS[@]} -gt "2" -a "$n" == "$c" ]; do
+      n="${WALLS[RANDOM % ${#WALLS[@]}]}"
+    done
+  fi
+  echo $n
+  $WALLCMD "$n"
+  echo "$n" > "/tmp/.rWall"
   sleep $STIME
 done
-
-exit

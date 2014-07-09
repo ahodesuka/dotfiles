@@ -5,6 +5,7 @@ Xft.rgba:               rgb
 Xft.autohint:           false
 Xft.hintstyle:          hintfull
 Xft.lcdfilter:          lcddefault
+Xcursor.theme:          OpenZone_Fire
 
 URxvt*font:             xft:ProFont:pixelsize=11:antialias=false,\
                         xft:Kochi Gothic,\

@@ -5,7 +5,7 @@ servers = (
     port = "6697";
     use_ssl = "yes";
     ssl_verify = "no";
-    autoconnect = "no";
+    autoconnect = "yes";
   }
 );
 
@@ -163,7 +163,7 @@ settings = {
     awl_custom_sb = "yes";
     nicklist_automode = "fifo";
     nicklist_width = "14";
-    autoaway_timeout = "3600";
+    autoaway_timeout = "900";
     neat_right_mode = "no";
     twtopic_size = "86";
     twtopic_refresh = "150";
@@ -181,7 +181,7 @@ settings = {
     nicklist_height = "65";
     title_string = "[$N@$tag]$.C";
     chanact_display = "%r$N%K|%W$C";
-    chanact_filter = "1";
+    chanact_filter = "2";
     chanact_header = " ";
     chanact_remove_hash = "no";
     chanact_abbreviate_names = "6";
@@ -194,7 +194,8 @@ settings = {
     mg_transfer_confirmation_delay = "30";
     mg_message_prefix = "xdcc send ";
     dccstat_progbar_width = "12";
-    dccstat_filename_max_length = "30";
+    dccstat_filename_max_length = "35";
+    dccmove_dir = "~/Anime";
   };
   "fe-common/core" = {
     theme = "ahoka";
@@ -207,7 +208,7 @@ settings = {
   "irc/dcc" = {
     dcc_autoget = "yes";
     dcc_autoresume = "yes";
-    dcc_download_path = "~";
+    dcc_download_path = "~/Downloads";
   };
   "irc/core" = { lag_max_before_disconnect = "300"; skip_motd = "yes"; };
 };

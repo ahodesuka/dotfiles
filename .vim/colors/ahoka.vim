@@ -67,6 +67,7 @@ if has("gui_running")
   let s:selection  = "#3e3b3b"
   let s:line       = "#222222"
   let s:comment    = "#787676"
+  let s:folded     = "#4e4e4e"
   let s:red        = "#cf7275"
   let s:orange     = "#c59f6f"
   let s:yellow     = "#edc472"
@@ -93,6 +94,7 @@ else
   let s:selection  = "8"
   let s:line       = "0"
   let s:comment    = "7"
+  let s:folded     = "239"
   let s:red        = "9"
   let s:orange     = "3"
   let s:yellow     = "11"
@@ -124,6 +126,7 @@ exe "let s:bg_background = ' ".s:vmode."bg=".s:background."'"
 exe "let s:bg_selection  = ' ".s:vmode."bg=".s:selection ."'"
 exe "let s:bg_line       = ' ".s:vmode."bg=".s:line      ."'"
 exe "let s:bg_comment    = ' ".s:vmode."bg=".s:comment   ."'"
+exe "let s:bg_folded     = ' ".s:vmode."bg=".s:folded    ."'"
 exe "let s:bg_red        = ' ".s:vmode."bg=".s:red       ."'"
 exe "let s:bg_orange     = ' ".s:vmode."bg=".s:orange    ."'"
 exe "let s:bg_yellow     = ' ".s:vmode."bg=".s:yellow    ."'"
@@ -144,6 +147,7 @@ exe "let s:fg_background = ' ".s:vmode."fg=".s:background."'"
 exe "let s:fg_selection  = ' ".s:vmode."fg=".s:selection ."'"
 exe "let s:fg_line       = ' ".s:vmode."fg=".s:line      ."'"
 exe "let s:fg_comment    = ' ".s:vmode."fg=".s:comment   ."'"
+exe "let s:fg_folded     = ' ".s:vmode."fg=".s:folded    ."'"
 exe "let s:fg_red        = ' ".s:vmode."fg=".s:red       ."'"
 exe "let s:fg_orange     = ' ".s:vmode."fg=".s:orange    ."'"
 exe "let s:fg_yellow     = ' ".s:vmode."fg=".s:yellow    ."'"
@@ -177,6 +181,7 @@ if has("gui_running")
   exe "let s:sp_selection  = ' guisp=".s:selection ."'"
   exe "let s:sp_line       = ' guisp=".s:line      ."'"
   exe "let s:sp_comment    = ' guisp=".s:comment   ."'"
+  exe "let s:sp_folded     = ' guisp=".s:folded    ."'"
   exe "let s:sp_red        = ' guisp=".s:red       ."'"
   exe "let s:sp_orange     = ' guisp=".s:orange    ."'"
   exe "let s:sp_yellow     = ' guisp=".s:yellow    ."'"
@@ -196,6 +201,7 @@ else
   let s:sp_selection  = ""
   let s:sp_line       = ""
   let s:sp_comment    = ""
+  let s:sp_folded     = ""
   let s:sp_red        = ""
   let s:sp_orange     = ""
   let s:sp_yellow     = ""
@@ -214,7 +220,7 @@ endif
 " Vim Highlighting: (see :help highlight-groups)"{{{
 " ----------------------------------------------------------------------------
 exe "hi! ColorColumn"   .s:fg_none        .s:bg_line        .s:fmt_none
-"       Conceal"
+exe "hi! Conceal"       .s:fg_line       .s:bg_none        .s:fmt_none
 "       Cursor"
 "       CursorIM"
 exe "hi! CursorColumn"  .s:fg_none        .s:bg_line        .s:fmt_none
@@ -226,16 +232,16 @@ exe "hi! DiffDelete"    .s:fg_background  .s:bg_red         .s:fmt_none
 exe "hi! DiffText"      .s:fg_background  .s:bg_blue        .s:fmt_none
 exe "hi! ErrorMsg"      .s:fg_background  .s:bg_red         .s:fmt_stnd
 exe "hi! VertSplit"     .s:fg_darkcolumn  .s:bg_none        .s:fmt_none
-exe "hi! Folded"        .s:fg_comment     .s:bg_darkcolumn  .s:fmt_none
-exe "hi! FoldColumn"    .s:fg_none        .s:bg_darkcolumn  .s:fmt_none
+exe "hi! Folded"        .s:fg_folded      .s:bg_darkcolumn  .s:fmt_none
+exe "hi! FoldColumn"    .s:fg_selection   .s:bg_darkcolumn  .s:fmt_none
 exe "hi! SignColumn"    .s:fg_none        .s:bg_darkcolumn  .s:fmt_none
 "       Incsearch"
 exe "hi! LineNr"        .s:fg_selection   .s:bg_darkcolumn  .s:fmt_none
-exe "hi! CursorLineNr"  .s:fg_red         .s:bg_darkcolumn  .s:fmt_bold
+exe "hi! CursorLineNr"  .s:fg_red         .s:bg_background  .s:fmt_none
 exe "hi! MatchParen"    .s:fg_background  .s:bg_aqua        .s:fmt_none
 exe "hi! ModeMsg"       .s:fg_green       .s:bg_none        .s:fmt_none
 exe "hi! MoreMsg"       .s:fg_green       .s:bg_none        .s:fmt_none
-exe "hi! NonText"       .s:fg_selection   .s:bg_none        .s:fmt_none
+exe "hi! NonText"       .s:fg_background  .s:bg_none        .s:fmt_none
 exe "hi! Pmenu"         .s:fg_foreground  .s:bg_darkcolumn  .s:fmt_none
 exe "hi! PmenuSel"      .s:fg_foreground  .s:bg_darkcolumn  .s:fmt_revr
 exe "hi! PmenuSbar"     .s:fg_foreground  .s:bg_darkcolumn  .s:fmt_none
@@ -257,6 +263,19 @@ exe "hi! Visual"        .s:fg_none        .s:bg_selection   .s:fmt_none
 "       VisualNos"
 exe "hi! WarningMsg"    .s:fg_red         .s:bg_none        .s:fmt_none
 "       WildMenu"
+
+" gitgutter
+exe "hi! GitGutterAdd"          .s:fg_green .s:bg_darkcolumn .s:fmt_none
+exe "hi! GitGutterChange"       .s:fg_yellow.s:bg_darkcolumn .s:fmt_none
+exe "hi! GitGutterDelete"       .s:fg_red   .s:bg_darkcolumn .s:fmt_none
+exe "hi! GitGutterChangeDelete" .s:fg_yellow.s:bg_darkcolumn .s:fmt_none
+
+" Syntastic
+exe "hi! SyntasticErrorSign"    .s:fg_red   .s:bg_darkcolumn .s:fmt_undr
+exe "hi! SyntasticWarningSign"  .s:fg_yellow.s:bg_darkcolumn .s:fmt_none
+
+" Misc
+exe "hi! cppSTLnamespace"       .s:fg_orange.s:bg_none       .s:fmt_none
 
 if has('gui_running')
   exe "hi! Normal" .s:fg_foreground .s:bg_background .s:fmt_none
