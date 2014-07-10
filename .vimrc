@@ -91,6 +91,7 @@ set formatoptions+=l
 set fillchars=vert:█,fold:█
 set completeopt=menuone,longest
 set showmatch
+set matchpairs=(:),{:},[:],<:>
 set re=1
 set conceallevel=2
 set nuw=6
@@ -100,18 +101,18 @@ set foldmethod=marker
 set foldtext=FoldText()
 " }}}
 
-function! FoldText()"{{{
+function! FoldText() " {{{
     let line = getline(v:foldstart)
-    let line = substitute(line, '^\s*\(#\|//\|/\*\|"\)\?\s*\|\s*\(#\|//\|/\*\|"\)\?\s*{{' . "{\d*\s*\(\*/\)\?", "", "g")
-    let line = " " . line . " "
+    let line = substitute(line, '^\s*\(#\|//\|/\*\|"\)\?\s*\|\s*\(#\|//\|/\*\|"\)\?\s*{{' . '{\d*\s*\(\*/\)\?', '', 'g')
+    let line = ' ' . line . ' '
     let lines_count = v:foldend - v:foldstart + 1
-    let lines_count_text = " " . lines_count . " lines "
-    let foldchar = matchstr(&fillchars, "fold:\zs.")
+    let lines_count_text = ' ' . lines_count . ' lines '
+    let foldchar = matchstr(&fillchars, 'fold:\zs.')
     let foldtextstart = strpart(repeat(foldchar, max([1, indent(v:foldstart)])) . line, 0, (winwidth(0)*2)/3)
     let foldtextend = lines_count_text . repeat(foldchar, 8)
-    let foldtextlength = strlen(substitute(foldtextstart . foldtextend, ".", "x", "g")) + &foldcolumn + &nuw
+    let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn + &nuw
     return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
-endfunction"}}}
+endfunction " }}}
 
 " Mappings {{{
 map! <S-Insert> <MiddleMouse>
@@ -165,23 +166,25 @@ set tags+=~/.vim/tags/ogre
 set tags+=~/.vim/tags/sdl
 " }}}
 
-let NERDTreeIgnore=[ "\.o$", "\~$" ]
+let NERDTreeIgnore=[ '\.o$', '\~$' ]
 
-let g:indentLine_char = "│"
-let g:indentLine_bufNameExclude = [ "NERD_tree.*" ]
+let delimitMate_matchpairs = '(:),[:],{:}'
+
+let g:indentLine_char = '│'
+let g:indentLine_bufNameExclude = [ 'NERD_tree.*' ]
 let g:indentLine_noConcealCursor = 1
-let g:indentLine_color_gui = "#222222"
+let g:indentLine_color_gui = '#222222'
 let g:indentLine_color_term = 236
 let g:indentLine_color_tty = 236
 
 let g:localvimrc_ask = 0
 
 let g:DeleteTrailingWhitespace = 1
-let g:DeleteTrailingWhitespace_Action = "delete"
+let g:DeleteTrailingWhitespace_Action = 'delete'
 
 let g:load_doxygen_syntax = 1
-let g:DoxygenToolkit_endCommentBlock = "**/"
-let g:DoxygenToolkit_endCommentTag = "**/"
+let g:DoxygenToolkit_endCommentBlock = '**/'
+let g:DoxygenToolkit_endCommentTag = '**/'
 
 " OmniCppComplete {{{
 let OmniCpp_NamespaceSearch = 1
@@ -191,24 +194,24 @@ let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
 let OmniCpp_MayCompleteDot = 1      " autocomplete after .
 let OmniCpp_MayCompleteArrow = 1    " autocomplete after ->
 let OmniCpp_MayCompleteScope = 1    " autocomplete after ::
-let OmniCpp_DefaultNamespaces = [ "std", "_GLIBCXX_STD" ]
+let OmniCpp_DefaultNamespaces = [ 'std', '_GLIBCXX_STD' ]
 " }}}
 
 " neocomplete {{{
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = "\*ku\*"
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
 let g:neocomplete#sources#dictionary#dictionaries = {
-    \ "default" : "",
+    \ 'default' : '',
     \ }
 
-if !exists("g:neocomplete#keyword_patterns")
+if !exists('g:neocomplete#keyword_patterns')
     let g:neocomplete#keyword_patterns = {}
 endif
 
-let g:neocomplete#keyword_patterns["default"] = "\h\w*"
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
@@ -222,43 +225,43 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 inoremap <expr><Up>    pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr><C-k>   pumvisible() ? "\<C-p>" : "\<C-k>"
 
-if !exists("g:neocomplete#sources#omni#input_patterns")
+if !exists('g:neocomplete#sources#omni#input_patterns')
     let g:neocomplete#sources#omni#input_patterns = {}
 endif
 
-let g:neocomplete#sources#omni#input_patterns.ruby = "[^. *\t]\.\w*\|\h\w*::"
-let g:neocomplete#sources#omni#input_patterns.c = "[^.[:digit:] *\t]\%(\.\|->\)"
-let g:neocomplete#sources#omni#input_patterns.cpp = "[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::"
+let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 " }}}
 
-let g:neosnippet#disable_runtime_snippets = { "_": 1, }
-let g:neosnippet#snippets_directory = "~/.vim/bundle/vim-snippets/snippets"
+let g:neosnippet#disable_runtime_snippets = { '_': 1, }
+let g:neosnippet#snippets_directory = '~/.vim/bundle/vim-snippets/snippets'
 
 function! g:HeaderguardName()
-    return "_" . toupper(expand("%:t:gs/[^0-9a-zA-Z_]/_/g")) . "_"
+    return '_' . toupper(expand('%:t:gs/[^0-9a-zA-Z_]/_/g')) . '_'
 endfunction
 
-let g:syntastic_stl_format = ""
+let g:syntastic_stl_format = ''
 let g:syntastic_c_auto_refresh_includes = 1
 let g:syntastic_cpp_no_include_search = 1
-let g:syntastic_cpp_compiler_options = "-std=c++11"
+let g:syntastic_cpp_compiler_options = '-std=c++11'
 
-let g:airline_theme = "powerlineish"
+let g:airline_theme = 'powerlineish'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#hunks#non_zero_only = 1
 
-let g:ruby_indent_access_modifier_style = "outdent"
+let g:ruby_indent_access_modifier_style = 'outdent'
 
 set sessionoptions-=help
 set sessionoptions-=options
 set sessionoptions+=resize
 set sessionoptions+=tabpages
 
-let g:session_autosave = "yes"
-let g:session_autoload = "yes"
+let g:session_autosave = 'yes'
+let g:session_autoload = 'yes'
 let g:session_autosave_periodic = 5
 let g:session_default_to_last = 1
-let g:session_persist_globals = [ "&expandtab" ]
+let g:session_persist_globals = [ '&expandtab' ]
 
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
