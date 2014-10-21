@@ -289,29 +289,10 @@ local globalkeys = awful.util.table.join(
     awful.key({ "Control", "Shift"         }, "Escape",         function () awful.util.spawn(settings.taskman) end),
     awful.key({ settings.modkey, "Control" }, "r",              awesome.restart),
     awful.key({ settings.modkey, "Shift"   }, "q",              awesome.quit),
-    awful.key({ settings.modkey,           }, "j",              function ()
-        awful.client.focus.byidx( 1)
-        if client.focus then client.focus:raise() end
-    end),
-    awful.key({ settings.modkey,           }, "k",              function ()
-        awful.client.focus.byidx(-1)
-        if client.focus then client.focus:raise() end
-    end),
-    awful.key({ settings.modkey, "Shift"   }, "j",              function () awful.client.swap.byidx(1) end),
-    awful.key({ settings.modkey, "Shift"   }, "k",              function () awful.client.swap.byidx(-1) end),
-    awful.key({ settings.modkey, "Control" }, "j",              function () awful.screen.focus_relative(1) end),
-    awful.key({ settings.modkey, "Control" }, "k",              function () awful.screen.focus_relative(-1) end),
-    awful.key({ settings.modkey,           }, "u",              awful.client.urgent.jumpto),
-    awful.key({ settings.modkey,           }, "Tab",            function ()
-        awful.client.focus.history.previous()
-        if client.focus then client.focus:raise() end
-    end),
     awful.key({ settings.modkey            }, "l",              function () awful.tag.incmwfact(0.025) end),
     awful.key({ settings.modkey            }, "h",              function () awful.tag.incmwfact(-0.025) end),
-    awful.key({ settings.modkey, "Shift"   }, "h",              function () awful.client.incwfact(0.0275) end),
-    awful.key({ settings.modkey, "Shift"   }, "l",              function () awful.client.incwfact(-0.0275) end),
-    awful.key({ settings.modkey, "Control" }, "h",              function () awful.tag.incnmaster(1) end),
-    awful.key({ settings.modkey, "Control" }, "l",              function () awful.tag.incnmaster(-1) end),
+    awful.key({ settings.modkey            }, "j",              function () awful.client.incwfact(0.0275) end),
+    awful.key({ settings.modkey            }, "k",              function () awful.client.incwfact(-0.0275) end),
     awful.key({ settings.modkey            }, "space",          function () awful.layout.inc(settings.layouts, 1) end),
     awful.key({ settings.modkey, "Shift"   }, "space",          function () awful.layout.inc(settings.layouts, -1) end),
     awful.key({ settings.modkey            }, "r",              function () promptbox[mouse.screen]:run() end)
@@ -408,6 +389,7 @@ awful.rules.rules =
                 "Ampv",
                 "Anidbmini",
                 "Blender",
+                "csgo_linux",
                 "dota_linux",
                 "Gimp",
                 "mahjong",
@@ -431,6 +413,7 @@ awful.rules.rules =
         {
             class =
             {
+                "csgo_linux",
                 "dota_linux",
                 "Plugin-container",
                 "starbound",
@@ -446,6 +429,7 @@ awful.rules.rules =
         {
             class =
             {
+                "csgo_linux",
                 "dota_linux",
                 "starbound",
                 "Torchlight.bin.x86_64",

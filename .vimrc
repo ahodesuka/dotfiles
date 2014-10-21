@@ -95,13 +95,14 @@ set matchpairs=(:),{:},[:],<:>
 set re=1
 set conceallevel=2
 set nuw=6
-set history=200
+set history=1000
 set foldcolumn=1
 set foldmethod=marker
 set foldtext=FoldText()
 " }}}
 
 function! FoldText() " {{{
+    " example: █ function! FoldText() ████████ 12 lines █
     let line = getline(v:foldstart)
     let line = substitute(line, '^\s*\(#\|//\|/\*\|"\)\?\s*\|\s*\(#\|//\|/\*\|"\)\?\s*{{' . '{\d*\s*\(\*/\)\?', '', 'g')
     let line = ' ' . line . ' '
@@ -161,6 +162,7 @@ set tags+=~/.vim/tags/cpp
 set tags+=~/.vim/tags/gl
 set tags+=~/.vim/tags/glibmm
 set tags+=~/.vim/tags/gtkmm-2.4
+set tags+=~/.vim/tags/gdkmm-2.4
 set tags+=~/.vim/tags/libxml2
 set tags+=~/.vim/tags/ogre
 set tags+=~/.vim/tags/sdl

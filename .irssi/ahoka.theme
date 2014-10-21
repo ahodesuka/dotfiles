@@ -12,7 +12,7 @@ abstracts = {
   # Generic
   #
   # reserved spaces for nickname alignment
-  spacer = "$[-4]0";
+  spacer = "$[-2]0";
   # text to insert at the beginning of each non-message line
   line_start = " ";
   # timestamp styling
@@ -221,7 +221,7 @@ abstracts = {
   sb_uc_space = " ";
 
   sb_dccstat = "{sb $0-}";
-  sb_ds_normal = "$2 $8 %R$6%n kB/s";
+  sb_ds_normal = "$2 %M$3%n %w/%n %M$4%n %K|%n %R$6%n kB/s %K|%n ETA: %M$7%n";
 };
 
 # Override irssi core settings

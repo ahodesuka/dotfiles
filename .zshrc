@@ -32,9 +32,12 @@ function mkcdir()
 
 autoload -U compinit && compinit
 
+autoload -U url-quote-magic
+zle -N self-insert url-quote-magic
+
 export HISTSIZE=10000
 export SAVEHIST=10000
-export HISTFILE=~/.zshistory
+export HISTFILE=~/.zsh_history
 
 setopt inc_append_history
 setopt hist_ignore_all_dups

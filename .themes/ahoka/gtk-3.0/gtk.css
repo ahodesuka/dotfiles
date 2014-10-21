@@ -2,6 +2,7 @@
 @define-color bg_color #1b1b1b;
 @define-color fg_color #e9e6e6;
 @define-color base_color #222222;
+@define-color widget_bg_color #333333;
 @define-color text_color #e9e6e6;
 @define-color selected_bg_color #87353d;
 @define-color selected_fg_color #ffffff;

@@ -1,13 +1,29 @@
-ctl.equal {
-  type equal;
+pcm.!default
+{
+    type asym
+    playback.pcm
+    {
+        type plug
+        slave.pcm "dmix"
+    }
+    capture.pcm
+    {
+        type plug
+        slave.pcm "hw:2,0"
+    }
 }
 
-pcm.plugequal {
-  type equal;
-  slave.pcm "plug:dmix";
+pcm.skype_control {
+    type softvol
+    slave {
+        pcm "dmix"
+    }
+    control {
+        name "Skype"
+        card 0
+    }
 }
-
-pcm.equal {
-  type plug;
-  slave.pcm plugequal;
+pcm.skype {
+    type plug
+    slave.pcm "skype_control"
 }

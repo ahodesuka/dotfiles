@@ -24,7 +24,7 @@ ARGV.each { |file|
                ((read += CHUNK_SIZE).to_f / size * 100).to_i, file)
         $stdout.flush
       end
-      crc = crc.to_s(16).upcase
+      crc = ("%08x" % crc).upcase
       color = fn[1] == crc ? CL_GREEN : CL_RED
       puts("\r#{color}#{crc}#{CL_CLEAR}    "+
            "#{fn[0]}#{color}#{fn[1]}#{CL_CLEAR}#{fn[2]}")

@@ -51,8 +51,7 @@ visualizer_fifo_path = "/tmp/mpd.fifo"
 visualizer_output_name = "fifo"
 visualizer_type = "wave"
 visualizer_look = "⚫┃"
-visualizer_use_colors = "yes"
-visualizer_sync_interval = "10"
+visualizer_sync_interval = "30"
 
 # Playlist
 song_columns_list_format = "(50)[red]{t|f} (50)[magenta]{ar} (5f)[white]{lr}"
@@ -63,6 +62,7 @@ autocenter_mode = "yes"
 centered_cursor = "no"
 playlist_disable_highlight_delay = "3"
 playlist_separate_albums = "yes"
+ask_before_clearing_playlists = "no"
 
 # Bars
 alternative_header_first_line_format = "{$b$2{%t}|{%f}$9$/b}"
@@ -74,7 +74,7 @@ titles_visibility = "no"
 header_visibility = "no"
 
 # Browser
-browser_playlist_prefix = "[P]$9 "
+browser_playlist_prefix = "[P] "
 browser_display_mode = "columns"
 
 # Colors
@@ -93,8 +93,8 @@ progressbar_elapsed_color = "red"
 state_line_color = "white"
 state_flags_color = "magenta"
 statusbar_color = "magenta"
-visualizer_color = "red"
 volume_color = "white"
+visualizer_colors = "blue cyan green yellow red magenta"
 
 # Screen
 locked_screen_width_part = "35"
@@ -107,7 +107,7 @@ mpd_connection_timeout = "5"
 mpd_crossfade_time = "2"
 mpd_music_dir = "/media/Misc/Music/"
 clock_display_seconds = "no"
-startup_screen = "2"
+screen_switcher_mode = "previous"
 enable_window_title = "yes"
 search_engine_display_mode = "columns"
 follow_now_playing_lyrics = "yes"

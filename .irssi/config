@@ -1,8 +1,9 @@
 servers = (
   {
-    address = "irc.rizon.net";
-    chatnet = "rizon";
-    port = "6697";
+    address = "rizonbnc.us.rizon.net";
+    chatnet = "rizonbnc";
+    port = "12345";
+    password = "";
     use_ssl = "yes";
     ssl_verify = "no";
     autoconnect = "yes";
@@ -10,7 +11,13 @@ servers = (
 );
 
 chatnets = {
-  rizon = { type = "IRC"; };
+  rizonbnc = {
+    type = "IRC";
+    autosendcmd = "";
+    max_kicks = "1";
+    max_msgs = "3";
+    max_whois = "30";
+  };
 };
 
 channels = (
@@ -54,11 +61,9 @@ aliases = {
   GOTO = "sb goto";
   CHAT = "dcc chat";
   RUN = "SCRIPT LOAD";
-  CALC = "exec - if command -v bc >/dev/null 2>&1\\; then printf '%s=' '$*'\\; echo '$*' | bc -l\\; else echo bc was not found\\; fi";
   SBAR = "STATUSBAR";
   INVITELIST = "mode $C +I";
   Q = "QUERY";
-  "MANUAL-WINDOWS" = "set use_status_window off;set autocreate_windows off;set autocreate_query_level none;set autoclose_windows off;set reuse_unused_windows on;save";
   EXEMPTLIST = "mode $C +e";
   ATAG = "WINDOW SERVER";
   UNSET = "set -clear";
@@ -123,7 +128,7 @@ statusbar = {
     dccstat = {
       placement = "top";
       position = "3";
-      items = { dccstat = { }; };
+      items = { dccstat = { priority = "100"; }; };
       disabled = "yes";
     };
     window = {
@@ -175,9 +180,7 @@ settings = {
     dccstat_cycle_through_transfers = "yes";
     dccstat_refresh = "1";
     dccstat_hide_sbar_when_inactive = "yes";
-    dccstat_progbar_remaining = "%K━%n";
-    dccstat_progbar_transferred = "%R━%n";
-    dccstat_progbar_position = "%R━%n";
+    dccstat_filename_max_length = "34";
     nicklist_height = "65";
     title_string = "[$N@$tag]$.C";
     chanact_display = "%r$N%K|%W$C";
@@ -193,8 +196,6 @@ settings = {
     mg_dcc_closed_retry_delay = "10";
     mg_transfer_confirmation_delay = "30";
     mg_message_prefix = "xdcc send ";
-    dccstat_progbar_width = "12";
-    dccstat_filename_max_length = "35";
     dccmove_dir = "~/Anime";
   };
   "fe-common/core" = {
@@ -216,3 +217,7 @@ keyboard = (
   { key = "meta-[M"; id = "command"; data = "mouse_xterm "; },
 );
 logs = { };
+ignores = (
+  { level = "JOINS PARTS QUITS MODES"; channels = ( "#news" ); },
+  { level = "JOINS PARTS QUITS MODES"; channels = ( "#nibl" ); }
+);
