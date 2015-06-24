@@ -8,6 +8,8 @@ alias ll="ls -l"
 alias cue2flac="find -type f -name '*.cue' -execdir cue2tracks -R -n 19 -o '%N. %p ─ %t' {} \;"
 alias patchAnime="find -type f -name '*.xdelta' -maxdepth 1 -exec xdelta3 -d '{}' \;"
 alias make="make -j5"
+alias gdb="gdb -q"
+alias du="cdu -d ch"
 
 function u2space()
 {
@@ -31,6 +33,7 @@ function mkcdir()
 }
 
 autoload -U compinit && compinit
+source ~/.npm-completion.sh
 
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
@@ -64,5 +67,5 @@ export PS1="$PS1%{[38;05;235;48;05;1m%}%{[00m%}%{[38;05;0;48;05;1m%}"
 export PS1="$PS1\$(__git_ps1 '  %s')%{[00m%}%{[38;05;1m%} %{[00m%}"
 
 if ! [[ `tty` =~ ^/dev/tty.* ]]; then
-    eval $(dircolors -b $HOME/.dircolors)
+    eval $(dircolors -b ~/.dircolors)
 fi

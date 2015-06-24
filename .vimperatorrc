@@ -1,5 +1,3 @@
-"3.8.2 (created: 2014/02/13 23:52:43)
-
 highlight CmdLine background: #222; color: #e9e6e6; transition: all 0.25s;
 highlight CmdLine>* font-family: "ProFont";
 highlight CompDesc width: 500px; max-width: 500px; color: gray; font-family: "ProFont";
@@ -15,17 +13,20 @@ highlight Normal color:#e9e6e6; background:#1b1b1b;
 highlight PromptText color:#222; background:#c98dad; padding-top:3px;
 highlight StatusLine color: #a49c9c; background: transparent; font-weight: normal;
 highlight WarningMsg color:#cf7275; background:#222;
-inoremap <C-a> <Insert><C-a><Insert>
-map > <C-i>
-map < <C-o>
-map w <Esc>
-map <C-f> /
-map <C-h> <C-p>
-map <C-l> <C-Tab>
-map <S-h> :tabm -1<CR>
-map <S-l> :tabm +1<CR>
-map <silent> <C-n> :nohl<Return>
-source! /home/mokou/.vimperatorrc.local
+
+inoremap <C-a> <C-Home><C-S-End>
+nnoremap > <C-i>
+nnoremap < <C-o>
+nnoremap <C-f> /
+nnoremap <C-h> <C-p>
+nnoremap <C-l> <C-Tab>
+nnoremap <S-h> :tabm -1<CR>
+nnoremap <S-l> :tabm +1<CR>
+nnoremap <silent> <C-n> :nohl<Return>
+nnoremap h <Left>
+nnoremap j <Down>
+nnoremap k <Up>
+nnoremap l <Right>
 
 set cpt=lf
 set gui=none,tabs
@@ -100,4 +101,4 @@ var myObj = {
 };
 EOF
 
-" vim: set ft=vimperator:
+" vim: set ft=vim:

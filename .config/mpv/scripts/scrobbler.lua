@@ -6,14 +6,14 @@ local user_opts = {
 }
 
 local timer_handle = nil
-local length = 0
+local duration = 0
 local watched = 0
 local paused = false
 
 function timer_fn()
     if not paused then
         watched = watched + 1
-        if watched >= math.floor(length * user_opts.percent + 0.5) then
+        if watched >= math.floor(duration * user_opts.percent + 0.5) then
             os.execute(user_opts.scrobbler .. " " ..
                        string.format("%q", mp.get_property("path")) .. " &")
             mp.cancel_timer(timer_handle)
@@ -26,10 +26,10 @@ function on_file_loaded()
         mp.cancel_timer(timer_handle)
     end
     watched = 0
-    length = mp.get_property("length")
+    duration = mp.get_property("duration")
     paused = mp.get_property("pause") == "yes"
-    if length ~= nil then
-        length = math.floor(length + 0.5)
+    if duration ~= nil then
+        duration = math.floor(duration + 0.5)
         timer_handle = mp.add_periodic_timer(1, timer_fn)
     end
 end

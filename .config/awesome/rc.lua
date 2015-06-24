@@ -62,6 +62,7 @@ mm = awful.menu({
         { settings.browser, settings.browser,         theme.menu_wbrowser },
         { settings.fileman, settings.fileman,         theme.menu_fbrowser },
         { "random bg",      settings.new_wall,        theme.menu_rwall    },
+        { "suspend",        "ktsuss pm-suspend",      theme.menu_suspend  },
         { "reboot",         "ktsuss shutdown -r now", theme.menu_reboot   },
         { "shutdown",       "ktsuss shutdown -h now", theme.menu_shutdown }
     }
@@ -105,9 +106,9 @@ tasklist.buttons = awful.util.table.join(
 tags.settings = {
     {
         { name = "東", layout = settings.layouts[2], mwfact = .6805 },
-        { name = "南", layout = settings.layouts[1], mwfact = .6805 },
+        { name = "南", layout = settings.layouts[2], mwfact = .6805 },
         { name = "西", layout = settings.layouts[1], mwfact = .6805 },
-        { name = "北", layout = settings.layouts[2], mwfact = .6805 }
+        { name = "北", layout = settings.layouts[1], mwfact = .6805 }
     },
     {
         { name = "東", layout = settings.layouts[1], mwfact = .6805 },
@@ -169,7 +170,7 @@ netupicon.image     = image(beautiful.widget_netup)
 clockicon.image     = image(beautiful.widget_clock)
 
 vicious.register(cpuwidget, vicious.widgets.cpu, " $1% ", 1)
-vicious.register(cputempwidget, vicious.widgets.thermal, " $1℃", 1, { "coretemp.0", "core" })
+vicious.register(cputempwidget, vicious.widgets.thermal, " $1℃", 1, "thermal_zone0")
 vicious.register(memwidget, vicious.widgets.mem, " $2mb", 1)
 vicious.register(netdownwidget, vicious.widgets.net, " ${eth0 down_kb}kb/s", 1)
 vicious.register(netupwidget, vicious.widgets.net, "${eth0 up_kb}kb/s ", 1)
@@ -177,16 +178,7 @@ vicious.cache(vicious.widgets.net)
 vicious.register(clockwidget, vicious.widgets.date, " " .. settings.dateformat, 1)
 
 mpdwidget                   = awesompd:create()
-mpdwidget.font              = beautiful.font
-mpdwidget.scrolling         = true
-mpdwidget.output_size       = 50
-mpdwidget.update_interval   = 1
-mpdwidget.path_to_icons     = awful.util.getdir("config") .. "/ahoka/icons/awesompd"
-mpdwidget.mpd_config        = os.getenv("HOME") .. "/.mpd/mpd.conf"
-mpdwidget.album_cover_size  = 40
-mpdwidget.browser           = settings.browser
-mpdwidget.ldecorator        = " "
-mpdwidget.rdecorator        = ""
+mpdwidget.mpd_config        = os.getenv("HOME") .. "/.config/mpd/mpd.conf"
 mpdwidget:register_buttons({
     { "", awesompd.MOUSE_LEFT,          mpdwidget:command_playpause()   },
     { "", awesompd.MOUSE_SCROLL_UP,     mpdwidget:command_volume_up()   },
@@ -289,10 +281,34 @@ local globalkeys = awful.util.table.join(
     awful.key({ "Control", "Shift"         }, "Escape",         function () awful.util.spawn(settings.taskman) end),
     awful.key({ settings.modkey, "Control" }, "r",              awesome.restart),
     awful.key({ settings.modkey, "Shift"   }, "q",              awesome.quit),
-    awful.key({ settings.modkey            }, "l",              function () awful.tag.incmwfact(0.025) end),
-    awful.key({ settings.modkey            }, "h",              function () awful.tag.incmwfact(-0.025) end),
-    awful.key({ settings.modkey            }, "j",              function () awful.client.incwfact(0.0275) end),
-    awful.key({ settings.modkey            }, "k",              function () awful.client.incwfact(-0.0275) end),
+    awful.key({ settings.modkey,           }, "Tab",            function ()
+        awful.client.focus.history.previous()
+        if client.focus then client.focus:raise() end
+    end),
+    awful.key({ settings.modkey            }, "h",              function ()
+        awful.client.focus.bydirection("left")
+        if client.focus then client.focus:raise() end
+    end),
+    awful.key({ settings.modkey            }, "j",              function ()
+        awful.client.focus.bydirection("down")
+        if client.focus then client.focus:raise() end
+    end),
+    awful.key({ settings.modkey            }, "k",              function ()
+        awful.client.focus.bydirection("up")
+        if client.focus then client.focus:raise() end
+    end),
+    awful.key({ settings.modkey            }, "l",              function ()
+        awful.client.focus.bydirection("right")
+        if client.focus then client.focus:raise() end
+    end),
+    awful.key({ settings.modkey, "Shift"   }, "h",              function () awful.tag.incmwfact(0.025) end),
+    awful.key({ settings.modkey, "Shift"   }, "j",              function () awful.client.incwfact(-0.0275) end),
+    awful.key({ settings.modkey, "Shift"   }, "k",              function () awful.client.incwfact(0.0275) end),
+    awful.key({ settings.modkey, "Shift"   }, "l",              function () awful.tag.incmwfact(-0.025) end),
+    awful.key({ settings.modkey, "Control" }, "h",              function () awful.client.swap.bydirection("left") end),
+    awful.key({ settings.modkey, "Control" }, "j",              function () awful.client.swap.bydirection("down") end),
+    awful.key({ settings.modkey, "Control" }, "k",              function () awful.client.swap.bydirection("up") end),
+    awful.key({ settings.modkey, "Control" }, "l",              function () awful.client.swap.bydirection("right") end),
     awful.key({ settings.modkey            }, "space",          function () awful.layout.inc(settings.layouts, 1) end),
     awful.key({ settings.modkey, "Shift"   }, "space",          function () awful.layout.inc(settings.layouts, -1) end),
     awful.key({ settings.modkey            }, "r",              function () promptbox[mouse.screen]:run() end)
@@ -388,7 +404,9 @@ awful.rules.rules =
                 "Ahoviewer",
                 "Ampv",
                 "Anidbmini",
+                "Awf-gtk2",
                 "Blender",
+                "Civ5XP",
                 "csgo_linux",
                 "dota_linux",
                 "Gimp",
@@ -398,12 +416,16 @@ awful.rules.rules =
                 "Skype",
                 "starbound",
                 "Steam",
+                "Thunderbird",
                 "Torchlight.bin.x86_64",
+                "Torchlight2.bin.x86_64",
                 "Wine",
+                ".*\.exe",
             },
             name =
             {
-                "Qalculate!"
+                "Kingdom Rush HD",
+                "Qalculate!",
             }
         },
         properties = { floating = true }
@@ -414,12 +436,19 @@ awful.rules.rules =
             class =
             {
                 "csgo_linux",
+                "Civ5XP",
                 "dota_linux",
                 "Plugin-container",
                 "starbound",
                 "Steam",
                 "Torchlight.bin.x86_64",
-                "Wine"
+                "Torchlight2.bin.x86_64",
+                "Wine",
+                ".*\.exe",
+            },
+            name =
+            {
+                "Kingdom Rush HD",
             }
         },
         properties = { border_width = 0 }
@@ -430,15 +459,22 @@ awful.rules.rules =
             class =
             {
                 "csgo_linux",
+                "Civ5XP",
                 "dota_linux",
                 "starbound",
                 "Torchlight.bin.x86_64",
+                "Torchlight2.bin.x86_64",
+            },
+            name =
+            {
+                "Kingdom Rush HD",
             }
         },
         properties = { x = 0, y = 0 }
     },
     { rule = { class = "Thunar", name = "File Operation Progress" }, properties = { floating = true } },
-    { rule = { class = "Firefox" }, except = { instance = "Navigator" }, properties = {floating = true} }
+    { rule = { class = "Firefox" }, except = { instance = "Navigator" }, properties = {floating = true} },
+    { rule = { class = "VirtualBox", name = "Windows 7.*VirtualBox" }, properties = { floating = true, skip_taskbar = true } },
 }
 
 client.add_signal("manage", function (c, startup)

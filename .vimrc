@@ -3,9 +3,9 @@ filetype off
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
+Plugin 'gmarik/vundle'
 
 " General plugins {{{
-Plugin 'gmarik/vundle'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'xolox/vim-misc'
@@ -20,10 +20,12 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'DoxygenToolkit.vim'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'Shougo/neosnippet'
-Plugin 'ahodesuka/vim-snippets'
+Plugin 'honza/vim-snippets'
 Plugin 'Raimondi/delimitMate'
+Plugin 'oblitum/rainbow'
 Plugin 'DeleteTrailingWhitespace'
 Plugin 'godlygeek/tabular'
+Plugin 'antoyo/vim-licenses'
 " }}}
 
 " Language specific plugins {{{
@@ -34,6 +36,11 @@ Plugin 'drmikehenry/vim-headerguard'
 Plugin 'vim-jp/cpp-vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 
+" JS
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'myhere/vim-nodejs-complete'
+
 " GLSL
 Plugin 'tikhomirov/vim-glsl'
 
@@ -42,7 +49,6 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'noprompt/vim-yardoc'
 
 " Web
-Plugin 'kchmck/vim-coffee-script'
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'othree/html5.vim'
 " }}}
@@ -72,7 +78,8 @@ set cursorline
 set lazyredraw
 set notimeout
 set ttimeout
-set ttimeoutlen=50
+set timeoutlen=1000
+set ttimeoutlen=0
 set expandtab
 set autoindent
 set cindent
@@ -87,18 +94,17 @@ set tw=120
 set wrap
 set linebreak
 set nolist
-set formatoptions+=l
+set formatoptions+=lt
 set fillchars=vert:█,fold:█
-set completeopt=menuone,longest
+set completeopt=menuone
 set showmatch
-set matchpairs=(:),{:},[:],<:>
 set re=1
-set conceallevel=2
 set nuw=6
 set history=1000
 set foldcolumn=1
 set foldmethod=marker
 set foldtext=FoldText()
+set updatetime=500
 " }}}
 
 function! FoldText() " {{{
@@ -116,7 +122,6 @@ function! FoldText() " {{{
 endfunction " }}}
 
 " Mappings {{{
-map! <S-Insert> <MiddleMouse>
 map <silent> <F2> :NERDTreeToggle \| :NERDTreeMirror<CR>
 map <silent> <F3> :TagbarToggle<CR>
 map <silent> <F4> :ccl<CR>
@@ -124,29 +129,39 @@ map <silent> <F5> :make! \| :copen<CR>
 map <silent> <F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 " Move tabs with shift + h/l
-nnoremap <silent> <S-h> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
-nnoremap <silent> <S-l> :execute 'silent! tabmove ' . tabpagenr()<CR>
+nnoremap <silent><S-h> :tabmove -1<CR>
+nnoremap <silent><S-l> :tabmove +1<CR>
 
 " Switch tabs with ctrl + h/l
-nnoremap <silent> <C-h> :tabp<CR>
-nnoremap <silent> <C-l> :tabn<CR>
+nnoremap <silent><C-h> :tabp<CR>
+nnoremap <silent><C-l> :tabn<CR>
+
+" Switch splits with alt + hjkl
+nnoremap <silent><A-h> :wincmd h<CR>
+nnoremap <silent><A-j> :wincmd j<CR>
+nnoremap <silent><A-k> :wincmd k<CR>
+nnoremap <silent><A-l> :wincmd l<CR>
+
+" Resize splits with shift + alt + hjkl
+nnoremap <silent><S-A-h> :vertical resize -5<CR>
+nnoremap <silent><S-A-j> :resize -5<CR>
+nnoremap <silent><S-A-k> :resize +5<CR>
+nnoremap <silent><S-A-l> :vertical resize +5<CR>
 
 " Remove search highlighting with ctrl + n
-noremap <silent> <C-n> :nohl<CR>
-inoremap <silent> <C-n> <C-o>:nohl<CR>
+noremap  <silent><C-n> :nohl<CR>
+inoremap <silent><C-n> <C-o>:nohl<CR>
 
 " Map ctrl + s to save current buffer if it has been modified
-noremap <silent> <C-s> :update<CR>
+noremap <silent><C-s> :update<CR>
 
 " Map shift + s to write all buffers
-noremap <silent> <S-s> :wa<CR>
+noremap <silent><S-s> :wa<CR>
 
-noremap <silent> <C-t> :tabnew<CR>
-noremap <silent> <C-w> :tabclose<CR>
-
-noremap <C-f> :GrepBuffer<Space>
+noremap  <C-f>      :GrepBuffer<Space>
 inoremap <C-f> <C-o>:GrepBuffer<Space>
 
+" ;/, + return moves to the end of the current line and puts ;/,
 inoremap ;<CR> <End>;
 inoremap ,<CR> <End>,
 
@@ -154,23 +169,47 @@ inoremap ,<CR> <End>,
 nnoremap <space> za
 " space creates folds in visual mode
 vnoremap <space> zf
+
+" autocomplete mappings
+function! CRCompleteFunc()
+    if neosnippet#expandable_or_jumpable()
+        return "\<Plug>(neosnippet_expand_or_jump)"
+    elseif pumvisible()
+        return neocomplete#close_popup()
+    elseif delimitMate#WithinEmptyPair()
+        return "\<Plug>delimitMateCR"
+    endif
+    return "\<CR>"
+endfunction
+
+inoremap <expr><Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr><Down>  pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr><C-j>   pumvisible() ? "\<C-n>" : "\<C-j>"
+imap     <expr><S-Tab> pumvisible() ? "\<C-p>" : "<Plug>delimitMateS-Tab"
+inoremap <expr><Up>    pumvisible() ? "\<C-p>" : "\<Up>"
+inoremap <expr><C-k>   pumvisible() ? "\<C-p>" : "\<C-k>"
+
+inoremap <expr><C-g>  neocomplete#undo_completion()
+inoremap <expr><C-l>  neocomplete#complete_common_string()
+
+imap <expr><CR> CRCompleteFunc()
+smap <expr><CR> neosnippet#expandable_or_jumpable() ?
+          \ "<Plug>(neosnippet_expand_or_jump)" :
+          \ "\<CR>"
+imap <expr><BS> delimitMate#WithinEmptyPair() ?
+          \ "<Plug>delimitMateBS" :
+          \ neocomplete#smart_close_popup() . "\<BS>"
 " }}}
 
 " Tags {{{
-set tags+=~/.vim/tags/cegui
 set tags+=~/.vim/tags/cpp
-set tags+=~/.vim/tags/gl
 set tags+=~/.vim/tags/glibmm
-set tags+=~/.vim/tags/gtkmm-2.4
 set tags+=~/.vim/tags/gdkmm-2.4
-set tags+=~/.vim/tags/libxml2
-set tags+=~/.vim/tags/ogre
-set tags+=~/.vim/tags/sdl
+set tags+=~/.vim/tags/gtkmm-2.4
+set tags+=~/.vim/tags/sigc++
 " }}}
 
-let NERDTreeIgnore=[ '\.o$', '\~$' ]
-
-let delimitMate_matchpairs = '(:),[:],{:}'
+let NERDTreeIgnore=[ '\.[ls]\?o$', '\~$' ]
 
 let g:indentLine_char = '│'
 let g:indentLine_bufNameExclude = [ 'NERD_tree.*' ]
@@ -188,20 +227,10 @@ let g:load_doxygen_syntax = 1
 let g:DoxygenToolkit_endCommentBlock = '**/'
 let g:DoxygenToolkit_endCommentTag = '**/'
 
-" OmniCppComplete {{{
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-let OmniCpp_MayCompleteDot = 1      " autocomplete after .
-let OmniCpp_MayCompleteArrow = 1    " autocomplete after ->
-let OmniCpp_MayCompleteScope = 1    " autocomplete after ::
-let OmniCpp_DefaultNamespaces = [ 'std', '_GLIBCXX_STD' ]
-" }}}
-
 " neocomplete {{{
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#force_overwrite_completefunc = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
@@ -215,17 +244,12 @@ endif
 
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-    return neosnippet#expandable_or_jumpable() ? neosnippet#mappings#expand_or_jump_impl()
-                \: pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
-inoremap <expr><TAB>   pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><Down>  pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <expr><C-j>   pumvisible() ? "\<C-n>" : "\<C-j>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-inoremap <expr><Up>    pumvisible() ? "\<C-p>" : "\<Up>"
-inoremap <expr><C-k>   pumvisible() ? "\<C-p>" : "\<C-k>"
+" Omni completion
+au FileType html,markdown set omnifunc=htmlcomplete#CompleteTags
+au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+au FileType python set omnifunc=pythoncomplete#Complete
+au FileType xml set omnifunc=xmlcomplete#CompleteTags
+au FileType cpp set omnifunc=omni#cpp#complete#Main
 
 if !exists('g:neocomplete#sources#omni#input_patterns')
     let g:neocomplete#sources#omni#input_patterns = {}
@@ -239,9 +263,16 @@ let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\
 let g:neosnippet#disable_runtime_snippets = { '_': 1, }
 let g:neosnippet#snippets_directory = '~/.vim/bundle/vim-snippets/snippets'
 
+" This is handled above by my own <CR> mapping
+" let delimitMate_expand_cr = 2
+let delimitMate_expand_space = 1
+
 function! g:HeaderguardName()
     return '_' . toupper(expand('%:t:gs/[^0-9a-zA-Z_]/_/g')) . '_'
 endfunction
+
+let g:rainbow_guifgs = ['#94aad1', '#8ab4be', '#edc472', '#c98dad']
+let g:rainbow_ctermfgs = ['12', '14', '11', '13']
 
 let g:syntastic_stl_format = ''
 let g:syntastic_c_auto_refresh_includes = 1
@@ -253,6 +284,8 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#hunks#non_zero_only = 1
 
 let g:ruby_indent_access_modifier_style = 'outdent'
+
+let g:licenses_authors_name = 'ahoka'
 
 set sessionoptions-=help
 set sessionoptions-=options
@@ -267,17 +300,13 @@ let g:session_persist_globals = [ '&expandtab' ]
 
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
+au FileType c,cpp,html,javascript call rainbow#load()
 au FileType coffee,html,python,ruby,xml setl shiftwidth=2 tabstop=2
 au FileType css set omnifunc=csscomplete#CompleteCSS | setlocal iskeyword+=-
-au FileType html,markdown set omnifunc=htmlcomplete#CompleteTags
-au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-au FileType python set omnifunc=pythoncomplete#Complete
-au FileType xml set omnifunc=xmlcomplete#CompleteTags
-au FileType cpp set omnifunc=omni#cpp#complete#Main
 
 colorscheme ahoka
 
-" gVim {{{
+" GVim {{{
 set guioptions=+a
 set guifont=ProFont
 set guicursor=n-v-c:block-Cursor
