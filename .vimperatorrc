@@ -1,7 +1,7 @@
 highlight CmdLine background: #222; color: #e9e6e6; transition: all 0.25s;
 highlight CmdLine>* font-family: "ProFont";
 highlight CompDesc width: 500px; max-width: 500px; color: gray; font-family: "ProFont";
-highlight CompItem[selected] background:#222;
+highlight CompItem[selected] background: #222;
 highlight CompResult width: 500px; max-width: 500px; overflow: hidden; font-family: "ProFont";
 highlight ContentSeparator border-top: 1px solid #161616; display: -moz-box;
 highlight ErrorMsg color: white; background: #8f5b5b; font-weight: bold;
@@ -9,15 +9,15 @@ highlight InfoMsg color: #c98dad; background: #222;
 highlight ModeMsg color: #222; background: #9ebf7c; border-radius: 1px; padding: 3px 5px 0;
 highlight MoreMsg color: #9ebf7c; background: #222;
 highlight NonText color: grey; min-height: 16px; padding-left: 2px; font-family: "ProFont";
-highlight Normal color:#e9e6e6; background:#1b1b1b;
-highlight PromptText color:#222; background:#c98dad; padding-top:3px;
+highlight Normal color: #e9e6e6; background: #1b1b1b;
+highlight PromptText color: #222; background: #c98dad; padding-top: 3px;
 highlight StatusLine color: #a49c9c; background: transparent; font-weight: normal;
-highlight WarningMsg color:#cf7275; background:#222;
+highlight WarningMsg color: #cf7275; background: #222;
 
 inoremap <C-a> <C-Home><C-S-End>
 nnoremap > <C-i>
 nnoremap < <C-o>
-nnoremap <C-f> /
+nmap <C-f> /
 nnoremap <C-h> <C-p>
 nnoremap <C-l> <C-Tab>
 nnoremap <S-h> :tabm -1<CR>
@@ -33,8 +33,7 @@ set gui=none,tabs
 autocmd Fullscreen .* js myObj.toggleBottombar('fullscreen')
 
 "javascript to hide statusbar
-noremap <silent> <F8> :js myObj.toggleBottombar('toggle')<CR>
-noremap <silent> <F2> :js myObj.toggleNavbar()<CR>
+noremap <silent> <F2> :js myObj.toggleBottombar('toggle')<CR>
 noremap : :js myObj.toggleBottombar('neutral')<CR>:
 noremap o :js myObj.toggleBottombar('neutral')<CR>o
 noremap O :js myObj.toggleBottombar('neutral')<CR>O
@@ -42,7 +41,7 @@ noremap t :js myObj.toggleBottombar('neutral')<CR>t
 noremap T :js myObj.toggleBottombar('neutral')<CR>t
 noremap / :js myObj.toggleBottombar('neutral')<CR>/
 noremap ? :js myObj.toggleBottombar('neutral')<CR>?
-cnoremap <CR> <CR>:js myObj.toggleBottombar('neutral')<CR>
+" cnoremap <CR> <CR>:js myObj.toggleBottombar('neutral')<CR>
 cnoremap <Esc> <Esc>:js myObj.toggleBottombar('neutral')<CR>
 
 js << EOF
@@ -51,7 +50,6 @@ var myObj = {
     isFullscreen : false,
     isStatuslineOn : true,
     bottombar : document.getElementById('liberator-bottombar'),
-    navbar : document.getElementById('nav-bar'),
     toggleBottombar : function(p) {
         if (!this.bottombar) return;
         if (p == 'on'){
@@ -93,10 +91,6 @@ var myObj = {
             this.bottombar.style.overflow = 'hidden';
             highlight.set('ContentSeparator', 'display: none;');
         }
-    },
-    toggleNavbar : function() {
-        if (!this.navbar) return;
-        this.navbar.collapsed = !this.navbar.getAttribute('collapsed');
     }
 };
 EOF

@@ -50,7 +50,9 @@ settings.layouts    =
 {
     awful.layout.suit.floating,
     awful.layout.suit.tile.left,
-    awful.layout.suit.tile
+    awful.layout.suit.tile,
+    awful.layout.suit.spiral,
+    awful.layout.suit.spiral.dwindle,
 }
 
 beautiful.init(settings.configdir .. "/ahoka/theme.lua")
@@ -113,8 +115,8 @@ tags.settings = {
     {
         { name = "東", layout = settings.layouts[1], mwfact = .6805 },
         { name = "南", layout = settings.layouts[1], mwfact = .6805 },
-        { name = "西", layout = settings.layouts[2], mwfact = .6805 },
-        { name = "北", layout = settings.layouts[2], mwfact = .6805 }
+        { name = "西", layout = settings.layouts[4], mwfact = .6805 },
+        { name = "北", layout = settings.layouts[4], mwfact = .6805 }
     },
 }
 
@@ -264,9 +266,9 @@ for s = 1, screen.count() do
 end
 
 root.buttons(awful.util.table.join(
-    awful.button({ }, 3, function () mm:toggle() end),
-    awful.button({ }, 8, function () awful.util.spawn_with_shell("mpc prev") end),
-    awful.button({ }, 9, function () awful.util.spawn_with_shell("mpc next") end),
+    awful.button({ }, 3,  function () mm:toggle()                               end),
+    awful.button({ }, 8,  function () awful.util.spawn_with_shell("mpc prev")   end),
+    awful.button({ }, 9,  function () awful.util.spawn_with_shell("mpc next")   end),
     awful.button({ }, 10, function () awful.util.spawn_with_shell("mpc toggle") end)
 ))
 
@@ -275,10 +277,10 @@ local globalkeys = awful.util.table.join(
     awful.key({ settings.modkey            }, "Right",          awful.tag.viewnext),
     awful.key({ settings.modkey,           }, "Escape",         awful.tag.history.restore),
     awful.key({ settings.modkey            }, "w",              function () awful.util.spawn_with_shell(settings.new_wall) end),
-    awful.key({ settings.modkey            }, "x",              function () awful.util.spawn(settings.term) end),
-    awful.key({ settings.modkey            }, "f",              function () awful.util.spawn(settings.browser) end),
-    awful.key({ settings.modkey            }, "e",              function () awful.util.spawn(settings.fileman) end),
-    awful.key({ "Control", "Shift"         }, "Escape",         function () awful.util.spawn(settings.taskman) end),
+    awful.key({ settings.modkey            }, "x",              function () awful.util.spawn(settings.term)                end),
+    awful.key({ settings.modkey            }, "f",              function () awful.util.spawn(settings.browser)             end),
+    awful.key({ settings.modkey            }, "e",              function () awful.util.spawn(settings.fileman)             end),
+    awful.key({ "Control", "Shift"         }, "Escape",         function () awful.util.spawn(settings.taskman)             end),
     awful.key({ settings.modkey, "Control" }, "r",              awesome.restart),
     awful.key({ settings.modkey, "Shift"   }, "q",              awesome.quit),
     awful.key({ settings.modkey,           }, "Tab",            function ()
@@ -301,17 +303,20 @@ local globalkeys = awful.util.table.join(
         awful.client.focus.bydirection("right")
         if client.focus then client.focus:raise() end
     end),
-    awful.key({ settings.modkey, "Shift"   }, "h",              function () awful.tag.incmwfact(0.025) end),
-    awful.key({ settings.modkey, "Shift"   }, "j",              function () awful.client.incwfact(-0.0275) end),
-    awful.key({ settings.modkey, "Shift"   }, "k",              function () awful.client.incwfact(0.0275) end),
-    awful.key({ settings.modkey, "Shift"   }, "l",              function () awful.tag.incmwfact(-0.025) end),
-    awful.key({ settings.modkey, "Control" }, "h",              function () awful.client.swap.bydirection("left") end),
-    awful.key({ settings.modkey, "Control" }, "j",              function () awful.client.swap.bydirection("down") end),
-    awful.key({ settings.modkey, "Control" }, "k",              function () awful.client.swap.bydirection("up") end),
-    awful.key({ settings.modkey, "Control" }, "l",              function () awful.client.swap.bydirection("right") end),
-    awful.key({ settings.modkey            }, "space",          function () awful.layout.inc(settings.layouts, 1) end),
+    awful.key({ settings.modkey, "Control" }, "h",              function () awful.tag.incmwfact(0.025)             end),
+    awful.key({ settings.modkey, "Control" }, "j",              function () awful.client.incwfact(-0.0275)         end),
+    awful.key({ settings.modkey, "Control" }, "k",              function () awful.client.incwfact(0.0275)          end),
+    awful.key({ settings.modkey, "Control" }, "l",              function () awful.tag.incmwfact(-0.025)            end),
+    awful.key({ settings.modkey, "Shift"   }, "h",              function () awful.client.swap.bydirection("left")  end),
+    awful.key({ settings.modkey, "Shift"   }, "j",              function () awful.client.swap.bydirection("down")  end),
+    awful.key({ settings.modkey, "Shift"   }, "k",              function () awful.client.swap.bydirection("up")    end),
+    awful.key({ settings.modkey, "Shift"   }, "l",              function () awful.client.swap.bydirection("right") end),
+    -- Mod1 is Alt
+    awful.key({ settings.modkey, "Mod1"    }, "j",              function () awful.screen.focus_relative(-1)        end),
+    awful.key({ settings.modkey, "Mod1"    }, "k",              function () awful.screen.focus_relative(1)         end),
+    awful.key({ settings.modkey            }, "space",          function () awful.layout.inc(settings.layouts, 1)  end),
     awful.key({ settings.modkey, "Shift"   }, "space",          function () awful.layout.inc(settings.layouts, -1) end),
-    awful.key({ settings.modkey            }, "r",              function () promptbox[mouse.screen]:run() end)
+    awful.key({ settings.modkey            }, "r",              function () promptbox[mouse.screen]:run()          end)
 )
 
 local clientkeys = awful.util.table.join(
@@ -409,14 +414,17 @@ awful.rules.rules =
                 "Civ5XP",
                 "csgo_linux",
                 "dota_linux",
+                "dota2",
                 "Gimp",
                 "mahjong",
                 "mpv",
                 "Plugin-container",
+                "scrot",
                 "Skype",
                 "starbound",
                 "Steam",
                 "Thunderbird",
+                "Terraria.bin.x86_64",
                 "Torchlight.bin.x86_64",
                 "Torchlight2.bin.x86_64",
                 "Wine",
@@ -438,9 +446,12 @@ awful.rules.rules =
                 "csgo_linux",
                 "Civ5XP",
                 "dota_linux",
+                "dota2",
                 "Plugin-container",
+                "scrot",
                 "starbound",
                 "Steam",
+                "Terraria.bin.x86_64",
                 "Torchlight.bin.x86_64",
                 "Torchlight2.bin.x86_64",
                 "Wine",
@@ -461,7 +472,9 @@ awful.rules.rules =
                 "csgo_linux",
                 "Civ5XP",
                 "dota_linux",
+                "dota2",
                 "starbound",
+                "Terraria.bin.x86_64",
                 "Torchlight.bin.x86_64",
                 "Torchlight2.bin.x86_64",
             },

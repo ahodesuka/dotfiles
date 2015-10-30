@@ -267,6 +267,11 @@ style "theme-thunar-toolbar" = "theme-toolbar" {
     }
 }
 
+style "theme-thunar-location-buttons" = "theme-button"
+{
+	ThunarLocationButtons::spacing = 0
+}
+
 style "theme-frame" = "theme-wide" {
     GtkWidget::draw-border = { 1, 1, 1, 1 }
 }
@@ -506,3 +511,4 @@ widget_class "*<GtkScrolledWindow>*<GtkScrollbar>" style "theme-scrolled-window-
 class "ThunarPathEntry"         style "theme-thunar-path-entry"
 class "ThunarIconView"          style "theme-thunar-icon-view"
 widget_class "*Thunar*Toolbar"  style "theme-thunar-toolbar"
+widget_class "*ThunarLocationButtons*"		style "theme-thunar-location-buttons"

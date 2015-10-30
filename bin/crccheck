@@ -3,33 +3,31 @@
 require "zlib"
 require "io/console"
 
-CL_CLEAR   = "\033[00;00m"
+CL_CL      = "\033[00;00m"
 CL_RED     = "\033[31;01m"
 CL_GREEN   = "\033[32;01m"
 CL_YELLOW  = "\033[33;01m"
-CHUNK_SIZE = 1024 ** 2
+CHUNK_SIZE = 1024 * 128
+FILES      = ARGV.empty? ?
+  Dir.entries(Dir.pwd).reject { |f| f.start_with?(".") }.sort : ARGV
 
-ARGV.each { |file|
+FILES.each do |file|
   next unless File.file?(file) rescue next
-  File.open(file, "rb") { |io|
+  File.open(file, "rb") do |io|
     file = File.basename(file)
     fn = file.partition(/[A-F0-9]{8}/i)
-    unless fn[1].empty?
-      fn[1].upcase!
-      size = File.size(io)
-      read = 0
-      while chunk = io.read(CHUNK_SIZE)
-        crc = Zlib.crc32(chunk, crc)
-        printf("\r%7d%%    %.#{IO.console.winsize[1] - 12}s",
-               ((read += CHUNK_SIZE).to_f / size * 100).to_i, file)
-        $stdout.flush
-      end
-      crc = ("%08x" % crc).upcase
-      color = fn[1] == crc ? CL_GREEN : CL_RED
-      puts("\r#{color}#{crc}#{CL_CLEAR}    "+
-           "#{fn[0]}#{color}#{fn[1]}#{CL_CLEAR}#{fn[2]}")
-    else
-      puts("#{" " * 12}#{CL_YELLOW}#{file}#{CL_CLEAR}")
+    fn[1].upcase!
+    size = File.size(io)
+    read = 0
+    while chunk = io.read(CHUNK_SIZE)
+      crc = Zlib.crc32(chunk, crc)
+      printf("\r%8d%%   %.#{IO.console.winsize[1] - 12}s",
+             ((read += CHUNK_SIZE).to_f / size * 100).to_i, file)
+      $stdout.flush
     end
-  }
-}
+    crc = "%08X" % crc
+    color = fn[1] == crc ? CL_GREEN : (fn[1].empty? ? CL_YELLOW : CL_RED)
+    puts "\r #{color}#{crc}#{CL_CL}   #{fn[0]}" +
+         "#{color}#{fn[1]}#{CL_CL}#{fn[2]}"
+  end
+end

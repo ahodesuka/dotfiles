@@ -7,69 +7,68 @@ Xft.hintstyle:          hintfull
 Xft.lcdfilter:          lcddefault
 Xcursor.theme:          OpenZone_Fire
 
-URxvt*font:             xft:ProFont:pixelsize=11:antialias=false,\
+urxvt*font:             xft:ProFont:pixelsize=11:antialias=false,\
                         xft:Kochi Gothic,\
                         xft:Baekmuk Dotum,\
                         xft:WenQuanYi Bitmap Song,\
                         xft:GohuFont:antialias=false,\
                         xft:WenQuanYi Zen Hei:antialias=false,\
                         xft:DejaVu Sans Mono:antialias=false
-URxvt*boldFont:         xft:ProFont:pixelsize=11:antialias=false,\
+urxvt*boldFont:         xft:ProFont:pixelsize=11:antialias=false,\
                         xft:Kochi Gothic,\
                         xft:Baekmuk Dotum,\
                         xft:WenQuanYi Bitmap Song,\
                         xft:GohuFont:antialias=false,\
                         xft:WenQuanYi Zen Hei:antialias=false,\
                         xft:DejaVu Sans Mono:antialias=false
-URxvt*imFont:           -*-Kochi Gothic-medium-r-normal--11-140-*-*-*-*-*-*
+urxvt*imFont:           -*-Kochi Gothic-medium-r-normal--11-140-*-*-*-*-*-*
 
-URxvt.fading:           false
-URxvt.shading:          false
-URxvt.scrollBar:        false
-URxvt.urgentOnBell:     true
-URxvt.geometry:         84x20
-URxvt.depth:            24
-URxvt.saveLines:        10000
-URxvt*termName:         rxvt-unicode
+urxvt.fading:           false
+urxvt.shading:          false
+urxvt.scrollBar:        false
+urxvt.urgentOnBell:     true
+urxvt.geometry:         84x20
+urxvt.depth:            24
+urxvt.saveLines:        10000
+urxvt*termName:         rxvt-unicode
 
-URxvt*preeditType:      Root
-URxvt*inputMethod:      SCIM
-URxvt*background:       #1b1b1b
-URxvt*foreground:       #cccaca
-URxvt*cursorColor:      #e9e6e6
+urxvt*preeditType:      Root
+urxvt*inputMethod:      SCIM
+urxvt*background:       #1b1b1b
+urxvt*foreground:       #cccaca
+urxvt*cursorColor:      #e9e6e6
 
 !Black
-URxvt*color0:           #222222
-URxvt*color8:           #5b595a
+urxvt*color0:           #222222
+urxvt*color8:           #5b595a
 !Red
-URxvt*color1:           #8f5b5b
-URxvt*color9:           #cf7275
+urxvt*color1:           #8f5b5b
+urxvt*color9:           #cf7275
 !Green
-URxvt*color2:           #758763
-URxvt*color10:          #9ebf7c
+urxvt*color2:           #758763
+urxvt*color10:          #9ebf7c
 !Yellow
-URxvt*color3:           #c59f6f
-URxvt*color11:          #edc472
+urxvt*color3:           #c59f6f
+urxvt*color11:          #edc472
 !Blue
-URxvt*color4:           #70819e
-URxvt*color12:          #94aad1
+urxvt*color4:           #70819e
+urxvt*color12:          #94aad1
 !Magenta
-URxvt*color5:           #947686
-URxvt*color13:          #c98dad
+urxvt*color5:           #947686
+urxvt*color13:          #c98dad
 !Cyan
-URxvt*color6:           #688f8a
-URxvt*color14:          #8ab4be
+urxvt*color6:           #60898f
+urxvt*color14:          #8ab4be
 !White
-URxvt*color7:           #a49c9c
-URxvt*color15:          #e9e6e6
+urxvt*color7:           #a49c9c
+urxvt*color15:          #e9e6e6
 
-URxvt.perl-lib:         /home/mokou/.config/urxvt
-URxvt.perl-ext:         default,matcher
+urxvt.perl-lib:         /home/mokou/.config/urxvt
+urxvt.perl-ext:         default,matcher
 
-URxvt.url-launcher:     firefox
-URxvt.colorUL:          #cf7275
-URxvt.matcher.button:   1
+urxvt.url-launcher:     firefox
+urxvt.colorUL:          #cf7275
+urxvt.matcher.button:   1
 
-URxvt*keysym.Home:      [1~
-URxvt*keysym.End:       [4~
-
+urxvt*keysym.Home:      [1~
+urxvt*keysym.End:       [4~

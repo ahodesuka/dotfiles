@@ -1429,7 +1429,7 @@ mp.set_key_bindings({
     {"mouse_move",              function(e) process_event("mouse_move", nil) end},
     {"mouse_leave",             mouse_leave},
 }, "showhide")
-mp.enable_key_bindings("showhide", "allow-vo-dragging|allow-hide-cursor")
+mp.enable_key_bindings("showhide", "allow-vo-dragging+allow-hide-cursor")
 
 --mouse input bindings
 mp.set_key_bindings({

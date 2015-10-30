@@ -14,7 +14,7 @@ alias du="cdu -d ch"
 function u2space()
 {
     for file in *; do
-        if [ "$file" != "${file//_/}" ]; then
+        if [ "$file" != "${file//_/ }" ]; then
             echo Renaming "$file" to "${file//_/ }"
             mv "$file" "${file//_/ }"
         fi

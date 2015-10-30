@@ -1,0 +1,55 @@
+snippet ifdef "#ifdef ... #endif"
+#ifdef ${1}
+	$0
+#endif // $1
+endsnippet
+
+snippet main "main() (main)"
+int main(int argc, char **argv)
+{
+	${VISUAL}${0}
+	return 0;
+}
+endsnippet
+
+snippet for "for loop (for)"
+for (${2:i} = 0; $2 < ${1:count}; ${3:++$2})
+{
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet fori "for int loop (fori)"
+for (${4:int} ${2:i} = 0; $2 < ${1:count}; ${3:++$2})
+{
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet cl "class .. (class)"
+class ${1:`!p snip.rv = snip.basename or "name"`}
+{
+public:
+	${1/(\w+).*/$1/}(${2:arguments});
+	virtual ~${1/(\w+).*/$1/}();
+
+private:
+	${0:/* data */}
+};
+endsnippet
+
+snippet map "std::map (map)"
+std::map<${1:key}, ${2:value}> ${3:map};$0
+endsnippet
+
+snippet vector "std::vector (v)"
+std::vector<${1:char}> ${2:v};$0
+endsnippet
+
+snippet do
+do
+{
+	${2}
+}
+while (${1:/* condition */});
+endsnippet
