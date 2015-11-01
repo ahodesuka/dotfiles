@@ -279,10 +279,10 @@ end
 
 -- {{{ Mouse and Key Bindings
 root.buttons(awful.util.table.join(
-    awful.button({ }, 3, function () menu:toggle() end),
-    awful.button({ }, 8, function () awful.util.spawn_with_shell("mpc prev") end),
-    awful.button({ }, 9, function () awful.util.spawn_with_shell("mpc next") end),
-    awful.button({ }, 10, function () awful.util.spawn_with_shell("mpc toggle") end)
+    awful.button({ }, 3,  function () menu:toggle() end),
+    awful.button({ }, 8,  mpd:command_prev_track()),
+    awful.button({ }, 9,  mpd:command_next_track()),
+    awful.button({ }, 10, mpd:command_playpause())
 ))
 
 local globalkeys = awful.util.table.join(
@@ -547,7 +547,7 @@ client.connect_signal("manage", function (c)
     if not awesome.startup then
         -- Set the windows at the slave,
         -- i.e. put it at the end of others instead of setting it master.
-        -- awful.client.setslave(c)
+        awful.client.setslave(c)
         -- Put windows in a smart way, only if they does not set an initial position.
         if not c.size_hints.user_position and not c.size_hints.program_position then
             under_mouse(c)
