@@ -30,7 +30,7 @@
     #absbot {
         display:none!important;
     }
-
+    
     :root .fixed.bottom-header body {
         padding-bottom:1em!important;
     }
@@ -74,7 +74,7 @@
     .menu-button + .container:not(:empty) {
         margin-left:0!important;
     }
-
+    
     :root s .quote:not(:hover),
     :root s a:not(:hover) {
         color:#000!important;
@@ -94,6 +94,7 @@
         color:#8f5b5b!important;
         text-decoration:none!important;
     }
+    div.closed,
     #thread-watcher:hover:before,
     :root a.backlink,
     :root .container > a.backlink.deadlink,
@@ -137,7 +138,8 @@
         vertical-align:bottom;
     }
     :root #file-n-submit > input[type="submit"],
-    :root #qr #sjis-toggle {
+    :root #qr #sjis-toggle,
+    :root #qr #tex-preview-button {
         height:22px!important;
         border:1px solid #161616;
         margin:1px -1px 0!important;
@@ -145,13 +147,15 @@
         border-right:0!important;
         width:76px!important;
     }
-    :root #qr #sjis-toggle {
+    :root #qr #sjis-toggle,
+    :root #qr #tex-preview-button {
         background:#222!important;
-        border:1px solid #161616!important;
+        border-left:1px solid #161616!important;
         color:#e9e6e6!important;
         margin:0!important;
     }
-    :root #qr #sjis-toggle:hover {
+    :root #qr #sjis-toggle:hover,
+    :root #qr #tex-preview-button:hover {
         background:#1b1b1b!important;
     }
 
@@ -233,6 +237,13 @@
     div.reply:target {
         background:#2a2a2a!important;
     }
+    .filter-highlight.opContainer,
+    .filter-highlight > .reply {
+       box-shadow:none;
+    }
+    .filter-highlight > .reply > .postInfo {
+       box-shadow:0 -1px #8f5b5b inset;
+    }
     .postblock {
         border:0!important;
         color:#e9e6e6!important;
@@ -268,7 +279,7 @@
         border-radius:0!important;
         z-index:4!important;
     }
-    #qr .field:not(:first-child):not(.captcha-input),
+    #qr .field:not(:first-child):not([name=name]):not(.captcha-input),
     #qr #dump-button,
     #thread-watcher {
         border-left:0!important;
@@ -297,7 +308,7 @@
     #updater .move {
         cursor:default!important;
     }
-
+    
     #custom-board-list a {
         border-top:1px transparent!important;
         padding:5px 1px 1px!important;
@@ -398,7 +409,7 @@
         text-decoration:none;
         border-bottom:1px dashed;
     }
-
+    
     :root .watch-thread-link {
        background-image: url("data:image/svg+xml,<svg viewBox='0 0 26 26' preserveAspectRatio='true' xmlns='http://www.w3.org/2000/svg'><path fill='rgb(207,114,117)' d='M24.132,7.971c-2.203-2.205-5.916-2.098-8.25,0.235L15.5,8.588l-0.382-0.382c-2.334-2.333-6.047-2.44-8.25-0.235c-2.204,2.203-2.098,5.916,0.235,8.249l8.396,8.396l8.396-8.396C26.229,13.887,26.336,10.174,24.132,7.971z'/></svg>")!important;
     }

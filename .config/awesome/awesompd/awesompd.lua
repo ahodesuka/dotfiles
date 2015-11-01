@@ -1,10 +1,18 @@
 ---------------------------------------------------------------------------
 -- @author Alexander Yakushev <yakushev.alex@gmail.com>
--- @copyright 2010-2011 Alexander Yakushev
--- @release v1.1.5
+-- @copyright 2010-2013 Alexander Yakushev
+-- @release v1.2.4
 ---------------------------------------------------------------------------
 
-awesompd = {}
+local wibox = require("wibox")
+local awful = require('awful')
+local beautiful = require('beautiful')
+local naughty = require('naughty')
+local format = string.format
+
+local module_path = (...):match ("(.+/)[^/]+$") or ""
+
+local awesompd = {}
 
 -- Function for checking icons and modules. Checks if a file exists,
 -- and if it does, returns the path to file, nil otherwise.
@@ -16,41 +24,15 @@ end
 
 -- Function for loading modules.
 function awesompd.try_require(module)
-   if awesompd.try_load(awful.util.getdir("config") ..
-                     "/awesompd/" .. module .. ".lua") then
-      return require('awesompd/' .. module)
+   if awesompd.try_load(awful.util.getdir("config") .. '/'..
+                        module_path .. module .. ".lua") then
+      return require(module_path .. module)
    else
       return require(module)
    end
 end
 
-awesompd.try_require("utf8")
-local beautiful = require('beautiful')
-local naughty = naughty
-local awful = awful
-local format = string.format
-local keygrabber = keygrabber
-
--- Debug stuff
-
-local enable_dbg = true
-local function dbg (...)
-   if enable_dbg then
-      print(...)
-   end
-end
-
-local function tbl_pr(tbl,shift)
-   if enable_dbg then
-      local shift = shift or ""
-      for k, v in pairs(tbl) do
-         print(shift .. k .. ": " .. tostring(v))
-         if type(v) == "table" then
-            tbl_pr(v, shift .. "  ")
-         end
-      end
-   end
-end
+local utf8 = awesompd.try_require("utf8")
 
 -- Constants
 awesompd.PLAYING = "Playing"
@@ -76,7 +58,7 @@ awesompd.ESCAPE_SYMBOL_MAPPING["&"] = "&amp;"
 awesompd.ESCAPE_MENU_SYMBOL_MAPPING = {}
 awesompd.ESCAPE_MENU_SYMBOL_MAPPING["&"] = "'n'"
 
--- /// Current track variables and functions ///
+-- /// Current track variables and functions /// 
 
 -- Returns a string for the given track to be displayed in the widget
 -- and notification.
@@ -89,21 +71,19 @@ function awesompd.get_display_name(track)
 end
 
 -- Returns a track display name, album name (if exists) and album
--- release date (if exists).
+-- release year (if exists).
 function awesompd.get_extended_info(track)
-   local result = awesompd.get_display_name(track) .. "\t"
+   local result = awesompd.get_display_name(track) .. "  "
    if track.album_name then
       result = result .. "\n" .. track.album_name
    end
-   if track.date then
-      result = result .. (track.data and " (" .. track.date .. ")" or "") .."\t"
-   end
+   result = result .. (track.date and " (" .. track.date .. ")" or "") .. "  "
    return result
 end
 
 -- Returns true if the current status is either PLAYING or PAUSED
 function awesompd:playing_or_paused()
-   return self.status == awesompd.PLAYING
+   return self.status == awesompd.PLAYING 
       or self.status == awesompd.PAUSED
 end
 
@@ -124,7 +104,7 @@ end
 -- Slightly modified function awful.util.table.join.
 function awesompd.ajoin(buttons)
     local result = {}
-    for i = 1, table.getn(buttons) do
+    for i = 1, #buttons do
         if buttons[i] then
             for k, v in pairs(buttons[i]) do
                 if type(k) == "number" then
@@ -145,13 +125,21 @@ function awesompd.split(s)
       return l
    end
    s = s .. "\n"
-   local f = function (s)
+   local f = function (s) 
                 l.n = l.n + 1
-        l[l.n] = s
-         end
+		l[l.n] = s
+	     end
    local p = "%s*(.-)%s*\n%s*"
    s = string.gsub(s,p,f)
    return l
+end
+
+-- Returns the given string if it is not nil or non-empty, otherwise
+-- returns nil.
+local function non_empty(s)
+   if s and s ~= "" then
+      return s
+   end
 end
 
 -- Icons
@@ -166,8 +154,8 @@ function awesompd.load_icons(path)
    awesompd.ICONS.PREV = awesompd.try_load(path .. "/prev_icon.png")
    awesompd.ICONS.CHECK = awesompd.try_load(path .. "/check_icon.png")
    awesompd.ICONS.RADIO = awesompd.try_load(path .. "/radio_icon.png")
-   awesompd.ICONS.DEFAULT_ALBUM_COVER =
-      awesompd.try_load(path .. "/nocover.png")
+   awesompd.ICONS.DEFAULT_ALBUM_COVER = 
+      awesompd.try_load(path .. "/default_album_cover.png")
 end
 
 -- Function that returns a new awesompd object.
@@ -177,7 +165,7 @@ function awesompd:create()
    setmetatable(instance,self)
    self.__index = self
    instance.current_server = 1
-   instance.widget = widget({ type = "textbox" })
+   instance.widget = wibox.layout.fixed.horizontal()
    instance.notification = nil
    instance.scroll_pos = 1
    instance.text = ""
@@ -199,62 +187,85 @@ function awesompd:create()
 
 -- Default user options
    instance.servers = { { server = "localhost", port = 6600 } }
-   instance.font = beautiful.font
+   instance.font = "Monospace"
    instance.font_color = beautiful.fg_normal
    instance.background = beautiful.bg_normal
    instance.scrolling = true
-   instance.output_size = 50
-   instance.update_interval = 1
-   instance.path_to_icons = awful.util.getdir("config") .. "/ahoka/icons/awesompd"
+   instance.output_size = 30
+   instance.update_interval = 10
+   instance.path_to_icons = ""
    instance.ldecorator = " "
-   instance.rdecorator = ""
+   instance.rdecorator = " "
    instance.show_album_cover = true
-   instance.album_cover_size = 60
-
--- Widget configuration
-   instance.widget:add_signal("mouse::enter", function(c)
-                                                 instance:notify_track(0)
-                                              end)
-   instance.widget:add_signal("mouse::leave", function(c)
-                                                 instance:remove_hint()
-                                              end)
+   instance.album_cover_size = 50
+   instance.browser = "firefox"
+-- Smart Update (sets timer to check/update widget near when the current track should end)
+   instance.track_position = "00:00"
+   instance.track_duration = "00:00"
+   instance.smart_update_timer = timer({ timeout = instance.update_interval })
+   -- Widget configuration
+   instance.widget:connect_signal("mouse::enter", function(c)
+	    instance:update_track()
+	    instance:notify_track()
+	 end)
+   instance.widget:connect_signal("mouse::leave", function(c)
+	    instance:hide_notification()
+	 end)
    return instance
 end
 
 -- Registers timers for the widget
 function awesompd:run()
-   enable_dbg = self.debug_mode
    self.load_icons(self.path_to_icons)
+   if self.album_cover_size > 100 then
+      self.album_cover_size = 100
+   end
+
+   self.text_widget = wibox.widget.textbox()
+   if self.widget_icon then
+      self.icon_widget = wibox.widget.imagebox()
+      self.icon_widget:set_image(self.widget_icon)
+      self.widget:add(self.icon_widget)
+   end
+   self.widget:add(self.text_widget)
 
    self:update_track()
    self:check_playlists()
-   self.update_widget_timer = timer({ timeout = 1 })
-   self.update_widget_timer:add_signal("timeout", function()
-                                                     self:update_widget()
-                                                  end)
-   self.update_widget_timer:start()
-   self.update_track_timer = timer({ timeout = self.update_interval })
-   self.update_track_timer:add_signal("timeout", function()
-                                                    self:update_track()
-                                                 end)
-   self.update_track_timer:start()
+
+   if scheduler then
+      scheduler.register_recurring("awesompd_scroll", 1,
+                                   function() self:update_widget() end)
+      scheduler.register_recurring("awesompd_update", self.update_interval,
+                                   function() self:update_track() end)
+   else
+      self.update_widget_timer = timer({ timeout = 1 })
+      self.update_widget_timer:connect_signal("timeout", function()
+                                                 self:update_widget()
+                                                         end)
+      self.update_widget_timer:start()
+      self.update_track_timer = timer({ timeout = self.update_interval })
+      self.update_track_timer:connect_signal("timeout", function()
+                                                self:update_track()
+                                                        end)
+      self.update_track_timer:start()
+   end
 end
 
 -- Function that registers buttons on the widget.
 function awesompd:register_buttons(buttons)
    widget_buttons = {}
    self.global_bindings = {}
-   for b=1,table.getn(buttons) do
+   for b=1, #buttons do
       if type(buttons[b][1]) == "string" then
          mods = { buttons[b][1] }
       else
          mods = buttons[b][1]
       end
-      if type(buttons[b][2]) == "number" then
+      if type(buttons[b][2]) == "number" then 
          -- This is a mousebinding, bind it to the widget
-         table.insert(widget_buttons,
+         table.insert(widget_buttons, 
                       awful.button(mods, buttons[b][2], buttons[b][3]))
-      else
+      else 
          -- This is a global keybinding, remember it for later usage in append_global_keys
          table.insert(self.global_bindings, awful.key(mods, buttons[b][2], buttons[b][3]))
       end
@@ -269,18 +280,33 @@ end
 -- returns it.
 function awesompd:append_global_keys(keytable)
    if keytable then
-      for i = 1, table.getn(self.global_bindings) do
+      for i = 1, #self.global_bindings do
          keytable = awful.util.table.join(keytable, self.global_bindings[i])
       end
       return keytable
    else
-      for i = 1, table.getn(self.global_bindings) do
+      for i = 1, #self.global_bindings do
          globalkeys = awful.util.table.join(globalkeys, self.global_bindings[i])
       end
    end
 end
 
 -- /// Group of mpc command functions ///
+
+-- Returns a mpc command with all necessary parameters. Boolean
+-- human_readable argument configures if the command special
+-- formatting of the output (to be later used in parsing) should not
+-- be used.
+function awesompd:mpcquery(human_readable)
+   local result =
+      "mpc -h " .. self.servers[self.current_server].server ..
+      " -p " .. self.servers[self.current_server].port .. " "
+   if human_readable then
+      return result
+   else
+      return result ..' -f "%file%-<>-%name%-<>-%title%-<>-%artist%-<>-%album%-<>-%date%" '
+   end
+end
 
 -- Takes a command to mpc and a hook that is provided with awesompd
 -- instance and the result of command execution.
@@ -350,8 +376,8 @@ end
 
 function awesompd:command_load_playlist(name)
    return function()
-             self:command("load \"" .. name .. "\"", function()
-                                              self.recreate_menu = true
+             self:command("load \"" .. name .. "\"", function() 
+                                              self.recreate_menu = true 
                                            end)
           end
 end
@@ -417,30 +443,30 @@ end
 -- /// Menu generation functions ///
 
 function awesompd:command_show_menu()
-   return
+   return 
    function()
-      self:remove_hint()
-      if self.recreate_menu then
+      self:hide_notification()
+      if self.recreate_menu then 
          local new_menu = {}
-         if self.main_menu ~= nil then
-            self.main_menu:hide()
-         end
+         if self.main_menu ~= nil then 
+            self.main_menu:hide() 
+         end 
          if self.status ~= awesompd.DISCONNECTED
-         then
-            self:check_list()
+         then 
+            self:check_list() 
             self:check_playlists()
 
             new_menu = { { "Playback", self:menu_playback() },
                          { "Options", self:menu_options() },
                          { "List", self:menu_list() },
                          { "Playlists", self:menu_playlists() } }
-         end
-         table.insert(new_menu, { "Servers", self:menu_servers() })
-         self.main_menu = awful.menu({ items = new_menu, width = 160 })
-         self.recreate_menu = false
-      end
-      self.main_menu:toggle()
-   end
+         end 
+         table.insert(new_menu, { "Servers", self:menu_servers() }) 
+         self.main_menu = awful.menu({ items = new_menu, theme = { width = 180 } }) 
+         self.recreate_menu = false 
+      end 
+      self.main_menu:toggle() 
+   end 
 end
 
 -- Returns an icon for a checkbox menu item if it is checked, nil
@@ -456,32 +482,32 @@ function awesompd:menu_item_radio(selected)
 end
 
 -- Returns the playback menu. Menu contains of:
--- Play/Pause - always
--- Previous - if the current track is not the first
+-- Play\Pause - always
+-- Previous - if the current track is not the first 
 -- in the list and playback is not stopped
--- Next - if the current track is not the last
+-- Next - if the current track is not the last 
 -- in the list and playback is not stopped
 -- Stop - if the playback is not stopped
 -- Clear playlist - always
 function awesompd:menu_playback()
    if self.recreate_playback then
       local new_menu = {}
-      table.insert(new_menu, { "Play/Pause",
-                               self:command_toggle(),
+      table.insert(new_menu, { "Play/Pause", 
+                               self:command_toggle(), 
                                self.ICONS.PLAY_PAUSE })
       if self:playing_or_paused() then
          if self.list_array and self.list_array[self.current_number-1] then
-            table.insert(new_menu,
-                         { "Prev: " ..
+            table.insert(new_menu, 
+                         { "Prev: " .. 
                            awesompd.protect_string(self.list_array[self.current_number - 1],
                                                    true),
                         self:command_prev_track(), self.ICONS.PREV })
          end
-         if self.list_array and self.current_number ~= table.getn(self.list_array) then
-            table.insert(new_menu,
-                         { "Next: " ..
-                           awesompd.protect_string(self.list_array[self.current_number + 1],
-                                                   true),
+         if self.list_array and self.current_number ~= #self.list_array then
+            table.insert(new_menu, 
+                         { "Next: " .. 
+                           awesompd.protect_string(self.list_array[self.current_number + 1], 
+                                                   true), 
                         self:command_next_track(), self.ICONS.NEXT })
          end
          table.insert(new_menu, { "Stop", self:command_stop(), self.ICONS.STOP })
@@ -499,13 +525,13 @@ function awesompd:menu_list()
    if self.recreate_list then
       local new_menu = {}
       if self.list_array then
-         local total_count = table.getn(self.list_array)
+         local total_count = #self.list_array 
          local start_num = (self.current_number - 15 > 0) and self.current_number - 15 or 1
          local end_num = (self.current_number + 15 < total_count ) and self.current_number + 15 or total_count
          for i = start_num, end_num do
             table.insert(new_menu, { self.list_array[i],
                                      self:command_play_specific(i),
-                                     self.current_number == i and
+                                     self.current_number == i and 
                                         (self.status == self.PLAYING and self.ICONS.PLAY or self.ICONS.PAUSE)
                                      or nil} )
          end
@@ -515,19 +541,19 @@ function awesompd:menu_list()
    end
    return self.list_menu
 end
-
+	     
 -- Returns the playlists menu. Menu consists of all files in the playlist folder.
 function awesompd:menu_playlists()
    if self.recreate_playlists then
       local new_menu = {}
-      if table.getn(self.playlists_array) > 0 then
-     for i = 1, table.getn(self.playlists_array) do
-        local submenu = {}
-        submenu[1] = { "Add to current", self:command_load_playlist(self.playlists_array[i]) }
-        submenu[2] = { "Replace current", self:command_replace_playlist(self.playlists_array[i]) }
-        new_menu[i] = { self.playlists_array[i], submenu }
-     end
-     table.insert(new_menu, {"", ""}) -- This is a separator
+      if #self.playlists_array > 0 then
+	 for i = 1, #self.playlists_array do
+	    local submenu = {}
+	    submenu[1] = { "Add to current", self:command_load_playlist(self.playlists_array[i]) }
+	    submenu[2] = { "Replace current", self:command_replace_playlist(self.playlists_array[i]) }
+	    new_menu[i] = { self.playlists_array[i], submenu }
+	 end
+	 table.insert(new_menu, {"", ""}) -- This is a separator
       end
       table.insert(new_menu, { "Refresh", function() self:check_playlists() end })
       self.recreate_playlists = false
@@ -540,10 +566,10 @@ end
 function awesompd:menu_servers()
    if self.recreate_servers then
       local new_menu = {}
-      for i = 1, table.getn(self.servers) do
-     table.insert(new_menu, {"Server: " .. self.servers[i].server ..
-                 ", port: " .. self.servers[i].port,
-                  function() self:change_server(i) end,
+      for i = 1, #self.servers do
+	 table.insert(new_menu, {"Server: " .. self.servers[i].server .. 
+				 ", port: " .. self.servers[i].port,
+			      function() self:change_server(i) end,
                               self:menu_item_radio(i == self.current_server)})
       end
       self.servers_menu = new_menu
@@ -553,17 +579,17 @@ end
 
 -- Returns the options menu. Menu works like checkboxes for it's elements.
 function awesompd:menu_options()
-   if self.recreate_options then
-      local new_menu = { { "Repeat", self:menu_toggle_repeat(),
+   if self.recreate_options then 
+      local new_menu = { { "Repeat", self:menu_toggle_repeat(), 
                            self:menu_item_toggle(self.state_repeat == "on")},
-                         { "Random", self:menu_toggle_random(),
+                         { "Random", self:menu_toggle_random(), 
                            self:menu_item_toggle(self.state_random == "on")},
-                         { "Single", self:menu_toggle_single(),
+                         { "Single", self:menu_toggle_single(), 
                            self:menu_item_toggle(self.state_single == "on")},
-                         { "Consume", self:menu_toggle_consume(),
+                         { "Consume", self:menu_toggle_consume(), 
                            self:menu_item_toggle(self.state_consume == "on")} }
       self.options_menu = new_menu
-      self.recreate_options = false
+      self.recreate_options = false      
    end
    return self.options_menu
 end
@@ -598,15 +624,15 @@ end
 
 -- Checks if the current playlist has changed after the last check.
 function awesompd:check_list()
-   local bus = io.popen(self:mpcquery() .. "playlist")
+   local bus = io.popen(self:mpcquery(true) .. "playlist")
    local info = bus:read("*all")
    bus:close()
    if info ~= self.list_line then
       self.list_line = info
       if string.len(info) > 0 then
-     self.list_array = self.split(string.sub(info,1,string.len(info)))
+	 self.list_array = self.split(string.sub(info,1,string.len(info)))
       else
-     self.list_array = {}
+	 self.list_array = {}
       end
       self.recreate_menu = true
       self.recreate_list = true
@@ -615,15 +641,15 @@ end
 
 -- Checks if the collection of playlists changed after the last check.
 function awesompd:check_playlists()
-   local bus = io.popen(self:mpcquery() .. "lsplaylists")
+   local bus = io.popen(self:mpcquery(true) .. "lsplaylists")
    local info = bus:read("*all")
    bus:close()
    if info ~= self.playlists_line then
       self.playlists_line = info
       if string.len(info) > 0 then
-     self.playlists_array = self.split(info)
+	 self.playlists_array = self.split(info)
       else
-     self.playlists_array = {}
+	 self.playlists_array = {}
       end
       self.recreate_menu = true
       self.recreate_playlists = true
@@ -633,7 +659,7 @@ end
 -- Changes the current server to the specified one.
 function awesompd:change_server(server_number)
    self.current_server = server_number
-   self:remove_hint()
+   self:hide_notification()
    self.recreate_menu = true
    self.recreate_playback = true
    self.recreate_list = true
@@ -644,94 +670,85 @@ end
 
 -- /// End of menu generation functions ///
 
-function awesompd:add_hint(hint_title, hint_text, hint_image, timeout)
-    self:remove_hint()
-    self.notification = naughty.notify({
-        title      = hint_title,
-        text       = awesompd.protect_string(hint_text),
-        timeout    = timeout or 5,
-        position   = "top_right",
-        icon       = hint_image,
-        icon_size  = self.album_cover_size,
-    })
+function awesompd:show_notification(hint_title, hint_text, hint_image)
+   self:hide_notification()
+   self.notification = naughty.notify({ title      =  hint_title
+					, text       = awesompd.protect_string(hint_text)
+					, timeout    = 5
+					, position   = "top_right"
+                                        , icon       = hint_image
+                                        , icon_size  = self.album_cover_size
+                                     })
 end
 
-function awesompd:remove_hint()
+function awesompd:hide_notification()
    if self.notification ~= nil then
       naughty.destroy(self.notification)
       self.notification = nil
    end
 end
 
-function awesompd:notify_track(timeout)
+function awesompd:notify_track()
    if self:playing_or_paused() then
-      local caption = "\n" .. self.status_text .. "\t"
+      local caption = self.status_text
       local nf_text = self.get_display_name(self.current_track)
       local al_cover = nil
       if self.show_album_cover then
          nf_text = self.get_extended_info(self.current_track)
          al_cover = self.current_track.album_cover
       end
-      self:add_hint(caption, nf_text, al_cover, timeout)
+      self:show_notification(caption, nf_text, al_cover)
    end
 end
 
 function awesompd:notify_state(state_changed)
    state_array = { "Volume: " .. self.state_volume ,
-           "Repeat: " .. self.state_repeat ,
-           "Random: " .. self.state_random ,
-           "Single: " .. self.state_single ,
-           "Consume: " .. self.state_consume }
+		   "Repeat: " .. self.state_repeat ,
+		   "Random: " .. self.state_random ,
+		   "Single: " .. self.state_single ,
+		   "Consume: " .. self.state_consume }
    state_header = state_array[state_changed]
    table.remove(state_array,state_changed)
    full_state = state_array[1]
-   for i = 2, table.getn(state_array) do
+   for i = 2, #state_array do
       full_state = full_state .. "\n" .. state_array[i]
    end
-   self:add_hint(state_header, full_state)
+   self:show_notification(state_header, full_state)
 end
 
 function awesompd:wrap_output(text)
    return format('<span font="%s" color="%s" background="%s">%s%s%s</span>',
-        self.font, self.font_color,self.background,self.ldecorator,
-        awesompd.protect_string(text), self.rdecorator)
-end
-
-function awesompd:mpcquery()
-   return "mpc -h " .. self.servers[self.current_server].server ..
-      " -p " .. self.servers[self.current_server].port .. " "
+                 self.font, self.font_color, self.background,
+                 (text == "" and "" or self.ldecorator), awesompd.protect_string(text),
+                 (text == "" and "" or self.rdecorator))
 end
 
 -- This function actually sets the text on the widget.
 function awesompd:set_text(text)
-   self.widget.text = self:wrap_output(text)
+   self.text_widget:set_markup(self:wrap_output(text))
 end
 
 function awesompd.find_pattern(text, pattern, start)
-   return utf8sub(text, string.find(text, pattern, start))
+   return utf8.sub(text, string.find(text, pattern, start))
 end
 
 -- Scroll the given text by the current number of symbols.
 function awesompd:scroll_text(text)
    local result = text
    if self.scrolling then
-      if self.output_size < utf8len(text) then
+      if self.output_size < utf8.len(text) then
          text = text .. " - "
-         if self.scroll_pos + self.output_size - 1 > utf8len(text) then
-            result = utf8sub(text, self.scroll_pos)
-            result = result .. utf8sub(text, 1, self.scroll_pos + self.output_size - 1 - utf8len(text))
+         if self.scroll_pos + self.output_size - 1 > utf8.len(text) then
+            result = utf8.sub(text, self.scroll_pos)
+            result = result .. utf8.sub(text, 1, self.scroll_pos + self.output_size - 1 - utf8.len(text))
             self.scroll_pos = self.scroll_pos + 1
-            if self.scroll_pos > utf8len(text) then
+            if self.scroll_pos > utf8.len(text) then
                self.scroll_pos = 1
             end
          else
-            result = utf8sub(text, self.scroll_pos, self.scroll_pos + self.output_size - 1)
+            result = utf8.sub(text, self.scroll_pos, self.scroll_pos + self.output_size - 1)
             self.scroll_pos = self.scroll_pos + 1
          end
-      end
-   else
-      if self.output_size < utf8len(text) then
-         result = utf8sub(text, 1, self.output_size)
       end
    end
    return result
@@ -762,13 +779,18 @@ function awesompd:check_notify()
 end
 
 function awesompd:notify_connect()
-   self:add_hint("Connected", "Connection established to " .. self.servers[self.current_server].server ..
-         " on port " .. self.servers[self.current_server].port)
+   self:show_notification("Connected", "Connection established to " .. self.servers[self.current_server].server ..
+		 " on port " .. self.servers[self.current_server].port)
 end
 
 function awesompd:notify_disconnect()
-   self:add_hint("Disconnected", "Cannot connect to " .. self.servers[self.current_server].server ..
-         " on port " .. self.servers[self.current_server].port)
+   self:show_notification("Disconnected", "Cannot connect to " .. self.servers[self.current_server].server ..
+		 " on port " .. self.servers[self.current_server].port)
+end
+
+local function to_seconds(minsec)
+   local min, sec = minsec:match("(%d+):(%d+)")
+   return tonumber(min) * 60 + tonumber(sec)
 end
 
 function awesompd:update_track(file)
@@ -785,16 +807,16 @@ function awesompd:update_track(file)
 
    if not track_line or string.len(track_line) == 0 then
       if self.status ~= awesompd.DISCONNECTED then
-     self:notify_disconnect()
-     self.recreate_menu = true
+	 self:notify_disconnect()
+	 self.recreate_menu = true
          self.status = awesompd.DISCONNECTED
          self.current_track = { }
          self:update_widget_text()
       end
    else
       if self.status == awesompd.DISCONNECTED then
-     self:notify_connect()
-     self.recreate_menu = true
+	 self:notify_connect()
+	 self.recreate_menu = true
          self:update_widget_text()
       end
       if string.find(track_line,"volume:") or string.find(track_line,"Updating DB") then
@@ -811,13 +833,24 @@ function awesompd:update_track(file)
           self:update_state(track_line)
       else
           self:update_state(options_line)
-          local _, _, new_file, new_album, new_date =
-          string.find(self:command_read('current -f "%file%-<>-%album%-<>-%date%"', "*line"),
-                      "(.+)%-<>%-(.*)%-<>%-(.*)")
-          if new_file ~= self.current_track.unique_name then
-              self.current_track = { display_name = track_line,
-                                     album_name = new_album,
-                                     date = new_date }
+          local _, _, new_file, station, title, artist, album, date =
+            string.find(track_line, "(.*)%-<>%-(.*)%-<>%-(.*)%-<>%-(.*)%-<>%-(.*)%-<>%-(.*)")
+          local display_name, force_update = artist .. " - " .. title, false
+          -- The following code checks if the current track is an
+          -- Internet link. Internet radios change tracks, but the
+          -- current file stays the same, so we should manually compare
+          -- its title.
+          if string.match(new_file, "http://") then
+              album = non_empty(station) or ""
+              display_name = non_empty(title) or new_file
+              if display_name ~= self.current_track.display_name then
+                  force_update = true
+              end
+          end
+          if new_file ~= self.current_track.unique_name or force_update then
+              self.current_track = { display_name = display_name,
+                                     album_name = album,
+                                     date = date }
               self.current_track.unique_name = new_file
               if self.show_album_cover then
                   self.current_track.album_cover = self:get_cover(new_file)
@@ -828,8 +861,11 @@ function awesompd:update_track(file)
               self.recreate_list = true
               self.current_number = tonumber(self.find_pattern(status_line,"%d+"))
               self:update_widget_text()
+
           end
-          local progress = self.find_pattern(status_line,"%#%d+/%d+")
+          local tmp_pst = string.find(status_line,"%d+%:%d+%/")
+          self.track_position, self.track_duration = status_line:match("(%d+:%d+)/(%d+:%d+)")
+          local progress = self.find_pattern(status_line,"%#%d+/%d+")-- .. " " .. string.sub(status_line,tmp_pst)
           local new_status = awesompd.PLAYING
           if string.find(status_line,"paused") then
               new_status = awesompd.PAUSED
@@ -841,6 +877,29 @@ function awesompd:update_track(file)
               self:update_widget_text()
           end
           self.status_text = self.status .. " " .. progress
+      end
+   end
+   self:smart_update()
+end
+
+function awesompd:smart_update()
+   -- Kill any set timers
+   if self.smart_update_timer.started then
+      self.smart_update_timer:stop()
+   end
+   if (self.status == awesompd.PLAYING) then
+      local pos = to_seconds(self.track_position)
+      local dur = to_seconds(self.track_duration)
+      local rem = (dur - pos) + 1
+      if (rem < self.update_interval) then
+	 -- Little time remaining, lets update when it runs out 
+	 local smart_timer = timer({ timeout = rem })
+	 smart_timer:connect_signal("timeout", function()
+	    smart_timer:stop()
+	    self:update_track()
+	 end)
+	 self.smart_update_timer = smart_timer
+	 smart_timer:start()
       end
    end
 end
@@ -879,31 +938,24 @@ end
 
 function awesompd:run_prompt(welcome,hook)
    awful.prompt.run({ prompt = welcome },
-            self.promptbox[mouse.screen].widget,
-            hook)
+		    self.promptbox[mouse.screen].widget,
+		    hook)
 end
 
 -- Replaces control characters with escaped ones.
 -- for_menu - defines if the special escable table for menus should be
 -- used.
 function awesompd.protect_string(str, for_menu)
-   if for_menu then
-      return utf8replace(str, awesompd.ESCAPE_MENU_SYMBOL_MAPPING)
-   else
-      return utf8replace(str, awesompd.ESCAPE_SYMBOL_MAPPING)
-   end
+	  return awful.util.escape(str)
 end
 
--- Gets the cover for the given track. Looks in local
--- folders. If there is no cover art either returns the default album
--- cover.
 function awesompd:get_cover(track)
-   return self:try_get_local_cover() or self.ICONS.DEFAULT_ALBUM_COVER
+   return self:try_get_local_cover(track) or self.ICONS.DEFAULT_ALBUM_COVER
 end
 
 -- Tries to find an album cover for the track that is currently
 -- playing.
-function awesompd:try_get_local_cover()
+function awesompd:try_get_local_cover(current_file)
    if self.mpd_config then
       local result
       -- First find the music directory in MPD configuration file
@@ -911,7 +963,7 @@ function awesompd:try_get_local_cover()
          self.pread('cat ' .. self.mpd_config .. ' | grep -v "#" | grep music_directory', "*line"),
          'music_directory%s+"(.+)"')
       music_folder = music_folder .. "/"
-
+      
       -- If the music_folder is specified with ~ at the beginning,
       -- replace it with user home directory
       if string.sub(music_folder, 1, 1) == "~" then
@@ -920,7 +972,6 @@ function awesompd:try_get_local_cover()
       end
 
       -- Get the path to the file currently playing.
-      local current_file = self:command_read('current -f "%file%"')
       local _, _, current_file_folder = string.find(current_file, '(.+%/).*')
 
       -- Check if the current file is not some kind of http stream or
@@ -930,30 +981,30 @@ function awesompd:try_get_local_cover()
       end
 
       local folder = music_folder .. current_file_folder
-
+      
       -- Get all images in the folder. Also escape occasional single
       -- quotes in folder name.
-      local request = format("ls '%s' | grep -P '\.jpg\|\.png\|\.gif|\.jpeg'",
+      local request = format("ls '%s' | grep -P '\\.jpg|\\.png|\\.gif|\\.jpeg'",
                              string.gsub(folder, "'", "'\\''"))
 
       local covers = self.pread(request, "*all")
       local covers_table = self.split(covers)
-
+      
       if covers_table.n > 0 then
          result = folder .. covers_table[1]
          if covers_table.n > 1 then
             -- Searching for front cover with grep because Lua regular
             -- expressions suck:[
-            local front_cover =
-               self.pread('echo "' .. covers ..
-                          '" | grep -i "cover\|front\|folder\|albumart" | head -n 1', "*line")
+            local front_cover = 
+               self.pread('echo "' .. covers .. 
+                          '" | grep -P -i "cover|front|folder|albumart" | head -n 1', "*line")
             if front_cover then
                result = folder .. front_cover
             end
          end
       end
       return result
-   end
+   end   
 end
 
 -- /// Deprecated, left for some backward compatibility in
@@ -962,3 +1013,5 @@ end
 function awesompd:command_toggle()
    return self:command_playpause()
 end
+
+return awesompd

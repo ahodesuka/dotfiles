@@ -2,62 +2,96 @@ local tags      = { }
 local statusbar = { }
 local promptbox = { }
 local taglist   = { }
+local tasklist  = { }
 local layoutbox = { }
 local settings  = { }
 
-require("beautiful")
-require("awful")
+local awful     = require("awful")
+awful.rules     = require("awful.rules")
+local wibox     = require("wibox")
+local beautiful = require("beautiful")
+local naughty   = require("naughty")
+local vicious   = require("vicious")
+local awesompd  = require("awesompd/awesompd")
+
+-- autofocus:
+-- When loaded, this module makes sure that there's always a client that will
+-- have focus on events such as tag switching, client unmanaging, etc.
 require("awful.autofocus")
-require("awful.rules")
-require("vicious")
-require("naughty")
-require("awesompd/awesompd")
 
 -- {{{ Error handling
--- Check if awesome encountered an error during startup and fell back to
--- another config (This code will only ever execute for the fallback config)
+-- Startup
 if awesome.startup_errors then
-    naughty.notify({ preset = naughty.config.presets.critical,
-                     title = "Oops, there were errors during startup!",
-                     text = awesome.startup_errors })
+  naughty.notify({ preset = naughty.config.presets.critical,
+                   title = "Oops, there were errors during startup!",
+                   text = awesome.startup_errors })
 end
 
--- Handle runtime errors after startup
+-- Runtime
 do
-    local in_error = false
-    awesome.add_signal("debug::error", function (err)
-        -- Make sure we don't go into an endless error loop
-        if in_error then return end
-        in_error = true
-
-        naughty.notify({ preset = naughty.config.presets.critical,
-                         title = "Oops, an error happened!",
-                         text = err })
-        in_error = false
+  local in_error = false
+  awesome.connect_signal("debug::error",
+    function(err)
+      if in_error then return end
+      in_error = true
+      naughty.notify({ preset = naughty.config.presets.critical,
+                       title = "Oops, an error happened!",
+                       text = err })
+      in_error = false
     end)
 end
 -- }}}
 
+-- {{{ Settings
 settings.modkey     = "Mod4"
 settings.term       = "urxvt"
 settings.browser    = "firefox"
 settings.fileman    = "thunar"
 settings.taskman    = settings.term .. " -e htop"
 settings.dateformat = "%Y.%m.%d %H:%M:%S"
-settings.configdir  = awful.util.getdir("config")
 settings.new_wall   = "rWall"
 settings.layouts    =
 {
     awful.layout.suit.floating,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
 }
 
-beautiful.init(settings.configdir .. "/ahoka/theme.lua")
+naughty.config.defaults.timeout = 5
+naughty.config.defaults.screen = screen.count()
+naughty.config.defaults.position = "top_right"
 
-mm = awful.menu({
+beautiful.init(awful.util.getdir("config") .. "/ahoka/theme.lua")
+-- }}}
+
+-- {{{ Tags
+tags.settings = {
+    {
+        { name = "東", props = { layout = settings.layouts[2], mwfact = .6805 } },
+        { name = "南", props = { layout = settings.layouts[2], mwfact = .6805 } },
+        { name = "西", props = { layout = settings.layouts[1], mwfact = .6805 } },
+        { name = "北", props = { layout = settings.layouts[1], mwfact = .6805 } },
+    },
+    {
+        { name = "東", props = { layout = settings.layouts[1], mwfact = .6805 } },
+        { name = "南", props = { layout = settings.layouts[1], mwfact = .6805 } },
+        { name = "西", props = { layout = settings.layouts[2], mwfact = .6805 } },
+        { name = "北", props = { layout = settings.layouts[2], mwfact = .6805 } },
+    },
+}
+
+for s = 1, screen.count() do
+    tags[s] = { }
+    for i, v in ipairs(tags.settings[s]) do
+        v.props.screen = s
+        tags[s][i] = awful.tag.add(v.name, v.props)
+    end
+    tags[s][1].selected = true
+end
+-- }}}
+
+-- {{{ Wibox
+menu = awful.menu({
     items =
     {
         { settings.term,    settings.term,            theme.menu_terminal },
@@ -70,12 +104,93 @@ mm = awful.menu({
     }
 })
 
+padding         = wibox.widget.textbox()
+separator       = wibox.widget.textbox()
+cpuwidgettb     = wibox.widget.textbox()
+cputempwidgettb = wibox.widget.textbox()
+memwidgettb     = wibox.widget.textbox()
+netdownwidgettb = wibox.widget.textbox()
+netupwidgettb   = wibox.widget.textbox()
+clockwidgettb   = wibox.widget.textbox()
 
-naughty.config.default_preset.timeout = 5
-naughty.config.default_preset.screen = 2
-naughty.config.default_preset.position = "top_right"
+cpuwidgettb.fit     = function(widget, w, h) return 28, h end
+cputempwidgettb.fit = function(widget, w, h) return 28, h end
+memwidgettb.fit     = function(widget, w, h) return 36, h end
+netdownwidgettb.fit = function(widget, w, h) return 42, h end
+netupwidgettb.fit   = function(widget, w, h) return 42, h end
+clockwidgettb.fit   = function(widget, w, h) return 88, h end
 
-tasklist = {}
+memwidgettb:set_align("center")
+netdownwidgettb:set_align("center")
+netupwidgettb:set_align("center")
+clockwidgettb:set_align("center")
+
+padding:set_text(" ")
+separator:set_markup("<span color='#444'> | </span>")
+
+cpuwidget     = wibox.layout.margin(cpuwidgettb, 1, 1, -1, 0)
+cputempwidget = wibox.layout.margin(cputempwidgettb, 1, 1, -1, 0)
+memwidget     = wibox.layout.margin(memwidgettb, 1, 1, -1, 0)
+netdownwidget = wibox.layout.margin(netdownwidgettb, 1, 1, -1, 0)
+netupwidget   = wibox.layout.margin(netupwidgettb, 1, 1, -1, 0)
+clockwidget   = wibox.layout.margin(clockwidgettb, 1, 1, -1, 0)
+
+mpdicon     = wibox.widget.imagebox()
+cpuicon     = wibox.widget.imagebox()
+tempicon    = wibox.widget.imagebox()
+memicon     = wibox.widget.imagebox()
+netdownicon = wibox.widget.imagebox()
+netupicon   = wibox.widget.imagebox()
+clockicon   = wibox.widget.imagebox()
+
+mpdicon:set_image(beautiful.widget_mpd)
+cpuicon:set_image(beautiful.widget_cpu)
+tempicon:set_image(beautiful.widget_cputemp)
+memicon:set_image(beautiful.widget_mem)
+netdownicon:set_image(beautiful.widget_net)
+netupicon:set_image(beautiful.widget_netup)
+clockicon:set_image(beautiful.widget_clock)
+
+vicious.register(cpuwidgettb, vicious.widgets.cpu, " $1% ", 1)
+vicious.register(cputempwidgettb, vicious.widgets.thermal, " $1℃", 1, "thermal_zone0")
+vicious.register(memwidgettb, vicious.widgets.mem, " $2mb", 1)
+vicious.register(netdownwidgettb, vicious.widgets.net, " ${eth0 down_mb}mb/s", 1)
+vicious.register(netupwidgettb, vicious.widgets.net, "${eth0 up_mb}mb/s ", 1)
+vicious.cache(vicious.widgets.net)
+vicious.register(clockwidgettb, vicious.widgets.date, " " .. settings.dateformat, 1)
+
+-- {{{ Awesompd
+mpd                   = awesompd:create()
+mpd.font              = beautiful.font
+mpd.scrolling         = false
+mpd.update_interval   = 1
+mpd.path_to_icons     = awful.util.getdir("config") .. "/ahoka/icons/awesompd"
+mpd.mpd_config        = os.getenv("HOME") .. "/.config/mpd/mpd.conf"
+mpd.album_cover_size  = 60
+mpd.browser           = settings.browser
+mpd.ldecorator        = " "
+mpd.rdecorator        = ""
+mpd:register_buttons({
+    { "", awesompd.MOUSE_LEFT, mpd:command_playpause() },
+    { "", awesompd.MOUSE_SCROLL_UP, mpd:command_volume_up() },
+    { "", awesompd.MOUSE_SCROLL_DOWN, mpd:command_volume_down() },
+    { "", awesompd.MOUSE_RIGHT, mpd:command_show_menu() }
+})
+mpd:run()
+mpdwidget = wibox.layout.margin(mpd.widget, 1, 1, -1, 0)
+-- }}}
+
+systray = wibox.widget.systray()
+
+taglist.buttons = awful.util.table.join(
+    awful.button({ }, 1, awful.tag.viewonly),
+    awful.button({ }, 3, awful.tag.viewtoggle),
+    awful.button({ settings.modkey }, 1, awful.client.movetotag),
+    awful.button({ settings.modkey }, 3, awful.client.toggletag),
+    awful.button({}, 4, awful.tag.viewnext),
+    awful.button({}, 5, awful.tag.viewprev)
+)
+
 tasklist.buttons = awful.util.table.join(
     awful.button({ }, 1, function (c)
         if c == client.focus then
@@ -86,6 +201,9 @@ tasklist.buttons = awful.util.table.join(
         client.focus = c
         c:raise()
     end
+    end),
+    awful.button({ }, 2, function (c)
+        c:kill()
     end),
     awful.button({ }, 3, function ()
         if instance then
@@ -105,113 +223,18 @@ tasklist.buttons = awful.util.table.join(
     end)
 )
 
-tags.settings = {
-    {
-        { name = "東", layout = settings.layouts[2], mwfact = .6805 },
-        { name = "南", layout = settings.layouts[2], mwfact = .6805 },
-        { name = "西", layout = settings.layouts[1], mwfact = .6805 },
-        { name = "北", layout = settings.layouts[1], mwfact = .6805 }
-    },
-    {
-        { name = "東", layout = settings.layouts[1], mwfact = .6805 },
-        { name = "南", layout = settings.layouts[1], mwfact = .6805 },
-        { name = "西", layout = settings.layouts[4], mwfact = .6805 },
-        { name = "北", layout = settings.layouts[4], mwfact = .6805 }
-    },
-}
-
 for s = 1, screen.count() do
-    tags[s] = {}
-    for i, v in ipairs(tags.settings[s]) do
-        tags[s][i] = tag({ name = v.name })
-        tags[s][i].screen = s
-        awful.tag.setproperty(tags[s][i], "layout", v.layout)
-        awful.tag.setproperty(tags[s][i], "mwfact", v.mwfact)
-        awful.tag.setproperty(tags[s][i], "hide",   v.hide)
-    end
-    tags[s][1].selected = true
-end
-
-separator           = widget({ type = "textbox" })
-spacesep            = widget({ type = "textbox" })
-cpuwidget           = widget({ type = "textbox" })
-cputempwidget       = widget({ type = "textbox" })
-memwidget           = widget({ type = "textbox" })
-netdownwidget       = widget({ type = "textbox" })
-netupwidget         = widget({ type = "textbox" })
-clockwidget         = widget({ type = "textbox" })
-
-cpuwidget.width     = 28
-cputempwidget.width = 28
-memwidget.width     = 36
-netdownwidget.width = 56
-netupwidget.width   = 48
-clockwidget.width   = 91
-
-memwidget.align     = "center"
-netdownwidget.align = "center"
-netupwidget.align   = "center"
-clockwidget.align   = "center"
-
-mpdicon         	= widget({ type = "imagebox" })
-cpuicon         	= widget({ type = "imagebox" })
-tempicon        	= widget({ type = "imagebox" })
-memicon         	= widget({ type = "imagebox" })
-netdownicon     	= widget({ type = "imagebox" })
-netupicon       	= widget({ type = "imagebox" })
-clockicon       	= widget({ type = "imagebox" })
-
-separator.text      = "<span color='#444'> | </span>"
-spacesep.text       = " "
-mpdicon.image       = image(beautiful.widget_mpd)
-cpuicon.image       = image(beautiful.widget_cpu)
-tempicon.image      = image(beautiful.widget_cputemp)
-memicon.image       = image(beautiful.widget_mem)
-netdownicon.image   = image(beautiful.widget_net)
-netupicon.image     = image(beautiful.widget_netup)
-clockicon.image     = image(beautiful.widget_clock)
-
-vicious.register(cpuwidget, vicious.widgets.cpu, " $1% ", 1)
-vicious.register(cputempwidget, vicious.widgets.thermal, " $1℃", 1, "thermal_zone0")
-vicious.register(memwidget, vicious.widgets.mem, " $2mb", 1)
-vicious.register(netdownwidget, vicious.widgets.net, " ${eth0 down_kb}kb/s", 1)
-vicious.register(netupwidget, vicious.widgets.net, "${eth0 up_kb}kb/s ", 1)
-vicious.cache(vicious.widgets.net)
-vicious.register(clockwidget, vicious.widgets.date, " " .. settings.dateformat, 1)
-
-mpdwidget                   = awesompd:create()
-mpdwidget.mpd_config        = os.getenv("HOME") .. "/.config/mpd/mpd.conf"
-mpdwidget:register_buttons({
-    { "", awesompd.MOUSE_LEFT,          mpdwidget:command_playpause()   },
-    { "", awesompd.MOUSE_SCROLL_UP,     mpdwidget:command_volume_up()   },
-    { "", awesompd.MOUSE_SCROLL_DOWN,   mpdwidget:command_volume_down() },
-    { "", awesompd.MOUSE_RIGHT,         mpdwidget:command_show_menu()   }
-})
-mpdwidget:run()
-
-systray = widget({ type = "systray" })
-
-taglist.buttons = awful.util.table.join(
-    awful.button({ }, 1, awful.tag.viewonly),
-    awful.button({ }, 3, awful.tag.viewtoggle),
-    awful.button({ settings.modkey }, 1, awful.client.movetotag),
-    awful.button({ settings.modkey }, 3, awful.client.toggletag),
-    awful.button({}, 4, awful.tag.viewnext),
-    awful.button({}, 5, awful.tag.viewprev)
-)
-
-for s = 1, screen.count() do
-    promptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
+    promptbox[s] = awful.widget.prompt()
     layoutbox[s] = awful.widget.layoutbox(s)
     layoutbox[s]:buttons(awful.util.table.join(
                          awful.button({ }, 1, function () awful.layout.inc(settings.layouts, 1) end),
                          awful.button({ }, 3, function () awful.layout.inc(settings.layouts, -1) end)
     ))
-    taglist[s] = awful.widget.taglist.new(s, awful.widget.taglist.label.all, taglist.buttons)
-    tasklist[s] = awful.widget.tasklist(function(c)
-        local tmptask = { awful.widget.tasklist.label.currenttags(c, s) }
-        return tmptask[1], tmptask[2], tmptask[3], nil -- remove task icon
-    end, tasklist.buttons)
+    taglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist.buttons)
+    tasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist.buttons)
+
+    local left_layout  = wibox.layout.fixed.horizontal()
+    local right_layout = wibox.layout.fixed.horizontal()
     statusbar[s] = awful.wibox(
     {
         position = "top",
@@ -220,55 +243,45 @@ for s = 1, screen.count() do
         bg = beautiful.bg_normal,
         screen = s
     })
-    if s == 1 then
-        statusbar[s].widgets =
-        {
-            taglist[s],
-            promptbox[s],
-            layoutbox[s],
-            tasklist[s],
-            layout = awful.widget.layout.horizontal.leftright
-        }
-    else
-        statusbar[s].widgets =
-        {
-            {
-                taglist[s],
-                promptbox[s],
-                layoutbox[s],
-                layout = awful.widget.layout.horizontal.leftright
-            },
-            systray,
-            separator,
-            clockwidget,
-            clockicon,
-            separator,
-            netupicon,
-            netupwidget,
-            netdownwidget,
-            netdownicon,
-            separator,
-            memwidget,
-            memicon,
-            separator,
-            cputempwidget,
-            tempicon,
-            cpuwidget,
-            cpuicon,
-            separator,
-            mpdwidget.widget,
-            mpdicon,
-            spacesep,
-            tasklist[s],
-            layout = awful.widget.layout.horizontal.rightleft
-        }
+    left_layout:add(taglist[s])
+    left_layout:add(promptbox[s])
+    left_layout:add(layoutbox[s])
+    if s == 2 then
+        right_layout:add(padding)
+        right_layout:add(mpdicon)
+        right_layout:add(mpdwidget)
+        right_layout:add(separator)
+        right_layout:add(cpuicon)
+        right_layout:add(cpuwidget)
+        right_layout:add(tempicon)
+        right_layout:add(cputempwidget)
+        right_layout:add(separator)
+        right_layout:add(memicon)
+        right_layout:add(memwidget)
+        right_layout:add(separator)
+        right_layout:add(netdownicon)
+        right_layout:add(netdownwidget)
+        right_layout:add(netupwidget)
+        right_layout:add(netupicon)
+        right_layout:add(separator)
+        right_layout:add(clockicon)
+        right_layout:add(clockwidget)
+        right_layout:add(separator)
+        right_layout:add(systray)
     end
+    local layout = wibox.layout.align.horizontal()
+    layout:set_left(left_layout)
+    layout:set_middle(tasklist[s])
+    layout:set_right(right_layout)
+    statusbar[s]:set_widget(layout)
 end
+-- }}}
 
+-- {{{ Mouse and Key Bindings
 root.buttons(awful.util.table.join(
-    awful.button({ }, 3,  function () mm:toggle()                               end),
-    awful.button({ }, 8,  function () awful.util.spawn_with_shell("mpc prev")   end),
-    awful.button({ }, 9,  function () awful.util.spawn_with_shell("mpc next")   end),
+    awful.button({ }, 3, function () menu:toggle() end),
+    awful.button({ }, 8, function () awful.util.spawn_with_shell("mpc prev") end),
+    awful.button({ }, 9, function () awful.util.spawn_with_shell("mpc next") end),
     awful.button({ }, 10, function () awful.util.spawn_with_shell("mpc toggle") end)
 ))
 
@@ -366,10 +379,16 @@ function nth_next_tag (n)
     return awful.util.cycle(#tags[client.focus.screen], awful.tag.getidx(awful.tag.selected(client.focus.screen)) + n)
 end
 
-local clientbuttons = awful.util.table.join(
+clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
-    awful.button({ settings.modkey }, 1, awful.mouse.client.move),
-    awful.button({ settings.modkey }, 3, awful.mouse.client.resize),
+    awful.button({ settings.modkey }, 1, function (c)
+        c:raise()
+        awful.mouse.client.move(c)
+    end),
+    awful.button({ settings.modkey }, 3, function (c)
+        c:raise()
+        awful.mouse.client.resize(c)
+    end),
     awful.button({ settings.modkey }, 4, function ()
         if client.focus and tags[client.focus.screen][nth_next_tag(1)] then
             awful.client.movetotag(tags[client.focus.screen][nth_next_tag(1)])
@@ -384,9 +403,11 @@ local clientbuttons = awful.util.table.join(
     end)
 )
 
-mpdwidget:append_global_keys()
+mpd:append_global_keys()
 root.keys(globalkeys)
+--- }}}
 
+-- {{{ Rules
 awful.rules.rules =
 {
     {
@@ -483,36 +504,69 @@ awful.rules.rules =
                 "Kingdom Rush HD",
             }
         },
-        properties = { x = 0, y = 0 }
+        properties = { x = 0, y = 0, screen = 0 }
     },
+    { rule = { instance = "sun-awt-X11-XWindowPeer" }, properties = { border_width = 0, floating = true, focusable = false, ontop = true, skip_taskbar = true } },
     { rule = { class = "Thunar", name = "File Operation Progress" }, properties = { floating = true } },
-    { rule = { class = "Firefox" }, except = { instance = "Navigator" }, properties = {floating = true} },
+    { rule = { class = "Firefox" }, except = { instance = "Navigator" }, properties = { floating = true } },
     { rule = { class = "VirtualBox", name = "Windows 7.*VirtualBox" }, properties = { floating = true, skip_taskbar = true } },
+
+}
+-- }}}
+
+-- {{{ Signals
+
+-- {{{ My under_mouse that is screen aware
+local capi =
+{
+    screen = screen,
+    mouse = mouse,
+    client = client
 }
 
-client.add_signal("manage", function (c, startup)
-    c:add_signal("mouse::enter", function (c)
-        if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-           and awful.client.focus.filter(c) then
-               client.focus = c
-        end
-    end)
+local function get_area(c)
+    local geometry = c:geometry()
+    local border = c.border_width or 0
+    geometry.width = geometry.width + 2 * border
+    geometry.height = geometry.height + 2 * border
+    return geometry
+end
 
-    if not startup then
-        awful.client.setslave(c)
-        c:geometry(geometry)
+function under_mouse(c)
+    local c = c or capi.client.focus
+    local c_geometry = get_area(c)
+    local m_coords = capi.mouse.coords()
+    local screen = c.screen or awful.screen.getbycoord(geometry.x, geometry.y)
+    local screen_geometry = capi.screen[screen].workarea
+    return c:geometry({ x = math.max(screen_geometry.x, m_coords.x - c_geometry.width / 2),
+                        y = math.max(screen_geometry.y, m_coords.y - c_geometry.height / 2) })
+end
+-- }}}
+
+client.connect_signal("manage", function (c)
+    if not awesome.startup then
+        -- Set the windows at the slave,
+        -- i.e. put it at the end of others instead of setting it master.
+        -- awful.client.setslave(c)
+        -- Put windows in a smart way, only if they does not set an initial position.
         if not c.size_hints.user_position and not c.size_hints.program_position then
-            awful.placement.no_overlap(c)
+            under_mouse(c)
             awful.placement.no_offscreen(c)
         end
+    elseif not c.size_hints.user_position and not c.size_hints.program_position then
+        -- Prevent clients from being unreachable after screen count change
+        awful.placement.no_offscreen(c)
     end
 end)
 
-client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+-- Enable sloppy focus
+client.connect_signal("mouse::enter", function(c)
+    if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
+        and awful.client.focus.filter(c) then
+        client.focus = c
+    end
+end)
 
-local oldspawn = awful.util.spawn
-awful.util.spawn = function (s)
-    oldspawn(s, false)
-end
-
+client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+-- }}}

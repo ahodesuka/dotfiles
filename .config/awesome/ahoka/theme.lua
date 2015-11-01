@@ -24,7 +24,9 @@ theme.menu_height = 16
 theme.menu_border_width = 1
 theme.menu_border_color = "#161616"
 
-theme.padding = 10
+theme.useless_gap = 6
+theme.tasklist_disable_icon = true
+theme.tasklist_floating = ""
 
 theme.taglist_squares_sel   = confdir .. "/icons/taglist/squarefza.png"
 theme.taglist_squares_unsel = confdir .. "/icons/taglist/squareza.png"
@@ -50,6 +52,7 @@ theme.layout_fullscreen = confdir .. "/icons/layouts/fullscreen.png"
 theme.layout_magnifier  = confdir .. "/icons/layouts/magnifier.png"
 theme.layout_floating   = confdir .. "/icons/layouts/floating.png"
 
+theme.menu_submenu_icon = confdir .. "/icons/menu/sub_menu.png"
 theme.menu_terminal     = confdir .. "/icons/menu/terminal.png"
 theme.menu_wbrowser     = confdir .. "/icons/menu/wbrowser.png"
 theme.menu_fbrowser     = confdir .. "/icons/menu/fbrowser.png"
