@@ -19,6 +19,18 @@ local awesompd  = require("awesompd/awesompd")
 -- have focus on events such as tag switching, client unmanaging, etc.
 require("awful.autofocus")
 
+-- {{{ Theme and Naughty Settings
+beautiful.init(awful.util.getdir("config") .. "/ahoka/theme.lua")
+
+naughty.config.defaults.timeout = 5
+naughty.config.defaults.screen = screen.count()
+naughty.config.defaults.position = "top_right"
+
+naughty.config.presets.critical.bg = beautiful.bg_normal
+naughty.config.presets.critical.fg = beautiful.fg_urgent
+naughty.config.presets.critical.border_color = beautiful.border_focus
+-- }}}
+
 -- {{{ Error handling
 -- Startup
 if awesome.startup_errors then
@@ -56,12 +68,6 @@ settings.layouts    =
     awful.layout.suit.tile.left,
     awful.layout.suit.tile,
 }
-
-naughty.config.defaults.timeout = 5
-naughty.config.defaults.screen = screen.count()
-naughty.config.defaults.position = "top_right"
-
-beautiful.init(awful.util.getdir("config") .. "/ahoka/theme.lua")
 -- }}}
 
 -- {{{ Tags
@@ -210,7 +216,7 @@ tasklist.buttons = awful.util.table.join(
             instance:hide()
             instance = nil
         else
-            instance = awful.menu.clients({ width = 250 })
+            instance = awful.menu.clients({ theme = { width = 250 } })
         end
     end),
     awful.button({ }, 4, function ()
@@ -246,7 +252,7 @@ for s = 1, screen.count() do
     left_layout:add(taglist[s])
     left_layout:add(promptbox[s])
     left_layout:add(layoutbox[s])
-    if s == 2 then
+    if s == screen.count() then
         right_layout:add(padding)
         right_layout:add(mpdicon)
         right_layout:add(mpdwidget)
@@ -335,7 +341,6 @@ local globalkeys = awful.util.table.join(
 local clientkeys = awful.util.table.join(
     awful.key({ settings.modkey            }, "c",     function (c) c:kill() end),
     awful.key({ settings.modkey, "Control" }, "space", awful.client.floating.toggle),
-    awful.key({ settings.modkey, "Shift"   }, "r",     function (c) c:redraw() end),
     awful.key({ settings.modkey, "Shift"   }, "f",     function (c) c.fullscreen = not c.fullscreen end),
     awful.key({ settings.modkey            }, "m",     function (c)
         c.maximized_horizontal = not c.maximized_horizontal
@@ -432,6 +437,7 @@ awful.rules.rules =
                 "Anidbmini",
                 "Awf-gtk2",
                 "Blender",
+                "Calc",
                 "Civ5XP",
                 "csgo_linux",
                 "dota_linux",
@@ -454,7 +460,6 @@ awful.rules.rules =
             name =
             {
                 "Kingdom Rush HD",
-                "Qalculate!",
             }
         },
         properties = { floating = true }
@@ -504,12 +509,12 @@ awful.rules.rules =
                 "Kingdom Rush HD",
             }
         },
-        properties = { x = 0, y = 0, screen = 0 }
+        properties = { x = 0, y = 0, screen = 1 }
     },
     { rule = { instance = "sun-awt-X11-XWindowPeer" }, properties = { border_width = 0, floating = true, focusable = false, ontop = true, skip_taskbar = true } },
     { rule = { class = "Thunar", name = "File Operation Progress" }, properties = { floating = true } },
     { rule = { class = "Firefox" }, except = { instance = "Navigator" }, properties = { floating = true } },
-    { rule = { class = "VirtualBox", name = "Windows 7.*VirtualBox" }, properties = { floating = true, skip_taskbar = true } },
+    { rule = { class = "VirtualBox", name = "Windows 7.*VirtualBox" }, properties = { border_width = 0, floating = true, skip_taskbar = true } },
 
 }
 -- }}}

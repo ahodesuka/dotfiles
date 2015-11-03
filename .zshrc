@@ -1,5 +1,8 @@
 source ~/.git-prompt.sh
 
+export GOPATH="$HOME/.go"
+export PATH="$GOPATH/bin:$PATH"
+
 alias byzm1="byz -x 0 -y 0 -w 1680 -h 1050"
 alias byzm2="byz -x 1680 -y 0 -w 1920 -h 1080"
 alias grep="grep --color=auto"
@@ -62,9 +65,16 @@ bindkey "[6~" history-beginning-search-forward
 
 function precmd { print -Pn "\e]0;%n@%M:%~\a" }
 
-export PS1="%{[38;05;236;48;05;235m%}%{[38;05;9;48;05;235m%} %~ "
-export PS1="$PS1%{[38;05;235;48;05;1m%}%{[00m%}%{[38;05;0;48;05;1m%}"
-export PS1="$PS1\$(__git_ps1 '  %s')%{[00m%}%{[38;05;1m%} %{[00m%}"
+typeset -Ag FG BG
+RESET="%{[00m%}"
+for color in {0..255}; do
+    FG[$color]="%{[38;5;${color}m%}"
+    BG[$color]="%{[48;5;${color}m%}"
+done
+
+export PS1="$FG[236]$BG[235]$FG[9] %~ $FG[235]$BG[1]$FG[0]\$(__git_ps1 '  %s')$RESET$FG[1] $RESET"
+
+unset FG BG RESET
 
 if ! [[ `tty` =~ ^/dev/tty.* ]]; then
     eval $(dircolors -b ~/.dircolors)

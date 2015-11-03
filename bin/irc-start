@@ -1,8 +1,0 @@
-#!/bin/bash
-
-if ! tmux has-session -t irc; then
-    tmux new-session -d -s "irc" irssi
-    tmux select-window -t "irc:1"
-fi
-
-urxvt -e tmux a -t irc
