@@ -7,7 +7,6 @@
 local wibox = require("wibox")
 local awful = require("awful")
 local beautiful = require("beautiful")
-local naughty = require("naughty")
 local format = string.format
 
 local module_path = (...):match ("(.+/)[^/]+$") or ""
@@ -417,17 +416,14 @@ function awesompd:run()
     end
     self.widget:add(wibox.layout.constraint(self.text_widget, "max", self.max_width, nil))
 
+    self.update_timer = timer({ timeout = 0.5 })
+    self.update_timer:connect_signal("timeout", function()
+        self:update_widget()
+    end)
+
     self:update_track()
     self:check_playlists()
     self:start_idleloop()
-    self:recalc_progress()
-
-    self.update_timer = timer({ timeout = 0.5 })
-    self.update_timer:connect_signal("timeout", function()
-        self:recalc_progress()
-        self:update_widget()
-    end)
-    self.update_timer:start()
 end
 
 -- Function that registers buttons on the widget.
@@ -648,7 +644,7 @@ function awesompd:menu_item_radio(selected)
 end
 
 -- Returns the playback menu. Menu contains of:
--- Play\Pause - always
+-- Play/Pause - always
 -- Previous - if the current track is not the first
 -- in the list and playback is not stopped
 -- Next - if the current track is not the last
@@ -892,6 +888,7 @@ end
 function awesompd:update_widget()
     self:set_text(self:scroll_text(self.text))
     if self:playing_or_paused() then
+        self:recalc_progress()
         if self.osd.wb.visible then
             self.osd.update()
         end
@@ -907,11 +904,13 @@ function awesompd:update_widget_text()
     else
         self.text = self.status
     end
+    self:update_widget()
 end
 
 -- Checks if notification should be shown and shows if positive.
 function awesompd:check_notify()
     if self.to_notify then
+        self.osd.update()
         self.osd.show(5)
         self.to_notify = false
     end
@@ -935,13 +934,11 @@ function awesompd:update_track(file)
             self.recreate_menu = true
             self.status = awesompd.DISCONNECTED
             self.current_track = { }
-            self:update_widget_text()
             self.osd.hide()
         end
     else
         if self.status == awesompd.DISCONNECTED then
             self.recreate_menu = true
-            self:update_widget_text()
             self.osd.hide()
         end
         if string.find(track_line,"volume:") or string.find(track_line,"Updating DB") then
@@ -953,7 +950,6 @@ function awesompd:update_track(file)
                 self.recreate_list = true
                 self.album_cover = nil
                 self.current_track = { }
-                self:update_widget_text()
             end
             self:update_state(track_line)
             self.osd.hide()
@@ -987,15 +983,14 @@ function awesompd:update_track(file)
                 self.recreate_playback = true
                 self.recreate_list = true
                 self.current_number = tonumber(self.find_pattern(status_line,"%d+"))
-                self:update_widget_text()
             end
             local new_status = awesompd.PLAYING
             local status, track_n_count, time_passed, track_duration, track_progress =
             status_line:match("%[(%w+)%]%s+(%#%d+/%d+)%s+(%d+:%d+)/(%d+:%d+)%s+%((%d+)%%%)")
             self.track_n_count = track_n_count
             self.track_passed = to_seconds(time_passed)
-            self.track_progress = tonumber(track_progress)
             self.track_duration = to_seconds(track_duration)
+            self.track_progress = tonumber(track_progress)
             if status:match("paused") then
                 new_status = awesompd.PAUSED
             end
@@ -1003,11 +998,17 @@ function awesompd:update_track(file)
                 self.to_notify = true
                 self.recreate_list = true
                 self.status = new_status
-                self:update_widget_text()
             end
-            self.osd.update()
         end
     end
+    if self:playing_or_paused() then
+        if not self.update_timer.started then
+            self.update_timer:start()
+        end
+    else
+        self.update_timer:stop()
+    end
+    self:update_widget_text()
 end
 
 function awesompd:start_idleloop()
