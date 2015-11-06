@@ -3,7 +3,6 @@ xset m 1 2
 xset r rate 250 50
 xdotool mousemove 840 525
 nvidia-settings -l
-rWall &
 
 ## ENV VARIABLES ##
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
