@@ -33,7 +33,6 @@ function awesompd.try_require(module)
 end
 
 local utf8 = awesompd.try_require("utf8")
-local scheduler = awesompd.try_require("scheduler")
 
 -- Constants
 awesompd.PLAYING = "Playing"
@@ -357,29 +356,7 @@ function awesompd:create_osd(args)
         end
     end
 
-    function self.osd.update_state()
-        local fmt = "<span fgcolor='%s'>%sVolume: %s</span>"
-        local s = ""
-        if self.state_repeat == "on" then
-            s = s .. "r"
-        end
-        if self.state_random == "on" then
-            s = s .. "z"
-        end
-        if self.state_single == "on" then
-            s = s .. "s"
-        end
-        if self.state_consume == "on" then
-            s = s .. "c"
-        end
-        if s ~= "" then
-            s = "[" .. s .. "] "
-        end
-        state_text:set_markup(string.format(fmt, alt_fg_color, s, self.state_volume))
-    end
-
     function self.osd.update()
-        self.osd.update_state()
         local title = self.current_track.display_name
         local album = self.current_track.album
         local date = self.current_track.date
@@ -407,6 +384,24 @@ function awesompd:create_osd(args)
         elseif self.status == awesompd.PAUSED then
             pp_button:set_image(self.ICONS.PLAY_BTN)
         end
+
+        local fmt, s = "<span fgcolor='%s'>%sVolume: %s</span>", ""
+        if self.state_repeat == "on" then
+            s = s .. "r"
+        end
+        if self.state_random == "on" then
+            s = s .. "z"
+        end
+        if self.state_single == "on" then
+            s = s .. "s"
+        end
+        if self.state_consume == "on" then
+            s = s .. "c"
+        end
+        if s ~= "" then
+            s = "[" .. s .. "] "
+        end
+        state_text:set_markup(string.format(fmt, alt_fg_color, s, self.state_volume))
     end
 
     self.osd.hide()
@@ -545,14 +540,12 @@ end
 function awesompd:command_volume_up()
     return function()
         self:command("volume +5", self.update_track)
-        self.osd.update_state()
     end
 end
 
 function awesompd:command_volume_down()
     return function()
         self:command("volume -5", self.update_track)
-        self.osd.update_state()
     end
 end
 
@@ -776,28 +769,24 @@ end
 function awesompd:menu_toggle_random()
     return function()
         self:command("random", self.update_track)
-        self.osd.update_state()
     end
 end
 
 function awesompd:menu_toggle_repeat()
     return function()
         self:command("repeat", self.update_track)
-        self.osd.update_state()
     end
 end
 
 function awesompd:menu_toggle_single()
     return function()
         self:command("single", self.update_track)
-        self.osd.update_state()
     end
 end
 
 function awesompd:menu_toggle_consume()
     return function()
         self:command("consume", self.update_track)
-        self.osd.update_state()
     end
 end
 
