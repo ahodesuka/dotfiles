@@ -207,7 +207,7 @@ function awesompd:create(args)
 
     -- Widget configuration
     instance.widget:connect_signal("mouse::enter", function(c)
-        instance:update_track()
+        --instance:update_track()
         instance.osd.show()
     end)
     instance.widget:connect_signal("mouse::leave", function(c)
@@ -418,10 +418,11 @@ function awesompd:run()
 
     self.update_timer = timer({ timeout = 0.5 })
     self.update_timer:connect_signal("timeout", function()
+        self:start_idleloop()
         self:update_widget()
     end)
+    self.update_timer:start()
 
-    self:update_track()
     self:check_playlists()
     self:start_idleloop()
 end
@@ -1001,13 +1002,6 @@ function awesompd:update_track(file)
             end
         end
     end
-    if self:playing_or_paused() then
-        if not self.update_timer.started then
-            self.update_timer:start()
-        end
-    else
-        self.update_timer:stop()
-    end
     self:update_widget_text()
 end
 
@@ -1019,7 +1013,13 @@ function awesompd:start_idleloop()
             if e == "options" or e == "mixer" then
                 self.osd.show(5)
             end
+        end,
+        -- stderr, loop will end
+        function(e)
+            self:update_track()
+            self.idle_pid = nil
         end)
+        self:update_track()
     end
 end
 
