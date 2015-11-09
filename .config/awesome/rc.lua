@@ -56,7 +56,7 @@ naughty.config.presets.critical.fg = beautiful.fg_urgent
 naughty.config.presets.critical.border_color = beautiful.border_focus
 
 wall = wallpaper:create({
-    dir = os.getenv("HOME") .. "/Pictures/Wallpapers/mokou",
+    dir = "~/Pictures/Wallpapers/mokou",
     delay = 60 * 60 * 4, -- 4 hours
 })
 
@@ -120,7 +120,7 @@ menu = awful.menu({
 -- {{{ Widgets
 function make_fixed_textbox(w, a, t)
     local tb = wibox.widget.textbox()
-    local widget = wibox.layout.margin(tb, 1, 1, -1, 0)
+    local widget = wibox.layout.margin(tb, 0, 0, -1, 0)
     widget.tb = tb
     tb.fit = function(_, _, h) return w, h end
     if a then
@@ -185,7 +185,7 @@ mpd:register_buttons({
     { "", awesompd.MOUSE_RIGHT, mpd:command_show_menu() }
 })
 
-mpdwidget = wibox.layout.margin(mpd.widget, 1, 1, -1, 0)
+mpdwidget = wibox.layout.margin(mpd.widget, 0, 0, -1, 0)
 
 systray = wibox.widget.systray()
 

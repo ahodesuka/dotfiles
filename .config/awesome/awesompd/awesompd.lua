@@ -344,6 +344,7 @@ function awesompd:create_osd(args)
     -- if n is nil then it's shown until hide is called
     function self.osd.show(n)
         if self:playing_or_paused() and not (hovering and n) then
+            self.osd.update()
             hovering = n == nil
             if hide_timer then
                 hide_timer:stop()
@@ -356,6 +357,7 @@ function awesompd:create_osd(args)
     end
 
     function self.osd.update()
+        self:recalc_progress()
         local title = self.current_track.display_name
         local album = self.current_track.album
         local date = self.current_track.date
@@ -911,7 +913,6 @@ end
 -- Checks if notification should be shown and shows if positive.
 function awesompd:check_notify()
     if self.to_notify then
-        self.osd.update()
         self.osd.show(5)
         self.to_notify = false
     end

@@ -1,23 +1,24 @@
-highlight CmdLine background: #222; color: #e9e6e6; transition: all 0.25s;
+highlight CmdLine background: #1b1b1b; color: #e9e6e6; transition: all 0.25s;
 highlight CmdLine>* font-family: "ProFont";
 highlight CompDesc width: 500px; max-width: 500px; color: gray; font-family: "ProFont";
 highlight CompItem[selected] background: #222;
 highlight CompResult width: 500px; max-width: 500px; overflow: hidden; font-family: "ProFont";
 highlight ContentSeparator border-top: 1px solid #161616; display: -moz-box;
 highlight ErrorMsg color: white; background: #8f5b5b; font-weight: bold;
-highlight InfoMsg color: #c98dad; background: #222;
+highlight InfoMsg color: #c98dad; background: #1b1b1b;
 highlight ModeMsg color: #222; background: #9ebf7c; border-radius: 1px; padding: 3px 5px 0;
-highlight MoreMsg color: #9ebf7c; background: #222;
+highlight MoreMsg color: #9ebf7c; background: #1b1b1b;
 highlight NonText color: grey; min-height: 16px; padding-left: 2px; font-family: "ProFont";
 highlight Normal color: #e9e6e6; background: #1b1b1b;
 highlight PromptText color: #222; background: #c98dad; padding-top: 3px;
 highlight StatusLine color: #a49c9c; background: transparent; font-weight: normal;
-highlight WarningMsg color: #cf7275; background: #222;
+highlight WarningMsg color: #cf7275; background: #1b1b1b;
 
 inoremap <C-a> <C-Home><C-S-End>
 nnoremap > <C-i>
 nnoremap < <C-o>
-nmap <C-f> /
+nnoremap <C-f> /
+inoremap <C-f> <Esc>/
 nnoremap <C-h> <C-p>
 nnoremap <C-l> <C-Tab>
 nnoremap <S-h> :tabm -1<CR>

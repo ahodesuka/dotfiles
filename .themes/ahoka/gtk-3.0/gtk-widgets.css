@@ -183,10 +183,10 @@ GtkAssistant .sidebar {
                                       );
 
     color: @theme_fg_color;
-    box-shadow: inset 0 1px  alpha(shade(@bg_color, 1.65), 0.30),
-                inset 0 -1px alpha(shade(@bg_color, 1.65), 0.30),
-                inset 1px 0  alpha(shade(@bg_color, 1.65), 0.30),
-                inset -1px 0 alpha(shade(@bg_color, 1.65), 0.30);
+    box-shadow: inset 0 1px  alpha(shade(@bg_color, 1.75), 0.30),
+                inset 0 -1px alpha(shade(@bg_color, 1.75), 0.30),
+                inset 1px 0  alpha(shade(@bg_color, 1.75), 0.30),
+                inset -1px 0 alpha(shade(@bg_color, 1.75), 0.30);
 }
 
 .button:hover {
@@ -199,6 +199,10 @@ GtkAssistant .sidebar {
     border-right-color: shade(@theme_bg_color, 0.66);
     border-left-color: shade(@theme_bg_color, 0.66);
     border-bottom-color: shade(@theme_bg_color, 0.6);
+    box-shadow: inset 0 1px  alpha(shade(@bg_color, 1.95), 0.30),
+                inset 0 -1px alpha(shade(@bg_color, 1.95), 0.30),
+                inset 1px 0  alpha(shade(@bg_color, 1.95), 0.30),
+                inset -1px 0 alpha(shade(@bg_color, 1.95), 0.30);
 }
 
 .button:active,
@@ -241,6 +245,15 @@ GtkAssistant .sidebar {
                                       shade(@theme_bg_color, 0.90),
                                       shade(@theme_bg_color, 0.95)
                                       );
+}
+.button.flat {
+	border-color: transparent;
+	background-color: transparent;
+	background-image: none;
+	box-shadow: inset 0 1px rgba(255,255,255,0), 0 1px rgba(255,255,255,0);
+	text-shadow: none;
+	icon-shadow: none;
+	border-image: none; 
 }
 
 /***********************
@@ -973,7 +986,7 @@ GtkComboBox .menu {
  ***************/
 .menubar.menuitem,
 .menubar .menuitem {
-    padding: 4px;
+    padding: 4px 8px;
     border-width: 1px;
     border-style: solid;
     border-color: transparent;
@@ -1142,19 +1155,18 @@ GtkModelMenuItem GtkBox GtkImage {
 }
 
 .notebook tab {
-    padding: 3px;
+    padding: 5px;
     border-color: shade(@theme_base_color, 0.75);
     background-image: linear-gradient(to bottom,
-                                      shade(@theme_base_color, 0.95),
-                                      shade(@theme_base_color, 0.90)
+                                      shade(@bg_color, 1.10),
+                                      shade(@bg_color, 1.02)
                                       );
 }
 
 .notebook tab:active {
-    border-color: shade(@theme_base_color, 0.7);
     background-image: linear-gradient(to bottom,
-                                      shade(@theme_base_color, 0.95),
-                                      shade(@theme_base_color, 1.00)
+                                      shade(@bg_color, 1.45),
+                                      shade(@bg_color, 1.15)
                                       );
 }
 
@@ -1165,6 +1177,8 @@ GtkModelMenuItem GtkBox GtkImage {
 }
 
 .notebook tab.top:active {
+    box-shadow: inset 1px 1px alpha(shade(@bg_color, 1.95), 0.30),
+                inset -1px 0 alpha(shade(@bg_color, 1.95), 0.30);
 }
 
 .notebook tab.right {
@@ -1174,6 +1188,8 @@ GtkModelMenuItem GtkBox GtkImage {
 }
 
 .notebook tab.right:active {
+    box-shadow: inset 0 1px alpha(shade(@bg_color, 1.95), 0.30),
+                inset -1px -1px alpha(shade(@bg_color, 1.95), 0.30);
 }
 
 .notebook tab.bottom {
@@ -1183,6 +1199,8 @@ GtkModelMenuItem GtkBox GtkImage {
 }
 
 .notebook tab.bottom:active {
+    box-shadow: inset 1px 0 alpha(shade(@bg_color, 1.95), 0.30),
+                inset -1px -1px alpha(shade(@bg_color, 1.95), 0.30);
 }
 
 .notebook tab.left {
@@ -1192,6 +1210,8 @@ GtkModelMenuItem GtkBox GtkImage {
 }
 
 .notebook tab.left:active {
+    box-shadow: inset 1px 1px alpha(shade(@bg_color, 1.95), 0.30),
+                inset 0 -1px alpha(shade(@bg_color, 1.95), 0.30);
 }
 
 .notebook tab GtkLabel {
@@ -1851,6 +1871,11 @@ GtkSwitch.slider {
                                       shade(shade(@theme_bg_color, 1.02), 1.10),
                                       shade(shade(@theme_bg_color, 1.02), 0.95)
                                       );
+    box-shadow: inset 0 1px  alpha(shade(@bg_color, 1.75), 0.30),
+                inset 0 -1px alpha(shade(@bg_color, 1.75), 0.30),
+                inset 1px 0  alpha(shade(@bg_color, 1.75), 0.30),
+                inset -1px 0 alpha(shade(@bg_color, 1.75), 0.30);
+
 }
 
 GtkSwitch.slider:insensitive {
@@ -1859,6 +1884,10 @@ GtkSwitch.slider:insensitive {
                                       shade(@theme_bg_color, 1.04),
                                       shade(@theme_bg_color, 0.96)
                                       );
+    box-shadow: inset 0 1px  alpha(shade(@bg_color, 1.35), 0.30),
+                inset 0 -1px alpha(shade(@bg_color, 1.35), 0.30),
+                inset 1px 0  alpha(shade(@bg_color, 1.35), 0.30),
+                inset -1px 0 alpha(shade(@bg_color, 1.35), 0.30);
 }
 
 GtkSwitch.trough {
