@@ -7,16 +7,16 @@ nvidia-settings -l
 ## ENV VARIABLES ##
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
 export QT_STYLE_OVERRIDE="gtk"
-export XMODIFIERS=@im=SCIM
-export GTK_IM_MODULE="scim"
-export QT_IM_MODULE="scim"
+export XMODIFIERS="@im=ibus"
+export GTK_IM_MODULE="ibus"
+export QT_IM_MODULE="ibus"
 export BROWSER="firefox"
 export EDITOR="gvim"
 
 ## DAEMONS ##
 compton -b
 mpd
-scim -d
+/usr/bin/thunar --daemon &
 
 ## PROGRAMS ##
 irc-start       &

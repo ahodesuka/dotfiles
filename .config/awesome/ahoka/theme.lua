@@ -26,7 +26,14 @@ theme.menu_border_color = "#161616"
 
 theme.useless_gap = 6
 theme.tasklist_disable_icon = true
+theme.tasklist_sticky = ""
+theme.tasklist_ontop = ""
+theme.tasklist_above = ""
+theme.tasklist_below = ""
 theme.tasklist_floating = ""
+theme.tasklist_maximized = ""
+theme.tasklist_maximized_horizontal = ""
+theme.tasklist_maximized_vertical = ""
 
 theme.taglist_squares_sel   = confdir .. "/icons/taglist/squarefza.png"
 theme.taglist_squares_unsel = confdir .. "/icons/taglist/squareza.png"
@@ -41,15 +48,8 @@ theme.widget_mpd        = confdir .. "/icons/vicious/note.png"
 
 theme.layout_tile       = confdir .. "/icons/layouts/tile.png"
 theme.layout_tileleft   = confdir .. "/icons/layouts/tileleft.png"
-theme.layout_tilebottom = confdir .. "/icons/layouts/tilebottom.png"
-theme.layout_tiletop    = confdir .. "/icons/layouts/tiletop.png"
-theme.layout_fairv      = confdir .. "/icons/layouts/fairv.png"
-theme.layout_fairh      = confdir .. "/icons/layouts/fairh.png"
 theme.layout_spiral     = confdir .. "/icons/layouts/spiral.png"
 theme.layout_dwindle    = confdir .. "/icons/layouts/dwindle.png"
-theme.layout_max        = confdir .. "/icons/layouts/max.png"
-theme.layout_fullscreen = confdir .. "/icons/layouts/fullscreen.png"
-theme.layout_magnifier  = confdir .. "/icons/layouts/magnifier.png"
 theme.layout_floating   = confdir .. "/icons/layouts/floating.png"
 
 theme.menu_submenu_icon = confdir .. "/icons/menu/sub_menu.png"
@@ -62,4 +62,3 @@ theme.menu_reboot       = confdir .. "/icons/menu/reboot.png"
 theme.menu_shutdown     = confdir .. "/icons/menu/shutdown.png"
 
 return theme
-

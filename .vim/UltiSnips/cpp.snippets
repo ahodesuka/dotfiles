@@ -32,7 +32,6 @@ class ${1:`!p snip.rv = snip.basename or "name"`}
 public:
 	${1/(\w+).*/$1/}(${2:arguments});
 	virtual ~${1/(\w+).*/$1/}();
-
 private:
 	${0:/* data */}
 };
@@ -52,4 +51,42 @@ do
 	${2}
 }
 while (${1:/* condition */});
+endsnippet
+
+# switch
+snippet switch
+	switch (${1:/* variable */})
+	{
+		case ${2:/* variable case */}:
+			${3}
+			${4:break;}${5}
+		default:
+			${6}
+	}
+endsnippet
+
+# switch without default
+snippet switchndef
+	switch (${1:/* variable */})
+	{
+		case ${2:/* variable case */}:
+			${3}
+			${4:break;}${5}
+	}
+endsnippet
+
+snippet ns "namespace .. (namespace)"
+namespace${1/.+/ /m}${1:`!p snip.rv = snip.basename or "name"`}
+{
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet copy "std::copy"
+std::copy(${1}.cbegin(), ${2}.cend(), std::ostream_iterator<${3:std::string}>(${4:std::cout}, ${5:"\n"}));
+endsnippet
+
+# #include <...>
+snippet inc
+#include <${1:iostream}>
 endsnippet

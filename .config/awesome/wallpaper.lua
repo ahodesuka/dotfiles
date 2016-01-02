@@ -12,7 +12,8 @@ function wallpaper:create(args)
     local i = 1
     instance.files = { }
     args.dir = string.gsub(args.dir, " ", "\\ ")
-    for f in io.popen("find '" .. args.dir .. "' -type f"):lines() do
+    local cmd = "find " .. args.dir .. " -type f -iregex '.*\.\\(png\\|jpg\\)'"
+    for f in io.popen(cmd):lines() do
         instance.files[i] = f
         i = i + 1
     end

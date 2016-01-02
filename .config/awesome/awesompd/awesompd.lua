@@ -316,6 +316,8 @@ function awesompd:create_osd(args)
                           ontop = true,
                         })
     self.osd.wb:set_widget(top_layout)
+    self.osd.wb:buttons(awful.util.table.join(
+        awful.button({}, 3, function() self.osd.hide() end)))
 
     self.osd.wb:connect_signal("mouse::enter", function(c)
         self.osd.show()
@@ -1009,17 +1011,23 @@ end
 function awesompd:start_idleloop()
     if not self.idle_pid then
         local cmd = self:mpcquery(true) .. "idleloop mixer options player playlist"
-        self.idle_pid = awful.spawn.with_line_callback(cmd, function(e)
-            self:update_track()
-            if e == "options" or e == "mixer" then
-                self.osd.show(5)
+        self.idle_pid = awful.spawn.with_line_callback(cmd, {
+            stdout = function(e)
+                self:update_track()
+                if e == "options" or e == "mixer" then
+                    self.osd.show(5)
+                end
+            end,
+            -- stderr, loop will end
+            stderr = function(e)
+                self:update_track()
+                self.idle_pid = nil
+            end,
+            exit = function(e)
+                self:update_track()
+                self.idle_pid = nil
             end
-        end,
-        -- stderr, loop will end
-        function(e)
-            self:update_track()
-            self.idle_pid = nil
-        end)
+        })
         self:update_track()
     end
 end

@@ -13,13 +13,13 @@ alias patchAnime="find -type f -name '*.xdelta' -maxdepth 1 -exec xdelta3 -d '{}
 alias make="make -j5"
 alias gdb="gdb -q"
 alias du="cdu -d ch"
+alias mpv="mpv --msg-level=ffmpeg=error"
 
 function u2space()
 {
     for file in *; do
-        if [ "$file" != "${file//_/ }" ]; then
-            echo Renaming "$file" to "${file//_/ }"
-            mv "$file" "${file//_/ }"
+        if [ "$file" != "${file/_/ }" ]; then
+            mv -v "$file" "${file/_/ }"
         fi
     done
 }
@@ -56,11 +56,17 @@ unsetopt equals
 
 zstyle ":completion::complete:*" use-cache 1
 
+# Home
 bindkey "[1~" beginning-of-line
+# End
 bindkey "[4~" end-of-line
+# Ins
 bindkey "[2~" overwrite-mode
+# Del
 bindkey "[3~" delete-char
+# Pg Up
 bindkey "[5~" history-beginning-search-backward
+# Pg Down
 bindkey "[6~" history-beginning-search-forward
 
 function precmd { print -Pn "\e]0;%n@%M:%~\a" }

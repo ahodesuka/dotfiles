@@ -1,9 +1,9 @@
 set nocp
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
 " General plugins {{{
 Plugin 'scrooloose/syntastic'
@@ -24,8 +24,8 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'Raimondi/delimitMate'
 Plugin 'oblitum/rainbow'
-Plugin 'godlygeek/tabular'
-Plugin 'antoyo/vim-licenses'
+Plugin 'junegunn/vim-easy-align'
+"Plugin 'antoyo/vim-licenses'
 " }}}
 
 " Language specific plugins {{{
@@ -46,6 +46,9 @@ Plugin 'tikhomirov/vim-glsl'
 " Ruby
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'noprompt/vim-yardoc'
+
+" Lua
+Plugin 'raymond-w-ko/vim-lua-indent'
 
 " Web
 Plugin 'hail2u/vim-css3-syntax'
@@ -91,6 +94,8 @@ set switchbuf+=usetab,newtab
 set title
 set t_Co=256
 set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,euc-jp,sjis,default,latin1
+set ff=unix
 set tw=120
 set wrap
 set linebreak
@@ -175,6 +180,12 @@ nnoremap <space> za
 " space creates folds in visual mode
 vnoremap <space> zf
 
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 " autocomplete mappings
 let g:ulti_expand_or_jump_res = 0
 function! CRCompleteFunc()
@@ -207,17 +218,16 @@ let g:indentLine_color_tty = 236
 let g:localvimrc_ask = 0
 
 let g:load_doxygen_syntax = 1
-let g:DoxygenToolkit_endCommentBlock = '**/'
-let g:DoxygenToolkit_endCommentTag = '**/'
+let g:DoxygenToolkit_commentType = 'C++'
 
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_extra_conf_globlist = ['/media/Misc/Documents/Git/*']
 " UltiSnips seems have issues with py3
 " https://github.com/Valloric/YouCompleteMe/issues/1214
 let g:UltiSnipsUsePythonVersion = 2
-let g:UltiSnipsJumpForwardTrigger = "<Tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
-let g:UltiSnipsEditSplit = "vertical"
+let g:UltiSnipsJumpForwardTrigger = '<Tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
+let g:UltiSnipsEditSplit = 'vertical'
 
 let delimitMate_expand_cr = 2
 let delimitMate_expand_space = 1
@@ -255,12 +265,12 @@ let g:session_persist_globals = [ '&expandtab' ]
 
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 " Trim trailing whitespace
-au BufWritePre * :%s/\s\+$//e | :call histdel('/', -1)
+au FileType c,cpp,coffee,java,ruby,python,sh au BufWritePre * :%s/\s\+$//e | :call histdel('/', -1)
 
 au BufRead,BufNewFile *.md setl spell
 au FileType gitcommit setl spell
 
-au FileType c,cpp,html,javascript call rainbow#load()
+au FileType c,cpp call rainbow#load()
 au FileType coffee,html,python,ruby,sh,xml setl shiftwidth=2 softtabstop=2 tabstop=2
 au FileType css set omnifunc=csscomplete#CompleteCSS | setlocal iskeyword+=-
 

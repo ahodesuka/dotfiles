@@ -1,0 +1,113 @@
+defaults.pcm.rate_converter "samplerate_medium"
+
+pcm.!default {
+  type plug
+  slave.pcm "softvol"
+}
+ctl.!default {
+  type hw
+  card 0
+}
+
+# main output
+pcm.dmixer {
+  type dmix
+  ipc_key 1024
+  slave {
+    pcm "hw:0,0"
+    format S16_LE
+    period_time 0
+    period_size 1024
+    buffer_size 8192
+    rate 48000
+  }
+  bindings {
+    0 0
+    1 1
+  }
+}
+ctl.dmixer {
+  type hw
+  card 0
+}
+
+# input
+pcm.dsnooper {
+  type dsnoop
+  ipc_key 1024
+  slave {
+    pcm "hw:2,0"
+    period_time 0
+    period_size 1024
+    buffer_size 8192
+  }
+}
+ctl.dsnooper {
+  type hw
+  card 0
+}
+
+# software volume
+pcm.softvol {
+  type softvol
+  slave {
+    pcm "dmixer"
+  }
+  control {
+    name "SoftMaster"
+    card 0
+  }
+}
+ctl.softvol {
+  type hw
+  card 0
+}
+
+# mpd volume control
+pcm.mpd {
+  type softvol
+  slave {
+    pcm "dmixer"
+  }
+  control {
+    name "MPD"
+    card 0
+  }
+}
+ctl.mpdvol {
+  type hw
+  card 0
+}
+
+# mpv volume control
+pcm.mpv {
+  type softvol
+  slave {
+    pcm "dmixer"
+  }
+  control {
+    name "MPV"
+    card 0
+  }
+}
+ctl.mpvvol {
+  type hw
+  card 0
+}
+
+
+# skype volume control
+pcm.skype {
+  type softvol
+  slave {
+    pcm "dmixer"
+  }
+  control {
+    name "Skype"
+    card 0
+  }
+}
+ctl.skypevol {
+  type hw
+  card 0
+}

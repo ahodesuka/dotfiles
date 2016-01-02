@@ -20,6 +20,14 @@ local wallpaper = require("wallpaper")
 -- have focus on events such as tag switching, client unmanaging, etc.
 require("awful.autofocus")
 
+-- Useless gap even if there is 1 client.
+local getgap = awful.tag.getgap
+function awful.tag.getgap(t, numclients)
+    return getgap(t, 42)
+end
+
+awful.util.spawn_with_shell("ibus-daemon -drx")
+
 -- {{{ Error handling
 -- Startup
 if awesome.startup_errors then
@@ -81,14 +89,14 @@ tags.settings = {
     {
         { name = "東", props = { layout = settings.layouts[2], mwfact = .6805 } },
         { name = "南", props = { layout = settings.layouts[2], mwfact = .6805 } },
-        { name = "西", props = { layout = settings.layouts[1], mwfact = .6805 } },
+        { name = "西", props = { layout = settings.layouts[2], mwfact = .6805 } },
         { name = "北", props = { layout = settings.layouts[1], mwfact = .6805 } },
     },
     {
         { name = "東", props = { layout = settings.layouts[1], mwfact = .6805 } },
         { name = "南", props = { layout = settings.layouts[1], mwfact = .6805 } },
-        { name = "西", props = { layout = settings.layouts[2], mwfact = .6805 } },
-        { name = "北", props = { layout = settings.layouts[2], mwfact = .6805 } },
+        { name = "西", props = { layout = settings.layouts[1], mwfact = .6805 } },
+        { name = "北", props = { layout = settings.layouts[1], mwfact = .6805 } },
     },
 }
 
@@ -430,7 +438,6 @@ awful.rules.rules =
             class =
             {
                 "Ahoviewer",
-                "Ampv",
                 "Anidbmini",
                 "Awf-gtk2",
                 "Blender",
@@ -466,12 +473,14 @@ awful.rules.rules =
         {
             class =
             {
+                "Borderlands2",
                 "csgo_linux",
                 "Civ5XP",
                 "dota_linux",
                 "dota2",
                 "Plugin-container",
                 "scrot",
+                "ShadowOfMordor",
                 "starbound",
                 "Steam",
                 "Terraria.bin.x86_64",
@@ -492,10 +501,15 @@ awful.rules.rules =
         {
             class =
             {
+                "Borderlands2",
                 "csgo_linux",
                 "Civ5XP",
+                "Darkest.exe",
                 "dota_linux",
                 "dota2",
+                "Hearthstone.exe",
+                "HeroesOfTheStorm.exe",
+                "ShadowOfMordor",
                 "starbound",
                 "Terraria.bin.x86_64",
                 "Torchlight.bin.x86_64",
@@ -508,7 +522,41 @@ awful.rules.rules =
         },
         properties = { x = 0, y = 0, screen = 1 }
     },
-    { rule = { instance = "sun-awt-X11-XWindowPeer" }, properties = { border_width = 0, floating = true, focusable = false, ontop = true, skip_taskbar = true } },
+    {
+        rule_any = {
+            class =
+            {
+                "mpv",
+            },
+        },
+        properties = {
+            screen = screen.count()
+        }
+    },
+    {
+        rule_any = {
+            class =
+            {
+                "RCT.EXE",
+            },
+        },
+        properties = {
+            width = 1270,
+            height = 800,
+        }
+    },
+    {
+        rule_any = {
+            instance = { "sun-awt-X11-XWindowPeer" }
+        },
+        properties = {
+            border_width = 0,
+            floating = true,
+            focusable = false,
+            ontop = true,
+            skip_taskbar = true
+        }
+    },
     { rule = { class = "Thunar", name = "File Operation Progress" }, properties = { floating = true } },
     { rule = { class = "Firefox" }, except = { instance = "Navigator" }, properties = { floating = true } },
     { rule = { class = "VirtualBox", name = "Windows 7.*VirtualBox" }, properties = { border_width = 0, floating = true, skip_taskbar = true } },

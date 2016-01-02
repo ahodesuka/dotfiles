@@ -24,13 +24,14 @@
     .boardBanner,
     .bottomCtrl,
     .pagelist,
+    #togglePostFormLink,
     #boardNavDesktopFoot,
     #qr .close,
     #blotter,
     #absbot {
         display:none!important;
     }
-    
+
     :root .fixed.bottom-header body {
         padding-bottom:1em!important;
     }
@@ -72,9 +73,9 @@
         border-radius:0 0 0 4px!important;
     }
     .menu-button + .container:not(:empty) {
-        margin-left:0!important;
+        padding-left:4px!important;
     }
-    
+
     :root s .quote:not(:hover),
     :root s a:not(:hover) {
         color:#000!important;
@@ -308,7 +309,7 @@
     #updater .move {
         cursor:default!important;
     }
-    
+
     #custom-board-list a {
         border-top:1px transparent!important;
         padding:5px 1px 1px!important;
@@ -353,11 +354,30 @@
         margin-top:0!important;
         margin-right:0!important;
     }
-    .menu-button + .container :first-child {
-        margin-left:0!important;
-    }
+
     :root .catalog-thread > .subject {
         line-height:12px!important;
+    }
+
+    .fileText {
+        display:flex;
+    }
+    .fileText .exsauce {
+        order:99;
+        padding-left:4px;
+    }
+
+    a.filtered {
+        text-decoration:line-through!important;
+    }
+
+    .centered-links:root #shortcuts {
+        width:350px!important;
+    }
+
+    /* 4chan x watch icon */
+    :root .watch-thread-link {
+       background-image: url("data:image/svg+xml,<svg viewBox='0 0 26 26' preserveAspectRatio='true' xmlns='http://www.w3.org/2000/svg'><path fill='rgb(207,114,117)' d='M24.132,7.971c-2.203-2.205-5.916-2.098-8.25,0.235L15.5,8.588l-0.382-0.382c-2.334-2.333-6.047-2.44-8.25-0.235c-2.204,2.203-2.098,5.916,0.235,8.249l8.396,8.396l8.396-8.396C26.229,13.887,26.336,10.174,24.132,7.971z'/></svg>")!important;
     }
 
     /* Pretty Print */
@@ -409,9 +429,27 @@
         text-decoration:none;
         border-bottom:1px dashed;
     }
-    
-    :root .watch-thread-link {
-       background-image: url("data:image/svg+xml,<svg viewBox='0 0 26 26' preserveAspectRatio='true' xmlns='http://www.w3.org/2000/svg'><path fill='rgb(207,114,117)' d='M24.132,7.971c-2.203-2.205-5.916-2.098-8.25,0.235L15.5,8.588l-0.382-0.382c-2.334-2.333-6.047-2.44-8.25-0.235c-2.204,2.203-2.098,5.916,0.235,8.249l8.396,8.396l8.396-8.396C26.229,13.887,26.336,10.174,24.132,7.971z'/></svg>")!important;
+
+    /* Offline page */
+    html {
+        background:none;
+    }
+    #hd {
+        display:none;
+    }
+    #bd {
+        margin-top:15%;
+    }
+    #bd > .box-outer {
+        background-color:#222;
+        border-color:#161616;
+    }
+    #bd .boxbar {
+        background-color:#161616;
+    }
+    #bd .boxbar,
+    #bd .boxcontent,
+    #bd .show_content[style*="#800"] {
+        color:#e9e6e6!important;
     }
 }
-

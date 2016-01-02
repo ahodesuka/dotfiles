@@ -191,7 +191,16 @@ def_key "j"
 #  select_item
 #
 #def_key "enter"
-#  press_enter
+#  enter_directory
+#
+#def_key "enter"
+#  toggle_output
+#
+#def_key "enter"
+#  run_action
+#
+#def_key "enter"
+#  play_item
 #
 #def_key "space"
 #  add_item_to_playlist
@@ -211,26 +220,26 @@ def_key "j"
 #def_key "delete"
 #  delete_stored_playlist
 #
-#def_key "right"
-#  next_column
-#
-#def_key "right"
-#  slave_screen
-#
-#def_key "right"
-#  volume_up
+def_key "l"
+  next_column
+
+def_key "l"
+  slave_screen
+
+def_key "l"
+  volume_up
 #
 #def_key "+"
 #  volume_up
 #
-#def_key "left"
-#  previous_column
-#
-#def_key "left"
-#  master_screen
-#
-#def_key "left"
-#  volume_down
+def_key "h"
+  previous_column
+
+def_key "h"
+  master_screen
+
+def_key "h"
+  volume_down
 #
 #def_key "-"
 #  volume_down
@@ -421,8 +430,8 @@ def_key "j"
 #def_key "g"
 #  jump_to_position_in_song
 #
-#def_key "l"
-#  show_lyrics
+def_key "L"
+  show_lyrics
 #
 #def_key "ctrl-v"
 #  select_range
