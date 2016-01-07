@@ -102,6 +102,7 @@ ask_for_locked_screen_width_part = "no"
 
 # Others
 ncmpcpp_directory = "~/.config/ncmpcpp"
+lyrics_directory = "~/.config/ncmpcpp/lyrics"
 mpd_host = "localhost"
 mpd_port = "6600"
 mpd_connection_timeout = "5"
