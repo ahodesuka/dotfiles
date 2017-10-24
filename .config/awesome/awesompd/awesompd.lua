@@ -1,11 +1,14 @@
 ---------------------------------------------------------------------------
 -- @author Alexander Yakushev <yakushev.alex@gmail.com>
 -- @copyright 2010-2013 Alexander Yakushev
+-- @copyright 2013-2017 ahoka
+-- Heavily reworked with the addition of a fancy OSD
 -- @release v1.2.4
 ---------------------------------------------------------------------------
 
 local wibox = require("wibox")
 local awful = require("awful")
+local gears = require("gears")
 local beautiful = require("beautiful")
 local format = string.format
 
@@ -201,7 +204,7 @@ function awesompd:create(args)
     -- Cleanup mpc idleloop call on exit/restart
     awesome.connect_signal("exit", function()
         if instance.idle_pid then
-            awful.util.spawn("kill " .. instance.idle_pid)
+            awful.spawn("kill " .. instance.idle_pid)
         end
     end)
 
@@ -246,7 +249,7 @@ function awesompd:create_osd(args)
         y = scrgeom.y + scrgeom.height + y - height
     end
 
-    local with_margins = wibox.layout.margin
+    local with_margins = wibox.container.margin
 
     local cover_img = wibox.widget.imagebox()
     local top_layout = wibox.layout.fixed.horizontal()
@@ -260,16 +263,20 @@ function awesompd:create_osd(args)
     local album_text = wibox.widget.textbox()
 
     -- This height would need to be adjusted for larger fonts
-    local track = wibox.layout.constraint(track_text, "max", width, 18)
-    local album = wibox.layout.constraint(album_text, "max", width, 18)
+    local track = wibox.container.constraint(track_text, "max", width, 18)
+    local album = wibox.container.constraint(album_text, "max", width, 18)
 
     track_text:set_ellipsize("middle")
     album_text:set_ellipsize("middle")
 
-    local progress_bar = awful.widget.progressbar({ height = 2, border_width = 0 })
-    progress_bar:set_background_color(args.bar_bg_color or "#444444")
-    progress_bar:set_color(args.bar_fg_color or "#aaaaaa")
-    progress_bar:set_max_value(100)
+    local progress_bar = wibox.widget {
+        max_value = 100,
+        forced_height = 2,
+        border_width = 0,
+        background_color = args.bar_bg_color or "#444444",
+        color = args.bar_fg_color or "#aaaaaa",
+        widget = wibox.widget.progressbar
+    }
 
     local state_text = wibox.widget.textbox()
     state_text:set_align("right")
@@ -331,12 +338,11 @@ function awesompd:create_osd(args)
         hovering = false
         n = n or 0
         if n > 0 then
-            hide_timer = timer({ timeout = n })
+            hide_timer = gears.timer({ timeout = n, autostart = true })
             hide_timer:connect_signal("timeout", function()
                 hide_timer:stop()
                 self.osd.wb.visible = false
             end)
-            hide_timer:start()
         else
             self.osd.wb.visible = false
         end
@@ -348,7 +354,7 @@ function awesompd:create_osd(args)
         if self:playing_or_paused() and not (hovering and n) then
             self.osd.update()
             hovering = n == nil
-            if hide_timer then
+            if hide_timer and hide_timer.started then
                 hide_timer:stop()
             end
             self.osd.wb.visible = true
@@ -418,9 +424,9 @@ function awesompd:run()
         self.icon_widget:set_image(self.widget_icon)
         self.widget:add(self.icon_widget)
     end
-    self.widget:add(wibox.layout.constraint(self.text_widget, "max", self.max_width, nil))
+    self.widget:add(wibox.container.constraint(self.text_widget, "max", self.max_width, nil))
 
-    self.update_timer = timer({ timeout = 0.5 })
+    self.update_timer = gears.timer({ timeout = 0.5 })
     self.update_timer:connect_signal("timeout", function()
         self:start_idleloop()
         self:update_widget()

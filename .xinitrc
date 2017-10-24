@@ -10,24 +10,26 @@ export QT_STYLE_OVERRIDE="gtk"
 export XMODIFIERS="@im=ibus"
 export GTK_IM_MODULE="ibus"
 export QT_IM_MODULE="ibus"
-export BROWSER="firefox"
-export EDITOR="gvim"
+export BROWSER="/usr/bin/firefox"
+export EDITOR="/usr/bin/gvim"
 
 ## DAEMONS ##
 compton -b
 mpd
 /usr/bin/thunar --daemon &
+ibus-daemon -drx
+transmission-daemon
 
 ## PROGRAMS ##
 irc-start       &
-dpmscheck       &
 parcellite      &
 thunderbird     &
-transmission -m &
+ckb -b          &
+steam           &
 
 ## WM ##
 case $1 in
 *)
-    exec awesome
+    exec awesome >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
     ;;
 esac

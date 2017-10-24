@@ -12,6 +12,7 @@ Plugin 'xolox/vim-misc'
 Plugin 'embear/vim-localvimrc'
 Plugin 'xolox/vim-session'
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
@@ -221,10 +222,8 @@ let g:load_doxygen_syntax = 1
 let g:DoxygenToolkit_commentType = 'C++'
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-let g:ycm_extra_conf_globlist = ['/media/Misc/Documents/Git/*']
-" UltiSnips seems have issues with py3
-" https://github.com/Valloric/YouCompleteMe/issues/1214
-let g:UltiSnipsUsePythonVersion = 2
+let g:ycm_extra_conf_globlist = ['~/Git/*']
+let g:UltiSnipsUsePythonVersion = 3
 let g:UltiSnipsJumpForwardTrigger = '<Tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 let g:UltiSnipsEditSplit = 'vertical'

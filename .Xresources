@@ -2,8 +2,8 @@ Xft.dpi:                96
 Xft.antialias:          true
 Xft.hinting:            true
 Xft.rgba:               rgb
-Xft.autohint:           false
-Xft.hintstyle:          hintfull
+Xft.autohint:           true
+Xft.hintstyle:          hintslight
 Xft.lcdfilter:          lcddefault
 Xcursor.theme:          OpenZone_Fire
 
@@ -59,7 +59,7 @@ URxvt*color13:          #c98dad
 URxvt*color6:           #60898f
 URxvt*color14:          #8ab4be
 !White
-URxvt*color7:           #a49c9c
+URxvt*color7:           #bcb9b9
 URxvt*color15:          #e9e6e6
 
 URxvt.perl-lib:         /home/mokou/.config/urxvt

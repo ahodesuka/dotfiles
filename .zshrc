@@ -18,8 +18,8 @@ alias mpv="mpv --msg-level=ffmpeg=error"
 function u2space()
 {
     for file in *; do
-        if [ "$file" != "${file/_/ }" ]; then
-            mv -v "$file" "${file/_/ }"
+        if [ "$file" != "${file//_/ }" ]; then
+            mv -v "$file" "${file//_/ }"
         fi
     done
 }
@@ -38,7 +38,10 @@ function mkcdir()
 autoload -U compinit && compinit
 source ~/.npm-completion.sh
 
-autoload -U url-quote-magic
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+
+autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
 
 export HISTSIZE=10000

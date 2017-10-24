@@ -9,9 +9,11 @@ function wallpaper:create(args)
     setmetatable(instance,self)
     self.__index = self
 
+    math.randomseed(os.time())
+
     instance.dir = string.gsub(args.dir, " ", "\\ ")
 
-    instance.timer = timer({ timeout = args.delay or 60 * 60 })
+    instance.timer = gears.timer({ timeout = args.delay or 60 * 60 })
     instance.timer:connect_signal("timeout", function()
         instance:new_wall()
     end)
@@ -24,7 +26,7 @@ end
 function wallpaper:new_wall()
     self.files = { }
     local i = 1
-    local cmd = "find " .. self.dir .. " -type f -iregex '.*\.\\(png\\|jpg\\)'"
+    local cmd = "find " .. self.dir .. " -type f -iname '*.png'"
     for f in io.popen(cmd):lines() do
         self.files[i] = f
         i = i + 1
@@ -34,7 +36,11 @@ function wallpaper:new_wall()
     if #self.files > 1 then
         i = math.random(1, #self.files)
         if self.files[i] == self.current then
-            i = i ~= 1 and i + 1 or i - 1
+            if i ~= 1 or i == #self.files then
+                i = i - 1
+            else
+                i = i + 1
+            end
         end
     end
 

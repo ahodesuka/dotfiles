@@ -34,6 +34,7 @@ theme.tasklist_floating = ""
 theme.tasklist_maximized = ""
 theme.tasklist_maximized_horizontal = ""
 theme.tasklist_maximized_vertical = ""
+theme.tasklist_align = "center"
 
 theme.taglist_squares_sel   = confdir .. "/icons/taglist/squarefza.png"
 theme.taglist_squares_unsel = confdir .. "/icons/taglist/squareza.png"

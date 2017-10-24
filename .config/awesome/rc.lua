@@ -6,7 +6,10 @@ local tasklist  = { }
 local layoutbox = { }
 local settings  = { }
 
+require("awful.autofocus")
+
 local awful     = require("awful")
+local gears     = require("gears")
 awful.rules     = require("awful.rules")
 local wibox     = require("wibox")
 local beautiful = require("beautiful")
@@ -14,19 +17,6 @@ local naughty   = require("naughty")
 local vicious   = require("vicious")
 local awesompd  = require("awesompd/awesompd")
 local wallpaper = require("wallpaper")
-
--- autofocus:
--- When loaded, this module makes sure that there's always a client that will
--- have focus on events such as tag switching, client unmanaging, etc.
-require("awful.autofocus")
-
--- Useless gap even if there is 1 client.
-local getgap = awful.tag.getgap
-function awful.tag.getgap(t, numclients)
-    return getgap(t, 42)
-end
-
-awful.util.spawn_with_shell("ibus-daemon -drx")
 
 -- {{{ Error handling
 -- Startup
@@ -56,8 +46,10 @@ end
 beautiful.init(awful.util.getdir("config") .. "/ahoka/theme.lua")
 
 naughty.config.defaults.timeout = 5
-naughty.config.defaults.screen = screen.count()
+naughty.config.defaults.screen = 2
 naughty.config.defaults.position = "top_right"
+
+naughty.config.presets.normal.icon_size = 64
 
 naughty.config.presets.critical.bg = beautiful.bg_normal
 naughty.config.presets.critical.fg = beautiful.fg_urgent
@@ -87,16 +79,16 @@ settings.layouts    =
 -- {{{ Tags
 tags.settings = {
     {
-        { name = "東", props = { layout = settings.layouts[2], mwfact = .6805 } },
-        { name = "南", props = { layout = settings.layouts[2], mwfact = .6805 } },
-        { name = "西", props = { layout = settings.layouts[2], mwfact = .6805 } },
-        { name = "北", props = { layout = settings.layouts[1], mwfact = .6805 } },
+        { name = "東", props = { layout = settings.layouts[2], master_width_factor = .6815 } },
+        { name = "南", props = { layout = settings.layouts[2], master_width_factor = .6815 } },
+        { name = "西", props = { layout = settings.layouts[2], master_width_factor = .6815 } },
+        { name = "北", props = { layout = settings.layouts[1], master_width_factor = .6815 } },
     },
     {
-        { name = "東", props = { layout = settings.layouts[1], mwfact = .6805 } },
-        { name = "南", props = { layout = settings.layouts[1], mwfact = .6805 } },
-        { name = "西", props = { layout = settings.layouts[1], mwfact = .6805 } },
-        { name = "北", props = { layout = settings.layouts[1], mwfact = .6805 } },
+        { name = "東", props = { layout = settings.layouts[1], master_width_factor = .6815 } },
+        { name = "南", props = { layout = settings.layouts[1], master_width_factor = .6815 } },
+        { name = "西", props = { layout = settings.layouts[1], master_width_factor = .6815 } },
+        { name = "北", props = { layout = settings.layouts[1], master_width_factor = .6815 } },
     },
 }
 
@@ -128,14 +120,14 @@ menu = awful.menu({
 -- {{{ Widgets
 function make_fixed_textbox(w, a, t)
     local tb = wibox.widget.textbox()
-    local widget = wibox.layout.margin(tb, 0, 0, -1, 0)
+    local widget = wibox.container.margin(tb, 0, 0, -1, 0)
     widget.tb = tb
     tb.fit = function(_, _, h) return w, h end
     if a then
-        tb:set_align(a)
+        tb.align = a
     end
     if t then
-        tb:set_markup(t)
+        tb.markup = t
     end
     return widget
 end
@@ -178,7 +170,7 @@ mpd = awesompd:create({
     rdecorator = "",
     -- OSD config
     osd = {
-        screen = screen.count(),
+        screen = naughty.config.defaults.screen,
         x = -10, -- 10px from right edge
         y = settings.bar_height + 10,
         bar_bg_color = beautiful.bg_focus,
@@ -193,9 +185,10 @@ mpd:register_buttons({
     { "", awesompd.MOUSE_RIGHT, mpd:command_show_menu() }
 })
 
-mpdwidget = wibox.layout.margin(mpd.widget, 0, 0, -1, 0)
+mpdwidget = wibox.container.margin(mpd.widget, 0, 0, -1, 0)
 
 systray = wibox.widget.systray()
+systray:set_screen(screen[screen.count()])
 
 taglist.buttons = awful.util.table.join(
     awful.button({ }, 1, awful.tag.viewonly),
@@ -234,7 +227,7 @@ tasklist.buttons = awful.util.table.join(
     end)
 )
 
-for s = 1, screen.count() do
+awful.screen.connect_for_each_screen(function(s)
     promptbox[s] = awful.widget.prompt()
     layoutbox[s] = awful.widget.layoutbox(s)
     layoutbox[s]:buttons(awful.util.table.join(
@@ -246,18 +239,16 @@ for s = 1, screen.count() do
 
     local left_layout  = wibox.layout.fixed.horizontal()
     local right_layout = wibox.layout.fixed.horizontal()
-    statusbar[s] = awful.wibox(
+    statusbar[s] = awful.wibar(
     {
         position = "top",
         height = settings.bar_height,
-        fg = beautiful.fg_normal,
-        bg = beautiful.bg_normal,
         screen = s
     })
     left_layout:add(taglist[s])
     left_layout:add(promptbox[s])
     left_layout:add(layoutbox[s])
-    if s == screen.count() then
+    if s.index == 2 then
         right_layout:add(padding)
         right_layout:add(mpdicon)
         right_layout:add(mpdwidget)
@@ -285,7 +276,7 @@ for s = 1, screen.count() do
     layout:set_middle(tasklist[s])
     layout:set_right(right_layout)
     statusbar[s]:set_widget(layout)
-end
+end)
 -- }}}
 
 -- {{{ Mouse and Key Bindings
@@ -305,6 +296,7 @@ local globalkeys = awful.util.table.join(
     awful.key({ settings.modkey            }, "f",              function() awful.spawn(settings.browser) end),
     awful.key({ settings.modkey            }, "e",              function() awful.spawn(settings.fileman) end),
     awful.key({ "Control", "Shift"         }, "Escape",         function() awful.spawn(settings.taskman) end),
+    awful.key({ "Control",                 }, "Print",          function() awful.spawn.with_shell("sleep 0.5s && scrot -sa") end),
     awful.key({ settings.modkey, "Control" }, "r",              awesome.restart),
     awful.key({ settings.modkey, "Shift"   }, "q",              awesome.quit),
     awful.key({ settings.modkey,           }, "Tab",            function()
@@ -340,7 +332,11 @@ local globalkeys = awful.util.table.join(
     awful.key({ settings.modkey, "Mod1"    }, "k",              function() awful.screen.focus_relative(1)         end),
     awful.key({ settings.modkey            }, "space",          function() awful.layout.inc(settings.layouts, 1)  end),
     awful.key({ settings.modkey, "Shift"   }, "space",          function() awful.layout.inc(settings.layouts, -1) end),
-    awful.key({ settings.modkey            }, "r",              function() promptbox[mouse.screen]:run()          end)
+    awful.key({ settings.modkey            }, "r",              function() promptbox[mouse.screen]:run()          end),
+    -- Special Keys
+    awful.key({                            }, "XF86AudioPlay",  mpd:command_playpause()),
+    awful.key({                            }, "XF86AudioNext",  mpd:command_next_track()),
+    awful.key({                            }, "XF86AudioPrev",  mpd:command_prev_track())
 )
 
 local clientkeys = awful.util.table.join(
@@ -361,32 +357,38 @@ end
 for i = 1, keynumber do
     globalkeys = awful.util.table.join(globalkeys,
         awful.key({ settings.modkey }, "#" .. i + 9, function()
-            local screen = mouse.screen
+            local screen = mouse.screen.index
             if tags[screen][i] then
-                awful.tag.viewonly(tags[screen][i])
+                tags[screen][i]:view_only()
             end
         end),
         awful.key({ settings.modkey, "Control" }, "#" .. i + 9, function()
-            local screen = mouse.screen
+            local screen = mouse.screen.index
             if tags[screen][i] then
-                awful.tag.viewtoggle(tags[screen][i])
+                tags[screen][i]:view_only()
             end
         end),
         awful.key({ settings.modkey, "Shift" }, "#" .. i + 9, function()
-            if client.focus and tags[client.focus.screen][i] then
-                awful.client.movetotag(tags[client.focus.screen][i])
+            if client.focus then
+                local tag = client.focus.screen.tags[i]
+                if tag then
+                    client.focus:move_to_tag(tag)
+                end
             end
         end),
         awful.key({ settings.modkey, "Control", "Shift" }, "#" .. i + 9, function()
-            if client.focus and tags[client.focus.screen][i] then
-                awful.client.toggletag(tags[client.focus.screen][i])
+            if client.focus then
+                local tag = client.focus.screen.tags[i]
+                if tag then
+                    client.focus:toggle_tag(tag)
+                end
             end
         end)
     )
 end
 
-function nth_next_tag (n)
-    return awful.util.cycle(#tags[client.focus.screen], awful.tag.getidx(awful.tag.selected(client.focus.screen)) + n)
+function nth_next_tag(n)
+    return gears.math.cycle(#tags[client.focus.screen.index], client.focus.first_tag.index + n)
 end
 
 clientbuttons = awful.util.table.join(
@@ -400,16 +402,22 @@ clientbuttons = awful.util.table.join(
         awful.mouse.client.resize(c)
     end),
     awful.button({ settings.modkey }, 4, function()
-        if client.focus and tags[client.focus.screen][nth_next_tag(1)] then
-            awful.client.movetotag(tags[client.focus.screen][nth_next_tag(1)])
+        if client.focus then
+            local tag = client.focus.screen.tags[nth_next_tag(1)]
+            if tag then
+                client.focus:move_to_tag(tag)
+            end
+            tag:view_only()
         end
-        awful.tag.viewnext()
     end),
     awful.button({ settings.modkey }, 5, function()
-        if client.focus and tags[client.focus.screen][nth_next_tag(1)] then
-            awful.client.movetotag(tags[client.focus.screen][nth_next_tag(-1)])
+        if client.focus then
+            local tag = client.focus.screen.tags[nth_next_tag(-1)]
+            if tag then
+                client.focus:move_to_tag(tag)
+            end
+            tag:view_only()
         end
-        awful.tag.viewprev()
     end)
 )
 
@@ -426,9 +434,13 @@ awful.rules.rules =
         {
             border_width = beautiful.border_width,
             border_color = beautiful.border_normal,
-            focus = true,
+            focus = awful.client.focus.filter,
+            raise = true,
             keys = clientkeys,
             buttons = clientbuttons,
+            screen = awful.screen.preferred,
+            -- manually handled by the "manage" signal
+            --placement = awful.placement.no_overlap+awful.placement.no_offscreen,
             size_hints_honor = false
         }
     },
@@ -454,10 +466,12 @@ awful.rules.rules =
                 "Skype",
                 "starbound",
                 "Steam",
+                "streamlink-twitch-gui",
                 "Thunderbird",
                 "Terraria.bin.x86_64",
                 "Torchlight.bin.x86_64",
                 "Torchlight2.bin.x86_64",
+                "UE4Editor",
                 "Wine",
                 ".*\.exe",
             },
@@ -483,6 +497,7 @@ awful.rules.rules =
                 "ShadowOfMordor",
                 "starbound",
                 "Steam",
+                "streamlink-twitch-gui",
                 "Terraria.bin.x86_64",
                 "Torchlight.bin.x86_64",
                 "Torchlight2.bin.x86_64",
@@ -530,19 +545,7 @@ awful.rules.rules =
             },
         },
         properties = {
-            screen = screen.count()
-        }
-    },
-    {
-        rule_any = {
-            class =
-            {
-                "RCT.EXE",
-            },
-        },
-        properties = {
-            width = 1270,
-            height = 800,
+            screen = 2
         }
     },
     {
@@ -563,8 +566,6 @@ awful.rules.rules =
 
 }
 -- }}}
-
--- {{{ Signals
 
 -- {{{ My under_mouse that is screen aware
 local capi =
@@ -592,6 +593,8 @@ function under_mouse(c)
                         y = math.max(screen_geometry.y, m_coords.y - c_geometry.height / 2) })
 end
 -- }}}
+
+-- {{{ Signals
 
 client.connect_signal("manage", function(c)
     if not awesome.startup then
