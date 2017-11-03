@@ -26,6 +26,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'Raimondi/delimitMate'
 Plugin 'oblitum/rainbow'
 Plugin 'junegunn/vim-easy-align'
+"Plugin 'gilligan/vim-lldb'
 "Plugin 'antoyo/vim-licenses'
 " }}}
 

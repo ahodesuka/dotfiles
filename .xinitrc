@@ -1,5 +1,5 @@
 ## SETTINGS ##
-xset m 1 2
+xset m 1 1
 xset r rate 250 50
 xdotool mousemove 840 525
 nvidia-settings -l
@@ -10,7 +10,7 @@ export QT_STYLE_OVERRIDE="gtk"
 export XMODIFIERS="@im=ibus"
 export GTK_IM_MODULE="ibus"
 export QT_IM_MODULE="ibus"
-export BROWSER="/usr/bin/firefox"
+export BROWSER="/usr/bin/palemoon-bin"
 export EDITOR="/usr/bin/gvim"
 
 ## DAEMONS ##
@@ -25,7 +25,7 @@ irc-start       &
 parcellite      &
 thunderbird     &
 ckb -b          &
-steam           &
+steam -silent   &
 
 ## WM ##
 case $1 in

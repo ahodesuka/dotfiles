@@ -3,10 +3,8 @@
 @-moz-document url-prefix("http://boards.4chan.org/"),
                url-prefix("https://boards.4chan.org/") {
     *:not(.fa):not(.YTLT-player-titlebar-button):not(.sjis):not(#sjis-toggle) {
-        font-family:"PF Tempesta Seven"!important;
-        font-size:11px!important;
-        font-style:normal!important;
-        font-weight:400!important;
+        font-family:"Open Sans";
+        font-size:8pt;
     }
     body {
         background:#1b1b1b!important;
@@ -129,6 +127,7 @@
     :root #qr option,
     :root #file-n-submit > input[type="submit"],
     :root .entry,
+    :root a.download-link,
     :root .field {
         color:#e9e6e6!important;
     }
@@ -262,6 +261,7 @@
     }
     :root div.postInfo {
         padding:2px 8px!important;
+        -moz-box-sizing:border-box!important;
     }
     div.post blockquote.postMessage {
         margin:4px 16px 6px!important;
@@ -324,10 +324,10 @@
         clear:none!important;
     }
     #unread-line {
-        background-image:linear-gradient(to left, rgba(117, 135, 99, 0), rgb(117, 135, 99), rgba(117, 135, 99, 0));
+        background-image:linear-gradient(to left, transparent, #cf7275, transparent);
         border:0!important;
         height:1px!important;
-        margin-top:1px!important;
+        margin-bottom:-1px!important;
     }
     #delform {
         margin:0 0 36px!important;
@@ -364,7 +364,11 @@
     }
     .fileText .exsauce {
         order:99;
-        padding-left:4px;
+        padding-left:3px;
+    }
+    .fileText .sauce:not(:empty),
+    .fileText .webm-title {
+       padding-left:3px;
     }
 
     a.filtered {
@@ -373,6 +377,13 @@
 
     .centered-links:root #shortcuts {
         width:350px!important;
+    }
+
+    :root:not(.werkTyme) .catalog-thread.watched .catalog-thumb,
+    .werkTyme:root:root .catalog-thread.watched:not(:hover),
+    .werkTyme:root:root:not(.catalog-hover-expand) .catalog-thread.watched,
+    .werkTyme.catalog-hover-expand:root .catalog-thread.watched > .catalog-container:hover > .catalog-post {
+       border-color:#cf7275!important;
     }
 
     /* 4chan x watch icon */
@@ -391,8 +402,8 @@
         background-color:#161616!important;
         border-color:#111!important;
     }
-    .prettyprint span[class] {
-        font-family:"Profont"!important;
+    .prettyprint * {
+        font-family:"Profont";
         font-size:11px!important;
     }
     .prettyprint .com {
@@ -423,6 +434,9 @@
     }
     .prettyprint .atn {
         color:#c98dad!important;
+    }
+    .prettyprint .dec {
+        color:#947686!important;
     }
     .quotelink.forwardlink,
     .backlink.forwardlink {

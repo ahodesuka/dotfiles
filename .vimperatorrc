@@ -14,6 +14,7 @@ highlight PromptText color: #222; background: #c98dad; padding-top: 3px;
 highlight StatusLine color: #a49c9c; background: transparent; font-weight: normal;
 highlight WarningMsg color: #cf7275; background: #1b1b1b;
 
+noremap <C-a> <Insert><C-a><Insert>
 inoremap <C-a> <C-Home><C-S-End>
 nnoremap > <C-i>
 nnoremap < <C-o>
@@ -31,69 +32,5 @@ nnoremap l <Right>
 
 set cpt=lf
 set gui=none,tabs
-autocmd Fullscreen .* js myObj.toggleBottombar('fullscreen')
-
-"javascript to hide statusbar
-noremap <silent> <F2> :js myObj.toggleBottombar('toggle')<CR>
-noremap : :js myObj.toggleBottombar('neutral')<CR>:
-noremap o :js myObj.toggleBottombar('neutral')<CR>o
-noremap O :js myObj.toggleBottombar('neutral')<CR>O
-noremap t :js myObj.toggleBottombar('neutral')<CR>t
-noremap T :js myObj.toggleBottombar('neutral')<CR>t
-noremap / :js myObj.toggleBottombar('neutral')<CR>/
-noremap ? :js myObj.toggleBottombar('neutral')<CR>?
-" cnoremap <CR> <CR>:js myObj.toggleBottombar('neutral')<CR>
-cnoremap <Esc> <Esc>:js myObj.toggleBottombar('neutral')<CR>
-
-js << EOF
-var myObj = {
-    contentSeperatorCss : highlight.get('ContentSeparator').value,
-    isFullscreen : false,
-    isStatuslineOn : true,
-    bottombar : document.getElementById('liberator-bottombar'),
-    toggleBottombar : function(p) {
-        if (!this.bottombar) return;
-        if (p == 'on'){
-            if (!this.isStatuslineOn) {
-                this.isStatuslineOn = true;
-                this.bottombar.style.height = '';
-                this.bottombar.style.overflow = '';
-                highlight.set('ContentSeparator', this.contentSeperatorCss);
-            }
-            return;
-        }
-        if (p == 'off'){
-            if (this.isStatuslineOn) {
-                this.isStatuslineOn = false;
-                this.bottombar.style.height = '0px';
-                this.bottombar.style.overflow = 'hidden';
-                highlight.set('ContentSeparator', 'display: none;');
-            }
-            return;
-        }
-        if (p == 'neutral') {
-            if (!this.isStatuslineOn) this.toggleBottombar();
-            return;
-        }
-        if (p == 'fullscreen') {
-            this.isFullscreen = !this.isFullscreen;
-            if (this.isFullscreen) return this.toggleBottombar('off');
-            else return this.toggleBottombar('on');
-        }
-        if (p == 'toggle') {
-            this.isStatuslineOn = !this.isStatuslineOn;
-        }
-        if (this.bottombar.style.height != '') {
-            this.bottombar.style.height = '';
-            this.bottombar.style.overflow = '';
-            highlight.set('ContentSeparator', this.contentSeperatorCss);
-        } else {
-            this.bottombar.style.height = '0px';
-            this.bottombar.style.overflow = 'hidden';
-            highlight.set('ContentSeparator', 'display: none;');
-        }
-    }
-};
-EOF
 
 " vim: set ft=vim:

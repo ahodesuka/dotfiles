@@ -88,7 +88,7 @@ tags.settings = {
         { name = "東", props = { layout = settings.layouts[1], master_width_factor = .6815 } },
         { name = "南", props = { layout = settings.layouts[1], master_width_factor = .6815 } },
         { name = "西", props = { layout = settings.layouts[1], master_width_factor = .6815 } },
-        { name = "北", props = { layout = settings.layouts[1], master_width_factor = .6815 } },
+        { name = "北", props = { layout = settings.layouts[2], master_width_factor = .6815 } },
     },
 }
 
@@ -188,7 +188,7 @@ mpd:register_buttons({
 mpdwidget = wibox.container.margin(mpd.widget, 0, 0, -1, 0)
 
 systray = wibox.widget.systray()
-systray:set_screen(screen[screen.count()])
+systray:set_screen(screen[naughty.config.defaults.screen])
 
 taglist.buttons = awful.util.table.join(
     awful.button({ }, 1, awful.tag.viewonly),
@@ -248,7 +248,7 @@ awful.screen.connect_for_each_screen(function(s)
     left_layout:add(taglist[s])
     left_layout:add(promptbox[s])
     left_layout:add(layoutbox[s])
-    if s.index == 2 then
+    if s.index == naughty.config.defaults.screen then
         right_layout:add(padding)
         right_layout:add(mpdicon)
         right_layout:add(mpdwidget)
@@ -296,7 +296,7 @@ local globalkeys = awful.util.table.join(
     awful.key({ settings.modkey            }, "f",              function() awful.spawn(settings.browser) end),
     awful.key({ settings.modkey            }, "e",              function() awful.spawn(settings.fileman) end),
     awful.key({ "Control", "Shift"         }, "Escape",         function() awful.spawn(settings.taskman) end),
-    awful.key({ "Control",                 }, "Print",          function() awful.spawn.with_shell("sleep 0.5s && scrot -sa") end),
+    awful.key({ "Control",                 }, "Print",          function() awful.spawn.with_shell("sleep 0.5s && scrot -s") end),
     awful.key({ settings.modkey, "Control" }, "r",              awesome.restart),
     awful.key({ settings.modkey, "Shift"   }, "q",              awesome.quit),
     awful.key({ settings.modkey,           }, "Tab",            function()
@@ -458,19 +458,18 @@ awful.rules.rules =
                 "csgo_linux",
                 "dota_linux",
                 "dota2",
+                "Genymotion Player",
                 "Gimp",
                 "mahjong",
                 "mpv",
                 "Plugin-container",
                 "scrot",
-                "Skype",
                 "starbound",
                 "Steam",
                 "streamlink-twitch-gui",
                 "Thunderbird",
                 "Terraria.bin.x86_64",
-                "Torchlight.bin.x86_64",
-                "Torchlight2.bin.x86_64",
+                "Torchlight2?.bin.x86_64",
                 "UE4Editor",
                 "Wine",
                 ".*\.exe",
@@ -499,8 +498,7 @@ awful.rules.rules =
                 "Steam",
                 "streamlink-twitch-gui",
                 "Terraria.bin.x86_64",
-                "Torchlight.bin.x86_64",
-                "Torchlight2.bin.x86_64",
+                "Torchlight2?.bin.x86_64",
                 "Wine",
                 ".*\.exe",
             },
@@ -519,16 +517,13 @@ awful.rules.rules =
                 "Borderlands2",
                 "csgo_linux",
                 "Civ5XP",
-                "Darkest.exe",
+                "Darkest",
                 "dota_linux",
                 "dota2",
-                "Hearthstone.exe",
-                "HeroesOfTheStorm.exe",
                 "ShadowOfMordor",
                 "starbound",
                 "Terraria.bin.x86_64",
-                "Torchlight.bin.x86_64",
-                "Torchlight2.bin.x86_64",
+                "Torchlight2?.bin.x86_64",
             },
             name =
             {
@@ -545,7 +540,7 @@ awful.rules.rules =
             },
         },
         properties = {
-            screen = 2
+            screen = screen.count()
         }
     },
     {
@@ -561,7 +556,7 @@ awful.rules.rules =
         }
     },
     { rule = { class = "Thunar", name = "File Operation Progress" }, properties = { floating = true } },
-    { rule = { class = "Firefox" }, except = { instance = "Navigator" }, properties = { floating = true } },
+    { rule = { class = "Pale moon" }, except = { instance = "Navigator" }, properties = { floating = true } },
     { rule = { class = "VirtualBox", name = "Windows 7.*VirtualBox" }, properties = { border_width = 0, floating = true, skip_taskbar = true } },
 
 }
