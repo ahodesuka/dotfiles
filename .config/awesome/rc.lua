@@ -191,7 +191,7 @@ systray = wibox.widget.systray()
 systray:set_screen(screen[naughty.config.defaults.screen])
 
 taglist.buttons = awful.util.table.join(
-    awful.button({ }, 1, awful.tag.viewonly),
+    awful.button({ }, 1, function(t) t:view_only() end),
     awful.button({ }, 3, awful.tag.viewtoggle)
 )
 
@@ -200,7 +200,7 @@ tasklist.buttons = awful.util.table.join(
         if c == client.focus then
             c.minimized = true
         else if not c:isvisible() then
-            awful.tag.viewonly(c:tags()[1])
+            c:tags()[1]:view_only()
         end
         client.focus = c
         c:raise()
