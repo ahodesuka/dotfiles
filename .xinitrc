@@ -24,8 +24,8 @@ transmission-daemon
 irc-start       &
 parcellite      &
 thunderbird     &
-ckb -b          &
 steam -silent   &
+discord         &
 
 ## WM ##
 case $1 in

@@ -533,20 +533,22 @@ awful.rules.rules =
         properties = { x = 0, y = 0, screen = 1 }
     },
     {
-        rule_any = {
-            class =
-            {
-                "mpv",
-            },
-        },
+        rule = { class = "discord" },
         properties = {
-            screen = screen.count()
+            tag = "北",
+            screen = naughty.config.defaults.screen
         }
     },
     {
-        rule_any = {
-            instance = { "sun-awt-X11-XWindowPeer" }
-        },
+        rule = { class = "mpv" },
+        properties = { screen = naughty.config.defaults.screen }
+    },
+    {
+        rule = { class = "Thunderbird" },
+        properties = { tag = "南" }
+    },
+    {
+        rule = { instance = "sun-awt-X11-XWindowPeer" },
         properties = {
             border_width = 0,
             floating = true,
@@ -563,6 +565,7 @@ awful.rules.rules =
 -- }}}
 
 -- {{{ My under_mouse that is screen aware
+-- is this still needed?
 local capi =
 {
     screen = screen,
