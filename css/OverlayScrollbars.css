@@ -1,0 +1,26 @@
+/* AGENT_SHEET */
+
+scrollbar {
+  -moz-appearance: none !important;
+  background: none !important;
+  position: relative !important;
+  border: none !important;
+  z-index: 102400 !important;
+}
+
+scrollbar thumb {
+  -moz-appearance: none !important;
+  border: none !important;
+  padding: 0 0 !important;
+  background: none !important;
+  border-radius: 1px !important;
+}
+
+scrollbar[orient="vertical"]   thumb { background: rgba(16,16,16,0.4) !important; min-height: 4px !important;  width: 4px !important }
+scrollbar[orient="horizontal"] thumb { background: rgba(16,16,16,0.4) !important; min-width:  4px !important; height: 4px !important }
+scrollbar[orient="vertical"]   thumb:hover, scrollbar[orient="vertical"] thumb:active   { background: #101010 !important }
+scrollbar[orient="horizontal"] thumb:hover, scrollbar[orient="horizontal"] thumb:active { background: #101010 !important }
+scrollbar[orient="vertical"]   { width:  4px !important; margin-left: -4px !important;  margin-right: 0 !important }
+scrollbar[orient="horizontal"] { height: 4px !important; margin-top:  -4px !important; margin-bottom: 0 !important }
+
+scrollbar scrollbarbutton, scrollbar scrollcorner { display: none !important }

@@ -27,7 +27,7 @@ URxvt.urgentOnBell:     true
 URxvt.geometry:         84x20
 URxvt.depth:            24
 URxvt.saveLines:        10000
-URxvt*termName:         rxvt-unicode
+!URxvt*termName:         rxvt-unicode-256color
 
 URxvt*internalBorder:   1
 
@@ -65,8 +65,8 @@ URxvt*color15:          #e9e6e6
 URxvt.perl-lib:         /home/mokou/.config/urxvt
 URxvt.perl-ext:         default,matcher
 
-URxvt.url-launcher:     firefox
-URxvt.colorUL:          #cf7275
+URxvt.url-launcher:     xdg-open
+URxvt.colorUL:          #94aad1
 URxvt.matcher.button:   1
 
 URxvt*keysym.Home:      [1~

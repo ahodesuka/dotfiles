@@ -338,6 +338,9 @@ function awesompd:create_osd(args)
         hovering = false
         n = n or 0
         if n > 0 then
+            if hide_timer and hide_timer.started then
+                hide_timer:stop()
+            end
             hide_timer = gears.timer({ timeout = n, autostart = true })
             hide_timer:connect_signal("timeout", function()
                 if hide_timer.started then

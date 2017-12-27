@@ -1,5 +1,7 @@
 -- scrobbler.lua
 
+mputils = require 'mp.utils'
+
 local user_opts = {
     scrobbler = "anidb",
     percent = 0.5
@@ -22,6 +24,12 @@ function timer_fn()
 end
 
 function on_file_loaded()
+    local path = mp.get_property("path", "")
+    local dir, filename = mputils.split_path(path)
+    if #dir == 0 or dir:match("://") then
+        return
+    end
+
     if timer_handle ~= nil then
         mp.cancel_timer(timer_handle)
     end

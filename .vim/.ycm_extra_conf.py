@@ -16,7 +16,7 @@ flags = [
     '-std=c++11',
     '-I./include',
     '-I.',
-    '-isystem/usr/lib/gcc/x86_64-pc-linux-gnu/4.9.3/include/g++-v4',
+    '-isystem/usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include/g++-v6',
 ]
 
 # Set this to the absolute path to the folder (NOT the file!) containing the

@@ -26,14 +26,17 @@ for (${4:int} ${2:i} = 0; $2 < ${1:count}; ${3:++$2})
 }
 endsnippet
 
-snippet cl "class .. (class)"
-class ${1:`!p snip.rv = snip.basename or "name"`}
+snippet cla "An entire .h generator" b
+#pragma once
+
+class ${1:`!v substitute(substitute(vim_snippets#Filename('$1','ClassName'),'^.','\u&',''), '_\(\w\)', '\u\1', 'g')`}
 {
 public:
-	${1/(\w+).*/$1/}(${2:arguments});
-	virtual ~${1/(\w+).*/$1/}();
+	$1(${2:args});
+	virtual ~$1();
+
 private:
-	${0:/* data */}
+	${3:/* data */}
 };
 endsnippet
 

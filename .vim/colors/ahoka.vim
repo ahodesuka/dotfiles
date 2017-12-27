@@ -93,7 +93,7 @@ else
   let s:foreground = "15"
   let s:selection  = "8"
   let s:line       = "0"
-  let s:comment    = "7"
+  let s:comment    = "245"
   let s:folded     = "239"
   let s:red        = "9"
   let s:orange     = "3"
@@ -312,7 +312,7 @@ exe "hi! PreProc"         .s:fg_aqua        .s:bg_none        .s:fmt_none
 "       Macro"
 "       PreCondit"
 
-exe "hi! Type"            .s:fg_yellow      .s:bg_none        .s:fmt_none
+exe "hi! Type"            .s:fg_magenta     .s:bg_none        .s:fmt_none
 exe "hi! StorageClass"    .s:fg_orange      .s:bg_none        .s:fmt_none
 exe "hi! Structure"       .s:fg_aqua        .s:bg_none        .s:fmt_none
 "       Typedef"

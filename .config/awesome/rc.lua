@@ -63,9 +63,12 @@ wall = wallpaper:create({
 settings.bar_height = 16
 settings.modkey     = "Mod4"
 settings.term       = "urxvt"
-settings.browser    = "firefox"
+settings.browser    = "palemoon-bin"
 settings.fileman    = "thunar"
-settings.taskman    = settings.term .. " -e htop"
+settings.suspend    = "farewell suspend"
+settings.restart    = "farewell restart"
+settings.shutdown   = "farewell shutdown"
+settings.taskman    = settings.term .. " -geometry 120x50 -e htop"
 settings.dateformat = "%Y.%m.%d %H:%M:%S"
 settings.new_wall   = wall:new()
 settings.layouts    =
@@ -73,6 +76,10 @@ settings.layouts    =
     awful.layout.suit.floating,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile,
+    awful.layout.suit.fair,
+    awful.layout.suit.fair.horizontal,
+    awful.layout.suit.spiral.dwindle,
+    awful.layout.suit.spiral,
 }
 -- }}}
 
@@ -110,9 +117,9 @@ menu = awful.menu({
         { settings.browser, settings.browser,         theme.menu_wbrowser },
         { settings.fileman, settings.fileman,         theme.menu_fbrowser },
         { "random bg",      settings.new_wall,        theme.menu_rwall    },
-        { "suspend",        "ktsuss pm-suspend",      theme.menu_suspend  },
-        { "reboot",         "ktsuss shutdown -r now", theme.menu_reboot   },
-        { "shutdown",       "ktsuss shutdown -h now", theme.menu_shutdown }
+        { "suspend",        settings.suspend,         theme.menu_suspend  },
+        { "restart",        settings.restart,         theme.menu_restart  },
+        { "shutdown",       settings.shutdown,        theme.menu_shutdown }
     }
 })
 -- }}}
@@ -343,10 +350,7 @@ local clientkeys = awful.util.table.join(
     awful.key({ settings.modkey            }, "c",     function(c) c:kill() end),
     awful.key({ settings.modkey, "Control" }, "space", awful.client.floating.toggle),
     awful.key({ settings.modkey, "Shift"   }, "f",     function(c) c.fullscreen = not c.fullscreen end),
-    awful.key({ settings.modkey            }, "m",     function(c)
-        c.maximized_horizontal = not c.maximized_horizontal
-        c.maximized_vertical   = not c.maximized_vertical
-    end)
+    awful.key({ settings.modkey            }, "m",     function(c) c.maximized = not c.maximized end)
 )
 
 keynumber = 0
@@ -491,6 +495,7 @@ awful.rules.rules =
                 "Civ5XP",
                 "dota_linux",
                 "dota2",
+                "Farewell",
                 "Plugin-container",
                 "scrot",
                 "ShadowOfMordor",
@@ -520,6 +525,7 @@ awful.rules.rules =
                 "Darkest",
                 "dota_linux",
                 "dota2",
+                "hearthstone.exe",
                 "ShadowOfMordor",
                 "starbound",
                 "Terraria.bin.x86_64",
@@ -559,7 +565,8 @@ awful.rules.rules =
     },
     { rule = { class = "Thunar", name = "File Operation Progress" }, properties = { floating = true } },
     { rule = { class = "Pale moon" }, except = { instance = "Navigator" }, properties = { floating = true } },
-    { rule = { class = "VirtualBox", name = "Windows 7.*VirtualBox" }, properties = { border_width = 0, floating = true, skip_taskbar = true } },
+    { rule = { class = "VirtualBox", name = "Windows 7.*VirtualBox" },
+        properties = { border_width = 0, floating = true, skip_taskbar = true, screen = 2 } },
 
 }
 -- }}}

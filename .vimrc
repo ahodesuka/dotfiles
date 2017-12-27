@@ -24,18 +24,18 @@ Plugin 'rdnetto/YCM-Generator'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'Raimondi/delimitMate'
-Plugin 'oblitum/rainbow'
+Plugin 'luochen1990/rainbow'
 Plugin 'junegunn/vim-easy-align'
-"Plugin 'gilligan/vim-lldb'
-"Plugin 'antoyo/vim-licenses'
+" Plugin 'SyntaxAttr.vim'
 " }}}
 
 " Language specific plugins {{{
 " C and C++
 Plugin 'a.vim'
-Plugin 'drmikehenry/vim-headerguard'
-Plugin 'vim-jp/cpp-vim'
+Plugin 'vim-jp/vim-cpp'
 Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'Conque-GDB'
+Plugin 'rhysd/vim-clang-format'
 
 " JS
 Plugin 'kchmck/vim-coffee-script'
@@ -63,57 +63,61 @@ filetype plugin indent on
 syntax on
 
 " Settings {{{
-" These really should be sorted and commented.
-set hidden
-set incsearch
-set hlsearch
-set ignorecase
-set smartcase
-set backspace=indent,eol,start
-set nostartofline
-set laststatus=2
-set confirm
-set noerrorbells
-set visualbell
-set t_vb=
-set mouse=a
-set cmdheight=1
-set number
-set cursorline
-set lazyredraw
-set notimeout
-set ttimeout
-set timeoutlen=1000
-set ttimeoutlen=0
+" These really should be commented.
 set autoindent
+set backspace=indent,eol,start
 set cindent
 set cinoptions=g0
-set expandtab
-set softtabstop=4
-set shiftwidth=4
-set tabstop=4
-set switchbuf+=usetab,newtab
-set title
-set t_Co=256
-set encoding=utf-8
-set fileencodings=ucs-bom,utf-8,euc-jp,sjis,default,latin1
-set ff=unix
-set tw=120
-set wrap
-set linebreak
-set nolist
-set formatoptions+=lt
-set fillchars=vert:█,fold:█
+set cmdheight=1
+set colorcolumn=80
 set completeopt=menuone
-set showmatch
-set re=1
-set nuw=6
-set history=1000
+set concealcursor=c
+set conceallevel=2
+set confirm
+set cursorline
+set encoding=utf-8
+set expandtab
+set ff=unix
+set fileencodings=ucs-bom,utf-8,euc-jp,sjis,default,latin1
+set fillchars=vert:█,fold:█
 set foldcolumn=1
 set foldmethod=marker
 set foldtext=FoldText()
-set updatetime=500
+set formatoptions=croqlt
+set hidden
+set history=1000
+set hlsearch
+set ignorecase
+set incsearch
+set laststatus=2
+set lazyredraw
+set linebreak
+set mouse=a
+set noerrorbells
+set nolist
+set noshowmode
+set nostartofline
+set notimeout
+set number
+set nuw=6
+set re=1
+set shiftwidth=4
+set showmatch
+set smartcase
+set softtabstop=4
 set spelllang=en_us
+set switchbuf+=usetab,newtab
+set t_Co=256
+set t_vb=
+set tabstop=4
+set textwidth=80
+set timeoutlen=1000
+set title
+set ttimeout
+set ttimeoutlen=0
+set updatetime=500
+set visualbell
+set wrap
 " }}}
 
 function! FoldText() " {{{
@@ -131,6 +135,20 @@ function! FoldText() " {{{
 endfunction " }}}
 
 " Mappings {{{
+" Alt Key helper for urxvt
+if !has('gui_running')
+  set ttimeoutlen=10
+  augroup FastEscape
+    autocmd!
+    autocmd InsertEnter * set timeoutlen=0
+    autocmd InsertLeave * set timeoutlen=2000
+  augroup END
+endif
+
+function! Altmap(char)
+  if has('gui_running') | return ' <A-'.a:char.'> ' | else | return ' <Esc>'.a:char.' '|endif
+endfunction
+
 map <silent> <F2> :NERDTreeToggle \| :NERDTreeMirror<CR>
 map <silent> <F3> :TagbarToggle<CR>
 map <silent> <F4> :ccl<CR>
@@ -149,10 +167,10 @@ nnoremap <silent><C-j> :wincmd j<CR>
 nnoremap <silent><C-k> :wincmd k<CR>
 
 " Switch splits with alt + hjkl
-nnoremap <silent><A-h> :wincmd h<CR>
-nnoremap <silent><A-j> :wincmd j<CR>
-nnoremap <silent><A-k> :wincmd k<CR>
-nnoremap <silent><A-l> :wincmd l<CR>
+execute 'nnoremap <silent>'.Altmap('h').':wincmd h<CR>'
+execute 'nnoremap <silent>'.Altmap('j').':wincmd j<CR>'
+execute 'nnoremap <silent>'.Altmap('k').':wincmd k<CR>'
+execute 'nnoremap <silent>'.Altmap('l').':wincmd l<CR>'
 
 " Resize splits with shift + alt + hjkl
 nnoremap <silent><S-A-h> :vertical resize -5<CR>
@@ -208,11 +226,17 @@ inoremap <expr><C-k>   pumvisible() ? "\<C-p>" : "\<C-k>"
 imap     <expr><CR>    pumvisible() ? "<C-r>=CRCompleteFunc()<CR>" : "<Plug>delimitMateCR"
 " }}}
 
+map -a	:call SyntaxAttr()<CR>
+
+if filereadable('/proc/cpuinfo')
+    let &makeprg = 'make -j'.(system('grep -c ^processor /proc/cpuinfo')+1)
+endif
+
 let NERDTreeIgnore=[ '\.[ls]\?o$', '\~$' ]
 
 let g:indentLine_char = '│'
 let g:indentLine_bufNameExclude = [ 'NERD_tree.*' ]
-let g:indentLine_noConcealCursor = 1
+let g:indentLine_setConceal = 0
 let g:indentLine_color_gui = '#222222'
 let g:indentLine_color_term = 236
 let g:indentLine_color_tty = 236
@@ -225,24 +249,35 @@ let g:DoxygenToolkit_commentType = 'C++'
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_extra_conf_globlist = ['~/Git/*']
 let g:UltiSnipsUsePythonVersion = 3
-let g:UltiSnipsJumpForwardTrigger = '<Tab>'
+let g:UltiSnipsJumpForwardTrigger = '<CR>'
 let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 let g:UltiSnipsEditSplit = 'vertical'
 
 let delimitMate_expand_cr = 2
 let delimitMate_expand_space = 1
 
-function! g:HeaderguardName()
-    return '_' . toupper(expand('%:t:gs/[^0-9a-zA-Z_]/_/g')) . '_'
-endfunction
-
-let g:rainbow_guifgs = ['#94aad1', '#8ab4be', '#edc472', '#c98dad']
-let g:rainbow_ctermfgs = ['12', '14', '11', '13']
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+\   'guifgs': ['#94aad1', '#8ab4be', '#edc472', '#c98dad'],
+\	'ctermfgs': ['12', '14', '11', '13'],
+\	'operators': '_!\|=\|&\|\.\|:\|;\|,\|<\|>\|+\|-\|\/\@<!\*\|\/\(\/\|\*\)\@!_',
+\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+\	'separately': {
+\		'*': {},
+\       'cpp': {
+\           'parentheses': [
+\               'start=/(/ end=/)/ fold',
+\               'start=/\[/ end=/\]/ fold',
+\               'start=/{/ end=/}/ fold',
+\               'start=/\(\(\<operator\>\)\@<!<\)\&[a-zA-Z0-9_]\@<=<\ze[^<]/ end=/>/']
+\       },
+\	}
+\}
 
 let g:syntastic_stl_format = ''
 let g:syntastic_c_auto_refresh_includes = 1
 let g:syntastic_cpp_no_include_search = 1
-let g:syntastic_cpp_compiler_options = '-std=c++11'
+let g:syntastic_cpp_compiler_options = '-std=c++14'
 
 let g:airline_theme = 'powerlineish'
 let g:airline_powerline_fonts = 1
@@ -267,11 +302,10 @@ au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 " Trim trailing whitespace
 au FileType c,cpp,coffee,java,ruby,python,sh au BufWritePre * :%s/\s\+$//e | :call histdel('/', -1)
 
-au BufRead,BufNewFile *.md setl spell
-au FileType gitcommit setl spell
+au FileType gitcommit,markdown setl spell
 
-au FileType c,cpp call rainbow#load()
-au FileType coffee,html,python,ruby,sh,xml setl shiftwidth=2 softtabstop=2 tabstop=2
+au FileType cpp setl cindent cino=j1,(0,ws,Ws
+au FileType coffee,html,lua,perl,python,ruby,sh,xml setl shiftwidth=2 softtabstop=2 tabstop=2
 au FileType css set omnifunc=csscomplete#CompleteCSS | setlocal iskeyword+=-
 
 colorscheme ahoka

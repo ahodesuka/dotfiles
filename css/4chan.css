@@ -1,14 +1,17 @@
 @namespace url(http://www.w3.org/1999/xhtml);
 
 @-moz-document url-prefix("http://boards.4chan.org/"),
-               url-prefix("https://boards.4chan.org/") {
+url-prefix("https://boards.4chan.org/") {
     *:not(.fa):not(.YTLT-player-titlebar-button):not(.sjis):not(#sjis-toggle) {
-        font-family:"Open Sans";
+        font-family:"Open Sans", sans-serif;
         font-size:8pt;
     }
     body {
         background:#1b1b1b!important;
         color:#e9e6e6!important;
+    }
+    .autohiding-scrollbar:root #shortcuts {
+        margin-right:2px!important;
     }
 
     /* Hidden elements */
@@ -34,7 +37,7 @@
         padding-bottom:1em!important;
     }
 
-    .postContainer .menu-button {
+    .postContainer:not(.catalog-container) .menu-button {
         opacity:0;
         float:right;
         right:-2px;
@@ -163,6 +166,7 @@
     #nav-links,
     #qr option,
     #dump-button,
+    .inline .post,
     :root .field,
     :root #qr-file-button,
     :root #file-n-submit > input[type="submit"],
@@ -239,16 +243,16 @@
     }
     .filter-highlight.opContainer,
     .filter-highlight > .reply {
-       box-shadow:none;
+        box-shadow:none;
     }
     .filter-highlight > .reply > .postInfo {
-       box-shadow:0 -1px #8f5b5b inset;
+        box-shadow:0 -1px #8f5b5b inset;
     }
     .postblock {
         border:0!important;
         color:#e9e6e6!important;
         background:#222!important;
-     }
+    }
     .thread:not([hidden]) + hr:not(:last-child) {
         border-color:#161616!important;
         display:block!important;
@@ -368,7 +372,7 @@
     }
     .fileText .sauce:not(:empty),
     .fileText .webm-title {
-       padding-left:3px;
+        padding-left:3px;
     }
 
     a.filtered {
@@ -383,12 +387,20 @@
     .werkTyme:root:root .catalog-thread.watched:not(:hover),
     .werkTyme:root:root:not(.catalog-hover-expand) .catalog-thread.watched,
     .werkTyme.catalog-hover-expand:root .catalog-thread.watched > .catalog-container:hover > .catalog-post {
-       border-color:#cf7275!important;
+        border-color:#cf7275!important;
+    }
+
+    .catalog-hover-expand:root .catalog-container:hover > .post {
+        background-color:#161616!important;
+        border-color:#101010!important;
+    }
+    .persona button {
+        min-height:23px!important;
     }
 
     /* 4chan x watch icon */
     :root .watch-thread-link {
-       background-image: url("data:image/svg+xml,<svg viewBox='0 0 26 26' preserveAspectRatio='true' xmlns='http://www.w3.org/2000/svg'><path fill='rgb(207,114,117)' d='M24.132,7.971c-2.203-2.205-5.916-2.098-8.25,0.235L15.5,8.588l-0.382-0.382c-2.334-2.333-6.047-2.44-8.25-0.235c-2.204,2.203-2.098,5.916,0.235,8.249l8.396,8.396l8.396-8.396C26.229,13.887,26.336,10.174,24.132,7.971z'/></svg>")!important;
+        background-image: url("data:image/svg+xml,<svg viewBox='0 0 26 26' preserveAspectRatio='true' xmlns='http://www.w3.org/2000/svg'><path fill='rgb(207,114,117)' d='M24.132,7.971c-2.203-2.205-5.916-2.098-8.25,0.235L15.5,8.588l-0.382-0.382c-2.334-2.333-6.047-2.44-8.25-0.235c-2.204,2.203-2.098,5.916,0.235,8.249l8.396,8.396l8.396-8.396C26.229,13.887,26.336,10.174,24.132,7.971z'/></svg>")!important;
     }
 
     /* Pretty Print */
