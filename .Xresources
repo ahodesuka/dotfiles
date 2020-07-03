@@ -11,14 +11,14 @@ URxvt*font:             xft:ProFont:pixelsize=11:antialias=false,\
                         xft:Kochi Gothic,\
                         xft:Baekmuk Dotum,\
                         xft:WenQuanYi Bitmap Song,\
-                        xft:DejaVu Sans Mono,\
-                        xft:FreeSerif
+                        xft:Noto Sans Mono,\
+                        xft:Unifont
 URxvt*boldFont:         xft:ProFont:pixelsize=11:antialias=false,\
                         xft:Kochi Gothic,\
                         xft:Baekmuk Dotum,\
                         xft:WenQuanYi Bitmap Song,\
-                        xft:DejaVu Sans Mono,\
-                        xft:FreeSerif
+                        xft:Noto Sans Mono,\
+                        xft:Unifont
 
 URxvt.modifier:         alt
 URxvt.fading:           false

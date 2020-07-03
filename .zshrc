@@ -1,5 +1,5 @@
 source ~/.zplug/init.zsh
-source ~/.git-prompt.sh
+source /usr/share/git/git-prompt.sh
 
 export GOPATH="$HOME/.go"
 export PATH="$GOPATH/bin:$PATH"
@@ -14,6 +14,11 @@ alias patchAnime="find -type f -name '*.xdelta' -maxdepth 1 -exec xdelta3 -d '{}
 alias make="make -j7"
 alias gdb="gdb -q"
 alias du="cdu -d ch"
+
+function base64decode()
+{
+    echo "$1" | base64 -d
+}
 
 function u2space()
 {
@@ -49,6 +54,15 @@ function man() {
         man "$@"
 }
 
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zsh-users/zsh-history-substring-search", defer:3
+
+zplug "Valodim/zsh-curl-completion"
+zplug "gentoo/gentoo-zsh-completions"
+zplug "lukechilds/zsh-better-npm-completion", defer:2
+
 autoload -Uz bracketed-paste-url-magic
 zle -N bracketed-paste bracketed-paste-url-magic
 
@@ -59,9 +73,11 @@ export SAVEHIST=10000
 export HISTFILE=~/.zsh_history
 
 setopt inc_append_history
+setopt hist_save_no_dups
+setopt hist_find_no_dups
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
-setopt promptsubst
+setopt prompt_subst
 
 stty -ixon -ixoff
 
@@ -74,15 +90,6 @@ fi
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 zstyle ':completion:*' menu select
 zstyle ":completion::complete:*" use-cache 1
-
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-history-substring-search", defer:3
-
-zplug "Valodim/zsh-curl-completion"
-zplug "gentoo/gentoo-zsh-completions"
-zplug "lukechilds/zsh-better-npm-completion", defer:2
 
 # Home
 bindkey "[1~" beginning-of-line

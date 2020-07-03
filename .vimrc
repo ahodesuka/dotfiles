@@ -24,7 +24,8 @@ Plugin 'rdnetto/YCM-Generator'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'Raimondi/delimitMate'
-Plugin 'luochen1990/rainbow'
+"Plugin 'luochen1990/rainbow'
+Plugin 'oblitum/rainbow'
 Plugin 'junegunn/vim-easy-align'
 " Plugin 'SyntaxAttr.vim'
 " }}}
@@ -183,7 +184,7 @@ noremap  <silent><C-n> :nohl<CR>
 inoremap <silent><C-n> <C-o>:nohl<CR>
 
 " Map ctrl + s to save current buffer if it has been modified
-noremap <silent><C-s> :update<CR>
+noremap  <silent><C-s> :update<CR>
 
 " Map shift + s to write all buffers
 noremap <silent><S-s> :wa<CR>
@@ -256,11 +257,15 @@ let g:UltiSnipsEditSplit = 'vertical'
 let delimitMate_expand_cr = 2
 let delimitMate_expand_space = 1
 
-let g:rainbow_active = 1
+let g:rainbow_guifgs = ['#94aad1', '#8ab4be', '#edc472', '#c98dad']
+let g:rainbow_ctermfgs = ['12', '14', '11', '13']
+
+"let g:rainbow_active = 1
+"\	'operators': '_,\|=\|+\|\*\|-\|\.\|;\||\|&\|?\|:\|<\|>\|%\|/[^/]_',
 let g:rainbow_conf = {
 \   'guifgs': ['#94aad1', '#8ab4be', '#edc472', '#c98dad'],
 \	'ctermfgs': ['12', '14', '11', '13'],
-\	'operators': '_!\|=\|&\|\.\|:\|;\|,\|<\|>\|+\|-\|\/\@<!\*\|\/\(\/\|\*\)\@!_',
+\	'operators': '_!\|=\|&\||\|?\|%\|\.\|:\|;\|,\|<\|>\|+\|-\@<!--\@!\|\/\@<!\*\|\/\(\/\|\*\)\@!_',
 \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
 \	'separately': {
 \		'*': {},
@@ -273,11 +278,6 @@ let g:rainbow_conf = {
 \       },
 \	}
 \}
-
-let g:syntastic_stl_format = ''
-let g:syntastic_c_auto_refresh_includes = 1
-let g:syntastic_cpp_no_include_search = 1
-let g:syntastic_cpp_compiler_options = '-std=c++14'
 
 let g:airline_theme = 'powerlineish'
 let g:airline_powerline_fonts = 1
@@ -304,8 +304,9 @@ au FileType c,cpp,coffee,java,ruby,python,sh au BufWritePre * :%s/\s\+$//e | :ca
 
 au FileType gitcommit,markdown setl spell
 
+au FileType c,cpp,objc,objcpp,go,rust,python,ruby,javascript,java,vim,zsh call rainbow#load()
 au FileType cpp setl cindent cino=j1,(0,ws,Ws
-au FileType coffee,html,lua,perl,python,ruby,sh,xml setl shiftwidth=2 softtabstop=2 tabstop=2
+au FileType coffee,css,html,javascript,json,lua,perl,python,ruby,sh,xml setl shiftwidth=2 softtabstop=2 tabstop=2
 au FileType css set omnifunc=csscomplete#CompleteCSS | setlocal iskeyword+=-
 
 colorscheme ahoka

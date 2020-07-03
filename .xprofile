@@ -1,0 +1,30 @@
+## SETTINGS ##
+export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
+export QT_QPA_PLATFORMTHEME="gtk2"
+export XMODIFIERS="@im=ibus"
+export GTK_IM_MODULE="ibus"
+export QT_IM_MODULE="ibus"
+export BROWSER="/usr/bin/palemoon-bin"
+export EDITOR="/usr/bin/vim"
+
+#xset m 1 1
+xset r rate 250 50
+xset dpms 300 300 300
+xdotool mousemove 2640 600
+nvidia-settings -l
+
+## DAEMONS ##
+picom -b
+pulseaudio --start
+mpd
+/usr/bin/thunar --daemon &
+ibus-daemon -drx
+#[ -z $(pidof transmission-daemon) ] && transmission-daemon
+
+## PROGRAMS ##
+dpmscheck           &
+irc-start           &
+#[ $(date +%j) -ge 355 -o $(date +%j) -le 1 ] && xsnow -ssnowdepth 8 &
+#steam -silent       &
+
+# vim: ft=sh

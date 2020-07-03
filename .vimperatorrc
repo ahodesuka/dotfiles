@@ -1,5 +1,6 @@
 highlight CmdLine background: #1b1b1b; color: #e9e6e6; transition: all 0.25s;
 highlight CmdLine>* font-family: "ProFont";
+highlight CompMsg font-style: normal;
 highlight CompDesc width: 500px; max-width: 500px; color: gray; font-family: "ProFont";
 highlight CompItem[selected] background: #222;
 highlight CompResult width: 500px; max-width: 500px; overflow: hidden; font-family: "ProFont";

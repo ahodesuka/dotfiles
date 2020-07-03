@@ -15,13 +15,13 @@
 #context-sep-navigation,
 #context-savepage,
 #context-sendpage,
-#context-sep-viewbgimage,
+/*#context-sep-viewbgimage,*/
 #context-back,
 #context-forward,
-#context-reload,
-#context-stop,
+/*#context-reload,
+#context-stop,*/
 #context-sendimage,
-#context-copyimage-contents,
+/*#context-copyimage-contents,*/
 #context-viewpartialsource-selection,
 #context-viewsource,
 /* TAB ICONS */
@@ -29,7 +29,9 @@
 /* MISC ELEMENTS */
 #appmenu-toolbar-button,
 #alltabs-button,
-.tab-close-button
+.tab-close-button,
+.tabbrowser-arrowscrollbox > .scrollbutton-up,
+.tabbrowser-arrowscrollbox > .scrollbutton-down
 {
     display:none!important;
 }
@@ -85,10 +87,21 @@ tab:not([pinned="true"]) .tab-label {
     text-align:center;
 }
 /* Noisy Tab Addon */
-tab .tab-content .entIcon {
-    height:16px!important;
+tab .tab-content .entIcon,
+tab .tab-content .tab-icon-sound {
+    filter:invert(100%);
+    height:14px!important;
     margin-right:3px!important;
-    width:16px!important;
+    transition:opacity 0.2s ease!important;
+    width:14px!important;
+}
+tab[pinned="true"] .tab-content .entIcon {
+    height:10px!important;
+    margin:-8px -16px 0 -8px!important;
+    width:10px!important;
+}
+tab[pinned="true"] .tab-content .tab-label {
+    display:none!important;
 }
 tab:not([pinned="true"])[entNoisy] .tab-label {
     padding-right:3px!important;
@@ -102,6 +115,9 @@ tab[pinned="true"]:not([busy]) .tab-icon-image {
     margin-left:6px!important;
     min-height:16px!important;
     min-width:16px!important;
+}
+.tabbrowser-tabs[positionpinnedtabs] > .tabbrowser-tab[pinned] {
+  position:static!important;
 }
 tab .tab-throbber {
     display:-moz-box!important;
@@ -144,7 +160,7 @@ tab .tab-throbber[progress] {
 }
 
 /* Vimperator */
-#liberator-statusline > * {
+#liberator-bottombar * {
     font-family:"ProFont"!important;
 }
 #liberator-statusline {
@@ -157,6 +173,17 @@ tab .tab-throbber[progress] {
 #liberator-status-ssl {
     max-height:12px!important;
     max-width:12px!important;
+}
+#liberator-status-ssl:not(.notSecure)::before {
+  content:"🔒"!important;
+  display:inline-block;
+  margin-top:-3px!important;
+  margin-right:-12px!important;
+  margin-left:5px!important;
+}
+#liberator-status-ssl.notSecure,
+#liberator-status-ssl.notSecure * {
+  width:0!important;
 }
 
 /* Prompt */
@@ -195,18 +222,24 @@ tabmodalprompt .mainContainer {
     background:transparent!important;
 }
 
-
 /* Firefox like image/video background */
-@namespace url(http://www.w3.org/1999/xhtml);
-@-moz-document regexp("((.*\\.(png|apng|jpg|jpeg|gif|tiff|bmp))|(^data:image\\/.*))(\\?([^#]*))?(#(.*))?(:\\w+)?") {
-html > body[style="background-color: #2E3B41"] {
+head {
+    display: initial !important;
+    visibility: hidden !important;
+}
+head > link[href="chrome://global/skin/media/TopLevelImageDocument.css"],
+head > link[href="chrome://global/skin/media/TopLevelVideoDocument.css"] {
     background-color:#222222!important;
     background-image:url("chrome://global/skin/media/imagedoc-darknoise.png")!important;
+    display: block !important;
+    height: 100vh !important;
+    pointer-events: none !important;
+    position: fixed !important;
+    visibility: visible !important;
+    width: 100vw !important;
 }
-
-html > body[style="background-color: #2E3B41"] > img:only-child:not(.transparent) {
+html > body > img:only-child:not(.transparent) {
     box-shadow:0px 0px 15px black!important;
-}
 }
 
 /* Misc */

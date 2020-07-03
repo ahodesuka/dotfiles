@@ -1,5 +1,9 @@
+# DO NOT EDIT! This file will be overwritten by LXAppearance.
+# Any customization should be done in ~/.gtkrc-2.0.mine instead.
+
+include "/home/mokou/.gtkrc-2.0.mine"
 gtk-theme-name="ahoka"
-gtk-icon-theme-name="Faience-ahoka"
+gtk-icon-theme-name="ahoka"
 gtk-font-name="cure Medium 8"
 gtk-cursor-theme-name="OpenZone_Fire"
 gtk-cursor-theme-size=0
@@ -11,5 +15,5 @@ gtk-enable-event-sounds=0
 gtk-enable-input-feedback-sounds=0
 gtk-xft-antialias=1
 gtk-xft-hinting=1
-gtk-xft-hintstyle="hintfull"
+gtk-xft-hintstyle="hintslight"
 gtk-xft-rgba="rgb"

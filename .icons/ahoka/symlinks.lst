@@ -1,0 +1,932 @@
+add-files-to-archive tap-create
+add-folder-to-archive
+application-exit exit gtk-quit xfce-system-exit
+appointment-new appointment stock_new-appointment
+bookmark-new bookmark_add bookmark-add bookmark_list_add stock_add-bookmark stock_help-add-bookmark bookmarks_list_add stock_thunar-shortcuts
+call-stop call-end
+contact-new stock_new-bcard
+dialog-apply gtk-apply stock_calc-accept stock_mail-filters-apply stock_mark
+dialog-ok gtk-ok ok games-endturn
+document-import document-import-ocal
+document-new file_new gtk-new stock_new-text filenew gtk-file
+document-open fileopen gtk-open gimp-image-open
+document-open-recent system-file-progress-panel nautilus-progress-info-panel system-file-manager-panel
+document-page-setup stock_print-setup gtk-page-setup
+document-print fileprint gtk-print stock_print
+document-print-preview gtk-print-preview preview-file stock_print-preview filequickprint
+document-properties bonobo-component-browser gtk-properties stock_file-properties stock_folder-properties stock_properties stock_file-properites
+document-revert gtk-revert-to-saved-ltr gtk-revert-to-saved-rtl revert
+document-save filesave gtk-save stock_save browser-download
+document-save-as filesaveas gtk-save-as stock_save-as
+document-save-all geany-save-all
+document-send blueman-send-file send-to
+edit-clear editclear gtk-clear locationbar-erase
+edit-copy editcopy gtk-copy stock_copy xml-node-duplicate
+edit-cut editcut gtk-cut stock_cut
+edit-paste editpaste gtk-paste stock_paste
+edit-find filefind find gtk-find stock_search
+edit-find-replace gtk-find-and-replace stock_search-and-replace
+edit-redo edit-undo-rtl gtk-redo-ltr redo stock_redo
+edit-select-all gtk-select-all stock_select-all
+edit-undo edit-redo-rtl gtk-undo-ltr undo stock_undo
+extract-archive cab_extract tap-extract-to tap-extract
+format-indent-less format-indent-more-rtl gnome-stock-text-unindent gtk-indent-rtl gtk-unindent-ltr stock_text_unindent
+format-indent-more format-indent-less-rtl gnome-stock-text-indent gtk-indent-ltr gtk-unindent-rtl stock_text_indent
+format-justify-center centrejust gtk-justify-center stock_text_center
+format-justify-fill gtk-justify-fill stock_text_justify
+format-justify-left leftjust gtk-justify-left stock_text_left
+format-justify-right rightjust gtk-justify-right stock_text_right
+format-text-bold gtk-bold stock_text_bold text_bold
+format-text-direction-ltr gimp-text-dir-ltr
+format-text-direction-rtl gimp-text-dir-rtl
+format-text-italic gtk-italic stock_text_italic text_italic
+format-text-strikethrough gtk-strikethrough stock_text-strikethrough text_strike
+format-text-underline gtk-underline stock_text_underlined text_under
+folder-new folder_new stock_new-dir
+folder-copy stock_folder-copy
+folder-move stock_folder-move
+gnome-app-install-star rhythmbox-set-star star
+go-bottom bottom gtk-goto-bottom stock_bottom
+go-down gtk-go-down stock_down down
+go-first go-last-rtl gtk-goto-first-ltr gtk-goto-last-rtl start stock_first
+go-home gohome gtk-home kfm-home redhat-home stock_home kfm_home
+go-jump gtk-jump-to-ltr gtk-jump-to-rtl location
+go-last go-first-rtl finish gtk-goto-first-rtl gtk-goto-last-ltr stock_last
+go-next go-previous-rtl forward gtk-go-back-rtl gtk-go-forward-ltr next stock_right meld-change-apply-right media-playlist-consecutive
+go-previous go-next-rtl back gtk-go-back-ltr gtk-go-forward-rtl previous stock_left meld-change-apply-left media-playlist-consecutive-rtl
+go-top top gtk-goto-top stock_top
+go-up gtk-go-up stock_up up
+help-about gtk-info gtk-info gnome-about-logo dialog-information gimp-info gtk-about stock_about
+gtk-no dialog-no stock_no
+gtk-yes dialog-yes stock_yes
+help-contents gtk-help help help-faq help-browser stock_help
+insert-text draw-text xml-text-new gimp-tool-text
+list-add add edit-add gtk-add meld-change-copy xml-element-new
+list-remove remove gtk-remove edit-delete editdelete gtk-delete stock_delete meld-change-delete xml-node-delete xml-attribute-delete
+mail-attachment stock_attach
+mail-inbox stock_inbox
+mail-forward stock_mail-forward gnome-stock-mail-fwd mail_forward
+mail-mark-important
+mail-mark-junk mail_spam stock_spam
+mail-mark-notjunk mail-mark-not-junk
+mail-mark-read mail-read xfce-nomail
+mail-message-new gnome-stock-mail-new mail_new stock_mail-compose mail-mark-read message applications-email-panel xfce-newmail mail-mark-unread mail-unread indicator-messages-new
+mail-outbox stock_outbox
+mail-reply-sender gnome-stock-mail-rpl mail_reply stock_mail-reply mail-replied
+mail-reply-all mail_replyall stock_mail-reply-to-all
+mail-send gnome-stock-mail-snd mail_send stock_mail-send mail-sent mail-folder-sent stock_sent-mail internet-mail
+mail-send-receive stock_mail-send-receive
+media-eject player-eject ejecter
+media-import-audio-cd stock_xfburn-import-session
+media-optical-audio-new audio-cd-new stock_xfburn-audio-cd
+media-optical-blank stock_xfburn-blank-cdrw
+media-optical-burn iso-image-burn media-write-cd stock_xfburn-burn-cd
+media-optical-copy audio-cd-duplicate stock_xfburn-data-copy
+media-optical-data-new stock_xfburn-new-data-composition
+media-optical-video-new
+media-playback-pause gtk-media-pause player_pause stock_media-pause
+media-playback-start gtk-media-play-ltr player_play stock_media-play
+media-playback-stop gtk-media-stop player_stop stock_media-stop
+media-playlist-repeat stock_repeat
+media-playlist-shuffle stock_shuffle
+media-record gtk-media-record player_record stock_media-rec
+media-seek-forward media-seek-backward-rtl gtk-media-rewind-rtl player_fwd stock_media-fwd
+media-seek-backward media-seek-forward-rtl gtk-media-forward-rtl gtk-media-forward-ltr gtk-media-rewind-ltr player_rew stock_media-rew
+media-skip-forward media-skip-backward-rtl gtk-media-next-ltr gtk-media-previous-rtl player_end stock_media-next
+media-skip-backward media-skip-forward-rtl gtk-media-next-rtl gtk-media-previous-ltr player_start stock_media-prev
+object-flip-horizontal gimp-flip-horizontal tool-mirror
+object-flip-vertical gimp-flip-vertical tool-flip
+object-rotate-left gimp-rotate-270
+object-rotate-right rotate gimp-rotate-90 gimp-rotate-180
+action-unavailable process-stop gtk-cancel gtk-stop stock_stop stop
+system-shutdown-restart-panel system-shutdown-panel-restart
+system-restart gnome-session-reboot un-reboot xfsm-reboot system-reboot
+system-log-out gnome-log-out gnome-logout gnome-session-logout xfsm-logout lxde-logout gnome-logout brisk_system-log-out
+system-lock-screen gnome-lockscreen xfce-system-lock
+system-shutdown system-shutdown-panel xfce-system-exit gnome-shutdown
+system-hibernate gnome-session-hibernate system-suspend-hibernate xfsm-hibernate gpm-hibernate
+system-suspend gnome-session-suspend gnome-session-sleep sleep xfsm-suspend gpm-suspend
+system-switch-user gnome-session-switch xfsm-switch
+system-run gnome-run gtk-execute bonobo-component-browser gimp-tools application-menu
+system-build geany-build
+system-search gnome-searchtool kfind search catfish preferences-system-search
+tab-new tab_new stock_new-tab
+tools-check-spelling gtk-spell-check stock_spellcheck
+view-fullscreen gtk-fullscreen stock_fullscreen window_fullscreen
+view-list-icons pack-less
+view-restore gtk-leave-fullscreen stock_leave-fullscreen window_nofullscreen
+view-refresh stock-refresh reload_page reload_all_tabs reload3 reload gtk-refresh stock_refresh
+view-sort-ascending gtk-sort-ascending
+view-sort-descending gtk-sort-descending
+window-close gtk-close stock_close geany-close-all paint-none gimp-close
+window-new window_new stock_new-window
+zoom-in gtk-zoom-in stock_zoom-in viewmag+
+zoom-out gtk-zoom-out stock_zoom-out viewmag-
+zoom-original gtk-zoom-100 stock_zoom-1 viewmag1
+zoom-fit zoom-best-fit zoom-fit-best gtk-zoom-fit stock_zoom-page viewmagfit zoom sticky_zoom gimp-tool-zoom system-search  gnome-searchtool kfind search catfish preferences-system-search
+paint-solid object-fill
+draw-rectangle object-stroke
+view-left-close gtk-index
+view-page-facing view-dual
+media-playlist-repeat-song media-playlist-repeat-song-rtl
+zoom-fit-page zoom-fit-best
+object-visible eye gimp-visible
+view-page-continuous view-continuous
+exchange-positions exchange-positions-zorder exchange-positions-clockwise
+font-select dialog-text-and-font gtk-select-font
+object-hidden user-not-tracked
+draw-eraser gimp-tool-eraser
+dialog-align-and-distribute gimp-tool-align
+tool-tweak gimp-tool-warp
+image-crop gimp-tool-crop tool-crop
+draw-path gimp-tool-path
+tool-measure gimp-tool-measure
+color-fill gimp-tool-bucket-fill
+paint-gradient-linear gimp-gradient-linear gimp-tool-blend tool-grayscale
+paint-gradient-radial gimp-gradient-radial
+dialog-layers gimp-layers
+stock_filters-invert gimp-invert tool-invert
+edit-undo-history gimp-undo-history
+grid-rectangular gimp-grid
+tool-pointer gimp-cursor
+edit-paste-in-place gimp-paste-into
+dialog-input-devices gimp-input-device
+edit-duplicate gimp-duplicate
+stroke-join-miter gimp-join-miter
+stroke-join-bevel gimp-join-bevel
+stroke-join-round gimp-join-round
+stroke-cap-butt gimp-cap-butt
+stroke-cap-round gimp-cap-round
+stroke-cap-square gimp-cap-square
+draw-ellipse gimp-shape-circle
+draw-rectangle gimp-shape-square
+open-menu gimp-menu-right gimp-menu-left
+view-continuous view-page-continuous
+zoom-fit-best zoom-fit-page
+gtk-select-color color-select color-picker preferences-color gimp-tool-color-picker gtk-color-picker
+edit-find filefind find gtk-find stock_search system-search
+view-dual view-page-facing
+gimp-tool-by-color-select color-management
+stock_connect online gtk-connect
+stock_disconnect  offline gtk-disconnect
+stock_text-monospaced
+stock_people stock_new-meeting
+find-location xc_crosshair
+path-mode-bezier gimp-paths
+gimp-wilber gimp-wilber-outline
+draw-cuboid gimp-tool-perspective
+paint-pattern gimp-pattern
+dialog-templates gimp-template
+gtk-orientation-landscape gimp-landscape
+gtk-orientation-portrait gimp-portrait
+vc-add vc-add-24
+vc-checkout vc-checkout-24
+vc-commit vc-commit-24
+vc-push vc-push-24
+vc-remove vc-remove-24
+vc-resolve vc-resolve-24
+vc-update vc-update-24
+filter-normal filter-normal-24
+filter-nonvc filter-nonvc-24
+filter-modified filter-modified-24
+filter-ignored filter-ignored-24
+document-edit list-edit
+gimp-tool-brightness-contrast tool-adjust-contrast
+gimp-histogram histogram
+gimp-colormap map
+gimp-tool-color-balance tool-adjust-colors
+gimp-scale tool-resize
+gimp-tool-rotate tool-rotate
+gimp-tool-posterize tool-sharpen
+file-catalog file-library
+abiword abiword_48
+accessories-calculator calc galculator gnome-calculator speedcrunch applications-mathematics kcalc
+accessories-character-map gnome-character-map gucharmap kcharselect gnome-characters
+accessories-dictionary gnome-dictionary stardict goldendict audiobook xfce4-dict
+accessories-text-editor gnome-word kedit mousepad text-editor xfce-edit geany gedit
+accessories-document-viewer acroread AdobeReader AdobeReader8 AdobeReader9 AdobeReader10 xreader
+activity-log-manager
+adobe-air AdobeAIR
+amarok
+amazon-mp3-store-source amazon-store wwwamazoncom-www.amazon.com wwwamazoncouk-www.amazon.co.uk wwwamazonfr-www.amazon.fr
+amule
+anjuta
+anki
+application-default-icon application-x-executable CMakeSetup
+atom atom-beta
+audacity aqualung
+audacious
+autoplus easylife
+avant-window-navigator awn-settings
+awn-settings cs-applets
+baobab
+blender
+bluefish bluefish-icon mate-panel-fish
+bluegriffon
+brasero nautilus-cd-burner k3b xfburn asunder stock_xfburn
+bug-buddy abrt gnome-abrt applications-debugging
+caffeine xfce4-time-out-plugin
+calibre-gui
+checkbox
+comix
+computerjanitor bleachbit
+config-users kuser system-config-users susers system-users cs-user-accounts
+ccc_large
+ccsm simple-ccsm
+cheese org.gnome.Cheese
+chromium-browser chromium
+chromium-browser2
+clementine application-x-clementine
+clock cairo-clock gnome-panel-clock gnome-set-time rclock stock_alarm time xfce4-clock xfce-schedule gnome-clocks mate-panel-clock clock-applet
+credentials-preferences
+deadbeef
+defcon
+deja-dup timeshift
+deluge deluge-torrent ktorrent
+desktop-effects wmtweaks cs-desktop-effects
+desura
+devede devedeng
+devhelp
+dia
+dc++ DC++
+docky plank
+dropbox
+dvdrip
+easytag EasyTAG_icon
+eclipse
+ekiga
+ejecter
+emacs emacs23
+emerald-theme-manager-icon
+emesene
+empathy org.gnome.Empathy
+eog gthumb gwenview gpicview ristretto applications-viewers mate-eyes-applet eom pix xviewer
+evernote nixnote
+evince atril
+evolution evolution-mail kmail sylpheed claws-mail xfce-mail applications-mail
+evolution-calendar gnome-calendar office-calendar office-date plan system-config-date ximian-evolution-calendar stock_calendar x-office-calendar korganizer xfcalendar vcalendar org.gnome.Calendar
+evolution-tasks gtg stock_task xfce4-clipman-plugin clipit-trayicon parcellite csd-clipboard cs-clipboard
+exaile
+f-spot
+facebook goa-account-facebook
+fedora-release-notes
+file-roller utilities-file-archiver xarchiver engrampa
+filezilla
+firefox mozilla-firefox firefox-3.0 firefox-3.5 firefox-4.0
+firefox-original
+flash adobeflashplugin flash-player-properties flashplayer
+flashplayer adobe-flashplayer
+flickr postr kflickr goa-account-flickr
+frostwire
+fusion-icon
+gajim
+gbrainy
+gcolor2 gcolor3 gtk-select-color
+gcstar
+gdm-setup gdm user_auth lightdm-settings cs-login
+geany
+gimp mtpaint applications-painting
+gksu-root-terminal gksu-debian cs-cat-admin
+glade glade-3 gazpacho gazpacho-icon applications-interfacedesign
+glippy glippy-panel
+gloobus gloobus-preview covergloobus
+gmail gmailwatcher checkgmail
+gnome-about-logo gnome-logo-icon-transparent mate-panel-notification-area
+gnome-activity-journal zeitgeist
+gnome-aisleriot applications-cardgames gnome-hearts gnome-hearts.png gnome-freecell
+gnome-contacts addressbook office-address-book x-office-address-book address-book-new stock_new-address-book x-office-address-book mugshot
+gnome-display-properties display-capplet preferences-desktop-display system-config-displayca mate-preferences-desktop-display msd-xrandr cs-display csd-xrandr csd-orientation cinnamon-preferences-desktop-display
+gnome-do cs-general
+gnome-documents
+gnome-freecell
+gnome-glchess pychess glchess gnome-chess chess
+gnome-glines glines five-or-more
+gnome-gnect gnect four-in-a-row
+gnome-gnibbles gnibbles gnome-nibbles
+gnome-iagno iagno
+gnome-klotski gnotski
+gnome-lightsoff lightsoff
+gnome-logout gnome-log-out gnome-session-logout xfsm-logout system-log-out
+gnome-mahjongg mahjongg
+gnome-mines gnomine gnomines
+gnome-network-properties mate-network-properties
+gnome-nettool gnome-networktool zenmap mate-netspeed-applet
+gnome-panel mate-panel xfce4-panel cs-panel
+gnome-panel-launcher gnome-desktop-item-edit preferences-desktop-launch-feedback mate-desktop-item-edit mate-panel-launcher cs-startup-programs cinnamon-panel-launcher
+gnome-quadrapassel quadrapassel lutris
+gnome-robots gnobots2
+gnome-screenshot applets-screenshooter ksnapshot screenie screenie-qt
+gnome-session session-properties xfce4-session mate-session-properties cinnamon-session-properties
+gnome-settings-default-applications preferences-desktop-default-applications cs-default-applications
+gnome-shutdown boot gnome-session-halt system-shut-down xfsm-shutdown system-shutdown
+gnome-sound-recorder
+gnome-sticky-notes-applet evolution-memos gnome-note gnote sticky-notes stock_insert-note stock_notes tomboy-note xfce4-notes-plugin bijiben mate-sticky-notes-applet org.gnome.bijiben cs-desklets tomboy knotes xpad
+gnome-sudoku
+gnome-swell-foop gnome-samegnome
+gnome-tali gtali tali applications-boardgames
+gnome-tetravex gnotravex
+gnumeric webservice-office-zoho-sheet
+gnucash-icon
+google goa-account-google
+googleearth google-earth
+googleplus google-plus
+google-chrome google-chrome-unstable
+google-chrome2
+googlemusicframe
+gparted mate-disk-usage-analyzer
+goa-panel goa-account
+gtk-info gnome-info gnome-status indicator-applet stock_view-details xfce-system-info mate-notification-properties
+gtk-recordmydesktop
+guake guake-notification guake-prefs
+guayadeque
+gwibber
+haguichi
+hardinfo sysprof-icon mate-sensors-applet xfce4-cpugraph-plugin xfce4-cpufreq-plugin xfce-sensors mate-inhibit-applet lshw
+help-browser gnochm gnome-help gnome-unknown gtk-help help khelpcenter stock_help stock_unknown susehelpcenter xfce-man xfce_unknown gnome-help browser-help
+homebank grisbi
+ibus ibus-setup
+iceweasel
+icedove
+im-chooser eekboard cs-input-method
+imagemagick display.im6
+indicator-weather org.gnome.Weather
+inkscape
+internet-archive
+jamendo
+jdownloader
+jockey jockey-kde applications-electronics cs-drivers application-x-firmware
+jokosher
+keepassx
+kupfer
+lastfm last-fm lastfm-audioscrobbler as-icon as-powered
+leafpad kate
+library-internet-radio gnomeradio kradio kradio4 radio
+libreoffice-base libreoffice3-base libreoffice34-base
+libreoffice-calc libreoffice3-calc libreoffice34-calc
+libreoffice-draw libreoffice3-draw libreoffice34-draw
+libreoffice-impress libreoffice3-impress libreoffice34-impress
+libreoffice-main libreoffice-startcenter libreoffice-template libreoffice3-template libreoffice34-template libreoffice3-startcenter libreoffice34-startcenter libreoffice-math
+libreoffice-math libreoffice3-math libreoffice34-math
+libreoffice-writer libreoffice3-writer libreoffice34-writer
+liferea internet-news-reader akregator rssowl news-feed
+logview logviewer utilities-log-viewer
+magnatune
+mail-notification mailnag
+mcomix
+media-player-banshee banshee banshee-1
+meld
+mendeley mendeleydesktop
+menu-editor alacarte gnome-gmenu drakmenustyle xfce4-menueditor mozo menulibre
+midori
+minitube
+minitunes itunes
+miro miro-guide-source
+mitter
+monodevelop applications-monodevelopment
+mplayer gnome-mplayer smplayer kmplayer kplayer
+mypaint
+nautilus-actions nautilus-actions-config-tool
+netbeans
+nm-stage01-connecting01 nm-stage02-connecting01 nm-stage03-connecting01 nm-vpn-connecting01
+nm-stage01-connecting02 nm-stage02-connecting02 nm-stage03-connecting02 nm-vpn-connecting02
+nm-stage01-connecting03 nm-stage02-connecting03 nm-stage03-connecting03 nm-vpn-connecting03
+nm-stage01-connecting04 nm-stage02-connecting04 nm-stage03-connecting04 nm-vpn-connecting04
+nm-stage01-connecting05 nm-stage02-connecting05 nm-stage03-connecting05 nm-vpn-connecting05
+nm-stage01-connecting06 nm-stage02-connecting06 nm-stage03-connecting06 nm-vpn-connecting06
+nm-stage01-connecting07 nm-stage02-connecting07 nm-stage03-connecting07 nm-vpn-connecting07
+nm-stage01-connecting08 nm-stage02-connecting08 nm-stage03-connecting08 nm-vpn-connecting08
+nm-stage01-connecting09 nm-stage02-connecting09 nm-stage03-connecting09 nm-vpn-connecting09
+nm-stage01-connecting10 nm-stage02-connecting10 nm-stage03-connecting10 nm-vpn-connecting10
+nm-stage01-connecting11 nm-stage02-connecting11 nm-stage03-connecting11 nm-vpn-connecting11
+nvidia-settings nvidia-current-settings nvidia-ddm-mx
+onboard
+openttd
+ooo-base ooo-base3.0 openofficeorg3.0-base openofficeorg3-base openofficeorg-base
+ooo-calc ooo-calc24 ooo-calc2 ooo-calc3.0 openofficeorg24-calc openofficeorg3.0-calc openofficeorg3-calc openofficeorg-calc
+ooo-draw ooo-draw3.0 openofficeorg3.0-draw openofficeorg3-draw openofficeorg-draw
+ooo-impress ooo-impress24 ooo-impress2 ooo-impress3.0 openofficeorg24-impress openofficeorg3.0-impress openofficeorg3-impress openofficeorg-impress
+ooo-math ooo-math3.0 openofficeorg3.0-math openofficeorg3-math openofficeorg-math
+ooo-printeradmin openofficeorg3.0-printeradmin openofficeorg3-printeradmin openofficeorg-printeradmin libreoffice-printeradmin libreoffice3-printeradmin  libreoffice34-printeradmin
+ooo-template ooo-template3.0 openofficeorg3.0-template openofficeorg3-template openofficeorg-template
+ooo-writer office-writer ooo-writer24 ooo-writer2 ooo-writer3.0 openofficeorg24-writer openofficeorg3.0-writer openofficeorg3-writer openofficeorg-writer
+openbravo-erp
+openerp-client
+openjdk-6 openjdk-7 openjdk-8 openjdk-9 java-1.8.0 sun-java6 sun-java7 sun-java sun-javaws sun-jcontrol applications-java system-switch-java javaws java9-openjdk java8-openjdk java7-openjdk
+openshot
+opera opera-browser
+opera-widget-manager opera-widget
+palimpsest gnome-device-manager gnome-disks mate-disk gsmartcontrol disk-manager
+partner preferences-management-service
+phatch
+phatch-inspector
+picasa picasa32x32 picasa-fontcfg
+picasa-fontcfg
+pidgin kopete
+pino
+pithos
+pitivi
+playonlinux
+ppa
+poedit gnome-translate
+podcast library-podcast gpodder
+preferences-color gnome-color-manager cs-color csd-color cinnamon-preferences-color
+preferences-desktop-accessibility accessibility-directory access ax-applet gnome-settings-accessibility-technologies orca mate-ax-applet csd-a11y-settings csd-a11y-keyboard cs-universal-access
+preferences-desktop-wallpaper background gnome-settings-background wallpaper xfce4-backdrop cs-backgrounds csd-background
+preferences-desktop-keyboard
+preferences-desktop-keyboard-shortcuts key_bindings ktouch klavaro gnome-settings-keybindings csd-media-keys
+preferences-desktop-locale config-language locale cs-language cs-region
+preferences-desktop-remote-desktop gdm-xnest gnome-remote-desktop tsclient vinagre remmina krfb
+preferences-desktop-screensaver kscreensaver screensaver xscreensaver cs-screensaver csd-screensaver-proxy
+preferences-desktop-sound gnome-audio gnome-settings-sound gnome-sound-properties gnome-volume-control multimedia-volume-control preferences-desktop-multimedia preferences-sound xfce-sound xfce4-sound xfce4-mixer volume-knob multimedia knotify kcmsound gnome-mixer arts csd-sound
+preferences-desktop-theme gnome-settings-theme style xfce-ui cs-themes xfce4-appearance-settings
+preferences-system-bluetooth bluetooth bluetooth-48 bluetoothradio blueman blueradio blueradio-48 bt-logo blueman-device cs-bluetooth
+preferences-system-firewall gufw gufw_menu ufw-frontends firestarter cs-firewall
+preferences-system-windows gnome-window-manager kcmkwm kwin xfwm4 window-manager mate-panel-window-list mate-panel-window-menu cs-windows
+qtassistant assistant assistant-qt4 qdbusviewer
+qtdesigner designer QtProject-designer designer-qt4 qt4logo
+qtlinguist linguist linguist-qt4
+qtcreator qtcreator_logo_32 qtassistant qtdesigner qtlinguist qdbusviewer-qt4    qtlinguist linguist linguist-qt4 qtdesigner designer QtProject-designer designer-qt4 qt4logo qtassistant assistant assistant-qt4 qdbusviewer
+radiotray
+rhythmbox gmusicbrowser gnome-music
+screenruler-icon screenruler
+scribes
+scribus
+setroubleshoot_icon
+setroubleshoot_red_icon
+shotwell
+shutter
+skype
+spotify spotify-linux-48x48 spotify-linux-512x512
+softwarecenter
+softwarecenter-debian
+softwarecenter-ubuntu softwarecenter
+software-properties edit-urpm-sources gpk-repo pk-package-sources x-system-software-sources aptdaemon-update-cache
+sound-juicer
+soundconverter oggconvert
+steam  steampowered
+stellarium
+stock_keyring badge-small keyring-manager password revelation seahorse seahorse-preferences activity-log-manager gksu dialog-password preferences-system-privacy cs-privacy
+synapse
+synaptic gnome-app-install gnome-package system-installer system-software-install system-installer system-software-installer drakstats gdebi gdeb gnome-apt kentoo kpackage kynpatic package-manager-icon pirut porthole rpmdrake update-notifier yumex aptdaemon-download mx-packageinstaller cs-sources
+system-file-manager file-manager kfm nautilus redhat-filemanager xfce-filemanager caja Thunar thunar mate-panel-drawer sunflower org.gnome.Nautilus
+system-switch-java
+telepathy
+terminator
+time-admin config-date preferences-system-time clocks timer-applet xfce4-timer orage_globaltime org.gnome.clocks mx-clocky cs-date-ti
+tomboy knotes xpad
+totem kaffeine parole org.gnome.Totem xplayer
+thunderbird mozilla-thunderbird thunderbird-icon
+tracker
+transmission
+truecrypt
+tv tvtime me-tv freetuxtv
+twitter twitux gtwitter goa-account-twitter Twitter-twitter.com applications-microblogging-panel
+ubuntu-tweak
+ubuntuone ubuntuone-client ubuntuone-installer
+umusicstore musicstore_icon
+ubuntuone-music
+unknown-channel
+update-manager mandrivaupdate system-software-update gpk-prefs pup zen-icon aptdaemon-upgrade
+usb-creator-gtk usb-creator
+user-info system-config-authentication text-x-vcard contact-new
+usermount mm
+utilities-terminal bash Etermutilities-terminal gnome-eterm gnome-term gnome-terminal gnome-xterm hotwire konsole lxterminal openterm terminal Terminal tilda xfce-terminal xterm
+utilities-system-monitor gnome-monitor gnome-system-monitor htop ksysguard mate-cpu-frequency-applet mate-power-statistics
+vim gvim
+virtualbox virtualbox-ose VBox
+web-browser browser gnome-web-browser redhat-web-browser internet-web-browser applications-webbrowsers palemoon
+wikipedia
+wine
+wine-notepad notepad
+wine-uninstaller msiexec
+wine-winecfg winecfg
+wine-winetricks winetricks
+wireshark hi48-app-wireshark
+wordpress
+workspace-switcher gnome-panel-workspace-switcher xfce4-workspaces mate-panel-workspace-switcher cs-workspaces
+WorldOfGoo
+Wunderlist wunderlist
+wxbanker gnucash-icon emblem-sales mate-invest-applet
+xbmc
+xchat xchat-gnome xchat-mini smuxi-frontend-gnome polari hexchat
+xfce4-appfinder mate-system-log
+xfce4-panel
+xine
+xournal
+xterm xterm_32x32 xterm-color_32x32 xterm_48x48 xterm-color_48x48
+yahoo goa-account-yahoo
+youtube minitube
+minitube smtube
+zim
+uget uget-icon
+smartgit meld-version-control smartgithg
+sqlitebrowser mysql-workbench
+system-search gnome-searchtool kfind search catfish preferences-system-search
+atril qpdfview
+vivaldi vivaldi-stable vivaldi-snapshot
+lollypop org.gnome.Lollypop
+qbittorrent qbittorrent-tray qbittorrent-tray-light qbittorrent-tray-dark
+peek com.uploadedlobster.peek
+plex plexhometheater plexmediamanager
+maxthon maxthon-desktop
+boincmgr boinc
+2048 gnome-2048
+yandex-browser yandex-browser-beta
+gnome-todo org.gnome.Todo
+gnome-maps org.gnome.Maps
+pyrenamer gprename
+bitcoin bitcoin-128 bitcoin-qt
+clipgrab ClipGrab clipgrab-qt5
+eufloria eufloriahd
+fbreader FBReader Buka calibre-gui
+fedorautils fedora-utils
+hamster hamster-applet hamster-indicator hamster-time-tracker
+handbrake-gtk hb-icon
+intellij-idea intellij_idea intellij-idea-ce intellij-idea-community intellij-idea-ultimate-edition intellij idea-ultimate idea
+keepass keepass2
+mame mameexecutor
+matlab matlab-desktop
+muse-sequencer muse muse_icon
+bleachbit csd-housekeeping
+cs-date-time csd-datetime cinnamon-preferences-system-time
+gnome-color-chooser cs-cat-appearance
+pocket goa-account-pocket
+mysqlworkbench mysql-workbench
+applications-accessories applications-utilities gnome-util package_utilities redhat-accessories xfce-utils
+applications-development gnome-devel package_development redhat-programming xfce-devel emblem-development
+applications-fonts
+applications-games gnome-joystick package_games redhat-games xfce-games input-gaming joystick yast_joystick zsnes fceux
+applications-graphics gnome-graphics package_graphics redhat-graphics xfce-graphics emblem-art
+applications-internet gnome-globe package_network redhat-internet stock_internet xfce-internet emblem-web
+applications-multimedia gnome-multimedia multimedia_section package_multimedia redhat-sound_video xfce-multimedia emblem-multimedia
+applications-office gnome-applications package_office redhat-office xfce-office emblem-marketing
+applications-other gnome-other preferences-other
+applications-science
+applications-system gnome-system package_system preferences-system redhat-system_tools system_section xfce-system xfce-system-settings cs-cat-hardware
+gnome-control-center kcontrol
+preferences-desktop configuration_section gnome-settings gtk-preferences preferences-desktop-personal redhat-preferences xfce4-settings gconf-editor dconf-editor gconfeditor paprefs control-center2 drakconf gconfeditor gkdebconf-icon gkdebconf gnome-desktop-config redhat-server_settings redhat-tools xfce4-mcs-manager xfce4-mcs-manager startupmanager gnome-tweak-tool mateconf-editor package_settings applications-system csd-xsettings cs-cat-prefs
+preferences-desktop-peripherals-directory
+preferences-desktop-personal-directory
+preferences-system-directory
+audio-card yast_soundcard
+audio-input-microphone gnome-stock-mic stock_mic gnome-sound-recorder
+battery gnome-dev-battery xfce4-power-manager-settings gnome-power-manager gnome-power-statistics xfce4-battery-plugin mate-power-manager xfpm-ac-adapter csd-power cs-power
+camera-photo camera camera_unmount emblem-camera applications-photography camera-video
+camera-web guvcview qv4l2
+computer gnome-computer gnome-dev-computer gnome-fs-client system
+drive-harddisk block-device gnome-dev-harddisk gtk-harddisk harddrive hdd_unmount yast_HD yast_idetude drive-harddisk-system
+drive-harddisk-ieee1394 gnome-dev-harddisk-1394
+drive-harddisk-scsi
+drive-harddisk-system
+drive-harddisk-usb gnome-dev-harddisk-usb
+drive-optical drive-cdrom gnome-dev-cdrom gnome-dev-dvd
+drive-removable-media gnome-dev-removable xfce-mount media-removable csd-automount
+drive-removable-media-ieee1394 gnome-dev-removable-1394 gnome-dev-unknown-1394
+drive-removable-media-scsi
+drive-removable-media-usb drive-removable-media-usb-pendrive gnome-dev-removable-usb usbpendrive_unmount
+gnome-dev-memory media-memory
+input-keyboard gnome-dev-keyboard kxkb xfce4-keyboard preferences-desktop-keyboard keyboard cs-keyboard csd-keyboard
+input-mouse gnome-dev-mouse-ball gnome-dev-mouse-optical mouse xfce4-mouse yast_mouse preferences-desktop-peripherals kmousetool csd-mouse cs-mouse
+input-tablet cs-tablet csd-wacom
+keyboard
+media-cdr cdwriter_unmount gnome-dev-disc-cdr media-optical-cdr media-optical-cd-r gnome-dev-disc-dvdr gnome-dev-disc-dvdr-plus
+media-cdrom-audio gnome-dev-cdrom-audio gnome-dev-disc-audio media-optical-audio stock_music-library media-optical-audio-new
+media-cdrw gnome-dev-disc-cdrw media-optical-cd-rw
+media-dvd dvd_unmount gnome-dev-disc-dvdram gnome-dev-disc-dvdrom gnome-dev-disc-dvdrw gnome-dev-dvd-alt media-dvdrw gnome-dev-disc-dvdrw media-optical-dvd-rw media-optical-dvd-r media-optical-dvd-rw media-optical-dvd-ram media-optical-dvd-rom media-optical-dvd-r-plus media-optical-dvd
+media-optical cdrom_unmount gnome-cd gnome-dev-disc-cdrom gtk-cdrom media-cdrom media-optical-cd media-cdr media-cdrw
+media-floppy gnome-dev-floppy gtk-floppy system-floppy 3floppy_unmount
+multimedia-player music-player
+multimedia-player-ipod gnome-dev-ipod gtkpod ipod_mount multimedia-player-apple-ipod
+multimedia-player-ipod-blue
+multimedia-player-ipod-green
+multimedia-player-ipod-grey multimedia-player-ipod gnome-dev-ipod gtkpod ipod_mount multimedia-player-apple-ipod
+multimedia-player-ipod-orange
+multimedia-player-ipod-pink
+multimedia-player-ipod-touch multimedia-player-apple-ipod-touch
+network-wired gnome-dev-ethernet  network-transmit-receive gnome-netstatus-txrx connect_creating connect_established nm-adhoc nm-device-wired nm-device-wired-autoip
+network-wired-disconnected
+network-wireless gnome-dev-wavelan
+printer gnome-dev-printer gnome-dev-printer-network gnome-dev-printer-new kjobviewer printer1 printer-remote printmgr stock_printers xfce-printer yast_printer stock_network-printer cupsprinter cups i-network-printer csd-printer cs-printer
+scanner flegita
+video-display display chardevice xfce4-display monitor cs-screen
+emblem-default
+emblem-downloads
+emblem-favorite gnome-app-install-star
+emblem-generic
+emblem-important emblem-danger important
+emblem-money
+emblem-new
+emblem-people
+emblem-personal
+emblem-readonly emblem-nowrite emblem-dropbox-unsyncable
+emblem-shared preferences-system-sharing
+emblem-sound
+emblem-symbolic-link
+emblem-system
+emblem-ubuntuone-synchronized emblem-dropbox-uptodate emblem-default
+emblem-ubuntuone-unsynchronized
+emblem-ubuntuone-updating emblem-synchronizing emblem-dropbox-syncing
+emblem-unreadable emblem-noread
+emblem-urgent
+emblem-mail evolution-mail kmail sylpheed claws-mail xfce-mail applications-mail
+application-msword application-vnd.openxmlformats-officedocument.wordprocessingml.document gnome-mime-application-msword gnome-mime-application-vnd.openxmlformats-officedocument.wordprocessingml.document
+application-pdf gnome-mime-application-pdf pdf
+application-pgp-keys application-pkcs7-mime application-x-pem-key application-x-keepass
+application-rss+xml application-atom+xml gnome-mime-application-atom+xml gnome-mime-application-rss+xml
+application-vnd.ms-excel application-vnd.openxmlformats-officedocument.spreadsheetml.sheet gnome-mime-application-vnd.ms-excel gnome-mime-application-vnd.openxmlformats-officedocument.spreadsheetml.sheet
+application-vnd.ms-powerpoint application-vnd.openxmlformats-officedocument.presentationml.presentation application-vnd.openxmlformats-officedocument.presentationml.slideshow gnome-mime-application-vnd.openxmlformats-officedocument.presentationml.presentation gnome-mime-application-vnd.openxmlformats-officedocument.presentationml.slideshow
+application-vnd.oasis.opendocument.formula gnome-mime-application-vnd.oasis.opendocument.formula
+application-vnd.scribus application-x-scribus gnome-mime-application-x-scribus gnome-mime-application-vnd.scribus
+application-x-7zip application-7zip gnome-mime-application-x-7zip application-x-7z-compressed gnome-mime-application-x-7z-compressed
+application-x-ace gnome-mime-application-x-ace
+application-x-archive application-x-compress gnome-mime-application-x-archive gnome-mime-application-x-compress application-x-lha application-x-lhz application-x-arc gnome-mime-application-x-arj gnome-mime-application-x-tarz gnome-mime-application-x-cpio gnome-mime-application-x-cpio-compressed gnome-mime-application-x-lha gnome-mime-application-x-lhz gnome-mime-application-x-stuffit gnome-mime-application-x-bzip gnome-mime-application-x-bzip-compressed gnome-mime-application-x-bzip-compressed-tar application-x-7zip application-x-gzip application-x-jar
+application-x-bittorrent gnome-mime-application-x-bittorrent
+application-x-executable binary exec gnome-fs-executable gnome-mime-application-x-executable
+application-x-flash-video application-x-shockwave-flash gnome-mime-application-x-shockwave-flash
+application-x-glade gnome-mime-application-x-glade application-x-designer gnome-mime-application-x-designer
+application-x-gzip gnome-mime-application-x-gzip application-x-compressed-tar gnome-mime-application-x-compressed-tar
+application-x-jar application-x-java-archive gnome-mime-application-x-jar gnome-mime-application-x-java-archive
+application-x-ms-dos-executable gnome-mime-application-x-ms-dos-executable gnome-exe-thumbnailer-generic-x
+application-x-msdownload gnome-exe-thumbnailer-template gnome-exe-thumbnailer-generic
+application-x-php gnome-mime-application-x-php
+application-x-rar gnome-mime-application-x-rar
+application-x-ruby gnome-mime-application-x-ruby applications-ruby
+application-x-sln application-x-csproj
+application-x-tar gnome-mime-application-x-tar application-x-archive folder_tar tar
+application-x-theme application-x-desktop application-x-gnome-theme-package gnome-mime-application-x-desktop gnome-mime-application-x-gnome-app-info gnome-mime-application-x-gnome-theme-package gnome-mime-application-x-theme gnome-mime-application-x-desktop gnome-mime-text-x-gtkrc
+application-x-zip application-zip gnome-mime-application-x-zip gnome-mime-application-zip zip
+ascii mime_ascii
+audio-x-generic gnome-mime-audio media-audio sound audio-x-mpeg audio-x-ms-wma audio-x-vorbis+ogg audio-x-wav
+audio-x-mp3-playlist audio-x-mpegurl audio-x-scpls playlist source-playlist
+audio-x-mpeg audio-mpeg
+audio-x-vorbis+ogg application-ogg audio-x-flac+ogg audio-x-speex+ogg gnome-mime-application-ogg
+audio-x-wav audio-x-adpcm
+authors gnome-mime-text-x-authors gnome-mime-text-x-credits text-x-authors text-x-credits
+deb application-x-deb gnome-mime-application-x-deb
+empty gnome-fs-regular gtk-file text-x-preview
+encrypted application-pgp-encrypted
+application-x-addon openofficeorg3-extension applications-puzzles parole-extension cs-extensions extension
+font-x-generic font_bitmap font font_truetype font_type1 gnome-mime-application-x-font-afm gnome-mime-application-x-font-bdf gnome-mime-application-x-font-linux-psf gnome-mime-application-x-font-pcf gnome-mime-application-x-font-sunos-news gnome-mime-application-x-font-ttf gnome-mime-x-font-afm preferences-desktop-font fonts gnome-settings-font applications-fonts cs-fonts
+image-bmp gnome-mime-image-bmp gnome-mime-image-x-portable-bitmap image-x-portable-bitmap image-x-win-bitmap
+image-gif gnome-mime-image-gif
+image-jpeg gnome-mime-image-jpeg image-jpeg2000 jpeg jpg
+image-png gnome-mime-image-png
+image-tiff gnome-mime-image-tiff
+image-x-eps application-illustrator
+image-x-generic gnome-mime-application-x-killustrator gnome-mime-image gnome-mime-image-x-cmu-raster gnome-mime-image-x-xpixmap image image-x-tga media-image
+image-x-ico image-x-icon image-vnd.microsoft.icon gnome-mime-image-vnd.microsoft.icon
+image-x-psd gnome-mime-image-x-psd image-x-psdimage-x-psd gnome-mime-image-vnd.adobe.photoshop
+message message-rfc822 application-mbox emblem-mail
+multipart-encrypted application-octet-stream application-x-ole-storage
+package-x-generic gnome-package package application-x-pak emblem-package
+rpm application-x-rpm gnome-mime-application-x-rpm
+text-css gnome-mime-text-css text-x-css
+text-html application-x-extension-html gnome-mime-text-html html text-htmlh text-mht www application-vnd.oasis.opendocument.text-web gnome-mime-application-vnd.oasis.opendocument.text-web gnome-mime-text-vnd.wap.wml text-xhtml+xml
+text-plain application-text gnome-mime-text gnome-mime-text-plain misc package_editors text-x-generic txt txt2
+text-richtext application-rtf application-x-m4 document gnome-mime-application-postscript gnome-mime-application-rtf gnome-mime-application-x-gzpostscript text-enriched applications-publishing
+text-x-bak application-x-trash
+text-x-c gnome-mime-text-x-csrc gnome-mime-text-x-c text-x-csrc
+text-x-c++ gnome-mime-text-x-c++src gnome-mime-text-x-c++ text-x-c++src
+text-x-c++hdr gnome-mime-text-x-c++hdr
+text-x-changelog gnome-mime-text-x-changelog
+text-x-chdr gnome-mime-text-x-chdr
+text-x-copying gnome-mime-text-x-copying
+text-x-generic-template template_source
+text-x-install gnome-mime-x-install
+text-x-java application-x-java application-x-class-file application-x-java gnome-mime-application-x-class-file gnome-mime-application-x-java gnome-mime-text-x-java-source gnome-mime-text-x-java text-x-java-source
+text-x-javascript application-javascript application-x-javascript gnome-mime-application-javascript gnome-mime-application-x-javascript gnome-mime-text-x-javascript
+text-x-makefile gnome-mime-text-x-makefile playlist-automatic source-smart-playlist
+text-x-python application-x-python-bytecode gnome-mime-application-x-python-bytecode gnome-mime-text-x-python applications-python
+text-x-readme gnome-mime-text-x-readme
+text-x-script application-x-shellscript gnome-mime-application-x-shellscript gnome-mime-text-x-csh gnome-mime-text-x-install gnome-mime-text-x-sh gnome-mime-text-x-zsh shellscript
+text-x-source gnome-mime-application-xml gnome-mime-text-x-source gnome-mime-text-x-csharp gnome-mime-text-x-makefile stock_script
+text-x-sql application-vnd.oasis.opendocument.database application-x-sqlite2 application-x-sqlite3 openofficeorg3-database openofficeorg3-oasis-database application-vnd.ms-access sqlitebrowser mysql-workbench
+text-x-tex gnome-mime-application-x-tex text-x-bibtex
+text-xhtml+xml gnome-mime-application-xhtml+xml
+text-xml application-xml gnome-mime-application-xml
+unknown none
+vcalendar gnome-mime-text-x-vcalendar stock_calendar
+video-x-generic application-vnd.rn-realmedia application-x-matroska gnome-mime-application-vnd.rn-realmedia-secure gnome-mime-application-vnd.rn-realmedia gnome-mime-application-vnd.rn-realmedia-vbr gnome-mime-video gnome-mime-video-x-ms-asf gnome-mime-video-x-ms-wmv media-video video emblem-videos
+x-office-address-book stock_addressbook
+x-office-document application-vnd.oasis.opendocument.text application-vnd.sun.xml.writer application-vnd.wordperfect gnome-mime-application-vnd.oasis.opendocument.text gnome-mime-application-vnd.stardivision.writer gnome-mime-application-vnd.sun.xml.writer gnome-mime-application-wordperfect gnome-mime-application-x-abiword gnome-mime-application-x-applix-word gnome-mime-application-x-dvi gnome-mime-application-x-kword office-document package_wordprocessing wordprocessing emblem-documents
+x-office-drawing application-illustrator application-vnd.oasis.opendocument.graphics application-vnd.sun.xml.draw gnome-mime-application-vnd.oasis.opendocument.graphics gnome-mime-application-vnd.oasis.opendocument.image gnome-mime-application-vnd.sun.xml.draw image-svg+xml image-x-svg+xml office-illustration openofficeorg3-drawing svg vnd.oasis.opendocument.drawing
+x-office-presentation gnome-mime-application-magicpoint gnome-mime-application-vnd.oasis.opendocument.presentation gnome-mime-application-vnd.stardivision.impress gnome-mime-application-vnd.sun.xml.impress gnome-mime-application-x-kpresenter kpresenter_kpr emblem-presentation
+x-office-spreadsheet application-vnd.oasis.opendocument.spreadsheet application-vnd.sun.xml.calc application-x-gnumeric gnome-mime-application-vnd.lotus-1-2-3 gnome-mime-application-vnd.oasis.opendocument.spreadsheet gnome-mime-application-vnd.stardivision.calc gnome-mime-application-vnd.sun.xml.calc gnome-mime-application-x-applix-spreadsheet gnome-mime-application-x-gnumeric gnome-mime-application-x-kspread office-spreadsheet openofficeorg3-oasis-spreadsheet spreadsheet text-spreadsheet
+bookmark-missing gnome-fs-bookmark-missing
+distributor-logo-archlinux archlinux-logo start-here-archlinux
+distributor-logo-debian debian-logo start-here-debian
+distributor-logo-fedora fedora-logo fedora-logo-icon start-here-fedora
+distributor-logo-frugalware frugalware-logo start-here-frugalware
+distributor-logo-gentoo start-here-gentoo
+distributor-logo-linux-mint start-here-linux-mint
+distributor-logo-mandriva mandriva-logo start-here-mandriva
+distributor-logo-opensuse opensuse-logo start-here-opensuse
+distributor-logo-slackware start-here-slackware
+distributor-logo-ubuntu ubuntu-logo distributor-logo gnome-main-menu novell-button start-here-ubuntu
+folder-download folder_download folder-downloads
+folder gnome-fs-directory stock_folder gtk-directory inode-directory
+folder-open folder-drag-accept folder_open gnome-fs-directory-accept gtk-directory stock_open
+folder-pictures folder_pictures folder-images folder_images user-pictures user-images
+folder-recent document-open-recent
+folder-remote network gnome-fs-blockdev gnome-fs-network gnome-fs-share folder-remote-ftp gnome-fs-ftp folder-remote-ssh gnome-fs-ssh folder-remote-nfs gnome-fs-nfs nfs network_fs gnome-fs-dav folder-remote-smb gnome-fs-smb samba gnome-mime-x-directory-smb-share user-share shares
+folder-saved-search application-x-gnome-saved-search
+network-server gnome-fs-server gnome-mime-x-directory-nfs-server gnome-mime-x-directory-smb-server redhat-network-server server gnome-network-properties
+network-workgroup gnome-mime-x-directory-smb-workgroup gtk-network network_local gnome-dev-network pyneighborhood_48x48 preferences-system-network xfce4-netload-plugin cmst mate-network-properties nm-device-wireless ndisgtk cs-network
+user-bookmarks gnome-fs-bookmark stock_bookmark
+user-desktop desktop gnome-fs-desktop emblem-desktop cs-desktop
+user-home folder-home folder_home gnome-fs-home
+user-trash emptytrash gnome-fs-trash-empty gnome-stock-trash trashcan_empty xfce-trash_empty
+start-here-gnome org.gnome.ChromeGnomeShell
+start-here-gnome-symbolic start-here-symbolic
+start-here-xfce xfce4-whiskermenu xfce4-panel-menu
+start-here-manjaro
+distributor-logo-manjaro manjaro
+applications-chat-panel
+applications-email-panel
+applications-microblogging-panel
+appointment-missed stock_appointment-reminder-excl
+appointment-soon stock_appointment-reminder
+apport
+aptdaemon-add
+aptdaemon-cleanup
+aptdaemon-delete
+aptdaemon-resolve
+aptdaemon-wait
+aptdaemon-working
+audacious-panel audacious
+audio-volume-high notification-audio-volume-high stock_volume stock_volume-max xfce4-mixer-no-muted audio-volume-high-panel xfce4-mixer-volume-high xfce4-mixer-volume-very-high
+audio-volume-low notification-audio-volume-low stock_volume-0 stock_volume-min audio-volume-low-panel xfce4-mixer-volume-low
+audio-volume-medium notification-audio-volume-medium stock_volume-med audio-volume-medium-panel xfce4-mixer-volume-low-medium xfce4-mixer-volume-medium
+audio-volume-off notification-audio-volume-off audio-volume-zero-panel audio-volume-low-zero-panel xfce4-mixer-volume-ultra-low
+audio-volume-muted notification-audio-volume-muted stock_volume-mute audio-volume-muted-panel
+audio-volume-muted-blocked-panel audio-volume-muted-blocking-panel xfce4-mixer-muted xfce4-mixer-volume-muted
+avatar-default
+bluetooth-active blueman-tray blueman-active
+bluetooth-disabled blueman-tray-disabled blueman-disabled
+bluetooth-paired
+caffeine-cup-empty
+caffeine-cup-full xfce4-time-out-plugin caffeine
+changes-allow object-unlocked unlock screensaver-unlock
+covergloobus-panel
+dcpp-panel dcpp-32
+deadbeef-tray-icon deadbeef_tray_icon
+deluge-panel deluge-torrent-panel
+dialog-error error gtk-dialog-error messagebox_critical stock_dialog-error
+dialog-information dialog-info gtk-dialog-info info messagebox_info stock_dialog-info mate-panel-notification-area cs-details
+dialog-password gtk-dialog-authentication
+dialog-question gtk-dialog-question stock_dialog-question
+dialog-warning gtk-dialog-warning messagebox_warning stock_dialog-warning xfce4-notifyd important preferences-system-notifications gtk-caps-lock-warning mate-notification-properties cs-notifications csd-print-notifications
+dropboxstatus-blank blank
+dropboxstatus-busy busy
+dropboxstatus-busy2 busy2
+dropboxstatus-idle idle
+dropboxstatus-logo logo
+dropboxstatus-x x
+exaile-play exaile-panel
+fusion-icon fusion-icon-panel
+glippy-panel glipper glippy
+gnome-do-panel gnome-do-icon
+battery-empty gpm-primary-000 battery-000 battery_empty gpm-battery-000 gpm-ups-000 gmp-ups-missing notification-battery-000 notification-battery-empty notification-gpm-battery-000 notification-gpm-battery-empty notification-gpm-ups-000 xfpm-primary-000 xfm-battery-000
+battery-empty-charging gpm-primary-000-charging gpm-battery-000-charging gpm-ups-000-charging notification-battery-000-plugged notification-gpm-battery-000-charging notification-gpm-ups-000-charging xfpm-primary-000-charging xfpm-battery-000-charging
+battery-caution gpm-primary-020 battery_caution gpm-battery-020 gpm-ups-020 notification-battery-020 notification-battery-low notification-gpm-battery-020 notification-gpm-ups-020 xfpm-primary-020 xfpm-battery-020 battery-caution
+battery-caution-charging gpm-primary-020-charging gpm-battery-020-charging gpm-ups-020-charging notification-battery-020-plugged notification-gpm-battery-020-charging notification-gpm-ups-020-charging xfpm-primary-020-charging xfpm-battery-020-charging
+battery-low gpm-primary-040 battery_low gpm-battery-040 gpm-ups-040 notification-battery-040 notification-gpm-battery-040 notification-gpm-ups-040 xfpm-primary-040 xfpm-battery-040
+battery-low-charging gpm-primary-040-charging gpm-battery-040-charging gpm-ups-040-charging notification-battery-040-plugged notification-gpm-battery-040-charging notification-gpm-ups-040-charging xfpm-primary-040-charging xfpm-battery-040-charging
+battery-good gpm-primary-060 battery_two_thirds gpm-battery-060 gpm-ups-060 notification-battery-060 notification-gpm-battery-060 notification-gpm-ups-060 xfpm-primary-060 xfpm-battery-060
+battery-good-charging gpm-primary-060-charging gpm-battery-060-charging gpm-ups-060-charging notification-battery-060-plugged notification-gpm-battery-060-charging notification-gpm-ups-060-charging xfpm-primary-060-charging xfpm-battery-060-charging
+battery-good gpm-primary-080 battery_third_fouth gpm-battery-080 gpm-ups-080 notification-battery-080 notification-gpm-battery-080 notification-gpm-ups-080 xfpm-primary-080 xfpm-battery-080
+battery-good-charging gpm-primary-080-charging gpm-battery-080-charging gpm-ups-080-charging notification-battery-080-plugged notification-gpm-battery-080-charging notification-gpm-ups-080-charging xfpm-primary-080-charging xfpm-battery-080-charging
+battery-full gpm-primary-100 battery_full gpm-battery-100 gpm-ups-100 notification-battery-100 notification-gpm-battery-100 notification-gpm-ups-100 xfpm-primary-100 xfpm-battery-100
+battery-full-charging gpm-primary-100-charging gpm-primary-charged gpm-battery-100-charging gpm-ups-100-charging notification-battery-100-plugged notification-gpm-battery-100-charging notification-gpm-ups-100-charging xfpm-primary-100-charging xfpm-battery-100-charging battery-full-charged
+battery-full-charged gpm-primary-charged battery_charged battery_plugged gpm-ac-adapter gpm-battery-charged notification-gpm-battery-charged xfpm-primary-charged xfpm-ac-adapter xfpm-battery-charged ac-adapter
+battery-missing gpm-primary-missing
+network-cellular-signal-excellent gsm-3g-full
+network-cellular-secure-signal-excellent gsm-3g-full-secure
+network-cellular-signal-good gsm-3g-high
+network-cellular-secure-signal-good gsm-3g-high-secure
+network-cellular-signal-ok gsm-3g-medium
+network-cellular-secure-signal-ok gsm-3g-medium-secure
+network-cellular-signal-weak gsm-3g-low
+network-cellular-secure-signal-weak gsm-3g-low-secure
+network-cellular-signal-none gsm-3g-none
+network-cellular-secure-signal-none gsm-3g-none-secure
+gtk-dialog-authentication-panel krb-valid-ticket
+gtg-panel clipit-trayicon
+im-message-new tray-message tray-new-im
+image-loading gnome-fs-loading-icon
+image-missing gtk-missing-image
+changes-prevent locked keys gnome-dev-wavelan-encrypted keys network-wireless-encrypted nm-vpn-standalone-lock status_lock stock_lock xfce-system-lock  object-locked lock
+media-player-banshee-panel banshee-panel
+network-error gnome-netstatus-error gnome-netstatus-disconn nm-no-connection
+network-idle connect_established gnome-netstatus-idle nm-device-wireless
+network-wired-disconnected network-offline connect_no
+network-receive gnome-netstatus-rx
+network-transmit gnome-netstatus-tx
+network-vpn nm-device-wired-secure
+nm-no-connection
+network-wireless-signal-none nm-signal-00 nm-signal-0
+network-wireless-secure-signal-none nm-signal-00-secure
+network-wireless-signal-weak nm-signal-25 gnome-netstatus-0-24
+network-wireless-secure-signal-weak nm-signal-25-secure
+network-wireless-signal-ok nm-signal-50 gnome-netstatus-25-49
+network-wireless-secure-signal-ok nm-signal-50-secure
+network-wireless-signal-good nm-signal-75 gnome-netstatus-50-74
+network-wireless-secure-signal-good nm-signal-75-secure
+network-wireless-signal-excellent nm-signal-100 gnome-netstatus-75-100 nm-device-wireless nm-device-wwan network-wireless gnome-dev-wavelan
+network-wireless-secure-signal-excellent nm-signal-100-secure
+nm-vpn-lock nm-vpn-active-lock nm-vpn-connecting12 nm-vpn-connecting13 nm-vpn-connecting14 nm-secure-lock
+notification-message-email
+notification-network-ethernet-connected
+notification-network-ethernet-disconnected
+notification-network-wireless-disconnected notification-network-disconnected
+notification-network-wireless-full notification-gsm-full
+notification-network-wireless-high notification-gsm-high
+notification-network-wireless-low notification-gsm-low
+notification-network-wireless-medium notification-gsm-medium
+notification-network-wireless-none notification-gsm-none
+pazzle zim-panel blueman-plugin gimp-plugin gimp-prefs-folders-plug-ins
+pino-tray-icon
+pino-tray-icon-fresh
+printer-printing
+printer-error
+radiotray_connecting
+radiotray_off
+radiotray_on
+reboot-notifier system-restart-panel system-shutdown-restart-panel
+rhythmbox-panel sound-icon
+rhythmbox-notplaying
+shutter-panel
+skype_away
+skype_dnd
+skype_invisible
+skype_na
+skype_offline
+skype_online
+skype_skypeme
+software-update-available
+software-update-urgent
+sound-icon
+synapse-panel
+system-devices-panel
+system-devices-panel-alert
+system-devices-panel-informations
+ubuntuone-client-error
+ubuntuone-client-idle
+ubuntuone-client-offline
+ubuntuone-client-updating
+transmission-tray-icon
+tomboy-panel
+user-available empathy-available user-available-panel tray-online available
+user-available-panel tray-online
+user-away user-extended-away empathy-away user-away-panel tray-away away
+user-away-panel tray-away
+user-busy empathy-busy user-busy-panel tray-busy busy
+user-busy-panel tray-busy
+user-idle empathy-extended-away user-idle-panel tray-extended-away
+user-idle-panel tray-extended-away
+user-indeterminate user-indeterminate-panel
+user-indeterminate-panel
+user-invisible empathy-invisible user-invisible-panel invisible
+user-offline empathy-offline user-offline-panel tray-offline offline
+user-offline-panel tray-offline
+user-trash-full edittrash gnome-fs-trash-full gnome-stock-trash-full stock_trash_full trashcan_full xfce-trash-full xfce-trash_full
+weather-clear stock_weather-sunny sunny
+weather-clear-night stock_weather-night-clear weather-clear-night-000 weather-clear-night-010 weather-clear-night-020 weather-clear-night-030 weather-clear-night-040 weather-clear-night-050 weather-clear-night-060 weather-clear-night-070 weather-clear-night-080 weather-clear-night-090 weather-clear-night-100 weather-clear-night-110 weather-clear-night-120 weather-clear-night-130 weather-clear-night-140 weather-clear-night-150 weather-clear-night-160 weather-clear-night-170 weather-clear-night-180 weather-clear-night-190 weather-clear-night-200 weather-clear-night-210 weather-clear-night-220 weather-clear-night-230 weather-clear-night-240 weather-clear-night-250 weather-clear-night-260 weather-clear-night-270 weather-clear-night-280 weather-clear-night-290 weather-clear-night-300 weather-clear-night-310 weather-clear-night-320 weather-clear-night-330 weather-clear-night-340 weather-clear-night-350
+weather-clouds
+weather-clouds-night
+weather-few-clouds stock_weather-few-clouds xfce4-weather
+weather-few-clouds-night stock_weather-night-few-clouds applications-astronomy
+weather-fog stock_weather-fog
+weather-overcast stock_weather-cloudy
+weather-severe-alert
+weather-showers stock_weather-showers
+weather-showers-scattered
+weather-snow stock_weather-snow
+weather-storm stock_weather-storm
+xchat-panel
+zim-panel
+uget-tray-default uget-tray-downloading uget-tray-error
+software-update-available system-upgrade pamac-tray-update software-update-urgent
+software-update-unvailable pamac-tray-no-update
+krb-valid-ticket dialog-password
+rotation-allowed transform-rotate
+avatar-default stock_person stock_person-panel
+view-wrapped xapp-search-wrap
+display-brightness mate-brightness-applet
+gravit-designer appimagekit-gravit-designer
+fluxgui fluxgui-panel
+vlc-panel
+notification notification-alert notifications-applet
+sidebar-hide pane-show
+sidebar-show pane-hide
+view-list-compact task-list
+mail-unread system-tray indicator-messages
+unity-3d unity-editor-icon
+caps-lock-off kbd-capslock-off
+caps-lock kbd-capslock-on
+num-lock-off kbd-numlock-off
+num-lock kbd-numlock-on
+cpu cpufreq-na
+app-launcher start-here
+1cestart 1cv8 1cv8c
+bzr bzr-icon-64

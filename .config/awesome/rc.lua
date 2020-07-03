@@ -18,6 +18,8 @@ local vicious   = require("vicious")
 local awesompd  = require("awesompd/awesompd")
 local wallpaper = require("wallpaper")
 
+require("startup")
+
 -- {{{ Error handling
 -- Startup
 if awesome.startup_errors then
@@ -46,7 +48,7 @@ end
 beautiful.init(awful.util.getdir("config") .. "/ahoka/theme.lua")
 
 naughty.config.defaults.timeout = 5
-naughty.config.defaults.screen = 2
+naughty.config.defaults.screen = screen.count()
 naughty.config.defaults.position = "top_right"
 
 naughty.config.presets.normal.icon_size = 64
@@ -56,7 +58,7 @@ naughty.config.presets.critical.fg = beautiful.fg_urgent
 naughty.config.presets.critical.border_color = beautiful.border_focus
 
 wall = wallpaper:create({
-    dir = "~/Pictures/Wallpapers/mokou",
+    dir = awful.util.getdir("config") .. "/wallpapers",
     delay = 60 * 60 * 4, -- 4 hours
 })
 
@@ -86,16 +88,22 @@ settings.layouts    =
 -- {{{ Tags
 tags.settings = {
     {
-        { name = "東", props = { layout = settings.layouts[2], master_width_factor = .6815 } },
-        { name = "南", props = { layout = settings.layouts[2], master_width_factor = .6815 } },
-        { name = "西", props = { layout = settings.layouts[2], master_width_factor = .6815 } },
-        { name = "北", props = { layout = settings.layouts[1], master_width_factor = .6815 } },
+        { name = "東", props = { layout = settings.layouts[2], master_width_factor = .6803 } },
+        { name = "南", props = { layout = settings.layouts[1], master_width_factor = .6803 } },
+        { name = "西", props = { layout = settings.layouts[1], master_width_factor = .6803 } },
+        { name = "北", props = { layout = settings.layouts[1], master_width_factor = .6803 } },
     },
     {
-        { name = "東", props = { layout = settings.layouts[1], master_width_factor = .6815 } },
-        { name = "南", props = { layout = settings.layouts[1], master_width_factor = .6815 } },
+        { name = "東", props = { layout = settings.layouts[2], master_width_factor = .6815 } },
+        { name = "南", props = { layout = settings.layouts[2], master_width_factor = .6815 } },
         { name = "西", props = { layout = settings.layouts[1], master_width_factor = .6815 } },
         { name = "北", props = { layout = settings.layouts[2], master_width_factor = .6815 } },
+    },
+    {
+        { name = "東", props = { layout = settings.layouts[2], master_width_factor = .6803 } },
+        { name = "南", props = { layout = settings.layouts[1], master_width_factor = .6803 } },
+        { name = "西", props = { layout = settings.layouts[1], master_width_factor = .6803 } },
+        { name = "北", props = { layout = settings.layouts[1], master_width_factor = .6803 } },
     },
 }
 
@@ -303,7 +311,7 @@ local globalkeys = awful.util.table.join(
     awful.key({ settings.modkey            }, "f",              function() awful.spawn(settings.browser) end),
     awful.key({ settings.modkey            }, "e",              function() awful.spawn(settings.fileman) end),
     awful.key({ "Control", "Shift"         }, "Escape",         function() awful.spawn(settings.taskman) end),
-    awful.key({ "Control",                 }, "Print",          function() awful.spawn.with_shell("sleep 0.5s && scrot -s") end),
+    awful.key({ "Control",                 }, "Print",          function() awful.spawn.with_shell("maimx") end),
     awful.key({ settings.modkey, "Control" }, "r",              awesome.restart),
     awful.key({ settings.modkey, "Shift"   }, "q",              awesome.quit),
     awful.key({ settings.modkey,           }, "Tab",            function()
@@ -327,8 +335,8 @@ local globalkeys = awful.util.table.join(
         if client.focus then client.focus:raise() end
     end),
     awful.key({ settings.modkey, "Control" }, "h",              function() awful.tag.incmwfact(0.025)             end),
-    awful.key({ settings.modkey, "Control" }, "j",              function() awful.client.incwfact(-0.23)           end),
-    awful.key({ settings.modkey, "Control" }, "k",              function() awful.client.incwfact(0.23)            end),
+    awful.key({ settings.modkey, "Control" }, "j",              function() awful.client.incwfact(-0.216)           end),
+    awful.key({ settings.modkey, "Control" }, "k",              function() awful.client.incwfact(0.216)            end),
     awful.key({ settings.modkey, "Control" }, "l",              function() awful.tag.incmwfact(-0.025)            end),
     awful.key({ settings.modkey, "Shift"   }, "h",              function() awful.client.swap.bydirection("left")  end),
     awful.key({ settings.modkey, "Shift"   }, "j",              function() awful.client.swap.bydirection("down")  end),
@@ -343,14 +351,16 @@ local globalkeys = awful.util.table.join(
     -- Special Keys
     awful.key({                            }, "XF86AudioPlay",  mpd:command_playpause()),
     awful.key({                            }, "XF86AudioNext",  mpd:command_next_track()),
-    awful.key({                            }, "XF86AudioPrev",  mpd:command_prev_track())
+    awful.key({                            }, "XF86AudioPrev",  mpd:command_prev_track()),
+    awful.key({                            }, "XF86PowerOff",   function() awful.spawn(settings.suspend) end)
 )
 
 local clientkeys = awful.util.table.join(
     awful.key({ settings.modkey            }, "c",     function(c) c:kill() end),
     awful.key({ settings.modkey, "Control" }, "space", awful.client.floating.toggle),
     awful.key({ settings.modkey, "Shift"   }, "f",     function(c) c.fullscreen = not c.fullscreen end),
-    awful.key({ settings.modkey            }, "m",     function(c) c.maximized = not c.maximized end)
+    awful.key({ settings.modkey            }, "m",     function(c) c.maximized = not c.maximized end),
+    awful.key({ settings.modkey            }, "t",     function(c) c.ontop = not c.ontop end)
 )
 
 keynumber = 0
@@ -458,29 +468,41 @@ awful.rules.rules =
                 "Awf-gtk2",
                 "Blender",
                 "Calc",
+                "chatterino",
+                "Google-chrome",
                 "Civ5XP",
                 "csgo_linux",
+                "dcg",
                 "dota_linux",
                 "dota2",
                 "Genymotion Player",
                 "Gimp",
                 "mahjong",
+                "Minecraft.*",
                 "mpv",
+                "obs",
+                "Pavucontrol",
                 "Plugin-container",
                 "scrot",
+                "SimulationCraft",
                 "starbound",
                 "Steam",
                 "streamlink-twitch-gui",
                 "Thunderbird",
                 "Terraria.bin.x86_64",
+                "tModLoader.bin.x86_64",
                 "Torchlight2?.bin.x86_64",
+                "Transmission-gtk",
                 "UE4Editor",
+                "underlords",
                 "Wine",
+                "XenonTrade",
                 ".*\.exe",
             },
             name =
             {
                 "Kingdom Rush HD",
+                "Starting Unity...",
             }
         },
         properties = { floating = true }
@@ -493,9 +515,12 @@ awful.rules.rules =
                 "Borderlands2",
                 "csgo_linux",
                 "Civ5XP",
+                "dcg",
                 "dota_linux",
                 "dota2",
                 "Farewell",
+                "hl2_linux",
+                "Minecraft.*",
                 "Plugin-container",
                 "scrot",
                 "ShadowOfMordor",
@@ -503,7 +528,10 @@ awful.rules.rules =
                 "Steam",
                 "streamlink-twitch-gui",
                 "Terraria.bin.x86_64",
+                "tModLoader.bin.x86_64",
                 "Torchlight2?.bin.x86_64",
+                "UE4Editor",
+                "underlords",
                 "Wine",
                 ".*\.exe",
             },
@@ -522,27 +550,40 @@ awful.rules.rules =
                 "Borderlands2",
                 "csgo_linux",
                 "Civ5XP",
-                "Darkest",
+                "darkest.bin.x86_64",
+                "dcg",
                 "dota_linux",
                 "dota2",
-                "hearthstone.exe",
+                "hl2_linux",
+                "Minecraft.*",
                 "ShadowOfMordor",
                 "starbound",
                 "Terraria.bin.x86_64",
+                "tModLoader.bin.x86_64",
                 "Torchlight2?.bin.x86_64",
+                "underlords",
+                "Unity",
+            },
+            instance =
+            {
+                "hearthstone.exe",
+                "pathofexile_x64steam.exe",
+                "skyrimse.exe",
+                "vampire.exe",
+                "wow.exe",
             },
             name =
             {
                 "Kingdom Rush HD",
             }
         },
-        properties = { x = 0, y = 0, screen = 1 }
+        properties = { x = 1680, y = 0, screen = 1 }
     },
     {
         rule = { class = "discord" },
         properties = {
             tag = "北",
-            screen = naughty.config.defaults.screen
+            screen = 2
         }
     },
     {
@@ -550,8 +591,41 @@ awful.rules.rules =
         properties = { screen = naughty.config.defaults.screen }
     },
     {
-        rule = { class = "Thunderbird" },
-        properties = { tag = "南" }
+        rule = { instance = "monsterhunterworld.exe" },
+        properties = {
+          tag = "西",
+          screen = naughty.config.defaults.screen
+        }
+    },
+    {
+        rule_any = { instance = { "ffxivlauncher.exe", "ffxiv_dx11.exe", "ffxivboot.exe" } },
+        properties = {
+          tag = "北",
+          screen = 1
+        }
+    },
+    {
+        rule = { class = "Thunderbird", instance = "Mail" },
+        properties = {
+          tag = "南",
+          screen = naughty.config.defaults.screen
+        }
+    },
+    -- ACT Toasts
+    {
+        rule = { instance = "advanced combat tracker.exe", name = "TraySlider" },
+        properties = {
+          ontop = true,
+          screen = 1
+        }
+    },
+    -- ACT Overlay
+    {
+        rule = { instance = "advanced combat tracker.exe", name = "Mini Parse" },
+        properties = {
+          ontop = true,
+          screen = 1
+        }
     },
     {
         rule = { instance = "sun-awt-X11-XWindowPeer" },
@@ -566,7 +640,8 @@ awful.rules.rules =
     { rule = { class = "Thunar", name = "File Operation Progress" }, properties = { floating = true } },
     { rule = { class = "Pale moon" }, except = { instance = "Navigator" }, properties = { floating = true } },
     { rule = { class = "VirtualBox", name = "Windows 7.*VirtualBox" },
-        properties = { border_width = 0, floating = true, skip_taskbar = true, screen = 2 } },
+        properties = { border_width = 0, floating = true, skip_taskbar = true,
+        screen = naughty.config.defaults.screen } },
 
 }
 -- }}}
@@ -620,7 +695,9 @@ end)
 -- Enable sloppy focus
 client.connect_signal("mouse::enter", function(c)
     if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-        and awful.client.focus.filter(c) then
+        and awful.client.focus.filter(c)
+        -- dont auto focus act overlay
+        and not (c.instance == "advanced combat tracker.exe" and c.name == "Mini Parse") then
         client.focus = c
     end
 end)

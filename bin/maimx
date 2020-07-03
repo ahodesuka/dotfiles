@@ -1,0 +1,21 @@
+#!/bin/sh
+MAIM=$(which maim)
+TMP_FILE=$(mktemp -u /tmp/tmp.XXXXXX.png)
+SAVE_DIR="$HOME/Pictures/Screenshots/$(date '+%m-%Y')"
+
+$MAIM -n -b 3 -u -s $TMP_FILE || exit
+
+eval $(xdotool getmouselocation --shell)
+
+WINDOW_PID=$(xdotool getwindowpid $WINDOW 2> /dev/null)
+
+if [ -z "$WINDOW_PID" ]; then
+  PROGRAM_NAME=$(wmctrl -m | cut -d\  -f2 | head -n1)
+else
+  PROGRAM_NAME=$(basename $(readlink -f /proc/$WINDOW_PID/exe))
+fi
+
+[ ! -d "$SAVE_DIR" ] && mkdir -p "$SAVE_DIR"
+
+xclip -selection clipboard -t image/png -i $TMP_FILE
+mv $TMP_FILE "$SAVE_DIR/${PROGRAM_NAME}_$(date +%F_%H-%M-%S).png"
